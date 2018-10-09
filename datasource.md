@@ -117,8 +117,12 @@ All  `GetDataSource`, `PutDataSource` and `DeleteDataSource` interfaces are exte
 extension GetDataSource {
     public func get<K>(_ id: K) -> Future<T> where K:Hashable { ... }
     public func getAll<K>(_ id: K) -> Future<[T]> where K:Hashable { ... }
+}
+extension PutDataSource {
     public func put<K>(_ value: T?, forId id: K) -> Future<T> where K:Hashable { ... }
     public func putAll<K>(_ array: [T], forId id: K) -> Future<[T]> where K:Hashable { ... }
+}
+extension DeleteDataSource {
     public func delete<K>(_ id: K) -> Future<Void> where K:Hashable { ... }
     public func deleteAll<K>(_ id: K) -> Future<Void> where K:Hashable { ... }
 }
