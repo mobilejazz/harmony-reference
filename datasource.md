@@ -30,6 +30,14 @@ dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
 
 A `Query` object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
 
+Default existing queries:
+
+- `VoidQuery`: Empty query.
+- `IdQuery<T>` (Swift) or `ByIdentifierQuery<T>` (Kotlin) : Query by Id.
+- `AllObjectsQuery`: Generic query to define the action of manipulating all objects.
+- `ObjectQuery<T>`: A query containing an object of type T.
+- `ArrayQuery<T>`: A query containing an array of objects of type T.
+
 ### API
 
 All actions handled by a `DataSource` are grouped in a simple CRUD.
