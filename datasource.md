@@ -28,17 +28,9 @@ dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
 
 ### Query
 
-A `Query` object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
+A [`Query`](query.md) object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
 
-Default existing queries:
-
-- `VoidQuery`: Empty query.
-- `IdQuery<T>` (Swift) or `ByIdentifierQuery<T>` (Kotlin) : Query by Id.
-- `AllObjectsQuery`: Generic query to define the action of manipulating all objects.
-- `ObjectQuery<T>`: A query containing an object of type T.
-- `ArrayQuery<T>`: A query containing an array of objects of type T.
-
-It is the developer responsibility to use the above listed queries or create new queries for all the specified actions in his project.
+For more information, read the [`Query`](query.md) reference.
 
 ### API
 
@@ -68,7 +60,7 @@ interface GetDataSource<V> : DataSource {
 
 Actions related functions. PUT methods will be responsible of editing, modifying, sending or any other action related method.
 
-Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the `Query`. In the case of `putAll`, an empty array can be passed.
+Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](query.md). In the case of `putAll`, an empty array can be passed.
 
 ```swift
 // Swift
@@ -90,7 +82,7 @@ interface PutDataSource<V> : DataSource {
 
 Deletion related functions.
 
-Note that only a `Query` is required and no value is returned rather than a Future encapsulating the output error.
+Note that only a [`Query`](query.md) is required and no value is returned rather than a Future encapsulating the output error.
 
 ```swift
 // Swift
