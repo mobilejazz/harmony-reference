@@ -38,6 +38,8 @@ Default existing queries:
 - `ObjectQuery<T>`: A query containing an object of type T.
 - `ArrayQuery<T>`: A query containing an array of objects of type T.
 
+It is the user responsibility to use the above listed queries or create new queries for all the specified actions in his project.
+
 ### API
 
 All actions handled by a `DataSource` are grouped in a simple CRUD.
