@@ -5,8 +5,8 @@ A `DataSource` is an interace for those classes responsible of fetching and mana
 ## Usage
 
 ```swift
+// Swift
 let dataSource = MyCustomGetDataSource()
-
 dataSource.get(IdQuery("myKey")).then { value in
     print("Success: \(value)")
 }.fail { error in 
@@ -15,8 +15,8 @@ dataSource.get(IdQuery("myKey")).then { value in
 ```
 
 ```kotlin
+// Kotlin
 val dataSource = MyCustomGetDataSource()
-
 dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
       println(it)
 }, onFailure = {
@@ -38,7 +38,7 @@ Default existing queries:
 - `ObjectQuery<T>`: A query containing an object of type T.
 - `ArrayQuery<T>`: A query containing an array of objects of type T.
 
-It is the user responsibility to use the above listed queries or create new queries for all the specified actions in his project.
+It is the developer responsibility to use the above listed queries or create new queries for all the specified actions in his project.
 
 ### API
 
@@ -49,6 +49,7 @@ All actions handled by a `DataSource` are grouped in a simple CRUD.
 Fetch related functions. 
 
 ```swift
+// Swift
 public protocol GetDataSource : DataSource {
     func get(_ query: Query) -> Future<T>
     func getAll(_ query: Query) -> Future<[T]>
@@ -56,6 +57,7 @@ public protocol GetDataSource : DataSource {
 ```
 
 ```kotlin
+// Kotlin
 interface GetDataSource<V> : DataSource {
   fun get(query: Query): Future<V>
   fun getAll(query: Query): Future<List<V>>
@@ -69,6 +71,7 @@ Actions related functions. PUT methods will be responsible of editing, modifying
 Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the `Query`. In the case of `putAll`, an empty array can be passed.
 
 ```swift
+// Swift
 public protocol PutDataSource : DataSource {
     func put(_ value: T?, in query: Query) -> Future<T>
     func putAll(_ array: [T], in query: Query) -> Future<[T]>
@@ -76,6 +79,7 @@ public protocol PutDataSource : DataSource {
 ```
 
 ```kotlin
+// Kotlin
 interface PutDataSource<V> : DataSource {
   fun put(query: Query, value: V?): Future<V>
   fun putAll(query: Query, value: List<V>? = emptyList()): Future<List<V>>
@@ -89,6 +93,7 @@ Deletion related functions.
 Note that only a `Query` is required and no value is returned rather than a Future encapsulating the output error.
 
 ```swift
+// Swift
 public protocol DeleteDataSource : DataSource {
     func delete(_ query: Query) -> Future<Void>
     func deleteAll(_ query: Query) -> Future<Void>
@@ -96,14 +101,67 @@ public protocol DeleteDataSource : DataSource {
 ```
 
 ```kotlin
+// Kotlin
 interface DeleteDataSource : DataSource {
   fun delete(query: Query): Future<Unit>
   fun deleteAll(query: Query): Future<Unit>
 }
 ```
 
+### **Id Query** CRUD extensions
+
+All  `GetDataSource`, `PutDataSource` and `DeleteDataSource` interfaces are extended with methods to access the CRUD functions by an Id:
+
+```swift
+// Swift
+extension GetDataSource {
+    public func get<K>(_ id: K) -> Future<T> where K:Hashable { ... }
+    public func getAll<K>(_ id: K) -> Future<[T]> where K:Hashable { ... }
+    public func put<K>(_ value: T?, forId id: K) -> Future<T> where K:Hashable { ... }
+    public func putAll<K>(_ array: [T], forId id: K) -> Future<[T]> where K:Hashable { ... }
+    public func delete<K>(_ id: K) -> Future<Void> where K:Hashable { ... }
+    public func deleteAll<K>(_ id: K) -> Future<Void> where K:Hashable { ... }
+}
+```
+
+```kotlin
+// TODO
+```
+
+This way, code that originally looked like this:
+
+```swift
+// Swift
+dataSource.get(IdQuery("myKey")).then { ... }
+dataSource.put(myObject, in:IdQuery("myKey")).then { ... }
+dataSource.delete(IdQuery("myKey")).then { ... }
+```
+```kotlin
+// Kotlin
+dataSource.get(ByIdentifierQuery("myKey")).onComplete( ... )
+dataSource.put(ByIdentifierQuery("myKey"), myObject).onComplete ( ... )
+dataSource.delete(ByIdentifierQuery("myKey")).onComplete( ... )
+```
+
+can be written as follows:
+
+```swift
+// Swift
+dataSource.get("myKey").then { ... }
+dataSource.put(myObject, forId:"myKey").then { ... }
+dataSource.delete("myKey").then { ... }
+```
+```kotlin
+// Kotlin
+dataSource.get("myKey").onComplete( ... )
+dataSource.put("myKey", myObject).onComplete ( ... )
+dataSource.delete("myKey").onComplete( ... )
+```
+
+
 ### `DataSource` Implementations
 
+- `VoidDataSource<T>`: Empty data source. All functions when called end with errors.
 - `InMemoryDataSource<T>`: Data stored in the app live memory.
 - `DeviceStorageDataSource<T>`: Data stored in `SharedPreferences` (android) or `UserDefaults` (iOS)
 - `DataSourceMapper<In,Out>`: Mappes the type of a data source.
@@ -111,6 +169,7 @@ interface DeleteDataSource : DataSource {
 
 #### Swift exclusive implementations
 
+- `DataSourceAssembler<T>`: Combines three data sources (get, put, delete) into a single object.
 - `RealmDataSource<E,O>`: Realm based data source. Available at the `MJSWiftCore/Realm` pod subspec.
 - `AnyDataSource<T>`: Type erasing for any get+put+delete data source.
 - `AnyGetDataSource<T>`: Type erasing for a get data source.
@@ -126,4 +185,12 @@ In order to have a generic type, all `GetDataSource`, `PutDataSource` and `Delet
 public protocol DataSource {
     associatedtype T
 }
+```
+
+## Kotlin Notes
+
+### `DataSource` base interface
+
+```kotlin
+// TODO
 ```
