@@ -167,6 +167,7 @@ dataSource.delete("myKey").onComplete( ... )
 
 - `DataSourceAssembler<T>`: Combines three data sources (get, put, delete) into a single object.
 - `RealmDataSource<E,O>`: Realm based data source. Available at the `MJSWiftCore/Realm` pod subspec.
+- `KeychainDataSource<T>`: Keychain based data source. Available at the `MJSwiftCore/Security` pod subspec.
 - `AnyDataSource<T>`: Type erasing for any get+put+delete data source.
 - `AnyGetDataSource<T>`: Type erasing for a get data source.
 - `AnyPutDataSource<T>`: Type erasing for a put data source.
