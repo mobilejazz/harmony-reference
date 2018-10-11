@@ -160,7 +160,7 @@ dataSource.delete("myKey").onComplete( ... )
 - [`VoidDataSource<T>`](VoidDataSource.md): Empty data source. All functions when called end with errors.
 - [`InMemoryDataSource<T>`](InMemoryDataSource.md): Data stored in the app live memory.
 - [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md): Data stored in `SharedPreferences` (android) or `UserDefaults` (iOS)
-- `DataSourceMapper<In,Out>`: Mappes the type of a data source.
+- [`DataSourceMapper<In,Out>`](DataSourceMapper.md): Mappes the type of a data source.
 - `DataSourceValidator<T>`: Validates the objects manipulated by a data source.
 
 #### Swift exclusive implementations
