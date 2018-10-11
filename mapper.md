@@ -4,9 +4,9 @@ A `Mapper` object defines a mapping method `map` between to types object types.
 
 ```swift
 // Swift
-open class Mapper <From,To> {
+open class Mapper <In,Out> {
     public init() { }
-    open func map(_ from: From) throws -> To {
+    open func map(_ from: In) throws -> Out {
         fatalError("Undefined mapper. Class Mapper must be subclassed.")
     }
 }
@@ -36,8 +36,16 @@ let objectB : B = mapper.map(objectA)
 
 - `VoidMapper`: Empty implementation that returns en error.
 - `BlankMapper<T>`: Blank mapper that returns the same object.
-- `CastMapper<From,To>`: Mapping by casting the object into the given types.
-- `CustomMapper<From,To>`: Mapper that has a closure/lambda upon initialization specifiying the mapping action.
+- `CastMapper<In,Out>`: Mapping by casting the object into the given types.
+- `CustomMapper<In,Out>`: Mapper that has a closure/lambda upon initialization specifiying the mapping action.
+
+### Swift exclusive implementations
+
+- `EncodableToDataMapper<T>`: `Encodable` object to `Data`.
+- `DataToDecodableMapper<T>`: `Data` to a `Decodable` object.
+- `EncodableToDecodableMapper<T>`:  `Encodable` object to a `Decodable` object.
+- `NSCodingToDataMapper<T>`: `NSCoding` object to `Data`. 
+- `DataToNSCodingMapper<T>`: `Data` to a `NSCoding` object.
 
 ## Creating custom mappers
 

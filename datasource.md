@@ -28,9 +28,9 @@ dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
 
 ### Query
 
-A [`Query`](query.md) object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
+A [`Query`](Query.md) object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
 
-For more information, read the [`Query`](query.md) reference.
+For more information, read the [`Query`](Query.md) reference.
 
 ### API
 
@@ -60,7 +60,7 @@ interface GetDataSource<V> : DataSource {
 
 Actions related functions. PUT methods will be responsible of editing, modifying, sending or any other action related method.
 
-Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](query.md). In the case of `putAll`, an empty array can be passed.
+Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](Query.md). In the case of `putAll`, an empty array can be passed.
 
 ```swift
 // Swift
@@ -82,7 +82,7 @@ interface PutDataSource<V> : DataSource {
 
 Deletion related functions.
 
-Note that only a [`Query`](query.md) is required and no value is returned rather than a Future encapsulating the output error.
+Note that only a [`Query`](Query.md) is required and no value is returned rather than a Future encapsulating the output error.
 
 ```swift
 // Swift
@@ -157,9 +157,9 @@ dataSource.delete("myKey").onComplete( ... )
 
 ### `DataSource` Implementations
 
-- `VoidDataSource<T>`: Empty data source. All functions when called end with errors.
-- `InMemoryDataSource<T>`: Data stored in the app live memory.
-- `DeviceStorageDataSource<T>`: Data stored in `SharedPreferences` (android) or `UserDefaults` (iOS)
+- [`VoidDataSource<T>`](VoidDataSource.md): Empty data source. All functions when called end with errors.
+- [`InMemoryDataSource<T>`](InMemoryDataSource.md): Data stored in the app live memory.
+- [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md): Data stored in `SharedPreferences` (android) or `UserDefaults` (iOS)
 - `DataSourceMapper<In,Out>`: Mappes the type of a data source.
 - `DataSourceValidator<T>`: Validates the objects manipulated by a data source.
 

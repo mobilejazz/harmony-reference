@@ -11,7 +11,7 @@ public protocol Query { }
 // Kotlin
 // TODO
 ```
-Note that a `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](datasource.md). 
+Note that a `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](DataSource.md). 
 
 ## Usage
 
@@ -43,7 +43,7 @@ itemsStorageDataSource.getAll(SearchQuery("lorem ipsum")).then { ... }
 
 ## Using Queries in DataSources
 
-Queries must be pro-actively supported in each [`DataSource`](datasource.md) implementation. A typical appearance of an implemented `get` method from a `GetDataSource` would be:
+Queries must be pro-actively supported in each [`DataSource`](DataSource.md) implementation. A typical appearance of an implemented `get` method from a `GetDataSource` would be:
 
 ```swift
 // Swift
@@ -68,7 +68,7 @@ Note the `default:` behavior. When using an unsupported query, an exception/fata
 
 ## Key-Value Query Support
 
-In order to create a key-value environment for data sources as `InMemoryDataSource<T>`, `DeviceStorageDataSource<T>` or any custom implementation, there is the `KeyQuery` subquery type:
+In order to create a key-value environment for data sources as [`InMemoryDataSource<T>`](InMemoryDataSource.md), `DeviceStorageDataSource<T>` or any custom implementation, there is the `KeyQuery` subquery type:
 
 ```swift
 // Swift
