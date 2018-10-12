@@ -8,13 +8,16 @@
 // Swift
 let dataSource = InMemoryDataSource<Double>()
 dataSource.put(3.14159265359, forId: "pi")
-dataSource.get("pi").then { pi in print("pi: \(pi)") }.fail { error in }
+dataSource.get("pi")
 dataSource.delete("pi")
 ```
 
 ```kotlin
 // Kotlin
-// TODO
+val dataSource = InMemoryDataSource<Double>()
+dataSource.put("pi", 3.14159265359)
+dataSource.get("pi")
+dataSource.delete("pi")
 ```
 
 Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`.
@@ -36,9 +39,10 @@ Objects interfaced with the `get`, `put` and `delete` functions are stored in se
 ```swift
 // Swift
 public class InMemoryDataSource<T> : GetDataSource, PutDataSource, DeleteDataSource  {
-
-    private var objects : [String : T] = [:] // get, put delete
-    private var arrays : [String : [T]] = [:] // getAll, putAll, deleteAll
+    // get, put delete
+    private var objects : [String : T] = [:] 
+    // getAll, putAll, deleteAll
+    private var arrays : [String : [T]] = [:] 
     
     [ ... ] // The rest of the class implementation
 }
@@ -46,5 +50,12 @@ public class InMemoryDataSource<T> : GetDataSource, PutDataSource, DeleteDataSou
 
 ```kotlin
 // Kotlin
-// TODO
+class InMemoryDataSource<V> @Inject constructor() : GetDataSource<V>, PutDataSource<V>, DeleteDataSource {
+  // get, put delete
+  private val objects: MutableMap<String, V> = mutableMapOf() 
+  // getAll, putAll, deleteAll
+  private val arrays: MutableMap<String, List<V>> = mutableMapOf() 
+
+  [ ... ] // The rest of the class implementation
+}
 ```

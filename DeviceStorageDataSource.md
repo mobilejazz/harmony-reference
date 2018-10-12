@@ -17,7 +17,7 @@ dataSource.delete("pi")
 // TODO
 ```
 
-Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`/`ByIdentifierQuery<T>`.
+Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`.
 
 ## Query Types
 
@@ -85,4 +85,6 @@ dataSource.get("pi").then { pi in
 
 In the example above, pi is returned as the string `"3.14159265359"`.
 
+### Kotlin
 
+// TODO
