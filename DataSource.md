@@ -128,30 +128,30 @@ This way, code that originally looked like this:
 
 ```swift
 // Swift
-dataSource.get(IdQuery("myKey")).then { ... }
-dataSource.put(myObject, in:IdQuery("myKey")).then { ... }
-dataSource.delete(IdQuery("myKey")).then { ... }
+dataSource.get(IdQuery("myKey"))
+dataSource.put(myObject, in:IdQuery("myKey"))
+dataSource.delete(IdQuery("myKey"))
 ```
 ```kotlin
 // Kotlin
-dataSource.get(ByIdentifierQuery("myKey")).onComplete( ... )
-dataSource.put(ByIdentifierQuery("myKey"), myObject).onComplete ( ... )
-dataSource.delete(ByIdentifierQuery("myKey")).onComplete( ... )
+dataSource.get(ByIdentifierQuery("myKey"))
+dataSource.put(ByIdentifierQuery("myKey"), myObject)
+dataSource.delete(ByIdentifierQuery("myKey"))
 ```
 
 can be written as follows:
 
 ```swift
 // Swift
-dataSource.get("myKey").then { ... }
-dataSource.put(myObject, forId:"myKey").then { ... }
-dataSource.delete("myKey").then { ... }
+dataSource.get("myKey")
+dataSource.put(myObject, forId:"myKey")
+dataSource.delete("myKey")
 ```
 ```kotlin
 // Kotlin
-dataSource.get("myKey").onComplete( ... )
-dataSource.put("myKey", myObject).onComplete ( ... )
-dataSource.delete("myKey").onComplete( ... )
+dataSource.get("myKey")
+dataSource.put("myKey", myObject)
+dataSource.delete("myKey")
 ```
 
 
@@ -189,5 +189,5 @@ public protocol DataSource {
 ### `DataSource` base interface
 
 ```kotlin
-// TODO
+interface DataSource
 ```

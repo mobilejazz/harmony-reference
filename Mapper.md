@@ -1,12 +1,12 @@
 # Mapper
 
-A `Mapper` object defines a mapping method `map` between to types object types.
+A `Mapper` object defines a mapping method `map` between two object types.
 
 ```swift
 // Swift
-open class Mapper <In,Out> {
+open class Mapper<From,To> {
     public init() { }
-    open func map(_ from: In) throws -> Out {
+    open func map(_ from: From) throws -> To {
         fatalError("Undefined mapper. Class Mapper must be subclassed.")
     }
 }
@@ -15,7 +15,9 @@ open class Mapper <In,Out> {
 
 ```kotlin
 // Kotlin
-// TODO
+interface Mapper<in From, out To> {
+   fun map(from: From): To
+}
 ```
 
 ## Usage
@@ -23,13 +25,31 @@ open class Mapper <In,Out> {
 ```swift
 // Swift
 let objectA : A = A()
-let mapper ; Mapper<A,B> = MyA2BMapper()
+let mapper : Mapper<A,B> = MyA2BMapper()
 let objectB : B = mapper.map(objectA)
 ```
 
 ```kotlin
 // Kotlin
-// TODO
+val a : A    
+val mapper: Mapper<A,B> = MyA2BMapper()
+val b : B = mapper.map(a)
+```
+
+## Mapping Arrays & Dictionaries
+
+`Mapper` has extensions to map values form arrays and dcitionaries:
+
+```swift
+// Swift
+public func map( _ array: [In]) throws -> [Out] { ... }
+public func map<K>(_ dictionary: [K:In]) throws -> [K:Out] where K:Hashable { ... }
+```
+
+```swift
+// Kotlin
+fun <From, To> Mapper<From, To>.map(values: List<From>): List<To> = values.map { ... }
+fun <From, To, K> Mapper<From, To>.map(value: Map<K, From>): Map<K, To> { ... }
 ```
 
 ## Default implementations
@@ -37,7 +57,7 @@ let objectB : B = mapper.map(objectA)
 - `VoidMapper`: Empty implementation that returns en error.
 - `BlankMapper<T>`: Blank mapper that returns the same object.
 - `CastMapper<In,Out>`: Mapping by casting the object into the given types.
-- `CustomMapper<In,Out>`: Mapper that has a closure/lambda upon initialization specifiying the mapping action.
+- `ClosureMapper<In,Out>`: Mapper that has a closure/lambda upon initialization specifiying the mapping action.
 
 ### Swift exclusive implementations
 
@@ -53,15 +73,13 @@ Custom mappings must be created by subclassing or adopting the `Mapper` class/in
 
 ```swift
 // Swift
-struct MyA2BMapper : Mapper <A,B> {
+class MyA2BMapper : Mapper <A,B> {
     
     // Add custom init if necessary
     // public init(_ customParam: ParamType) { ... }
 
     public override func map(_ from: A) throws -> B {
-        var objectB : B = B()
-        // Map `from` into objectB.
-        // Throw an error if necessary
+        var objectB : B = B(from.id)
         return objectB
     }
 }
@@ -69,5 +87,7 @@ struct MyA2BMapper : Mapper <A,B> {
 
 ```kotlin
 // Kotlin
-// TODO
+class MyA2BMapper : Mapper<A, B> {
+  override fun map(from: A): B = B(from.id) 
+}
 ```

@@ -17,7 +17,7 @@ dataSource.delete("pi")
 // TODO
 ```
 
-Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`/`ByIdentifierQuery<T>`.
+Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`.
 
 ## Query Types
 
