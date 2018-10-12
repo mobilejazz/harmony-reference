@@ -161,7 +161,7 @@ dataSource.delete("myKey")
 - [`InMemoryDataSource<T>`](InMemoryDataSource.md): Data stored in the app live memory.
 - [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md): Data stored in `SharedPreferences` (android) or `UserDefaults` (iOS)
 - [`DataSourceMapper<In,Out>`](DataSourceMapper.md): Mappes the type of a data source.
-- `DataSourceValidator<T>`: Validates the objects manipulated by a data source.
+- [`DataSourceValidator<T>`](DataSourceValidator.md): Validates the objects manipulated by a data source.
 
 #### Swift exclusive implementations
 
