@@ -6,22 +6,25 @@
 
 ```swift
 // Swift
+let dataSource = DataSourceMapper(InMemoryDataSource<A>(),
+                                  toInMapper: MyB2AMapper(),
+                                  toOutMapper: MyA2BMapper())
 
-struct MyObjectType : Codable { ... }
-
-let rawDataSource = DeviceStorageDataSource<Data>()
-let dataSource = DataSourceMapper(rawDataSource, 
-                                  toInMapper: EncodableToDataMapper<MyObjectType>(),
-                                  toOutMapper: DataToDecodableMapper<MyObjectType>())
-
-let myObject = MyObjectType()
-dataSource.put(myObject, forId: "myKey")
-dataSource.get("myKey").then { object in print("\(object)")}
+dataSource.put(B(), forId: "myKey")
+dataSource.get("myKey")
 ```
 
 ```kotlin
 // Kotlin
-// TODO
+val deviceStorageDataSource = InMemoryDataSource<String, A>()
+val dataSourceMapper = DataSourceMapper(deviceStorageDataSource,
+                                        deviceStorageDataSource,
+                                        deviceStorageDataSource, 
+                                        AtoBMapper(), 
+                                        BtoAMapper())
+  
+dataSourceMapper.put("fromKey", B())
+dataSourceMapper.get("fromKey")
 ```
 
 ## Query Types
@@ -33,5 +36,7 @@ Any [`Query`](Query.md) can be passed to a `DataSourceMapper<In,Out>`.
 
 Together with `DataSourceMapper<In,Out>` there are also similar implementations for:
 
-- `DataSourceMapper<In,Out>`: Implements `GetDataSource`.
-- `DataSourceMapper<In,Out>`: Implements `PutDataSource`.
+- `GetDataSourceMapper<In,Out>`: Implements `GetDataSource`.
+- `PutDataSourceMapper<In,Out>`: Implements `PutDataSource`.
+
+There is no need to map a `DeleteDataSource`.
