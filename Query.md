@@ -9,7 +9,7 @@ public protocol Query { }
 
 ```kotlin
 // Kotlin
-// TODO
+open class Query
 ```
 Note that a `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](DataSource.md). 
 
@@ -19,27 +19,36 @@ Note that a `Query` must be independent of its data source. Calling a query `MyN
 // Swift
 struct SearchQuery: Query {
     let text : String
-    init(_ text: String) { self.text = text }
 }
 
 // Searching in network
-itemsNetworkDataSource.getAll(SearchQuery("lorem ipsum")).then { ... }
+itemsNetworkDataSource.getAll(SearchQuery("lorem ipsum"))
 // Searching in local storage
-itemsStorageDataSource.getAll(SearchQuery("lorem ipsum")).then { ... }
+itemsStorageDataSource.getAll(SearchQuery("lorem ipsum"))
 ```
 
 ```kotlin
 // Kotlin
-// TODO
+class SearchQuery(val text: String): Query()
+
+// Searching in network
+itemsNetworkDataSource.getAll(SearchQuery(“lorem ipsim”))
+// Searching in local storage
+itemsStorageDataSource.getAll(SearchQuery(“lorem ipsim”))
 ```
 
 ## Default implementations
 
 - `VoidQuery`: Empty query.
-- `IdQuery<T>` (Swift) or `ByIdentifierQuery<T>` (Kotlin) : Query by Id.
+- `IdQuery<T>`: Query by Id of type T.
+- `IdsQuery<T>`: Query containing a collection of Ids. 
 - `AllObjectsQuery`: Generic query to define the action of manipulating all objects.
 - `ObjectQuery<T>`: A query containing an object of type T.
-- `ArrayQuery<T>`: A query containing an array of objects of type T.
+- `ObjectsQuery<T>`: A query containing a collection of objects of type T.
+- `PaginationQuery`: Abstract pagnation query.
+- `PaginationOffsetLimitQuery`: Pagination query by offset and limit.
+- `InsertObjectQuery`: Generic query representing insertion of objects. Typically used in PUT functions.
+- `UpdateObjectQuery`: Generic query representing update of objects. Typically used in PUT functions.
 
 ## Using Queries in DataSources
 
@@ -48,7 +57,7 @@ Queries must be pro-actively supported in each [`DataSource`](DataSource.md) imp
 ```swift
 // Swift
 func get(_ query: Query) -> Future<MyObject> {
-   switch query.self {
+    switch query.self {
     case let query as IdQuery<String>:
         return getObjectByIdMethod(id: query.id)
     case is MyCustomQuery:
@@ -61,14 +70,21 @@ func get(_ query: Query) -> Future<MyObject> {
 
 ```kotlin
 // Kotlin
-// TODO
+override fun get(query: Query): Future<MyObject> = Future {
+    when (query) {
+      is KeyQuery<*> -> {
+        return getObjectByIdMethod(query.identifier)
+      }
+      else -> notSupportedQuery()
+    }
+  }
 ```
 
-Note the `default:` behavior. When using an unsupported query, an exception/fatalError is raised as this is an illegal call.
+Note the `default:` / `else` behavior. When using an unsupported query, an exception/fatalError is raised as this is an illegal call.
 
-## Key-Value Query Support
+## Key-Value Support
 
-In order to create a key-value environment for data sources as [`InMemoryDataSource<T>`](InMemoryDataSource.md), `DeviceStorageDataSource<T>` or any custom implementation, there is the `KeyQuery` subquery type:
+In order to create a key-value environment for data sources as in [`InMemoryDataSource<T>`](InMemoryDataSource.md), [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md) or any custom implementation, there is the `KeyQuery` subquery type:
 
 ```swift
 // Swift
@@ -80,26 +96,27 @@ public protocol KeyQuery : Query {
 
 ```kotlin
 // Kotlin
-// TODO
+open class KeyQuery<out T>(val key: T) : Query()
 ```
 
 Only queries adopting this structure can be used in Key-Value based DataSources.
 
 Note that the following default queries already have support for `KeyQuery`:
 
-- `IdQuery<T>` or `ByIdentifierQuery<T>`
+- `IdQuery<T>`
+- `IdsQuery<T>`
 - `AllObjectsQuery<T>`
 
-Custom queries must adopt this form to be used in Key-Value DataSources. For example, returning to the top example `SearchQuery`:
+Custom queries must adopt this form to be used in Key-Value data sources. For example, returning to the top example `SearchQuery`:
 
 ```swift
 // Swift
 extension SearchQuery: KeyQuery {
-    public var key : String { return "search:\"" + text + "\""}
+    public var key : String { return text }
 }
 ```
 
 ```kotlin
 // Kotlin
-// TODO
+class SearchQuery(val text: String): KeyQuery<String>(text)
 ```
