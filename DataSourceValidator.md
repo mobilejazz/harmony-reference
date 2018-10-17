@@ -1,6 +1,8 @@
 # DataSourceValidator
 
-`DataSourceValidator<T>` encapuslates a [`DataSource`](DataSource.md) instance of type `T` validates all objects fetched in the `GetDataSource` functions.
+`DataSourceValidator<T>` encapuslates a [`DataSource`](DataSource.md) instance and validates all objects fetched in the `GetDataSource` functions.
+
+Validation happens via the `ObjectValidation` protocol described below.
 
 ## Usage
 
