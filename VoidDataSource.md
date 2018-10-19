@@ -18,11 +18,11 @@ dataSource.get("sampleKey").fail { error in
 // TODO
 ```
 
-Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`.
+Note that the example above is using the extension methods of `DataSoruce` that encapsulate queries of type `IdQuery<T>`.
 
 ## Query Types
 
-Any [`Query`](Query.md) can be passed to a `VoidDataSource<T>`.
+Any [`Query`](Query.md) can be passed to a `VoidDataSource<T>` (and all will result with an error).
 
 ## Other Implementations
 
