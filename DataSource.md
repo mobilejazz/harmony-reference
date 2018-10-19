@@ -170,6 +170,7 @@ dataSource.delete("myKey")
 - `AnyGetDataSource<T>`: Type erasing for a get data source.
 - `AnyPutDataSource<T>`: Type erasing for a put data source.
 - `AnyDeleteDataSource<T>`: Type erasing for a delete data source.
+- `RetryDataSource<T>`: Encapsulates another data source and retries a call when an error happens.
 
 ## Swift Notes
 

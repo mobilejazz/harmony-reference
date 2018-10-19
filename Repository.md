@@ -147,6 +147,7 @@ repository.delete("myKey", operation: MyCustomOperation())
 - `AnyGetRepository<T>`: Type erasing for a get repository.
 - `AnyPutRepository<T>`: Type erasing for a put repository.
 - `AnyDeleteRepository<T>`: Type erasing for a delete repository.
+- `RetryRepository<T>`: Encapsulates another repository and retries a call when an error happens.
 
 ## Swift Notes
 
