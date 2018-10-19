@@ -2,6 +2,8 @@
 
 The `SingleDataSourceRepository<T>` redirects all calls to the single data source of type `T` that encapsulates.
 
+This repository is commonly used when there is only one data source to manipulate, or during the initial phase of development when further data soruces are not yet implemented (for example, using a network data source only while not having yet the local storage data source ready).
+
 ## Usage
 
 ```swift
