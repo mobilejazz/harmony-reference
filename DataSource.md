@@ -24,19 +24,17 @@ dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
 })
 ```
 
-## About Data Sources
-
-### Query
+## Query
 
 A [`Query`](Query.md) object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
 
 For more information, read the [`Query`](Query.md) reference.
 
-### API
+## API
 
 All actions handled by a `DataSource` are grouped in a simple CRUD.
 
-#### **Get**
+### **Get**
 
 Fetch related functions. 
 
@@ -56,7 +54,7 @@ interface GetDataSource<V> : DataSource {
 }
 ```
 
-#### **Put**
+### **Put**
 
 Actions related functions. PUT methods will be responsible of editing, modifying, sending or any other action related method.
 
@@ -78,7 +76,7 @@ interface PutDataSource<V> : DataSource {
 }
 ```
 
-#### **Delete**
+### **Delete**
 
 Deletion related functions.
 
@@ -100,7 +98,7 @@ interface DeleteDataSource : DataSource {
 }
 ```
 
-### **Id Query** CRUD extensions
+## **Id Query** CRUD extensions
 
 All  `GetDataSource`, `PutDataSource` and `DeleteDataSource` interfaces are extended with methods to access the CRUD functions by an Id:
 
@@ -155,7 +153,7 @@ dataSource.delete("myKey")
 ```
 
 
-### `DataSource` Implementations
+## `DataSource` Implementations
 
 - [`VoidDataSource<T>`](VoidDataSource.md): Empty data source. All functions when called end with errors.
 - [`InMemoryDataSource<T>`](InMemoryDataSource.md): Data stored in the app live memory.
@@ -163,7 +161,7 @@ dataSource.delete("myKey")
 - [`DataSourceMapper<In,Out>`](DataSourceMapper.md): Mappes the type of a data source.
 - [`DataSourceValidator<T>`](DataSourceValidator.md): Validates the objects manipulated by a data source.
 
-#### Swift exclusive implementations
+### Swift exclusive implementations
 
 - `DataSourceAssembler<T>`: Combines three data sources (get, put, delete) into a single object.
 - `RealmDataSource<E,O>`: Realm based data source. Available at the `MJSWiftCore/Realm` pod subspec.
