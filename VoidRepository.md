@@ -7,7 +7,7 @@
 ```swift
 // Swift
 let repository = VoidRepository<String>()
-dataSource.get("sampleKey", operation: VoidOperation()).fail { error in
+repository.get("sampleKey", operation: VoidOperation()).fail { error in
     // Error is of type CoreError.NotImplemented
     print("Function is not implemented!")
 }
