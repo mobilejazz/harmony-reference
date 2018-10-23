@@ -47,8 +47,6 @@ itemsStorageDataSource.getAll(SearchQuery(“lorem ipsim”))
 - `ObjectsQuery<T>`: A query containing a collection of objects of type T.
 - `PaginationQuery`: Abstract pagnation query.
 - `PaginationOffsetLimitQuery`: Pagination query by offset and limit.
-- `InsertObjectQuery`: Generic query representing insertion of objects. Typically used in PUT functions.
-- `UpdateObjectQuery`: Generic query representing update of objects. Typically used in PUT functions.
 
 ## Using Queries in DataSources
 
@@ -82,14 +80,61 @@ override fun get(query: Query): Future<MyObject> = Future {
 
 Note the `default:` / `else` behavior. When using an unsupported query, an exception/fatalError is raised as this is an illegal call.
 
+## `PutQuery` support
+
+This optional interface/protocol can add support to a custom query to be used in **PUT** operations on supported data sources.
+
+```swift
+// Swift
+public protocol PutQuery : Query { }  
+```
+
+```swift
+// Kotlin
+// TODO
+```
+
+For example, we can add the `PutQuery` interface to the above example `SearchQuery`.
+
+```swift
+// Swift
+extension SearchQuery : PutQuery { }
+```
+
+```kotlin
+// Kotlin
+// TODO
+```
+
+Now, this `SearchQuery` can be used to in **PUT** functions by supported data sources like the [`RealmDetaSource`](RealmDetaSource.md) in Swift (where all objects that are being listed in the **PUT** functions will be inserted into the Realm database).
+
+
+Other custom data sources can do custom implementations:
+
+```swift
+// Swift
+func put(_ value: T?, in query: Query) -> Future<T> {
+    switch query.self {
+    case is PutQuery:
+        // Store here the object value
+    default:
+        query.fatalError(.put, self)
+    }
+}    
+```
+
+```kotlin
+// Kotlin
+// TODO
+```
+
 ## Key-Value Support
 
-In order to create a key-value environment for data sources as in [`InMemoryDataSource<T>`](InMemoryDataSource.md), [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md) or any custom implementation, there is the `KeyQuery` subquery type:
+In order to create a key-value environment for data sources as in [`InMemoryDataSource<T>`](InMemoryDataSource.md), [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md) or any custom implementation, there is the `KeyQuery` interface/protocol to implement:
 
 ```swift
 // Swift
 public protocol KeyQuery : Query {
-    /// The key associated to the query
     var key : String { get }
 }
 ```
@@ -111,7 +156,7 @@ Custom queries must adopt this form to be used in Key-Value data sources. For ex
 
 ```swift
 // Swift
-extension SearchQuery: KeyQuery {
+extension SearchQuery : KeyQuery {
     public var key : String { return text }
 }
 ```
