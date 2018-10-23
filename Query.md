@@ -128,7 +128,7 @@ func put(_ value: T?, in query: Query) -> Future<T> {
 // TODO
 ```
 
-## Key-Value Support
+## `KeyQuery` support
 
 In order to create a key-value environment for data sources as in [`InMemoryDataSource<T>`](InMemoryDataSource.md), [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md) or any custom implementation, there is the `KeyQuery` interface/protocol to implement:
 
