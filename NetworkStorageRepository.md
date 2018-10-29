@@ -1,6 +1,6 @@
 # NetworkStorageRepository
 
-`NetworkStorageRepository<T>` implements `GetRepository`, `PutRepository` and `DeleteRepository` and encapuslates two [`Repository`](Repository.md) instances: one representing a **network** data source and another one representing a **storage** data source.
+`NetworkStorageRepository<T>` implements `GetRepository`, `PutRepository` and `DeleteRepository` and encapuslates two [`DataSource`](DataSource.md) instances: one representing a **network** data source and another one representing a **storage** data source.
 
 Using the different supported operation types, the repository will fetch/push data to a single data source or to both data sources in a specific order. For example, the repository can fetch from the network data source and store the results to the storage data source. 
 
