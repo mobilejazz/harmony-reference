@@ -2,7 +2,7 @@
 
 `RealmDataSource<E,O>` is a swift implementation of an interface for Realm conforming to [`DataSource`](DataSource.md) (`GetDataSoruce`, `PutDataSource` and `DeleteDataSource`). It automatically maps entities to realm objects (it requires object mappers) and can run queries to fetch, store and delete objects.
 
-It's interface exposes two generics:
+Its interface exposes two generics:
 - `E`: The entity type
 - `O`: The equivalent realm object type
 
