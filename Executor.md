@@ -54,13 +54,12 @@ executor.submit { end in
 
 ## Swift `Future` extension
 
-Executor is extended in Swift for a better integration with `Future`.
+Executor is extended in Swift for a better integration with `Future`:
 
 ```swift
 // Swift
 extension Executor {
     public func submit<T>(_ closure: @escaping (FutureResolver<T>) throws -> Void) -> Future<T>
-
     public func submit(_ closure: @escaping () throws -> Void) -> Future<Void>
 }
 ```
