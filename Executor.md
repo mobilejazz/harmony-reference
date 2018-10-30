@@ -38,7 +38,7 @@ executor.submit { end in
 
 - `DirectExecutor`: executes the code on the calling thread synchronously.
 
-### Kotlin exclusive implementations`
+### Kotlin exclusive implementations
 
 - TODO
 - TODO
