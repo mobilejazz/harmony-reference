@@ -77,6 +77,7 @@ let future : Future<Item> = executor.submit { resolver in
 }
 future.then { item in
     // Do stuff, like update UI.
+    // Note that by default, then block is called using a MainDirectExecutor, ensuring this code is run in the main thread.
 }
 ```
 
