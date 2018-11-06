@@ -138,7 +138,7 @@ Kotlin:
 
 ### **PUT**
 
-Get interactors require a `PutRepository` and an `Executor` upon initialization.
+Put interactors require a `PutRepository` and an `Executor` upon initialization.
  
 Swift:
 - `Interactor.Put<T>`
@@ -152,7 +152,7 @@ Kotlin:
 
 ### **DELETE**
 
-Get interactors require a `DeleteRepository` and an `Executor` upon initialization.
+Delete interactors require a `DeleteRepository` and an `Executor` upon initialization.
  
 Swift:
 - `Interactor.Delete`
