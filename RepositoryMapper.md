@@ -10,8 +10,8 @@ let repository = RepositoryMapper(MyCustomRepository<A>(),
                                   toInMapper: MyB2AMapper(),
                                   toOutMapper: MyA2BMapper())
 
-repository.put(B(), forId: "myKey", operation: VoidOperation())
-repository.get("myKey", operation: VoidOperation())
+repository.put(B(), forId: "myKey", operation: DefaultOperation())
+repository.get("myKey", operation: DefaultOperation())
 ```
 
 ```kotlin

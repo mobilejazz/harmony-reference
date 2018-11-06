@@ -1,5 +1,6 @@
 # Executor
 
+## Swift
 An executor is an abstract definition of an object responsible of executing a block of code.
 
 ```swift
@@ -11,14 +12,9 @@ public protocol Executor {
 }
 ```
 
-```kotlin
-// Kotlin
-// TODO
-```
-
 Note that the `submit` function exposes a closure/lambda that includes inside another closure/lambda. This nested block must be called once the execution finishes.
 
-## Usage
+### Usage
 
 ```swift
 // Swift
@@ -29,9 +25,17 @@ executor.submit { end in
 }
 ```
 
+## Kotlin
+// TODO
+
+### Usage
+
 ```kotlin
 // Kotlin
-// TODO
+val executor: Executor = ...
+executor.submit(Callable { 
+      // Do custom stuff and once finished call end
+})
 ```
 
 ## Default implementations
@@ -40,9 +44,8 @@ executor.submit { end in
 
 ### Kotlin exclusive implementations
 
-- TODO
-- TODO
-- TODO
+- `AppExecutor`: Single thread executor.
+- `AppUiExecutor`: Main thread executor.
 
 ### Swift exclusive implementations
 

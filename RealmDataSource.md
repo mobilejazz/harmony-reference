@@ -40,7 +40,8 @@ Note that the example above is using the extension methods of `DataSoruce` that 
 - `RealmQuery`: get objects by predicate. Read more below.
 
 **put** and **putAll** functions:
-- `PutQuery`: queries conforming to this protocol will be enabled to perform put operations (the object being stored is the one passed in the **put** and **putAll** functions). Read more below.
+- put: Query is not checked. Object is stored directly.
+- putAll: Query is not checked. Objects are stored directly.
 
 **delete** function:
 - `IdQuery<Int>`: delete an object by its id (typed int).
@@ -98,12 +99,6 @@ dataSource.getAll(SearchTextQuery(text:"textToSearch")).then { array in
     print("Entities found: \(array)")
 }
 ```
-
-## `PutQuery` protocol
-
-`RealmDataSource` is using `PutQuery` (defined in [`Query.md`](Query.md) file) to enable put actions on any query conforming to this protocol.
-
-A typical example of use is when using a [`NetworkStorageRepository`](NetworkStorageRepository.md) together with a network data soruce and a `RealmDataSource` for local storage. When running a **get** or **getAll** function using the `NetworkSyncOperation` or `StorageSyncOperation`, the `Query` used will be passed to a **get**/**getAll** function in its data sources, but after fetching data from network, the same query will be sent via **put**/**putAll** to the local storage system. Therefore, in order to enable the storage action, that query must conform to the *PutQuery* protocol, otherwise it will fail.
 
 ## `RealmObject`
 

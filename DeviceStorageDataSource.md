@@ -7,6 +7,7 @@
 ```swift
 // Swift
 let dataSource = DeviceStorageDataSource<Double>()
+
 dataSource.put(3.14159265359, forId: "pi")
 dataSource.get("pi").then { pi in print("pi: \(pi)") }.fail { error in }
 dataSource.delete("pi")
@@ -14,7 +15,11 @@ dataSource.delete("pi")
 
 ```kotlin
 // Kotlin
-// TODO
+val dataSource = DeviceStorageDataSource<Double>(...)
+
+dataSource.put("pi", 3.14159265359)
+dataSource.get("pi")
+dataSource.delete("pi")
 ```
 
 Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`.
@@ -42,13 +47,11 @@ To store any different type, use a [`DataSourceMapper<In,Out>`](DataSourceMapper
 - `Array` of any type of this list
 - `Dictionary` of `[String : T]` where `T` is any type of this list
 
+More information: https://developer.apple.com/documentation/foundation/userdefaults
+
 ### `SharedPreferences` (Android) compatible types
 
-- `// TODO`
-- `// TODO`
-- `// TODO`
-- `// TODO`
-- `// TODO`
+More information: https://developer.android.com/reference/android/content/SharedPreferences
 
 ## Implementation Notes
 

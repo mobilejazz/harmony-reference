@@ -2,7 +2,7 @@
 
 The `SingleDataSourceRepository<T>` redirects all calls to the single data source of type `T` that encapsulates.
 
-This repository is commonly used when there is only one data source to manipulate, or during the initial phase of development when further data soruces are not yet implemented (for example, using a network data source only while not having yet the local storage data source ready).
+This repository is commonly used when there is only one data source to manipulate, or during the initial phase of development when further data sources are not yet implemented (for example, using a network data source only while not having yet the local storage data source ready).
 
 ## Usage
 
@@ -10,17 +10,20 @@ This repository is commonly used when there is only one data source to manipulat
 // Swift
 let dataSource = MyDataSource()
 let repository = SingleDataSourceRepository(dataSource)
-repository.get(IdQuery("myKey"), operation: VoidOperation())
+repository.get(IdQuery("myKey"), operation: DefaultOperation())
 ```
 
 ```kotlin
 // Kotlin
-// TODO
+val datasource = MyDataSource()
+val repository = SingleDataSourceRepository(datasource /*get datasource*/, datasource /*put datasource*/, datasource /*delete datasource*/)
+
+repository.get(IdQuery("myKey"), DefaultOperation)
 ```
 
 ## Operation Types
 
-Any operation can be passed to this repository, at is directly forwarding everything to its encapsulated [`DataSource`](DataSource.md). It is recomended to use a `VoidOperation` as convention.
+Any operation can be passed to this repository, at is directly forwarding everything to its encapsulated [`DataSource`](DataSource.md). It is recomended to use a `DefaultOperation` as convention.
 
 ## Other Implementations
 
@@ -30,9 +33,9 @@ Together with `SingleDataSourceRepository<T>` there are implementations deciated
 - `SinglePutDataSourceRepository<T>`: Implements `PutDataSource`.
 - `SingleDeleteDataSourceRepository<T>`: Implements `DeleteDataSource`.
 
-## Swift Notes
+## Notes
 
-There are extensions of `GetDataSource`, `PutDataSource` and `DeleteDataSource<T>` to get a `SingleXXXDataSourceRepository<T>`:
+There are extensions of `GetDataSource`, `PutDataSource` and `DeleteDataSource to get a `SingleXXXDataSourceRepository<T>`:
 
 ```swift
 // Swift
@@ -51,6 +54,13 @@ extension DeleteDataSource {
         return SingleDeleteDataSourceRepository(self)
     }
 }
+
+// Kotlin
+fun <V>GetDataSource<V>.toGetRepository() = SingleGetDataSourceRepository(this)
+
+fun <V>PutDataSource<V>.toPutRepository() = SinglePutDataSourceRepository(this)
+
+fun DeleteDataSource.toDeleteRepository() = SingleDeleteDataSourceRepository(this)
 ```
 This allows the following code:
 
@@ -60,5 +70,12 @@ let getDataSource = MyGetDataSource()
 let getRepository = getDataSource.toGetRepository()
 
 // And same for PutDataSource and DeleteDataSource
+```
+
+
+```kotlin
+// Kotlin
+val getDataSource = MyGetDataSource()
+val gteRepository = getDataSource.toGetRepository()
 // ...
 ```

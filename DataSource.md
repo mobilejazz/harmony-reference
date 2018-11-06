@@ -41,6 +41,7 @@ Fetch related functions.
 ```swift
 // Swift
 public protocol GetDataSource : DataSource {
+    associatedtype T
     func get(_ query: Query) -> Future<T>
     func getAll(_ query: Query) -> Future<[T]>
 }
@@ -63,6 +64,7 @@ Note that in the `put` function, the `value` is optional. This happens becasue i
 ```swift
 // Swift
 public protocol PutDataSource : DataSource {
+    associatedtype T
     func put(_ value: T?, in query: Query) -> Future<T>
     func putAll(_ array: [T], in query: Query) -> Future<[T]>
 }
@@ -169,7 +171,6 @@ dataSource.delete("myKey")
 - `AnyDataSource<T>`: Type erasing for any get+put+delete data source.
 - `AnyGetDataSource<T>`: Type erasing for a get data source.
 - `AnyPutDataSource<T>`: Type erasing for a put data source.
-- `AnyDeleteDataSource<T>`: Type erasing for a delete data source.
 - `RetryDataSource<T>`: Encapsulates another data source and retries a call when an error happens.
 
 ## Swift Notes
@@ -178,9 +179,7 @@ dataSource.delete("myKey")
 In order to have a generic type, all `GetDataSource`, `PutDataSource` and `DeleteDataSource` extends from the following base protocol:
 
 ```swift
-public protocol DataSource {
-    associatedtype T
-}
+public protocol DataSource { }
 ```
 
 ## Kotlin Notes

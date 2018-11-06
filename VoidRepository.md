@@ -7,7 +7,7 @@
 ```swift
 // Swift
 let repository = VoidRepository<String>()
-repository.get("sampleKey", operation: VoidOperation()).fail { error in
+repository.get("sampleKey", operation: DefaultOperation()).fail { error in
     // Error is of type CoreError.NotImplemented
     print("Function is not implemented!")
 }
@@ -15,7 +15,11 @@ repository.get("sampleKey", operation: VoidOperation()).fail { error in
 
 ```kotlin
 // Kotlin
-// TODO
+val repository = VoidRepository<String>()
+repository.get("sampleKey").onComplete(onSuccess = {}, onFailure = {
+    // Error is a UnsupportedOperationException
+    print(it)
+})
 ```
 
 Note that the example above is using the extension methods of `Repository` that encapsulate queries of type `IdQuery<T>`.
@@ -30,10 +34,7 @@ Together with `VoidRepository<T>` there are also similar implementations for:
 
 - `VoidGetRepository<T>`: Implements `GetRepository`.
 - `VoidPutRepository<T>`: Implements `PutRepository`.
-- `VoidDeleteRepository<T>`: Implements `DeleteRepository`.
-- `VoidGetPutRepository<T>`: Implements `GetRepository` and `PutRepository`.
-- `VoidGetDeleteRepository<T>`: Implements `GetRepository` and `DeleteRepository`.
-- `VoidPutDeleteRepository<T>`: Implements `PutRepository` and `DeleteRepository`.
+- `VoidDeleteRepository`: Implements `DeleteRepository`.
 
 ## Implementation Notes
 
@@ -54,5 +55,18 @@ public class VoidRepository<T> : GetRepository, PutRepository, DeleteRepository 
 
 ```kotlin
 // Kotlin
-// TODO
+class VoidRepository<V> : GetRepository<V>, PutRepository<V>, DeleteRepository {
+
+  override fun get(query: Query, operation: Operation): Future<V> = Future { notSupportedOperation() }
+
+  override fun getAll(query: Query, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
+
+  override fun put(query: Query, value: V?, operation: Operation): Future<V> = Future { notSupportedOperation() }
+
+  override fun putAll(query: Query, value: List<V>?, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
+
+  override fun delete(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
+
+  override fun deleteAll(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
+}
 ```

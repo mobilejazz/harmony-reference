@@ -1,8 +1,8 @@
 # Repository
 
-A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](DataSource.md)s. This redirect semantic is encapsulated in  [`Operation`](Operation.md) objects.
+A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](DataSource.md)s. This redirect semantic is encapsulated in [`Operation`](Operation.md) objects.
 
-A good example of `Repository` is the [`NetworkStorageRepository`](NetworkStorageRepository.md), which depending on the `Operation` used on each request can obtain data from an storage-based data soruce or from a network-based data source. The most basic repository is the [`SingleDataSourceRepository`](SingleDataSourceRepository.md) which redirects all calls to the single data source that encapsulates.
+A good example of `Repository` is the [`NetworkStorageRepository`](NetworkStorageRepository.md), which depending on the `Operation` used on each request can obtain data from an storage-based data source or from a network-based data source. The most basic repository is the [`SingleDataSourceRepository`](SingleDataSourceRepository.md) which redirects all calls to the single data source that encapsulates.
 
 ## Usage
 
@@ -18,7 +18,12 @@ let future = repository.get(IdQuery("myKey"), operation: StorageSyncOperation())
 
 ```kotlin
 // Kotlin
-// TODO
+val networkDataSource = MyNetworkDataSource()
+val storageDataSource = MyStorageDataSource()
+
+val repository = NetworkStorageRepository(networkDataSource, networkDataSource, networkDataSource, storageDataSource, storageDataSource, storageDataSource)
+
+val future = repository.get(IdQuery("my-key"), StorageSyncOperation)
 ```
 
 ## Operation
@@ -29,7 +34,7 @@ For more information, read the [`Operation`](Operation.md) reference.
 
 ## API
 
-The `Repository` functions replicatec the [`DataSource`](DataSoure.md) public API, adding an extra parameter of type `Operation` on each method.
+The `Repository` functions replicate the [`DataSource`](DataSoure.md) public API, adding an extra parameter of type `Operation` on each function.
 
 ### **Get**
 
@@ -38,6 +43,7 @@ Fetch related functions.
 ```swift
 // Swift
 public protocol GetRepository : Repository {
+    associatedtype T
     func get(_ query: Query, operation: Operation) -> Future<T>
     func getAll(_ query: Query, operation: Operation) -> Future<[T]>
 }
@@ -45,7 +51,10 @@ public protocol GetRepository : Repository {
 
 ```kotlin
 // Kotlin
-// TODO
+interface GetRepository<V> : Repository {
+  fun get(query: Query, operation: Operation = DefaultOperation): Future<V>
+  fun getAll(query: Query, operation: Operation = DefaultOperation): Future<List<V>>
+}
 ```
 
 ### **Put**
@@ -55,6 +64,7 @@ Actions related functions.
 ```swift
 // Swift
 public protocol PutRepository : Repository {
+    associatedtype T
     func put(_ value: T?, in query: Query, operation: Operation) -> Future<T>
     func putAll(_ array: [T], in query: Query), operation: Operation -> Future<[T]>
 }
@@ -62,7 +72,10 @@ public protocol PutRepository : Repository {
 
 ```kotlin
 // Kotlin
-// TODO
+interface PutRepository<V> : Repository {
+  fun put(query: Query, value: V?, operation: Operation = DefaultOperation): Future<V>
+  fun putAll(query: Query, value: List<V>? = emptyList(), operation: Operation = DefaultOperation): Future<List<V>>
+}
 ```
 
 ### **Delete**
@@ -79,7 +92,10 @@ public protocol DeleteRepository : Repository {
 
 ```kotlin
 // Kotlin
-// TODO
+interface DeleteRepository : Repository {
+  fun delete(query: Query, operation: Operation = DefaultOperation): Future<Unit>
+  fun deleteAll(query: Query, operation: Operation = DefaultOperation): Future<Unit>
+}
 ```
 
 ## **Id Query** CRUD extensions
@@ -103,7 +119,17 @@ extension DeleteRepository {
 ```
 
 ```kotlin
-// TODO
+fun <K, V> GetRepository<V>.get(id: K, operation: Operation = DefaultOperation): Future<V> = get(IdQuery(id), operation)
+
+fun <K, V> GetRepository<V>.getAll(ids: List<K>, operation: Operation = DefaultOperation): Future<List<V>> = getAll(IdsQuery(ids), operation)
+
+fun <K, V> PutRepository<V>.put(id: K, value: V?, operation: Operation = DefaultOperation): Future<V> = put(IdQuery(id), value, operation)
+
+fun <K, V> PutRepository<V>.putAll(ids: List<K>, values: List<V>? = emptyList(), operation: Operation = DefaultOperation) = putAll(IdsQuery(ids), values, operation)
+
+fun <K> DeleteRepository.delete(id: K, operation: Operation = DefaultOperation) = delete(IdQuery(id), operation)
+
+fun <K> DeleteRepository.deleteAll(ids: List<K>, operation: Operation = DefaultOperation) = deleteAll(IdsQuery(ids), operation)
 ```
 
 This way, code that originally looked like this:
@@ -116,7 +142,9 @@ repository.delete(IdQuery("myKey"), operation: MyCustomOperation())
 ```
 ```kotlin
 // Kotlin
-// TODO
+repository.get(IdQuery("myKey"))
+repository.put(IdQuery("myKey"), myObject)
+repository.delete(IdQuery("myKey"))
 ```
 
 can be written as follows:
@@ -129,7 +157,9 @@ repository.delete("myKey", operation: MyCustomOperation())
 ```
 ```kotlin
 // Kotlin
-// TODO
+repository.get("myKey")
+repository.put("myKey", myObject)
+repository.delete("myKey")
 ```
 
 
@@ -146,7 +176,6 @@ repository.delete("myKey", operation: MyCustomOperation())
 - `AnyRepository<T>`: Type erasing for any get+put+delete repository.
 - `AnyGetRepository<T>`: Type erasing for a get repository.
 - `AnyPutRepository<T>`: Type erasing for a put repository.
-- `AnyDeleteRepository<T>`: Type erasing for a delete repository.
 - `RetryRepository<T>`: Encapsulates another repository and retries a call when an error happens.
 
 ## Swift Notes
@@ -155,9 +184,7 @@ repository.delete("myKey", operation: MyCustomOperation())
 In order to have a generic type, all `GetRepository`, `PutRepository` and `DeleteRepository` extends from the following base protocol:
 
 ```swift
-public protocol Repository {
-    associatedtype T
-}
+public protocol Repository { }
 ```
 
 ## Kotlin Notes

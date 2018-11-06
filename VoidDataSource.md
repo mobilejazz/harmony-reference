@@ -15,7 +15,11 @@ dataSource.get("sampleKey").fail { error in
 
 ```kotlin
 // Kotlin
-// TODO
+val dataSource = VoidDataSource<String>()
+getDataSource.get("sampleKey").onComplete(onSuccess = {}, onFailure = {
+    // Error is a UnsupportedOperationException
+    print(it)
+})
 ```
 
 Note that the example above is using the extension methods of `DataSoruce` that encapsulate queries of type `IdQuery<T>`.
@@ -30,10 +34,7 @@ Together with `VoidDataSource<T>` there are also similar implementations for:
 
 - `VoidGetDataSource<T>`: Implements `GetDataSource`.
 - `VoidPutDataSource<T>`: Implements `PutDataSource`.
-- `VoidDeleteDataSource<T>`: Implements `DeleteDataSource`.
-- `VoidGetPutDataSource<T>`: Implements `GetDataSource` and `PutDataSource`.
-- `VoidGetDeleteDataSource<T>`: Implements `GetDataSource` and `DeleteDataSource`.
-- `VoidPutDeleteDataSource<T>`: Implements `PutDataSource` and `DeleteDataSource`.
+- `VoidDeleteDataSource`: Implements `DeleteDataSource`.
 
 ## Implementation Notes
 
@@ -54,5 +55,17 @@ public class VoidDataSource<T> : GetDataSource, PutDataSource, DeleteDataSource 
 
 ```kotlin
 // Kotlin
-// TODO
+class VoidDataSource<V> : GetDataSource<V>, PutDataSource<V>, DeleteDataSource {
+  override fun get(query: Query): Future<V> = Future { throw UnsupportedOperationException() }
+
+  override fun getAll(query: Query): Future<List<V>> = Future { throw UnsupportedOperationException() }
+
+  override fun put(query: Query, value: V?): Future<V> = Future { throw UnsupportedOperationException() }
+
+  override fun putAll(query: Query, value: List<V>?): Future<List<V>> = Future { throw UnsupportedOperationException() }
+
+  override fun delete(query: Query): Future<Unit> = Future { throw UnsupportedOperationException() }
+
+  override fun deleteAll(query: Query): Future<Unit> = Future { throw UnsupportedOperationException() }
+}
 ```

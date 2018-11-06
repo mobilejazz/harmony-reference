@@ -9,7 +9,7 @@ public protocol Operation { }
 
 ```kotlin
 // Kotlin
-// TODO
+sealed class Operation
 ```
 Note that an `Operation` depends exclusively on a custom implementation of a [`Repository`](Repository.md). Each [`Repository`](Repository.md) implementation will delcare it's supported `Operations`.
 
@@ -27,12 +27,16 @@ repository.get(IdQuery("myKey"), operation: MyRetryOnceIfErrorOperation())
 
 ```kotlin
 // Kotlin
-// TODO
+object MyRetryOnceIfErrorOperation: Operation()
+
+val repository = MyCustomRepository(...)
+
+repository.get(IdQuery("myKey"), MyRetryOnceIfErrorOperation)
 ```
 
 ## Default implementations
 
-- `VoidOperation`: Empty operation. To be used when none operation is required.
+- `DefaultOperation`: Empty operation. To be used when none operation is required.
 
 Any other custom operation will be declared together with its [`Repository`](Repository.md) implementation.
 
@@ -58,7 +62,12 @@ func get(_ query: Query, operation: Operation) -> Future<MyObject> {
 
 ```kotlin
 // Kotlin
-// TODO
+override fun get(query: Query,operation: Operation): Future<MyObject> = when (operation) {
+    is MyRetryOnceIfErrorOperation -> {...}
+    is MyOtherOperation -> {...}
+    else -> notSupportedOperation()
+  }
+
 ```
 
 Note the `default:` / `else` behavior. When using an unsupported operation, an exception/fatalError is raised as this is an illegal call.

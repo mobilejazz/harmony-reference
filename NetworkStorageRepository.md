@@ -18,7 +18,12 @@ let future = repository.get(IdQuery("myKey"), operation: StorageSyncOperation())
 
 ```kotlin
 // Kotlin
-// TODO
+val networkDataSource = MyNetworkDataSource()
+val storageDataSource = MyStorageDataSource()
+
+val repository = NetworkStorageRepository(networkDataSource, networkDataSource, networkDataSource, storageDataSource, storageDataSource, storageDataSource)
+
+val future = repository.get(IdQuery("my-key"), StorageSyncOperation)
 ```
 
 ## Operation Types
@@ -41,9 +46,8 @@ Using the storage data source only.
 
 The repository will first forward the query to the **storage** data source. 
 
-- On **GET** actions, if this one fails with an error of type `CoreError.NotValid` or `CoreError.NotFound`, the repository will forward the query to the **network** data source. Otherwise, will return the result of the **storage** data source.
+- On **GET** actions, if this one fails with an error of type `CoreError.NotValid` or `CoreError.NotFound` / `DataNotFoundException` or `ObjectNotValidException`, the repository will forward the query to the **network** data source. Otherwise, will return the result of the **storage** data source.
 - On **PUT** and **DELETE** actions, the repository will forward the query to the **network** data source after if the storage action is resolved successfully.
-
 
 ## Example: Building a cache
 
