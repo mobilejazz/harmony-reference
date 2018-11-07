@@ -164,6 +164,12 @@ Kotlin:
 - `DeleteInteractor`
 - `DeleteAllInteractor`
 
+>Note the naming conventions used in Swift: `Interactor` is a struct used to define a namespace and all default interactors are nested classes defined within that struct (namespace).
+
+### Swift Notes
+
+For each interactor there are two sub-types: `Interactor.XXX` and `Interactor.XXXByQuery`. The `ByQuery` interactors are the ones equivalent to Android`XXXInteractor`. These interactors have an `execute` method than has the `query` as a parameter. Additionally, Swift has the `Interactor.XXX` which the query is passed upon initialization and not as a parameter in the `execute` method. 
+
 ### `IdQuery` CRUD extensions
 
 Similar to the [`Repository`](Repository.md) public interface, all default interactors interfaces are extended with methods to access the CRUD functions by an Id using the `IdQuery`.
