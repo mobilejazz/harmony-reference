@@ -28,9 +28,10 @@ executor.submit { end in
 ## Kotlin
 A executor service creates and maintains a reusable pool of threads for executing submitted tasks.
 
-Kotlin mj-core is using the concurrency package from Guava to suply the lack of Asynchronous calls from the Java `Future` with the Guava `ListenableFuture` using `ListeningExecutorService` instead of a Java `ExecutorService`.
+Kotlin mj-core is using the concurrency package from Guava to suply the lack of Asynchronous calls from the Java `Future` with the Guava `ListenableFuture`, using `ListeningExecutorService` instead of a Java `ExecutorService`.
 
-To provide a abstraction from Guava `ListenableFuture` and `ListeningExecutorService` types we expose two kotlin `typealias`:
+To provide an abstraction from Guava `ListenableFuture` and `ListeningExecutorService` types, we expose two kotlin `typealias`:
+
 - `Executor` --> `ListeningExecutorService`
 - `Future` --> `ListenableFuture`
 
