@@ -212,6 +212,44 @@ For each interactor there are two sub-types: `Interactor.XXX` and `Interactor.XX
 
 Similar to the [`Repository`](Repository.md) public interface, all default interactors interfaces are extended with methods to access the CRUD functions by an Id using the `IdQuery`.
 
-## Recomendations
+## Default Interactors Composition
 
-- Compose the default interactors to access a repository.
+Typically, your custom interactors will require repositories to access the data manipulation layer. However, it is recomended to **compose default interactors** instead of having direct references to repositories.
+
+Same applies with custom interactors composing other custom interactors.
+
+For example:
+
+
+```swift
+// Swift
+struct CountAllUsersInteractor {
+    private let executor : Executor
+    private let getUsers : Interactor.GetAllByQuery<User>
+
+    func execute(in: Executor? = nil) -> Future<UInt> {
+        let executor = executor ?? self.executor
+        return executor.submit { resolver in 
+            let array = try getUsers.execute(AllObjectsQuery(), in: DirectExecutor()).get().result
+            resolver.set(array.count)
+        }
+    }
+}
+
+struct UserLimitReachedInteractor {
+    private let executor : Executor
+    private let userCount : CountAllUsersInteractor
+
+    func execute(limit : Int) -> Future <Bool> {
+        return executor.submit { resolver in
+            let count = try userCount.execute(in: DirectExecutor()).get().result
+            resolver.set(count > limit)
+        }
+    }
+}
+```
+
+```kotlin
+// Kotlin
+// TODO
+```
