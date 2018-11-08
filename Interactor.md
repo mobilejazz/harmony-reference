@@ -21,7 +21,9 @@ struct CurrentTimeInteractor {
 
 ```kotlin
 // Kotlin
-// TODO
+class CurrentTimeInteractor {
+  operator fun invoke(): Date = Date()
+}
 ```
 
 ## Composition
@@ -43,7 +45,13 @@ struct ElapsedTimeSinceNowInteractor {
 
 ```kotlin
 // Kotlin
-// TODO
+class ElapsedTimeSinceNowInteractor(val currentTimeInteractor: CurrentTimeInteractor) {
+
+  operator fun invoke(date: Date): Long {
+    val now = currentTimeInteractor()
+    return now.time - date.time
+  }
+}
 ```
 
 ## Threading
@@ -77,7 +85,22 @@ struct ElapsedTimeSinceNowInteractor {
 
 ```kotlin
 // Kotlin
-// TODO
+class CurrentTimeInteractor(val executor: Executor) {
+  operator fun invoke(): Future<Date> {
+    return executor.submit(Callable {
+      Date()
+    })
+  }
+}
+
+class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
+  operator fun invoke(date: Date): Future<Long> {
+    return executor.submit(Callable {
+      val now = currentTimeInteractor().get()
+      now.time - date.time
+    })
+  }
+}
 ```
 
 >Note that the above is obtaining synchronoulsy the result of the `currentTime` interactor, which might lead to a **deadlock** if the executor of both interactors are using the same single-thread executor / serial queue.
@@ -110,7 +133,22 @@ struct ElapsedTimeSinceNowInteractor {
 
 ```kotlin
 // Kotlin
-// TODO
+class CurrentTimeInteractor(val executor: Executor) {
+  operator fun invoke(executor: Executor = this.executor): Future<Date> {
+    return executor.submit(Callable {
+      Date()
+    })
+  }
+}
+
+class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
+  operator fun invoke(date: Date): Future<Long> {
+    return executor.submit(Callable {
+      val now = currentTimeInteractor(DirectExecutor).get()
+      now.time - date.time
+    })
+  }
+}
 ```
 
 This example is using a [`DirectExecutor`](Executor.md) to perform synchronously.
@@ -168,7 +206,7 @@ Kotlin:
 
 ### Swift Notes
 
-For each interactor there are two sub-types: `Interactor.XXX` and `Interactor.XXXByQuery`. The `ByQuery` interactors are the ones equivalent to Android`XXXInteractor`. These interactors have an `execute` method than has the `query` as a parameter. Additionally, Swift has the `Interactor.XXX` which the query is passed upon initialization and not as a parameter in the `execute` method. 
+For each interactor there are two sub-types: `Interactor.XXX` and `Interactor.XXXByQuery`. The `ByQuery` interactors are the ones equivalent to Android `XXXInteractor`. These interactors have an `execute` method than has the `query` as a parameter. Additionally, Swift has the `Interactor.XXX` which the query is passed upon initialization and not as a parameter in the `execute` method. 
 
 ### `IdQuery` CRUD extensions
 
