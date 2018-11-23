@@ -30,7 +30,7 @@ class CurrentTimeInteractor {
 
 Interactors can perform from very easy to extremely complex operations. For this reason, it is a good practice to compose interactors in order to divide the reponsibility of each operation in its own interactor class.
 
-For example, we could have an interactor that retuns the time between now and a date:
+For example, we could have an interactor that returns the time between now and a date:
 
 ```swift
 // Swift
@@ -56,7 +56,7 @@ class ElapsedTimeSinceNowInteractor(val currentTimeInteractor: CurrentTimeIntera
 
 ## Threading
 
-Every usecase implemented within an interactor must be wrapped inside an executor (defined upon initialization). This will grant the developer to decide how the code will be executed (main thread, background thread in serial, background thread in parallel, etc.).
+Every usecase implemented within an interactor must be wrapped inside an executor (defined upon initialization). This will grant the developer the ability to decide how the code will be executed (main thread, background thread in serial, background thread in parallel, etc.).
 
 For this reason, every interactor must have in its constructor/initializer an executor.
 
