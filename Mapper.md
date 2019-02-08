@@ -55,7 +55,7 @@ fun <From, To, K> Mapper<From, To>.map(value: Map<K, From>): Map<K, To> { ... }
 ## Default implementations
 
 - `VoidMapper`: Empty implementation that returns en error.
-- `BlankMapper<T>`: Blank mapper that returns the same object.
+- `IdentityMapper<T>`:  Mapper that returns the same object.
 - `CastMapper<In,Out>`: Mapping by casting the object into the given types.
 - `ClosureMapper<In,Out>`: Mapper that has a closure/lambda upon initialization specifiying the mapping action.
 
