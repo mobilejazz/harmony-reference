@@ -34,6 +34,30 @@ Even if `DeviceStorageDataSource<T>` has a generic type, there are restrictions 
 
 To store any different type, use a [`DataSourceMapper<In,Out>`](DataSourceMapper.md) to transfrom (map) the type to a compatible one.
 
+#### Kotlin exclusive implementations
+
+If you want to fetch/store custom objects, you need to use a `DeviceStorageObjectAssemblerDataSource<T>` class to be able to serialize and deserialize the object. This is a limitation from `SharedPreferences`
+
+For example:
+```kotlin
+// Kotlin
+val toStringMapper = ModelToStringMapper<ItemEntity>(gson)
+val toModelMapper = StringToModelMapper(ItemEntity::class.java, gson)
+val toListModelMapper = ListModelToStringMapper<ItemEntity>(gson)
+val toStringListMapper = StringToListModelMapper(object : TypeToken<List<ItemEntity>>() {}, gson)
+
+val deviceStorageDataSource = DeviceStorageDataSource<String>(sharedPreferences) // Mandatory to use a DeviceStorageDataSource of String
+val itemEntityDeviceStorageDataSource = DeviceStorageObjectAssemblerDataSource(toStringMapper, toModelMapper, toListModelMapper, toStringListMapper,deviceStorageDataSource)
+
+val itemEntity = ItemEntity(123, "by", "title", "text", "type", 123, "url", emptyList())
+
+// Store value with key "1"
+itemEntityDeviceStorageDataSource.put(KeyQuery("1"), itemEntity).get()
+
+// Fetch value with key "1"
+val result = itemEntityDeviceStorageDataSource.get(KeyQuery("1")).get()
+```
+
 ### `UserDefaults` (iOS) compatible types
 
 - `Integer`
@@ -90,4 +114,31 @@ In the example above, pi is returned as the string `"3.14159265359"`.
 
 ### Kotlin
 
-// TODO
+```kotlin
+// Kotlin
+val doubleDataSource = DeviceStorageDataSource<Double>(sharedPreferences, prefix = "Double")
+val intDataSource = DeviceStorageDataSource<Int>(sharedPreferences, prefix = "Int")
+doubleDataSource.put(KeyQuery("pi"), 3.14159265359)
+intDataSource.put(KeyQuery("pi"), 3)
+```
+
+In `SharedPreferences` we will find two new entries after running the above code:
+
+- A `Double` 3.14159265359 stored for the key `"Double.pi"`
+- An `Int` 3 stored for the key `"Int.pi"`
+
+Note that we could now create a new data source using the prefix `"Double"` but of a different type. Then, the `get` would succeed only if the cast from its original type to the newer type succeeds, otherwise would throw an `DataNotFoundException`.
+
+```kotlin
+// Kotlin
+val dataSource = DeviceStorageDataSource<Double>(sharedPreferences, prefix = "Double")
+dataSource.get(KeyQuery("pi")).onCompleteUi(
+    onSuccess = {
+        println("Pi: $it")
+    },
+    onFailure = {
+        println("Error: " + it.localizedMessage)
+    }
+```
+
+In the example above, pi is returned as the string `"3.14159265359"`.
