@@ -70,8 +70,8 @@ func get(_ query: Query) -> Future<MyObject> {
 // Kotlin
 override fun get(query: Query): Future<MyObject> = Future {
     when (query) {
-      is KeyQuery<*> -> {
-        return getObjectByIdMethod(query.identifier)
+      is KeyQuery -> {
+        return getObjectByIdMethod(query.key)
       }
       else -> notSupportedQuery()
     }
@@ -93,7 +93,7 @@ public protocol KeyQuery : Query {
 
 ```kotlin
 // Kotlin
-open class KeyQuery<out T>(val key: T) : Query()
+open class KeyQuery(val key: String) : Query()
 ```
 
 Only queries adopting this structure can be used in Key-Value based DataSources.
@@ -115,5 +115,5 @@ extension SearchQuery : KeyQuery {
 
 ```kotlin
 // Kotlin
-class SearchQuery(val text: String): KeyQuery<String>(text)
+class SearchQuery(val text: String): KeyQuery(text)
 ```
