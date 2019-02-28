@@ -165,9 +165,9 @@ dataSource.delete("myKey")
 
 ### Swift exclusive implementations
 
-- `DataSourceAssembler<T>`: Combines three data sources (get, put, delete) into a single object.
 - [`RealmDataSource<E,O>`](RealmDataSource.md): Realm based data source. Available at the `MJSWiftCore/Realm` pod subspec.
-- `KeychainDataSource<T>`: Keychain based data source. Available at the `MJSwiftCore/Security` pod subspec.
+- [`KeychainDataSource<T>`](KeychainDataSource.md): Keychain based data source. Available at the `MJSwiftCore/Security` pod subspec.
+- `DataSourceAssembler<T>`: Combines three data sources (get, put, delete) into a single object.
 - `AnyDataSource<T>`: Type erasing for any get+put+delete data source.
 - `AnyGetDataSource<T>`: Type erasing for a get data source.
 - `AnyPutDataSource<T>`: Type erasing for a put data source.
