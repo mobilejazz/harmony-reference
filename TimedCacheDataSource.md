@@ -25,8 +25,6 @@ dataSource.delete("object")
 
 >Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`.
 
-The `KeychainService` class is a wrapper on the iOS Keychain. For more details, read the class documentation.
-
 ## Query Types
 
 All queries must adopt the [`KeyQuery`](query.md) interface as the `TimedCacheDataSource<T>` is based on a key-value pattern. Otherwise, the cache is just ignored and all queries are forwarded to the contained data source.
