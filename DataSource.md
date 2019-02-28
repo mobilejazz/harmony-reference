@@ -165,6 +165,7 @@ dataSource.delete("myKey")
 
 ### Swift exclusive implementations
 
+- [`TimedCacheDataSource<T>`](TimedCacheDataSource.md): A TLRU cache over a data source.
 - [`RealmDataSource<E,O>`](RealmDataSource.md): Realm based data source. Available at the `MJSWiftCore/Realm` pod subspec.
 - [`KeychainDataSource<T>`](KeychainDataSource.md): Keychain based data source. Available at the `MJSwiftCore/Security` pod subspec.
 - `DataSourceAssembler<T>`: Combines three data sources (get, put, delete) into a single object.
