@@ -2,7 +2,7 @@
 
 A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](DataSource.md)s. This redirect semantic is encapsulated in [`Operation`](Operation.md) objects.
 
-A good example of `Repository` is the [`NetworkStorageRepository`](NetworkStorageRepository.md), which depending on the `Operation` used on each request can obtain data from an storage-based data source or from a network-based data source. The most basic repository is the [`SingleDataSourceRepository`](SingleDataSourceRepository.md) which redirects all calls to the single data source that encapsulates.
+A good example of `Repository` is the [`CacheRepository`](CacheRepository.md), which depending on the `Operation` used on each request can obtain data from an storage-based data source or from a main-based data source. The most basic repository is the [`SingleDataSourceRepository`](SingleDataSourceRepository.md) which redirects all calls to the single data source that encapsulates.
 
 ## Usage
 
@@ -10,10 +10,9 @@ A good example of `Repository` is the [`NetworkStorageRepository`](NetworkStorag
 // Swift
 let networkDataSource = MyNetworkDataSource()
 let storageDataSource = MyStorageDataSource()
-let repository = NetworkStorageRepository(network: networkDataSource, 
-                                          storage: storageDataSource)
+let repository = CacheRepository(main: networkDataSource, cache: storageDataSource)
 
-let future = repository.get(IdQuery("myKey"), operation: StorageSyncOperation())
+let future = repository.get(IdQuery("myKey"), operation: MainSyncOperation())
 ```
 
 ```kotlin
@@ -168,7 +167,7 @@ repository.delete("myKey")
 - [`VoidRepository<T>`](VoidRepository.md): Empty repository. All functions when called end with errors.
 - [`RepositoryMapper<In,Out>`](RepositoryMapper.md): Mappes the type of a repository.
 - [`SingleDataSourceRepository<T>`](SingleDataSourceRepository.md): Encapuslates a single data source.
-- [`NetworkStorageRepository<T>`](NetworkStorageRepository.md): Network & Storage repository, fetching from one data source and updating the other one when required.
+- [`CacheRepository<T>`](CacheRepository.md): Main & Cache repository, fetching from one data source and updating the other one when required.
 
 #### Swift exclusive implementations
 
