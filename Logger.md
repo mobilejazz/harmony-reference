@@ -5,13 +5,13 @@
 ## Declaration
 
 ```swift
-enum LogLevel {
+public enum LogLevel {
     case info
     case warning
     case error
 }
 
-protocol Logger {
+public protocol Logger {
   func log(_ level: LogLevel, tag: String, message: String)
   func print(tag: String, message: String)
   func warning(tag: String, message: String) 
@@ -30,12 +30,12 @@ TODO
 // Swift
 
 #if DEBUG
-  let logger = DeviceConsoleLogger()        
+  let logger = DeviceConsoleLogger() // This class is an example
 #else
-  let logger = BugfenderLogger()
+  let logger = BugfenderLogger() // This class is an example 
 #endif
 
-let manager = NetworkManager(logger)
+let manager = NetworkManager(logger) // This class is an example 
 
 ```
 
@@ -45,14 +45,14 @@ let manager = NetworkManager(logger)
 // Swift
 // Swift
 /// Information that gets logged can be labeled as one of the following informative labels.
-enum LogLevel {
+public enum LogLevel {
     case info
     case warning
     case error
 }
 
 /// Abstracts concrete implementations of a logger system.
-protocol Logger {
+public protocol Logger {
     
     /// Logs a String object using a given level
     ///
@@ -85,7 +85,7 @@ protocol Logger {
 }
 
 // MARK: - Default implementations
-extension Logger {
+public extension Logger {
     
     func print(tag: String, message: String) {
         self.log(.info, tag: tag, message: message)
