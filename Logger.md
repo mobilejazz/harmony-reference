@@ -13,9 +13,6 @@ public enum LogLevel {
 
 public protocol Logger {
   func log(_ level: LogLevel, tag: String, message: String)
-  func print(tag: String, message: String)
-  func warning(tag: String, message: String) 
-  func error(tag: String, message: String)
 }
 ```
 
@@ -30,7 +27,7 @@ TODO
 // Swift
 
 #if DEBUG
-  let logger = DeviceConsoleLogger() // This class is an example
+  let logger = DeviceConsoleLogger()
 #else
   let logger = BugfenderLogger() // This class is an example 
 #endif
@@ -60,46 +57,61 @@ public protocol Logger {
     ///   - level: Type of log.
     ///   - tag: An additional label to help categorise logs.
     ///   - message: The message to be logged.
-    func log(_ level: LogLevel, tag: String, message: String)
-    
-    /// Logs a String object using an info level.
-    ///
-    /// - Parameters:
-    ///   - tag: An additional label to help categorise logs.
-    ///   - message: The message to be logged.
-    func print(tag: String, message: String)
-    
-    /// Logs a String object using a warning level.
-    ///
-    /// - Parameters:
-    ///   - tag: An additional label to help categorise logs.
-    ///   - message: The message to be logged.
-    func warning(tag: String, message: String)
-    
-    /// Logs a String object using an error level.
-    ///
-    /// - Parameters:
-    ///   - tag: An additional label to help categorise logs.
-    ///   - message: The message to be logged.
-    func error(tag: String, message: String)
+    func log(_ level: LogLevel, tag: String?, message: String)
 }
 
 // MARK: - Default implementations
 public extension Logger {
     
-    func print(tag: String, message: String) {
+    func info(tag: String? = nil, message: String) {
         self.log(.info, tag: tag, message: message)
     }
     
-    func warning(tag: String, message: String) {
+    func warning(tag: String? = nil, message: String) {
         self.log(.warning, tag: tag, message: message)
     }
     
-    func error(tag: String, message: String) {
+    func error(tag: String? = nil, message: String) {
         self.log(.error, tag: tag, message: message)
     }
 }
 ```
+## Convenience loggers provided by the library
+
+- DeviceConsoleLogger
+
+```swift
+// Swift
+
+/// Prints to the system console
+public class DeviceConsoleLogger: Logger {
+
+    func log(_ level: LogLevel, tag: String?, message: String) {
+        if let tag = tag {
+            Swift.print("[\(levelStringRepresentation(of: level))] - TAG:\(tag), {\(message)}")
+        } else {
+            Swift.print("[\(levelStringRepresentation(of: level))], {\(message)}")
+        }
+    }    
+}
+
+// MARK: - Helpers
+private extension DeviceConsoleLogger {
+    
+    func levelStringRepresentation(of level: LogLevel) -> String {
+        switch level
+        {
+            case .info:
+                return "INFO"
+            case .warning:
+                return "WARNING"
+            case .error:
+                return "ERROR"
+        }
+    }
+}
+```
+
 
 ```kotlin
 // Kotlin
