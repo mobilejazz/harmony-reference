@@ -62,7 +62,7 @@ public protocol Logger {
 // MARK: - Default implementations
 public extension Logger {
     
-    func info(tag: String? = nil, _ message: String) {
+    func print(tag: String? = nil, _ message: String) {
         self.log(level: .info, tag: tag, message: message)
     }
     
