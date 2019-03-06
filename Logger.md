@@ -56,22 +56,22 @@ public protocol Logger {
     ///   - level: Type of log.
     ///   - tag: An additional label to help categorise logs.
     ///   - message: The message to be logged.
-    func log(_ level: LogLevel, tag: String?, _ message: String)
+    func log(level: LogLevel, tag: String?, message: String)
 }
 
 // MARK: - Default implementations
 public extension Logger {
     
     func info(tag: String? = nil, _ message: String) {
-        self.log(.info, tag: tag, message)
+        self.log(level: .info, tag: tag, message: message)
     }
     
     func warning(tag: String? = nil, _ message: String) {
-        self.log(.warning, tag: tag, message)
+        self.log(level: .warning, tag: tag, message: message)
     }
     
     func error(tag: String? = nil, _ message: String) {
-        self.log(.error, tag: tag, message)
+        self.log(level: .error, tag: tag, message: message)
     }
 }
 ```
@@ -83,9 +83,9 @@ public extension Logger {
 // Swift
 
 /// Prints to the system console
-class DeviceConsoleLogger: Logger {
+public class DeviceConsoleLogger: Logger {
 
-    func log(_ level: LogLevel, tag: String?, _ message: String) {
+    public func log(_ level: LogLevel, tag: String?, _ message: String) {
         if let tag = tag {
             Swift.print("[\(levelStringRepresentation(of: level))] - TAG:\(tag), {\(message)}")
         } else {
