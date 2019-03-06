@@ -40,7 +40,6 @@ let manager = NetworkManager(logger) // This class is an example
 
 ```swift
 // Swift
-// Swift
 /// Information that gets logged can be labeled as one of the following informative labels.
 public enum LogLevel {
     case info
@@ -57,22 +56,22 @@ public protocol Logger {
     ///   - level: Type of log.
     ///   - tag: An additional label to help categorise logs.
     ///   - message: The message to be logged.
-    func log(_ level: LogLevel, tag: String?, message: String)
+    func log(_ level: LogLevel, tag: String?, _ message: String)
 }
 
 // MARK: - Default implementations
 public extension Logger {
     
-    func info(tag: String? = nil, message: String) {
-        self.log(.info, tag: tag, message: message)
+    func info(tag: String? = nil, _ message: String) {
+        self.log(.info, tag: tag, message)
     }
     
-    func warning(tag: String? = nil, message: String) {
-        self.log(.warning, tag: tag, message: message)
+    func warning(tag: String? = nil, _ message: String) {
+        self.log(.warning, tag: tag, message)
     }
     
-    func error(tag: String? = nil, message: String) {
-        self.log(.error, tag: tag, message: message)
+    func error(tag: String? = nil, _ message: String) {
+        self.log(.error, tag: tag, message)
     }
 }
 ```
@@ -84,9 +83,9 @@ public extension Logger {
 // Swift
 
 /// Prints to the system console
-public class DeviceConsoleLogger: Logger {
+class DeviceConsoleLogger: Logger {
 
-    func log(_ level: LogLevel, tag: String?, message: String) {
+    func log(_ level: LogLevel, tag: String?, _ message: String) {
         if let tag = tag {
             Swift.print("[\(levelStringRepresentation(of: level))] - TAG:\(tag), {\(message)}")
         } else {
