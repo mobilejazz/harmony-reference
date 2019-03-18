@@ -62,14 +62,29 @@ public protocol Logger {
 // MARK: - Default implementations
 public extension Logger {
     
+    /// Logs a String message using an info level.
+    ///
+    /// - Parameters:
+    ///   - tag: An additional label to help categorise logs.
+    ///   - message: String to be logged
     func print(tag: String? = nil, _ message: String) {
         self.log(level: .info, tag: tag, message: message)
     }
     
+    /// Logs a String message using a warning level.
+    ///
+    /// - Parameters:
+    ///   - tag: An additional label to help categorise logs.
+    ///   - message: String to be logged
     func warning(tag: String? = nil, _ message: String) {
         self.log(level: .warning, tag: tag, message: message)
     }
     
+    /// Logs a String message using an error level.
+    ///
+    /// - Parameters:
+    ///   - tag: An additional label to help categorise logs.
+    ///   - message: String to be logged
     func error(tag: String? = nil, _ message: String) {
         self.log(level: .error, tag: tag, message: message)
     }
