@@ -36,7 +36,9 @@ repository.get(IdQuery("myKey"), MyRetryOnceIfErrorOperation)
 
 ## Default implementations
 
-- `DefaultOperation`: Empty operation. To be used when none operation is required.
+- `DefaultOperation`: Empty operation. To be used when none operation is required or as a default behavior.
+
+>**All repositories must accept this operation and perform its expectec behavior.**
 
 Any other custom operation will be declared together with its [`Repository`](Repository.md) implementation.
 

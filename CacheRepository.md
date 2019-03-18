@@ -29,6 +29,16 @@ val future = repository.get(IdQuery("my-key"), StorageSyncOperation)
 
 The [`Operation`](Operation.md) types supported in `CacheRepository<T>` are:
 
+### `DefaultOperation`
+
+The default behavior is:
+
+- **GET** methods: Behaves as a `CacheSyncOperation`.
+- **PUT** methods: Behaves as a `MainSyncOperation`.
+- **DELETE** methods: Behaves as a `MainSyncOperation`.
+
+Therefore, by using a `DefaultOperation`, the cache repository will act as a regular cache: fetching data from the cache first (otherwise, using the main data source) and applying changes first to the main data source (and then syncing with the cache).
+
 ### `MainOperation`
 
 Using the main data source only.
