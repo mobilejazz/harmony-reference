@@ -5,13 +5,13 @@
 ## Declaration
 
 ```swift
-@objc(HMLogLevel) public enum LogLevel: Int {
+@objc(MJLogLevel) public enum LogLevel: Int {
     case info
     case warning
     case error
 }
 
-@objc(HMLogger) public protocol Logger {
+@objc(MJLogger) public protocol Logger {
   func log(_ level: LogLevel, tag: String, message: String)
 }
 ```
