@@ -1,6 +1,6 @@
 # RepositoryMapper
 
-`RepositoryMapper<In,Out>` encapuslates a [`Repository`](Repository.md) instance of type `In` and exposes a new interface of [`Repository`](Repository.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](Mapper.md) and [`Mapper<Out,In>`](Mapper.md).
+`RepositoryMapper<In,Out>` encapuslates a [`Repository`](Repository.md) instance of type `In` and exposes a new interface of [`Repository`](Repository.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../Mapper.md) and [`Mapper<Out,In>`](../Mapper.md).
 
 ## Usage
 
