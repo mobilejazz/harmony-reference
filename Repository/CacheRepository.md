@@ -1,6 +1,6 @@
 # CacheRepository
 
-`CacheRepository<T>` implements `GetRepository`, `PutRepository` and `DeleteRepository` and encapuslates two [`DataSource`](DataSource.md) instances: one representing a **main** data source and another one representing a **cache** data source.
+`CacheRepository<T>` implements `GetRepository`, `PutRepository` and `DeleteRepository` and encapuslates two [`DataSource`](../DataSource/DataSource.md) instances: one representing a **main** data source and another one representing a **cache** data source.
 
 Using the different supported operation types, the repository will fetch/push data to a single data source or to both data sources in a specific order. For example, the repository can fetch from the main data source and store the results to the cache data source. 
 
@@ -66,4 +66,4 @@ The repository will first forward the query to the **cache** data source.
 
 - When forcing a refresh (using a *pull-to-refresh* for example), use the `MainSyncOperation` on **GET** actions (forcing to fetch the main data source first and updating cache if success).
 
-- To add additional validation logic to the cache data source, use a [`DataSourceValidator`](DataSourceValidator.md).
+- To add additional validation logic to the cache data source, use a [`DataSourceValidator`](../DataSource/DataSourceValidator.md).
