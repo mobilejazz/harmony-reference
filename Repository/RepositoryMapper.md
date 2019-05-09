@@ -15,8 +15,14 @@ repository.get("myKey", operation: DefaultOperation())
 ```
 
 ```kotlin
-// Kotlin
-// TODO
+val repository = RepositoryMapper(MyGetRepository(), 
+                                    MyPutRepository(), 
+                                    MyDeletedRepository(), 
+                                    toInMapper, 
+                                    toOutMapper)
+                                    
+repository.get(IdQuery("myKey"), DefaultOperation)
+repository.put(IdQuery("myKey"), B(), DefaultOperation)                                    
 ```
 
 ## Operation Types
