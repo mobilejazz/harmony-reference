@@ -1,6 +1,6 @@
 # DataSourceMapper
 
-`DataSourceMapper<In,Out>` encapuslates a [`DataSource`](DataSource.md) instance of type `In` and exposes a new interface of [`DataSource`](DataSource.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](Mapper.md) and [`Mapper<Out,In>`](Mapper.md).
+`DataSourceMapper<In,Out>` encapuslates a [`DataSource`](DataSource.md) instance of type `In` and exposes a new interface of [`DataSource`](DataSource.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../Mapper.md) and [`Mapper<Out,In>`](../Mapper.md).
 
 ## Usage
 
