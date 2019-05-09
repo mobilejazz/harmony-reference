@@ -1,6 +1,6 @@
 # Repository
 
-A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](DataSource.md)s. This redirect semantic is encapsulated in [`Operation`](Operation.md) objects.
+A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](../DataSource/DataSource.md)s. This redirect semantic is encapsulated in [`Operation`](Operation.md) objects.
 
 A good example of `Repository` is the [`CacheRepository`](CacheRepository.md), which depending on the `Operation` used on each request can obtain data from an storage-based data source or from a main-based data source. The most basic repository is the [`SingleDataSourceRepository`](SingleDataSourceRepository.md) which redirects all calls to the single data source that encapsulates.
 
@@ -33,7 +33,7 @@ For more information, read the [`Operation`](Operation.md) reference.
 
 ## API
 
-The `Repository` functions replicate the [`DataSource`](DataSoure.md) public API, adding an extra parameter of type `Operation` on each function.
+The `Repository` functions replicate the [`DataSource`](../DataSource/DataSoure.md) public API, adding an extra parameter of type `Operation` on each function.
 
 ### **Get**
 
@@ -99,7 +99,7 @@ interface DeleteRepository : Repository {
 
 ## **Id Query** CRUD extensions
 
-Similar to the [`DataSource`](DataSoure.md) public interface,  all  `GetRepository`, `PutRepository` and `DeleteRepository` interfaces are extended with methods to access the CRUD functions by an Id:
+Similar to the [`DataSource`](../DataSource/DataSoure.md) public interface,  all  `GetRepository`, `PutRepository` and `DeleteRepository` interfaces are extended with methods to access the CRUD functions by an Id:
 
 ```swift
 // Swift
