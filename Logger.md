@@ -13,6 +13,7 @@
 
 @objc(MJLogger) public protocol Logger {
   func log(_ level: LogLevel, tag: String, message: String)
+  func log(key: String, value: Any?)
 }
 ```
 
@@ -57,6 +58,13 @@ public protocol Logger {
     ///   - tag: An additional label to help categorise logs.
     ///   - message: The message to be logged.
     func log(level: LogLevel, tag: String?, message: String)
+
+    /// Logs a key-value pair
+    ///
+    /// - Parameters:
+    ///   - key: They key
+    ///   - value: The value
+    func log(key: String, value: Any?)
 }
 
 // MARK: - Default implementations
@@ -107,6 +115,14 @@ public class DeviceConsoleLogger: Logger {
             Swift.print("[\(levelStringRepresentation(of: level))], {\(message)}")
         }
     }    
+
+    public func log(key: String, value: Any?) {
+        if let value = value {
+            log(level: .info, tag: "KEY", message: "\(key): \(value)")
+        } else {
+            log(level: .info, tag: "KEY", message: "\(key): <nil>")
+        }
+    }
 }
 
 // MARK: - Helpers
