@@ -1,0 +1,29 @@
+{% include header/header.html %}
+
+<div class="main">
+  <div class="main__nav">
+    <a class="main__mj-logo" href="{{ site.baseurl }}/">
+      {% include svg/as_logotype.svg %}
+    </a>
+
+    <a class="main__mobile-nav-toggle" href="#">
+      <span class="main__mobile-nav-icon-open">{% include svg/bars-solid.svg %}</span>
+      <span class="main__mobile-nav-icon-closed">{% include svg/times-solid.svg %}</span>
+    </a>
+
+    <div class="main__sticky-nav">
+      {% include nav/nav.html nav=site.data.nav %}
+
+      <a class="main__mj-link" href="https://mobilejazz.com/" target="_blank">
+        Visit mobilejazz.com {% include svg/external-link-alt-solid.svg %}
+      </a>
+    </div>
+  </div>
+
+  <div class="main__content">
+    {% include social/social.html %}
+    {{ content }}
+  </div>
+</div>
+
+{% include footer/footer.html %}

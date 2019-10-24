@@ -1,0 +1,22 @@
+{
+  "name": "harmony-docs",
+  "version": "0.1.0",
+  "description": "A Jekyll project to generate a site for the Harmony references documents.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "bundle exec jekyll serve",
+    "build": "bundle exec jekyll build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:mobilejazz/harmony-docs.git"
+  },
+  "author": "Mobile Jazz",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/mobilejazz/harmony-docs#readme",
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "pygments-css": "git+https://github.com/richleland/pygments-css.git"
+  }
+}

@@ -1,0 +1,32 @@
+<div class="social">
+  <a href="http://www.facebook.com/share.php?u={{ site.url }}{{ page.url }}"
+    target="_blank"
+    title="Share on Facebook"
+    class="social__link social__link--facebook"
+    data-social-sharing>
+    {% include svg/facebook-square-brands.svg %}
+  </a>
+  
+  <a href="http://twitter.com/share?url={{ site.url }}{{ page.url }}"
+    target="_blank"
+    title="Share on Twitter"
+    class="social__link social__link--twitter"
+    data-social-sharing>
+    {% include svg/twitter-square-brands.svg %}
+  </a>
+  
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}"
+    target="_blank"
+    title="Share on LinkedIn"
+    class="social__link social__link--linkedin"
+    data-social-sharing>
+    {% include svg/linkedin-brands.svg %}
+  </a>
+
+  <a href="mailto:?&body={{ site.url }}{{ page.url }}"
+    title="Share via email"
+    class="social__link social__link--email">
+    {% include svg/envelope-square-solid.svg %}
+  </a>
+</div>
+  
