@@ -1,6 +1,6 @@
 {
   "name": "harmony-docs",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A Jekyll project to generate a site for the Harmony references documents.",
   "main": "index.js",
   "scripts": {
