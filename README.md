@@ -8,7 +8,7 @@
 * All of the markdown documents are located in `/pages` directory.
 * When creating a new page, be sure to add the front matter declarations, see the example below or and existing markdown file.
 
-```
+```markdown
 ---
 title: Executor
 permalink: /executor/
@@ -23,16 +23,24 @@ permalink: /executor/
 ## Running the project locally
 
 ### Prepare Ruby environment
-* Install bundler: `gem install bundler`
+
+* Project requires Ruby 2.4, you can use RVM to install that specific version:
+  * Install Ruby 2.4 with [RVM](https://rvm.io): `rvm install 2.4 && rvm use 2.4`
+* Install `bundler`: `gem install bundler -v 2.0.2`
 * Install depenencies: `bundler install`
-    
+
 ### Prepare Node environment
-* Install node: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
-* Install dependencies: `npm install`
+
+* Install Node.JS 10 (`lts/dubnium`), either:
+  * Use [NVM](https://github.com/nvm-sh/nvm), just: `nvm install && nvm use`
+  * Download it directly: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+* Install dependencies: `npm ci`
 
 ### Run project
+
 * Start dev server: `npm start`
 
 ## Building the project
+
 * Follow instructions for running the project locally
-* Run: `npm build` 
+* Run: `npm build`
