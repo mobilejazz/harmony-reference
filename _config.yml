@@ -21,3 +21,5 @@ defaults:
     values:
       layout: "main/main"
 
+gems:
+  - jekyll-relative-links
