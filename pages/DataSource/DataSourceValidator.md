@@ -23,7 +23,7 @@ validatedDataSource.get("myKey").recover { error in
         // Validation did not pass
         return networkDataSource.get("myKey")
     }
-    return Future(error)    
+    return Future(error)
 }
 ```
 
@@ -96,4 +96,3 @@ In order to use `Vastra` in android, there is a dedicated data source for it: `D
 // Kotlin
 // TODO
 ```
-

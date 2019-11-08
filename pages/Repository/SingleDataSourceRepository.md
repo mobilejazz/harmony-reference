@@ -49,24 +49,27 @@ extension GetDataSource {
         return SingleGetDataSourceRepository(self)
     }
 }
+
 extension PutDataSource {
     public func toPutRepository() -> SinglePutDataSourceRepository<Self,T> {
         return SinglePutDataSourceRepository(self)
     }
 }
+
 extension DeleteDataSource {
     public func toDeleteRepository() -> SingleDeleteDataSourceRepository<Self,T> {
         return SingleDeleteDataSourceRepository(self)
     }
 }
+```
 
+```kotlin
 // Kotlin
 fun <V>GetDataSource<V>.toGetRepository() = SingleGetDataSourceRepository(this)
-
 fun <V>PutDataSource<V>.toPutRepository() = SinglePutDataSourceRepository(this)
-
 fun DeleteDataSource.toDeleteRepository() = SingleDeleteDataSourceRepository(this)
 ```
+
 This allows the following code:
 
 ```swift
@@ -76,7 +79,6 @@ let getRepository = getDataSource.toGetRepository()
 
 // And same for PutDataSource and DeleteDataSource
 ```
-
 
 ```kotlin
 // Kotlin

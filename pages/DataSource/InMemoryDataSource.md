@@ -48,7 +48,7 @@ public class InMemoryDataSource<T> : GetDataSource, PutDataSource, DeleteDataSou
     private var objects : [String : T] = [:] 
     // getAll, putAll, deleteAll
     private var arrays : [String : [T]] = [:] 
-    
+
     [ ... ] // The rest of the class implementation
 }
 ```
@@ -56,11 +56,11 @@ public class InMemoryDataSource<T> : GetDataSource, PutDataSource, DeleteDataSou
 ```kotlin
 // Kotlin
 class InMemoryDataSource<V> @Inject constructor() : GetDataSource<V>, PutDataSource<V>, DeleteDataSource {
-  // get, put delete
-  private val objects: MutableMap<String, V> = mutableMapOf() 
-  // getAll, putAll, deleteAll
-  private val arrays: MutableMap<String, List<V>> = mutableMapOf() 
+    // get, put delete
+    private val objects: MutableMap<String, V> = mutableMapOf() 
+    // getAll, putAll, deleteAll
+    private val arrays: MutableMap<String, List<V>> = mutableMapOf() 
 
-  [ ... ] // The rest of the class implementation
+    [ ... ] // The rest of the class implementation
 }
 ```

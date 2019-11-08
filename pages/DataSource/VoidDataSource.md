@@ -61,16 +61,11 @@ public class VoidDataSource<T> : GetDataSource, PutDataSource, DeleteDataSource 
 ```kotlin
 // Kotlin
 class VoidDataSource<V> : GetDataSource<V>, PutDataSource<V>, DeleteDataSource {
-  override fun get(query: Query): Future<V> = Future { throw UnsupportedOperationException() }
-
-  override fun getAll(query: Query): Future<List<V>> = Future { throw UnsupportedOperationException() }
-
-  override fun put(query: Query, value: V?): Future<V> = Future { throw UnsupportedOperationException() }
-
-  override fun putAll(query: Query, value: List<V>?): Future<List<V>> = Future { throw UnsupportedOperationException() }
-
-  override fun delete(query: Query): Future<Unit> = Future { throw UnsupportedOperationException() }
-
-  override fun deleteAll(query: Query): Future<Unit> = Future { throw UnsupportedOperationException() }
+    override fun get(query: Query): Future<V> = Future { throw UnsupportedOperationException() }
+    override fun getAll(query: Query): Future<List<V>> = Future { throw UnsupportedOperationException() }
+    override fun put(query: Query, value: V?): Future<V> = Future { throw UnsupportedOperationException() }
+    override fun putAll(query: Query, value: List<V>?): Future<List<V>> = Future { throw UnsupportedOperationException() }
+    override fun delete(query: Query): Future<Unit> = Future { throw UnsupportedOperationException() }
+    override fun deleteAll(query: Query): Future<Unit> = Future { throw UnsupportedOperationException() }
 }
 ```

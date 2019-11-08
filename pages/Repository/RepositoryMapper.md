@@ -28,7 +28,6 @@ repository.get("myKey", operation: DefaultOperation())
 
 Any [`Operation`](Operation.md) can be passed to a `RepositoryMapper<In,Out>`.
 
-
 ## Other Implementations
 
 Together with `RepositoryMapper<In,Out>` there are also similar implementations for:

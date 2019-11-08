@@ -6,6 +6,7 @@ permalink: /executor/
 # Executor
 
 ## Swift
+
 An executor is an abstract definition of an object responsible of executing a block of code.
 
 ```swift
@@ -31,6 +32,7 @@ executor.submit { end in
 ```
 
 ## Kotlin
+
 A executor service creates and maintains a reusable pool of threads for executing submitted tasks.
 
 Kotlin mj-core is using the concurrency package from Guava to suply the lack of Asynchronous calls from the Java `Future` with the Guava `ListenableFuture`, using `ListeningExecutorService` instead of a Java `ExecutorService`.
@@ -45,6 +47,7 @@ More information:
 - https://github.com/google/guava/wiki/ListenableFutureExplained
 
 ### Usage
+
 ```kotlin
 val executor: Executor = [...]
 
@@ -95,6 +98,7 @@ let future : Future<Item> = executor.submit { resolver in
         resolver.set(value)
     }
 }
+
 future.then { item in
     // Do stuff, like update UI.
     // Note that by default, then block is called using a MainDirectExecutor, ensuring this code is run in the main thread.
@@ -120,7 +124,6 @@ val executor: Executor = AppExecutor()
 executor.submit({ 
     executor.submit({ })
 })
-
 ```
 
 This example above is nesting two executor calls, where the executor is based on a serial queue / single thread. This means that when the second call to `submit` happens, the queue will block further code execution waiting for the first call to `submit` ends, which won't happen as the code is now stopped.
@@ -130,5 +133,3 @@ To solve this, there are two options:
 1. When nesting executor calls, use the `DirectExecutor` on all nested executor references. The `DirectExecutor` will execute the code in the same thread/queue, not creating any deadlock.
 
 2. Use concurrent executors. However, be aware that when using concurrent executors, all code used within an executor must be thread-safe. To avoid threading issues, it is always a safer option to not use concurrent executors.
-
-
