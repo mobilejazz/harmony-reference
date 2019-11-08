@@ -146,6 +146,11 @@
       color: $default-color;
       overflow-x: scroll;
 
+      code {
+        font-family: $font-monospace;
+        font-size: .9em;
+      }
+
       // Comments
       $comment-color: #7ba1b9;
 
