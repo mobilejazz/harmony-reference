@@ -43,8 +43,8 @@ To provide an abstraction from Guava `ListenableFuture` and `ListeningExecutorSe
 - `Future` --> `ListenableFuture`
 
 More information: 
-- https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executor.html
-- https://github.com/google/guava/wiki/ListenableFutureExplained
+- [https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executor.html](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executor.html)
+- [https://github.com/google/guava/wiki/ListenableFutureExplained](https://github.com/google/guava/wiki/ListenableFutureExplained)
 
 ### Usage
 
