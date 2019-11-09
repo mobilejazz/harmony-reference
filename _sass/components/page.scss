@@ -13,7 +13,7 @@
 
     code {
       color: #115481;
-      font-size: 1em;
+      font-size: .9em;
       font-family: $font-monospace;
       vertical-align: top;
     }
@@ -35,23 +35,33 @@
   h2 {
     font-size: $size-h2;
     line-height: $baseline-height * 9;
-    margin-top: u(3);
+    margin-top: u(5);
+  }
+
+  h1 + h2 {
+    margin-top: u(2.5);
   }
 
   h3 {
     font-size: $size-h3;
     line-height: $baseline-height * 8;
     margin-top: u(2);
+    font-weight: 500;
 
     code {
       word-spacing: calc-rem(-8px);
     }
   }
 
+  h2 + h3 {
+    margin-top: u(1.5);
+  }
+
   h4 {
     font-size: $size-h4;
     line-height: $baseline-height * 7;
-    margin-top: u(1);
+    margin-top: u(1.5);
+    font-weight: normal;
 
     code {
       word-spacing: calc-rem(-8px);
@@ -62,6 +72,7 @@
     font-size: $size-h5;
     line-height: $baseline-height * 6;
     margin-top: u(1);
+    font-weight: normal;
 
     code {
       word-spacing: calc-rem(-5px);
@@ -73,6 +84,7 @@
     line-height: $baseline-height * 6;
     margin-top: u(1);
     color: #344f61;
+    font-weight: normal;
 
     code {
       word-spacing: calc-rem(-4px);
@@ -99,12 +111,12 @@
   }
 
   p {
-    margin-top: u(1);
+    margin-top: u(1.5);
   }
 
   ul, ol {
-    margin-top: u(2);
-    margin-bottom: u(2);
+    margin-top: u(2.5);
+    margin-bottom: u(2.5);
 
     li {
       margin-top: u(.5);
