@@ -23,9 +23,9 @@ dataSource.get(IdQuery("myKey")).then { value in
 // Kotlin
 val dataSource = MyCustomGetDataSource()
 dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
-      println(it)
+    println(it)
 }, onFailure = {
-      println(it.localizedMessage)
+    println(it.localizedMessage)
 })
 ```
 
@@ -39,7 +39,7 @@ For more information, read the [`Query`](Query.md) reference.
 
 All actions handled by a `DataSource` are grouped in a simple CRUD.
 
-### **Get**
+### Get
 
 Fetch related functions. 
 
@@ -55,12 +55,12 @@ public protocol GetDataSource : DataSource {
 ```kotlin
 // Kotlin
 interface GetDataSource<V> : DataSource {
-  fun get(query: Query): Future<V>
-  fun getAll(query: Query): Future<List<V>>
+    fun get(query: Query): Future<V>
+    fun getAll(query: Query): Future<List<V>>
 }
 ```
 
-### **Put**
+### Put
 
 Actions related functions. PUT methods will be responsible of editing, modifying, sending or any other action related method.
 
@@ -78,12 +78,12 @@ public protocol PutDataSource : DataSource {
 ```kotlin
 // Kotlin
 interface PutDataSource<V> : DataSource {
-  fun put(query: Query, value: V?): Future<V>
-  fun putAll(query: Query, value: List<V>? = emptyList()): Future<List<V>>
+    fun put(query: Query, value: V?): Future<V>
+    fun putAll(query: Query, value: List<V>? = emptyList()): Future<List<V>>
 }
 ```
 
-### **Delete**
+### Delete
 
 Deletion related functions.
 
@@ -100,12 +100,12 @@ public protocol DeleteDataSource : DataSource {
 ```kotlin
 // Kotlin
 interface DeleteDataSource : DataSource {
-  fun delete(query: Query): Future<Unit>
-  fun deleteAll(query: Query): Future<Unit>
+    fun delete(query: Query): Future<Unit>
+    fun deleteAll(query: Query): Future<Unit>
 }
 ```
 
-## **Id Query** CRUD extensions
+## `IdQuery` CRUD extensions
 
 All  `GetDataSource`, `PutDataSource` and `DeleteDataSource` interfaces are extended with methods to access the CRUD functions by an Id:
 
@@ -115,10 +115,12 @@ extension GetDataSource {
     public func get<K>(_ id: K) -> Future<T> where K:Hashable { ... }
     public func getAll<K>(_ id: K) -> Future<[T]> where K:Hashable { ... }
 }
+
 extension PutDataSource {
     public func put<K>(_ value: T?, forId id: K) -> Future<T> where K:Hashable { ... }
     public func putAll<K>(_ array: [T], forId id: K) -> Future<[T]> where K:Hashable { ... }
 }
+
 extension DeleteDataSource {
     public func delete<K>(_ id: K) -> Future<Void> where K:Hashable { ... }
     public func deleteAll<K>(_ id: K) -> Future<Void> where K:Hashable { ... }
@@ -137,6 +139,7 @@ dataSource.get(IdQuery("myKey"))
 dataSource.put(myObject, in:IdQuery("myKey"))
 dataSource.delete(IdQuery("myKey"))
 ```
+
 ```kotlin
 // Kotlin
 dataSource.get(ByIdentifierQuery("myKey"))
@@ -152,13 +155,13 @@ dataSource.get("myKey")
 dataSource.put(myObject, forId:"myKey")
 dataSource.delete("myKey")
 ```
+
 ```kotlin
 // Kotlin
 dataSource.get("myKey")
 dataSource.put("myKey", myObject)
 dataSource.delete("myKey")
 ```
-
 
 ## `DataSource` Implementations
 
@@ -182,6 +185,7 @@ dataSource.delete("myKey")
 ## Swift Notes
 
 ### `DataSource` base protocol
+
 In order to have a generic type, all `GetDataSource`, `PutDataSource` and `DeleteDataSource` extends from the following base protocol:
 
 ```swift

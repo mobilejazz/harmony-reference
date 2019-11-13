@@ -17,7 +17,7 @@ permalink: /logger/
 }
 
 @objc(MJLogger) public protocol Logger {
-  func log(_ level: LogLevel, tag: String, message: String)
+    func log(_ level: LogLevel, tag: String, message: String)
 }
 ```
 
@@ -32,13 +32,12 @@ TODO
 // Swift
 
 #if DEBUG
-  let logger = DeviceConsoleLogger()
+    let logger = DeviceConsoleLogger()
 #else
-  let logger = BugfenderLogger() // This class is an example 
+    let logger = BugfenderLogger() // This class is an example 
 #endif
 
 let manager = NetworkManager(logger) // This class is an example 
-
 ```
 
 ## Implementation
@@ -54,7 +53,6 @@ public enum LogLevel {
 
 /// Abstracts concrete implementations of a logger system.
 public protocol Logger {
-    
     /// Logs a String object using a given level
     ///
     /// - Parameters:
@@ -66,7 +64,6 @@ public protocol Logger {
 
 // MARK: - Default implementations
 public extension Logger {
-    
     /// Logs a String message using an info level.
     ///
     /// - Parameters:
@@ -75,7 +72,7 @@ public extension Logger {
     func print(tag: String? = nil, _ message: String) {
         self.log(level: .info, tag: tag, message: message)
     }
-    
+
     /// Logs a String message using a warning level.
     ///
     /// - Parameters:
@@ -84,7 +81,7 @@ public extension Logger {
     func warning(tag: String? = nil, _ message: String) {
         self.log(level: .warning, tag: tag, message: message)
     }
-    
+
     /// Logs a String message using an error level.
     ///
     /// - Parameters:
@@ -95,6 +92,7 @@ public extension Logger {
     }
 }
 ```
+
 ## Convenience loggers provided by the library
 
 - DeviceConsoleLogger
@@ -104,19 +102,17 @@ public extension Logger {
 
 /// Prints to the system console
 public class DeviceConsoleLogger: Logger {
-
     func log(level: LogLevel, tag: String?, message: String) {
         if let tag = tag {
             Swift.print("[\(levelStringRepresentation(of: level))] - TAG:\(tag), {\(message)}")
         } else {
             Swift.print("[\(levelStringRepresentation(of: level))], {\(message)}")
         }
-    }    
+    }
 }
 
 // MARK: - Helpers
 private extension DeviceConsoleLogger {
-    
     func levelStringRepresentation(of level: LogLevel) -> String {
         switch level
         {
@@ -130,7 +126,6 @@ private extension DeviceConsoleLogger {
     }
 }
 ```
-
 
 ```kotlin
 // Kotlin

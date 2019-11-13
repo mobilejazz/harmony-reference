@@ -108,9 +108,9 @@ Note that we could now create a new data source using the prefix `"Double"` but 
 ```swift
 // Swift
 let dataSource = DeviceStorageDataSource<String>(UserDefaults.standard, prefix: "Double")
-dataSource.get("pi").then { pi in 
+dataSource.get("pi").then { pi in
     print("Pi: \(pi)")
-}.fail { error in 
+}.fail { error in
     print("Error: \(error)")
 }
 ```

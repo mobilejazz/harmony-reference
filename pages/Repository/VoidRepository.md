@@ -61,17 +61,11 @@ public class VoidRepository<T> : GetRepository, PutRepository, DeleteRepository 
 ```kotlin
 // Kotlin
 class VoidRepository<V> : GetRepository<V>, PutRepository<V>, DeleteRepository {
-
-  override fun get(query: Query, operation: Operation): Future<V> = Future { notSupportedOperation() }
-
-  override fun getAll(query: Query, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
-
-  override fun put(query: Query, value: V?, operation: Operation): Future<V> = Future { notSupportedOperation() }
-
-  override fun putAll(query: Query, value: List<V>?, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
-
-  override fun delete(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
-
-  override fun deleteAll(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
+    override fun get(query: Query, operation: Operation): Future<V> = Future { notSupportedOperation() }
+    override fun getAll(query: Query, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
+    override fun put(query: Query, value: V?, operation: Operation): Future<V> = Future { notSupportedOperation() }
+    override fun putAll(query: Query, value: List<V>?, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
+    override fun delete(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
+    override fun deleteAll(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
 }
 ```

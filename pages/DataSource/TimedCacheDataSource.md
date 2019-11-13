@@ -11,7 +11,6 @@ permalink: /data-source/timed-cache-data-source/
 
 ```swift
 // Swift
-
 // custom data source
 let customDataSource = MyCustomDataSource()
 

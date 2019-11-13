@@ -16,6 +16,7 @@ public protocol Query { }
 // Kotlin
 open class Query
 ```
+
 Note that a `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](DataSource.md). 
 
 ## Usage
@@ -37,9 +38,9 @@ itemsStorageDataSource.getAll(SearchQuery("lorem ipsum"))
 class SearchQuery(val text: String): Query()
 
 // Searching in network
-itemsNetworkDataSource.getAll(SearchQuery(“lorem ipsim”))
+itemsNetworkDataSource.getAll(SearchQuery("lorem ipsim"))
 // Searching in local storage
-itemsStorageDataSource.getAll(SearchQuery(“lorem ipsim”))
+itemsStorageDataSource.getAll(SearchQuery("lorem ipsim"))
 ```
 
 ## Default implementations
@@ -64,23 +65,23 @@ func get(_ query: Query) -> Future<MyObject> {
     case let query as IdQuery<String>:
         return getObjectByIdMethod(id: query.id)
     case is MyCustomQuery:
-        ... 
+        // ...
     default:
         query.fatalError(.get, self)
     }
-}    
+}
 ```
 
 ```kotlin
 // Kotlin
 override fun get(query: Query): Future<MyObject> = Future {
     when (query) {
-      is KeyQuery -> {
-        return getObjectByIdMethod(query.key)
-      }
-      else -> notSupportedQuery()
+        is KeyQuery -> {
+          return getObjectByIdMethod(query.key)
+        }
+        else -> notSupportedQuery()
     }
-  }
+}
 ```
 
 Note the `default:` / `else` behavior. When using an unsupported query, an exception/fatalError is raised as this is an illegal call.

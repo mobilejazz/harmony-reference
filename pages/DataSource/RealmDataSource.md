@@ -8,13 +8,14 @@ permalink: /data-source/realm-data-soure/
 `RealmDataSource<E,O>` is a swift implementation of an interface for Realm conforming to [`DataSource`](DataSource.md) (`GetDataSoruce`, `PutDataSource` and `DeleteDataSource`). It automatically maps entities to realm objects (it requires object mappers) and can run queries to fetch, store and delete objects.
 
 Its interface exposes two generics:
+
 - `E`: The entity type
 - `O`: The equivalent realm object type
 
 Upon initialization, it requires of two mappers:
+
 - `O` to `E` mapper (realm to entity): Using the default [`Mapper`](Mapper.md) interface.
 - `E` to `O` mapper (entity to realm): Using a custom interface called `RealmMapper`.
-
 
 ## Usage
 
@@ -37,27 +38,31 @@ Note that the example above is using the extension methods of `DataSoruce` that 
 ## Query Types
 
 **get** function:
+
 - `IdQuery<Int>`: get an object by its id (typed int).
 - `IdQuery<String>`: get an object by its id (typed string).
 
 **getAll** function:
+
 - `AllObjectsQuery`: get all objects.
 - `RealmQuery`: get objects by predicate. Read more below.
 
 **put** and **putAll** functions:
+
 - put: Query is not checked. Object is stored directly.
 - putAll: Query is not checked. Objects are stored directly.
 
 **delete** function:
+
 - `IdQuery<Int>`: delete an object by its id (typed int).
 - `IdQuery<String>`: delete an object by its id (typed string).
 - `ObjectQuery<E>`: delete the object contained in the query.
 
 **deleteAll** function:
+
 - `ObjectsQuery<E>`: delete the objects contained in the query.
 - `AllObjectsQuery`: delete all objects.
 - `RealmQuery`: delete objects by predicate. Reade more below.
-
 
 ## `RealmQuery` protocol
 
@@ -111,9 +116,8 @@ All realm objects used in `RealmDataSource` must subclass `RealmObject`, which a
 
 ```swift
 open class RealmObject : Object {
-    
     @objc dynamic public var id : String = ""
-    
+
     public convenience init(_ id: String?) {
         self.init()
         if let id = id {
@@ -122,7 +126,7 @@ open class RealmObject : Object {
             self.id = UUID().uuidString
         }
     }
-    
+
     @objc override open class func primaryKey() -> String? {
         return "id"
     }
@@ -138,8 +142,8 @@ public extension RealmObject {
     public static func findId<T>(keyedValues: [String : T], inRealm realm: Realm) -> String? where T : CVarArg
 }
 ```
-This convenience methods are very useful when mapping entities coming from a server (where the realm `id` is not stored). If the server object has a primary key or a set of variables representing a primary key, this methods will perform the query search and return the `id` of the object stored in the local realm database or `nil` if doesn't exist.
 
+This convenience methods are very useful when mapping entities coming from a server (where the realm `id` is not stored). If the server object has a primary key or a set of variables representing a primary key, this methods will perform the query search and return the `id` of the object stored in the local realm database or `nil` if doesn't exist.
 
 ## `RealmMapper`
 

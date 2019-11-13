@@ -65,10 +65,7 @@ The repository will first forward the query to the **cache** data source.
 
 ## Example: Building a cache
 
--  Use the `CacheSyncOperation` for **GET** actions (repository will first check if the cache contains valid results and if not, go to the main data source).
-
+- Use the `CacheSyncOperation` for **GET** actions (repository will first check if the cache contains valid results and if not, go to the main data source).
 - Use `MainSyncOperation` for **PUT** and **DELETE** actions (repository will push changes to the main data source and if success, update the cache).
-
 - When forcing a refresh (using a *pull-to-refresh* for example), use the `MainSyncOperation` on **GET** actions (forcing to fetch the main data source first and updating cache if success).
-
 - To add additional validation logic to the cache data source, use a [`DataSourceValidator`](../DataSource/DataSourceValidator.md).

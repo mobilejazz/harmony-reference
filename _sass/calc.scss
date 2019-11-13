@@ -1,0 +1,26 @@
+// -------------------
+// Calculate Variables
+// -------------------
+// HEADING
+$size-diff: $size-h1 - $size-body;
+
+$size-h2: $size-body + $size-diff * ease-in(.8);
+$size-h3: $size-body + $size-diff * ease-in(.6);
+$size-h4: $size-body + $size-diff * ease-in(.4);
+$size-h5: $size-body + $size-diff * ease-in(.2);
+$size-h6: $size-body;
+
+$size-h1: calc-rem($size-h1);
+$size-h2: calc-rem($size-h2);
+$size-h3: calc-rem($size-h3);
+$size-h4: calc-rem($size-h4);
+$size-h5: calc-rem($size-h5);
+$size-h6: calc-rem($size-h6);
+
+// SMALL/SMALLER
+$size-small: calc-rem($size-small);
+$size-smaller: calc-rem($size-smaller);
+$size-tiny: calc-rem($size-tiny);
+
+// MONOSPACE
+$size-body-monospace: $size-body * $font-monospace-scale;

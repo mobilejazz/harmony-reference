@@ -19,7 +19,7 @@ For example, we could have an interactor that returns the current time:
 // Swift
 struct CurrentTimeInteractor {
     func execute() -> Date {
-        return Date() 
+        return Date()
     }
 }
 ```
@@ -27,7 +27,7 @@ struct CurrentTimeInteractor {
 ```kotlin
 // Kotlin
 class CurrentTimeInteractor {
-  operator fun invoke(): Date = Date()
+    operator fun invoke(): Date = Date()
 }
 ```
 
@@ -51,11 +51,10 @@ struct ElapsedTimeSinceNowInteractor {
 ```kotlin
 // Kotlin
 class ElapsedTimeSinceNowInteractor(val currentTimeInteractor: CurrentTimeInteractor) {
-
-  operator fun invoke(date: Date): Long {
-    val now = currentTimeInteractor()
-    return now.time - date.time
-  }
+    operator fun invoke(date: Date): Long {
+        val now = currentTimeInteractor()
+        return now.time - date.time
+    }
 }
 ```
 
@@ -91,20 +90,20 @@ struct ElapsedTimeSinceNowInteractor {
 ```kotlin
 // Kotlin
 class CurrentTimeInteractor(val executor: Executor) {
-  operator fun invoke(): Future<Date> {
-    return executor.submit(Callable {
-      Date()
-    })
-  }
+    operator fun invoke(): Future<Date> {
+        return executor.submit(Callable {
+            Date()
+        })
+    }
 }
 
 class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
-  operator fun invoke(date: Date): Future<Long> {
-    return executor.submit(Callable {
-      val now = currentTimeInteractor().get()
-      now.time - date.time
-    })
-  }
+    operator fun invoke(date: Date): Future<Long> {
+        return executor.submit(Callable {
+            val now = currentTimeInteractor().get()
+            now.time - date.time
+        })
+    }
 }
 ```
 
@@ -139,25 +138,24 @@ struct ElapsedTimeSinceNowInteractor {
 ```kotlin
 // Kotlin
 class CurrentTimeInteractor(val executor: Executor) {
-  operator fun invoke(executor: Executor = this.executor): Future<Date> {
-    return executor.submit(Callable {
-      Date()
-    })
-  }
+    operator fun invoke(executor: Executor = this.executor): Future<Date> {
+        return executor.submit(Callable {
+            Date()
+        })
+    }
 }
 
 class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
-  operator fun invoke(date: Date): Future<Long> {
-    return executor.submit(Callable {
-      val now = currentTimeInteractor(DirectExecutor).get()
-      now.time - date.time
-    })
-  }
+    operator fun invoke(date: Date): Future<Long> {
+        return executor.submit(Callable {
+            val now = currentTimeInteractor(DirectExecutor).get()
+            now.time - date.time
+        })
+    }
 }
 ```
 
 This example is using a [`DirectExecutor`](Executor.md) to perform synchronously.
-
 
 ## Default Interactors
 
@@ -165,45 +163,51 @@ In order to access the CRUD operations of a [`Repository`](../Repository/Reposit
 
 Default interators have one method called `execute` (in Kotlin, it is using the `invoke` operator) which contains the same parameters than the Repository functions, plus an optional `Executor`.
 
-### **GET**
+### Get
 
 Get interactors require a `GetRepository` and an `Executor` upon initialization.
 
 Swift:
+
 - `Interactor.Get<T>`
 - `Interactor.GetByQuery<T>`
 - `Interactor.GetAll<T>`
 - `Interactor.GetAllByQuery<T>`
 
 Kotlin:
+
 - `GetInteractor<T>`
 - `GetAllInteractor<T>`
 
-### **PUT**
+### Put
 
 Put interactors require a `PutRepository` and an `Executor` upon initialization.
- 
+
 Swift:
+
 - `Interactor.Put<T>`
 - `Interactor.PutByQuery<T>`
 - `Interactor.PutAll<T>`
 - `Interactor.PutAllByQuery<T>`
 
 Kotlin:
+
 - `PutInteractor<T>`
 - `PutAllInteractor<T>`
 
-### **DELETE**
+### Delete
 
 Delete interactors require a `DeleteRepository` and an `Executor` upon initialization.
- 
+
 Swift:
+
 - `Interactor.Delete`
 - `Interactor.DeleteByQuery`
 - `Interactor.DeleteAll`
 - `Interactor.DeleteAllByQuery`
 
 Kotlin:
+
 - `DeleteInteractor`
 - `DeleteAllInteractor`
 
@@ -224,7 +228,6 @@ Typically, your custom interactors will require repositories to access the data 
 Same applies with custom interactors composing other custom interactors.
 
 For example:
-
 
 ```swift
 // Swift
