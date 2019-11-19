@@ -1,12 +1,9 @@
 #!/bin/bash
 
-SERVER_ADDRESS=134.209.248.240
-
 # get the commit id for the latest commit in HEAD
 DOCKER_IMAGE_TAG="$(git rev-parse --short HEAD)"
 
 # first prepare build the image
-# docker build -f ../Dockerfile -t joselufo/harmony-reference:$DOCKER_IMAGE_TAG ../.
 docker build -t joselufo/harmony-reference:$DOCKER_IMAGE_TAG -f ../Dockerfile ../.
 
 # copying and adding the new docker image tag into the enviroment file
