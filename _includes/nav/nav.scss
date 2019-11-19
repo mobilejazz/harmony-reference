@@ -1,0 +1,51 @@
+.menu {
+  font-size: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__link {
+    background-color: rgba(255,255,255,0);
+    border-left: 4px solid transparent;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: u(1.5) u(2) u(1.5) u(1.5);
+    text-decoration: none;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .menu__item--active > & {
+      border-left-color: $color-secondary;
+    }
+  }
+
+  &__caret {
+    width: 12px;
+  }
+
+  svg {
+    width: 12px;
+  }
+
+  .menu {
+    background-color: rgba(0, 0, 0, 0.2);
+    display: none;
+
+    .menu__link {
+      padding-left: 20px;
+    }
+  }
+
+  .menu__item--display-submenu {
+    svg {
+      transform: rotate(180deg);
+    }
+
+    .menu {
+      display: block;
+    }
+  }
+}

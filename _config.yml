@@ -1,0 +1,25 @@
+title: Harmony Docs
+email: info@mobilejazz.com
+description: >-
+  A Jekyll project to generate a site for the Harmony references documents.
+baseurl: ""
+url: ""
+twitter_username: mobilejazzcom
+github_username: mobilejazz
+
+sass:
+  load_paths:
+    - node_modules
+    - _sass
+    - _layouts
+    - _includes
+
+defaults:
+  -
+    scope:
+      path: "pages"
+    values:
+      layout: "main/main"
+
+gems:
+  - jekyll-relative-links
