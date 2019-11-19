@@ -1,0 +1,13 @@
+version: "3.5"
+services:
+    harmony-reference:
+        build:
+            context: ../.
+            dockerfile: Dockerfile
+        environment:
+            - JEKYLL_ENV=production
+            - VIRTUAL_HOST=harmony.mobilejazz.local
+            - LETSENCRYPT_HOST=harmony.mobilejazz.local
+            - LETSENCRYPT_EMAIL=harmony@mobilejazz.local
+
+
