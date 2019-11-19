@@ -6,6 +6,3 @@ services:
             - VIRTUAL_HOST=harmony.mobilejazz.com
             - LETSENCRYPT_HOST=harmony.mobilejazz.com
             - LETSENCRYPT_EMAIL=harmony@mobilejazz.com
-
-
-
