@@ -4,3 +4,9 @@ _site
 node_modules
 
 *.swp
+
+docker/ssl
+
+bin/password.txt
+
+vendor
