@@ -1,9 +1,9 @@
-title: Harmony Docs
+title: Harmony Reference
 email: info@mobilejazz.com
 description: >-
-  A Jekyll project to generate a site for the Harmony references documents.
+  Harmony concepts and code examples from Mobile Jazz.
 baseurl: ""
-url: ""
+url: "https://harmony.mobilejazz.com"
 twitter_username: mobilejazzcom
 github_username: mobilejazz
 
