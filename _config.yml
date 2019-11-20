@@ -21,5 +21,10 @@ defaults:
     values:
       layout: "main/main"
 
+exclude:
+    - docker
+    - bin
+    - Dockerfile
+
 gems:
   - jekyll-relative-links

@@ -1,0 +1,8 @@
+version: "3.5"
+services:
+    harmony-reference:
+        image: joselufo/harmony-reference:$HARMONY_REFERENCE_VERSION
+        environment:
+            - VIRTUAL_HOST=harmony.mobilejazz.com
+            - LETSENCRYPT_HOST=harmony.mobilejazz.com
+            - LETSENCRYPT_EMAIL=harmony@mobilejazz.com
