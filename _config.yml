@@ -3,7 +3,7 @@ email: info@mobilejazz.com
 description: >-
   A Jekyll project to generate a site for the Harmony references documents.
 baseurl: ""
-url: ""
+url: "https://harmony.mobilejazz.com"
 twitter_username: mobilejazzcom
 github_username: mobilejazz
 
