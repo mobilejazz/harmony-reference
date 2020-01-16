@@ -8,7 +8,7 @@ permalink: /oauth2server/oauthprovider
 The `OAuthProvider` class is an interface for the dependency injection definition:
 
 ```typescript
-// Typescript
+// TypeScript
 export interface OAuthProvider {
     clientModel(): OAuth2BaseModel;
     userModel(getUser: GetOAuthUserInteractor, loginUser: LoginOAuthUserInteractor): OAuth2UserModel;
@@ -24,7 +24,7 @@ Currently, there is only one implementation of that provider, described below.
 An SQL based implementation of the `OAuthProvider`.
 
 ```typescript
-// Typescript
+// TypeScript
 export class OAuthSqlProvider implements OAuthProvider {
     constructor(
         private readonly sqlInterface: SQLInterface,

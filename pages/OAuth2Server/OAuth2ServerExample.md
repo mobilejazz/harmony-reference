@@ -19,7 +19,7 @@ For example, by using `client_id` *application* and `client_secret` *secret*, we
 
 ## 1. Authenticate by password
 
-Send a *POST* with the following body:
+Send a `POST` with the following body:
 ```json
 {
     "grant_type": "password",
@@ -32,7 +32,7 @@ The `scope` is optional.
 
 ## 2. Authenticate by refresh token
 
-Send a *POST* with the following body:
+Send a `POST` with the following body:
 ```json
 {
     "grant_type": "refresh_token",
@@ -42,10 +42,10 @@ Send a *POST* with the following body:
 
 ## 2. Authenticate by client credentials
 
-Send a *POST* with the following body:
+Send a `POST` with the following body:
 ```json
 {
     "grant_type": "client_credentials"
 }
 ```
-Note the *client_id* and *client_secret* are defiend in the `Authorization` HTTP header.
+Note the `client_id` and `client_secret` are defiend in the `Authorization` HTTP header.

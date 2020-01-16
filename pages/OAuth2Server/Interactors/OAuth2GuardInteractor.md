@@ -9,8 +9,8 @@ Interactor that contains the logic of the incoming requests clients/users authen
 
 Typically, a guard must use this interactor, easily forwarding the incoming requests to it.
 
-```typescript 
-// Typescript
+```typescript
+// TypeScript
 export class OAuth2GuardInteractor {
     constructor(
         private readonly oauthServer: OAuth2Server,
@@ -28,7 +28,8 @@ The interactor will include in the request of the execution context the `user` a
 
 In order to simplify the access to the request attached `user` and `client` objects, decorators can be created in Nest as follows:
 
-```typescript 
+```typescript
+// TypeScript
 export const Client = createParamDecorator((data, req) => {
     return req.client;
 });

@@ -8,7 +8,7 @@ permalink: /oauth2server/oauthuser
 An interface that defines an identifier for the user.
 
 ```typescript
-// Typescript
+// TypeScript
 export interface OAuthUser {
     oauthId(): string;
 }
@@ -17,15 +17,15 @@ export interface OAuthUser {
 Objects representing the user must implement this interface and provide an ID to identify the user. For example:
 
 ```typescript
-// Typescript
+// TypeScript
 export class User implements OAuthUser {
     constructor(
         readonly id: number,
-        readonly name: string
-    ) { }
+        readonly name: string,
+    ) {}
 
     oauthId(): string {
-        return `${id}`
+        return this.id.toString();
     }
 }
 ```

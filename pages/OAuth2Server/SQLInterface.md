@@ -1,6 +1,6 @@
 ---
-title: SQLInterface
-permalink: /oauth2server/sqinterface
+title: SQL Interface
+permalink: /oauth2server/sqlinterface
 ---
 
 # SQLInterface
@@ -8,7 +8,7 @@ permalink: /oauth2server/sqinterface
 An interface for an SQL database entry point.
 
 ```typescript
-// Typescript
+// TypeScript
 export interface SQLInterface {
     query(query: string, parameters?: any[]): Promise<any>;
     transaction<T>(runInTransaction: (sqlInterface: SQLInterface) => Promise<T>): Promise<T>;
