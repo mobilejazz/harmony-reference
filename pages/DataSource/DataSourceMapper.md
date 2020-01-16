@@ -36,7 +36,6 @@ dataSourceMapper.get("fromKey")
 
 Any [`Query`](Query.md) can be passed to a `DataSourceMapper<In,Out>`.
 
-
 ## Other Implementations
 
 Together with `DataSourceMapper<In,Out>` there are also similar implementations for:

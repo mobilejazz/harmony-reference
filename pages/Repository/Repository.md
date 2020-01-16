@@ -40,9 +40,9 @@ For more information, read the [`Operation`](Operation.md) reference.
 
 The `Repository` functions replicate the [`DataSource`](../DataSource/DataSoure.md) public API, adding an extra parameter of type `Operation` on each function.
 
-### **Get**
+### Get
 
-Fetch related functions. 
+Fetch related functions.
 
 ```swift
 // Swift
@@ -56,12 +56,12 @@ public protocol GetRepository : Repository {
 ```kotlin
 // Kotlin
 interface GetRepository<V> : Repository {
-  fun get(query: Query, operation: Operation = DefaultOperation): Future<V>
-  fun getAll(query: Query, operation: Operation = DefaultOperation): Future<List<V>>
+    fun get(query: Query, operation: Operation = DefaultOperation): Future<V>
+    fun getAll(query: Query, operation: Operation = DefaultOperation): Future<List<V>>
 }
 ```
 
-### **Put**
+### Put
 
 Actions related functions.
 
@@ -77,12 +77,12 @@ public protocol PutRepository : Repository {
 ```kotlin
 // Kotlin
 interface PutRepository<V> : Repository {
-  fun put(query: Query, value: V?, operation: Operation = DefaultOperation): Future<V>
-  fun putAll(query: Query, value: List<V>? = emptyList(), operation: Operation = DefaultOperation): Future<List<V>>
+    fun put(query: Query, value: V?, operation: Operation = DefaultOperation): Future<V>
+    fun putAll(query: Query, value: List<V>? = emptyList(), operation: Operation = DefaultOperation): Future<List<V>>
 }
 ```
 
-### **Delete**
+### Delete
 
 Deletion related functions.
 
@@ -97,12 +97,12 @@ public protocol DeleteRepository : Repository {
 ```kotlin
 // Kotlin
 interface DeleteRepository : Repository {
-  fun delete(query: Query, operation: Operation = DefaultOperation): Future<Unit>
-  fun deleteAll(query: Query, operation: Operation = DefaultOperation): Future<Unit>
+    fun delete(query: Query, operation: Operation = DefaultOperation): Future<Unit>
+    fun deleteAll(query: Query, operation: Operation = DefaultOperation): Future<Unit>
 }
 ```
 
-## **Id Query** CRUD extensions
+## `IdQuery` CRUD extensions
 
 Similar to the [`DataSource`](../DataSource/DataSoure.md) public interface,  all  `GetRepository`, `PutRepository` and `DeleteRepository` interfaces are extended with methods to access the CRUD functions by an Id:
 
@@ -124,15 +124,10 @@ extension DeleteRepository {
 
 ```kotlin
 fun <K, V> GetRepository<V>.get(id: K, operation: Operation = DefaultOperation): Future<V> = get(IdQuery(id), operation)
-
 fun <K, V> GetRepository<V>.getAll(ids: List<K>, operation: Operation = DefaultOperation): Future<List<V>> = getAll(IdsQuery(ids), operation)
-
 fun <K, V> PutRepository<V>.put(id: K, value: V?, operation: Operation = DefaultOperation): Future<V> = put(IdQuery(id), value, operation)
-
 fun <K, V> PutRepository<V>.putAll(ids: List<K>, values: List<V>? = emptyList(), operation: Operation = DefaultOperation) = putAll(IdsQuery(ids), values, operation)
-
 fun <K> DeleteRepository.delete(id: K, operation: Operation = DefaultOperation) = delete(IdQuery(id), operation)
-
 fun <K> DeleteRepository.deleteAll(ids: List<K>, operation: Operation = DefaultOperation) = deleteAll(IdsQuery(ids), operation)
 ```
 
@@ -144,6 +139,7 @@ repository.get(IdQuery("myKey"), operation: MyCustomOperation())
 repository.put(myObject, in:IdQuery("myKey"), operation: MyCustomOperation())
 repository.delete(IdQuery("myKey"), operation: MyCustomOperation())
 ```
+
 ```kotlin
 // Kotlin
 repository.get(IdQuery("myKey"))
@@ -159,13 +155,13 @@ repository.get("myKey", operation: MyCustomOperation())
 repository.put(myObject, forId:"myKey", operation: MyCustomOperation())
 repository.delete("myKey", operation: MyCustomOperation())
 ```
+
 ```kotlin
 // Kotlin
 repository.get("myKey")
 repository.put("myKey", myObject)
 repository.delete("myKey")
 ```
-
 
 ## `Repository` Implementations
 
@@ -185,6 +181,7 @@ repository.delete("myKey")
 ## Swift Notes
 
 ### `Repository` base protocol
+
 In order to have a generic type, all `GetRepository`, `PutRepository` and `DeleteRepository` extends from the following base protocol:
 
 ```swift

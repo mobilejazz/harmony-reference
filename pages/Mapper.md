@@ -15,7 +15,6 @@ open class Mapper<From,To> {
         fatalError("Undefined mapper. Class Mapper must be subclassed.")
     }
 }
-
 ```
 
 ```kotlin
@@ -36,7 +35,7 @@ let objectB : B = mapper.map(objectA)
 
 ```kotlin
 // Kotlin
-val a : A    
+val a : A
 val mapper: Mapper<A,B> = MyA2BMapper()
 val b : B = mapper.map(a)
 ```
@@ -79,10 +78,8 @@ Custom mappings must be created by subclassing or adopting the `Mapper` class/in
 ```swift
 // Swift
 class MyA2BMapper : Mapper <A,B> {
-    
     // Add custom init if necessary
     // public init(_ customParam: ParamType) { ... }
-
     public override func map(_ from: A) throws -> B {
         var objectB : B = B(from.id)
         return objectB

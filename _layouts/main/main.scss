@@ -6,7 +6,7 @@
   }
 
   &__nav {
-    background-color: $dark-blue;
+    background-color: $color-dark-blue;
 
     @media (max-width: 599px) {
       align-items: center;
@@ -47,15 +47,19 @@
     min-width: 0;
     padding: 16px;
 
+    > .highlighter-rouge {
+      max-width: 100%;
+    }
+
     @media (min-width: 600px) {
-      padding: 16px 80px 16px 32px;
+      padding: u(3) u(10) u(6) u(4);
     }
   }
 
   &__mj-logo {
     display: block;
     line-height: 0;
-    padding: 16px;
+    padding: 22px u(3) u(2) u(2);
 
     @media (max-width: 599px) {
       width: 50%;
@@ -93,7 +97,9 @@
   &__mj-link {
     display: block;
     font-size: 0;
-    padding: 16px 16px 8px;
+    padding: u(3) u(2) u(1);
+    max-width: 200px;
+    opacity: .8;
   }
 
   &__mj-social {

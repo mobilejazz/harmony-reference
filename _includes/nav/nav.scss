@@ -10,7 +10,7 @@
     color: white;
     display: flex;
     justify-content: space-between;
-    padding: 16px 16px 16px 12px;
+    padding: u(1.5) u(2) u(1.5) u(1.5);
     text-decoration: none;
 
     &:hover {
@@ -18,7 +18,7 @@
     }
 
     .menu__item--active > & {
-      border-left-color: $secondary;
+      border-left-color: $color-secondary;
     }
   }
 
@@ -27,6 +27,7 @@
   }
 
   svg {
+    height: 19px;
     width: 12px;
   }
 
