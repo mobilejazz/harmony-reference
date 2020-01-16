@@ -46,3 +46,20 @@
       url: /repository/single-data-source-repository/
     - title: VoidRepository
       url: /repository/void-repository/
+- title: OAuth2 Server
+  url: /oauth2server/
+  subnav:
+    - title: Introduction
+      url: /oauth2server/introduction
+    - title: OAuth2Server Example
+      url: /oauth2server/oauth2server_example
+    - title: OAuthProvider
+      url: /oauth2server/oauthprovider
+    - title: OAuth2Server Models
+      url: /oauth2server/oauth2server_models
+    - title: OAuthUser
+      url: /oauth2server/oauthuser
+    - title: SQL Interface
+      url: /oauth2server/sqlinterface
+    - title: SQL Schema
+      url: /oauth2server/sqlschema
