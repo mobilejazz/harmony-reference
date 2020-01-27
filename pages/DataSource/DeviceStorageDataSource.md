@@ -39,9 +39,10 @@ Even if `DeviceStorageDataSource<T>` has a generic type, there are restrictions 
 
 To store any different type, use a [`DataSourceMapper<In,Out>`](DataSourceMapper.md) to transfrom (map) the type to a compatible one.
 
-#### Kotlin exclusive implementations
+### Kotlin exclusive implementations
 
-If you want to fetch/store custom objects, you need to use a `DeviceStorageObjectAssemblerDataSource<T>` class to be able to serialize and deserialize the object. This is a limitation from `SharedPreferences`
+#### SerializationDataSourceMapper
+If you want to fetch/store custom objects, you need to use a `SerializationDataSourceMapper<T>` class to be able to serialize and deserialize the object. This is a limitation from `SharedPreferences`.
 
 For example:
 ```kotlin
@@ -49,7 +50,35 @@ For example:
 val toStringMapper = ModelToStringMapper<ItemEntity>(gson)
 val toModelMapper = StringToModelMapper(ItemEntity::class.java, gson)
 val toListModelMapper = ListModelToStringMapper<ItemEntity>(gson)
-val toStringListMapper = StringToListModelMapper(object : TypeToken<List<ItemEntity>>() {}, gson)
+val toStringListMapper = StringToListModelMapper(object:TypeToken<List<ItemEntity>>() {}, gson)
+  return SerializationDataSourceMapper(
+        deviceStorageDataSource,
+        deviceStorageDataSource,
+        deviceStorageDataSource,
+        toModelMapper,
+        toStringListMapper, // List
+        toStringMapper,
+        toListModelMapper) // List
+
+val itemEntity = ItemEntity(123, "by", "title", "text", "type", 123, "url", emptyList())
+
+// Store value with key "1"
+itemEntityDeviceStorageDataSource.put(KeyQuery("1"), itemEntity).get()
+
+// Fetch value with key "1"
+val result = itemEntityDeviceStorageDataSource.get(KeyQuery("1")).get()
+```
+
+#### `@Deprecated` DeviceStorageObjectAssemblerDataSource
+Use SerializationDataSourceMapper instead.
+
+For example:
+```kotlin
+// Kotlin
+val toStringMapper = ModelToStringMapper<ItemEntity>(gson)
+val toModelMapper = StringToModelMapper(ItemEntity::class.java, gson)
+val toListModelMapper = ListModelToStringMapper<ItemEntity>(gson)
+val toStringListMapper = StringToListModelMapper(object:TypeToken<List<ItemEntity>>() {}, gson)
 
 val deviceStorageDataSource = DeviceStorageDataSource<String>(sharedPreferences) // Mandatory to use a DeviceStorageDataSource of String
 val itemEntityDeviceStorageDataSource = DeviceStorageObjectAssemblerDataSource(toStringMapper, toModelMapper, toListModelMapper, toStringListMapper,deviceStorageDataSource)
