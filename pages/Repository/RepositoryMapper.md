@@ -21,7 +21,22 @@ repository.get("myKey", operation: DefaultOperation())
 
 ```kotlin
 // Kotlin
-// TODO
+fun provideDataRepositoryMapper(dataMapperHarmony: Mapper<@JvmSuppressWildcards DataEntity, @JvmSuppressWildcards DataModel>,
+                                dataEntityMapperHarmony: Mapper<@JvmSuppressWildcards DataModel, @JvmSuppressWildcards DataEntity> ):
+    RepositoryMapper<DataEntity, DataModel> {
+
+    val dataStorageDataSource = DataStorageDataSource()
+
+    val singleDataSourceRepository = SingleDataSourceRepository(
+        dataStorageDataSource,
+        dataStorageDataSource,
+        dataStorageDataSource)
+
+    return RepositoryMapper(singleDataSourceRepository,
+        singleDataSourceRepository,
+        singleDataSourceRepository,
+        dataMapperHarmony,
+        dataEntityMapperHarmony)
 ```
 
 ## Operation Types
