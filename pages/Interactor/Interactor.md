@@ -259,5 +259,30 @@ struct UserLimitReachedInteractor {
 
 ```kotlin
 // Kotlin
-// TODO
+class CountAllUsersInteractor constructor (
+    private val executor: Executor = AppExecutor,
+    private val getUsers: GetAllInteractor<User>) {
+
+    operator fun invoke (
+        executor: Executor = this.executor
+    ): Future<Int> =
+        executor.submit(Callable {
+            return@Callable getUsers(executor = DirectExecutor).get().size
+        })
+}
+
+class UserLimitReachedInteractor constructor(
+    private val executor: Executor = AppExecutor,
+    private val userCount: CountAllUsersInteractor) {
+
+    operator fun invoke(
+        executor: Executor = this.executor,
+        limit: Int
+    ): Future<Boolean> =
+        executor.submit(Callable {
+            val count = userCount(executor = DirectExecutor).get()
+            return@Callable count > limit
+        })
+
+}
 ```
