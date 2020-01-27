@@ -10,14 +10,33 @@ permalink: /logger/
 ## Declaration
 
 ```swift
+/// Information that gets logged can be labeled as one of the following informative labels.
 @objc(MJLogLevel) public enum LogLevel: Int {
+    case trace
+    case debug
     case info
     case warning
     case error
+    case fatal
 }
 
+/// Abstracts concrete implementations of a logger system.
 @objc(MJLogger) public protocol Logger {
-    func log(_ level: LogLevel, tag: String, message: String)
+    
+    /// Logs a String object using a given level
+    ///
+    /// - Parameters:
+    ///   - level: Type of log.
+    ///   - tag: An additional label to help categorise logs.
+    ///   - message: The message to be logged.
+    func log(level: LogLevel, tag: String?, message: String)
+    
+    /// Logs a key-value pair
+    ///
+    /// - Parameters:
+    ///   - key: They key
+    ///   - value: The value
+    func log(key: String, value: Any?)
 }
 ```
 
@@ -69,7 +88,7 @@ public extension Logger {
     /// - Parameters:
     ///   - tag: An additional label to help categorise logs.
     ///   - message: String to be logged
-    func print(tag: String? = nil, _ message: String) {
+    func info(tag: String? = nil, _ message: String) {
         self.log(level: .info, tag: tag, message: message)
     }
 
