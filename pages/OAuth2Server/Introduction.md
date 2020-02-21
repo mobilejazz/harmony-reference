@@ -13,7 +13,7 @@ Find below a step by step guide on how to use it.
 
 First, we must create a `OAuth2Server` instance, which will be the object responsible of processing incoming authorization requests, as well as for authenticating incoming clients and users.
 
-For that purpose, the class [`OAuthProvider`](OAuthProvider.md) exposes the methods needed to obtain the data needed to create the `OAuth2Server` instance.
+To create the `OAuth2Server` instance, we can use the class [`OAuthProvider`](OAuthProvider.md). This class will provide us the *Model* required by the `OAuth2Server` constructor. For example:
 
 ```typescript
 // TypeScript
@@ -36,7 +36,7 @@ In this case, a new endpoint must be defined, typically being a `POST` at `/auth
 
 For this purpose, the library has a specific interactor called [`AuthControllerInteractor`](Interactors/AuthControllerInteractor.md).
 
-As an example of usage, a Nest controller would be like:
+As an example of usage, a NestJS controller would be like:
 
 ```typescript
 // TypeScript
