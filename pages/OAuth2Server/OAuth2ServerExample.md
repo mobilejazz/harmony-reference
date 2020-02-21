@@ -30,6 +30,11 @@ Send a `POST` with the following body:
 ```
 The `scope` is optional.
 
+Curl example:
+```bash
+curl -X POST "http://HOST/auth/token" -H "Authorization: Basic YXBwbGljYXRpb246c2VjcmV0" -H "Content-Type: application/json" -d "{ \"grant_type\": \"password\", \"username\": \"user@test.com\", \"password\": \"aaa123\"}"
+```
+
 ## 2. Authenticate by refresh token
 
 Send a `POST` with the following body:
@@ -40,12 +45,38 @@ Send a `POST` with the following body:
 }
 ```
 
+Curl example:
+```bash
+curl -X POST "http://HOST/auth/token" -H "Authorization: Basic YXBwbGljYXRpb246c2VjcmV0" -H "Content-Type: application/json" -d "{ \"grant_type\": \"refresh_token\", \"refresh_token\": \"THE_REFRESH_TOKEN\"}"
+```
+
 ## 2. Authenticate by client credentials
 
 Send a `POST` with the following body:
 ```json
 {
     "grant_type": "client_credentials"
+
 }
 ```
 Note the `client_id` and `client_secret` are defiend in the `Authorization` HTTP header.
+
+Curl example:
+```bash
+curl -X POST "http://HOST/auth/token" -H "Authorization: Basic YXBwbGljYXRpb246c2VjcmV0" -H "Content-Type: application/json" -d "{ \"grant_type\": \"client_credentials\"}"
+```
+
+It is also possible to include the `client_id` and `client_secret` inside the JSON body, instead of in the authorization headers: 
+
+```json
+{
+    "grant_type": "client_credentials",
+    "client_id" : "THE_CLIENT_ID",
+    "client_secret": "THE_CLIENT_SECRET"
+}
+```
+
+Curl example:
+```bash
+curl -X POST "http://HOST/auth/token" -H "Content-Type: application/json" -d "{ \"grant_type\": \"client_credentials\", \"client_id\": \"THE_CLIENT_ID\", \"client_secret\": \"THE_CLIENT_SECRET\"}"
+```

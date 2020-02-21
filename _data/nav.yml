@@ -61,5 +61,4 @@
       url: /oauth2server/oauthuser
     - title: SQL Interface
       url: /oauth2server/sqlinterface
-    - title: SQL Schema
-      url: /oauth2server/sqlschema
+      
