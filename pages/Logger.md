@@ -18,7 +18,7 @@ val logger = if (BuildConfig.DEBUG) {
     BugfenderLogger() // This class is an example 
 }
 
-let manager = NetworkManager(logger) // This class is an example 
+val manager = NetworkManager(logger) // This class is an example 
 ```
 
 ```swift
@@ -163,10 +163,9 @@ interface Logger {
     log(level: LogLevel, message: string): void;
     log(level: LogLevel, tag: string, message: string): void;
 }
-
+```
 - `logKeyValue`: logs a key-value pair.
 - `log`: method has two signatures, the difference being an optional `tag` parameter.
-```
 
 ### Default implementations
 
@@ -230,10 +229,10 @@ public extension Logger {
 
 ### Alias methods (Typescript)
 
+There are also few alias methods available, one for each log level, all of them with an optional first 
+parameter: `tag`.
 ```typescript
 // TypeScript
-
-// There are also few alias methods available, one for each log level, all of them with an optional first parameter: `tag`.
 
 interface Logger {
     trace(message: string): void;
