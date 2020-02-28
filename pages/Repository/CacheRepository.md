@@ -15,6 +15,7 @@ Using the different supported operation types, the repository will fetch/push da
 // Swift
 let networkDataSource = MyNetworkDataSource()
 let storageDataSource = MyStorageDataSource()
+
 let repository = CacheRepository(main: networkDataSource, cache: storageDataSource)
 
 let future = repository.get("myKey", operation: CacheSyncOperation())
@@ -25,9 +26,9 @@ let future = repository.get("myKey", operation: CacheSyncOperation())
 val networkDataSource = MyNetworkDataSource()
 val storageDataSource = MyStorageDataSource()
 
-val repository = NetworkStorageRepository(networkDataSource, networkDataSource, networkDataSource, storageDataSource, storageDataSource, storageDataSource)
+val repository = CacheRepository(storageDataSource, storageDataSource, storageDataSource, networkDataSource, networkDataSource, networkDataSource)
 
-val future = repository.get(IdQuery("my-key"), StorageSyncOperation)
+val future = repository.get(IdQuery("my-key"), MainSyncOperation)
 ```
 
 ## Operation Types
