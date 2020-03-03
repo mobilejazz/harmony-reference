@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # DataSourceMapper
 
-`DataSourceMapper<In,Out>` encapuslates a [`DataSource`](DataSource.md) instance of type `In` and exposes a new interface of [`DataSource`](DataSource.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../Mapper.md) and [`Mapper<Out,In>`](../Mapper.md).
+`DataSourceMapper<In,Out>` encapuslates a [`DataSource`](data-source.md) instance of type `In` and exposes a new interface of [`DataSource`](data-source.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../mapper.md) and [`Mapper<Out,In>`](../mapper.md).
 
 ## Usage
 
@@ -47,7 +47,7 @@ dataSource.get("myKey")
 
 ## Query Types
 
-Any [`Query`](Query.md) can be passed to a `DataSourceMapper<In,Out>`.
+Any [`Query`](query.md) can be passed to a `DataSourceMapper<In,Out>`.
 
 ## Other Implementations
 

@@ -43,9 +43,9 @@ dataSource.get(IdQuery("myKey")).then { value in
 
 ## Query
 
-A [`Query`](Query.md) object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
+A [`Query`](query.md) object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
 
-For more information, read the [`Query`](Query.md) reference.
+For more information, read the [`Query`](query.md) reference.
 
 ## API
 
@@ -86,7 +86,7 @@ public protocol GetDataSource : DataSource {
 
 Actions related functions. PUT methods will be responsible of editing, modifying, sending or any other action related method.
 
-Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](Query.md). In the case of `putAll`, an empty array can be passed.
+Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](query.md). In the case of `putAll`, an empty array can be passed.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -119,7 +119,7 @@ public protocol PutDataSource : DataSource {
 
 Deletion related functions.
 
-Note that only a [`Query`](Query.md) is required and no value is returned rather than a Future encapsulating the output error.
+Note that only a [`Query`](query.md) is required and no value is returned rather than a Future encapsulating the output error.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -231,17 +231,17 @@ dataSource.delete("myKey")
 
 ## `DataSource` Implementations
 
-- [`VoidDataSource<T>`](VoidDataSource.md): Empty data source. All functions when called end with errors.
-- [`InMemoryDataSource<T>`](InMemoryDataSource.md): Data stored in the app live memory.
-- [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md): Data stored in `SharedPreferences` (android) or `UserDefaults` (iOS)
-- [`DataSourceMapper<In,Out>`](DataSourceMapper.md): Mappes the type of a data source.
-- [`DataSourceValidator<T>`](DataSourceValidator.md): Validates the objects manipulated by a data source.
+- [`VoidDataSource<T>`](void-data-source.md): Empty data source. All functions when called end with errors.
+- [`InMemoryDataSource<T>`](in-memory-data-source.md): Data stored in the app live memory.
+- [`DeviceStorageDataSource<T>`](device-storage-data-source.md): Data stored in `SharedPreferences` (android) or `UserDefaults` (iOS)
+- [`DataSourceMapper<In,Out>`](data-source-mapper.md): Mappes the type of a data source.
+- [`DataSourceValidator<T>`](data-source-validator.md): Validates the objects manipulated by a data source.
 
 ### Swift exclusive implementations
 
-- [`TimedCacheDataSource<T>`](TimedCacheDataSource.md): A TLRU cache over a data source.
-- [`RealmDataSource<E,O>`](RealmDataSource.md): Realm based data source. Available at the `MJSWiftCore/Realm` pod subspec.
-- [`KeychainDataSource<T>`](KeychainDataSource.md): Keychain based data source. Available at the `MJSwiftCore/Security` pod subspec.
+- [`TimedCacheDataSource<T>`](timed-cache-data-source.md): A TLRU cache over a data source.
+- [`RealmDataSource<E,O>`](realm-data-source.md): Realm based data source. Available at the `MJSWiftCore/Realm` pod subspec.
+- [`KeychainDataSource<T>`](keychain-data-source.md): Keychain based data source. Available at the `MJSwiftCore/Security` pod subspec.
 - `DataSourceAssembler<T>`: Combines three data sources (get, put, delete) into a single object.
 - `AnyDataSource<T>`: Type erasing for any get+put+delete data source.
 - `AnyGetDataSource<T>`: Type erasing for a get data source.

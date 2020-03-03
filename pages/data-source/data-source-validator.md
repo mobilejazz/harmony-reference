@@ -4,7 +4,7 @@ title: Data Source Validator
 
 # DataSourceValidator
 
-`DataSourceValidator<T>` encapuslates a [`DataSource`](DataSource.md) instance and validates all objects fetched in the `GetDataSource` functions.
+`DataSourceValidator<T>` encapuslates a [`DataSource`](data-source.md) instance and validates all objects fetched in the `GetDataSource` functions.
 
 Validation happens via the `ObjectValidation` protocol described below.
 
@@ -33,7 +33,7 @@ validatedDataSource.get("myKey").recover { error in
 
 ## Query Types
 
-Any [`Query`](Query.md) accepted by the encapuslated `DataSource` an be used in the `DataSourceValidator<T>`.
+Any [`Query`](query.md) accepted by the encapuslated `DataSource` an be used in the `DataSourceValidator<T>`.
 
 ## Object Types
 

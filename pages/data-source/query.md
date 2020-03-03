@@ -29,7 +29,7 @@ public protocol Query { }
 </TabItem>
 </Tabs>
 
-Note that a `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](DataSource.md). 
+Note that a `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](data-source.md).
 
 ## Usage
 
@@ -78,7 +78,7 @@ itemsStorageDataSource.getAll(SearchQuery("lorem ipsum"))
 
 ## Using Queries in DataSources
 
-Queries must be pro-actively supported in each [`DataSource`](DataSource.md) implementation. A typical appearance of an implemented `get` method from a `GetDataSource` would be:
+Queries must be pro-actively supported in each [`DataSource`](data-source.md) implementation. A typical appearance of an implemented `get` method from a `GetDataSource` would be:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -120,7 +120,7 @@ Note the `default:` / `else` behavior. When using an unsupported query, an excep
 
 ## `KeyQuery` support
 
-In order to create a key-value environment for data sources as in [`InMemoryDataSource<T>`](InMemoryDataSource.md), [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md) or any custom implementation, there is the `KeyQuery` interface/protocol to implement:
+In order to create a key-value environment for data sources as in [`InMemoryDataSource<T>`](in-memory-data-source.md), [`DeviceStorageDataSource<T>`](device-storage-data-source.md) or any custom implementation, there is the `KeyQuery` interface/protocol to implement:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },

@@ -43,7 +43,7 @@ Note that the example above is using the extension methods of `Repository` that 
 
 ## Operation Types
 
-Any [`Operation`](Operation.md) can be passed to a `VoidRepository<T>` (and all will result with an error).
+Any [`Operation`](operation.md) can be passed to a `VoidRepository<T>` (and all will result with an error).
 
 ## Other Implementations
 

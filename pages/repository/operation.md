@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Operation
 
-The [`Operation`](Operation.md) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
+The [`Operation`](operation.md) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -29,7 +29,7 @@ public protocol Operation { }
 </TabItem>
 </Tabs>
 
-Note that an `Operation` depends exclusively on a custom implementation of a [`Repository`](Repository.md). Each [`Repository`](Repository.md) implementation will delcare it's supported `Operations`.
+Note that an `Operation` depends exclusively on a custom implementation of a [`Repository`](repository.md). Each [`Repository`](repository.md) implementation will delcare it's supported `Operations`.
 
 ## Usage
 
@@ -68,11 +68,11 @@ repository.get(IdQuery("myKey"), operation: MyRetryOnceIfErrorOperation())
 
 > **All repositories must accept this operation and perform its expectec behavior.**
 
-Any other custom operation will be declared together with its [`Repository`](Repository.md) implementation.
+Any other custom operation will be declared together with its [`Repository`](repository.md) implementation.
 
 ## Using Operations in Repositories
 
-Operations must be pro-actively supported in each [`Repository`](Repository.md) implementation. A typical appearance of an implemented `get` method from a `GetRepository` would be:
+Operations must be pro-actively supported in each [`Repository`](repository.md) implementation. A typical appearance of an implemented `get` method from a `GetRepository` would be:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },

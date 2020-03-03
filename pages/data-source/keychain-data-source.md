@@ -29,7 +29,7 @@ All queries must adopt the [`KeyQuery`](query.md) interface as the `KeychainData
 
 Even if `KeychainDataSource<T>` has a generic type, the Keychain can only store `Data`. However, the class has a built-in data conversion for any type `T` that is `Codable`.
 
-Otherwise, a [`DataSourceMapper<In,Out>`](DataSourceMapper.md) can be used to map any type `T` to `Data`.
+Otherwise, a [`DataSourceMapper<In,Out>`](data-source-mapper.md) can be used to map any type `T` to `Data`.
 
 ## Error Handling
 
