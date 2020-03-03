@@ -70,9 +70,6 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Mobile Jazz`,
     },
   },
-  // plugins: [
-  //   path.join(__dirname, '/plugins/code-tabs-plugin'),
-  // ],
   presets: [
     [
       '@docusaurus/preset-classic',
