@@ -40,7 +40,7 @@ Together with `SingleDataSourceRepository<T>` there are implementations deciated
 
 ## Notes
 
-There are extensions of `GetDataSource`, `PutDataSource` and `DeleteDataSource to get a `SingleXXXDataSourceRepository<T>`:
+There are extensions of `GetDataSource`, `PutDataSource` and `DeleteDataSource` to get a `SingleXXXDataSourceRepository<T>`:
 
 ```swift
 // Swift
