@@ -7,55 +7,40 @@
 module.exports = {
   someSidebar: [
     'introduction',
-    // "introduction",
-    // {
-    //   type: "category",
-    //   label: "Getting Started",
-    //   items: [
-    //     {
-    //       type: "category",
-    //       label: "Docs",
-    //       items: [
-    //         "doc2"
-    //         // 'doc3',
-    //       ]
-    //     }
-    //   ]
-    // },
     {
       type: 'category',
       label: 'Reference',
       items: [
-        'Executor',
-        'Logger',
-        'Mapper',
+        'executor',
+        'logger',
+        'mapper',
         {
           type: 'category',
           label: 'Data Source',
           items: [
-            'DataSource/DataSource',
-            'DataSource/DataSourceMapper',
-            'DataSource/DataSourceValidator',
-            'DataSource/DeviceStorageDataSource',
-            'DataSource/InMemoryDataSource',
-            'DataSource/KeychainDataSource',
-            'DataSource/Query',
-            'DataSource/RealmDataSource',
-            'DataSource/TimedCacheDataSource',
-            'DataSource/VoidDataSource',
+            'data-source/data-source',
+            'data-source/data-source-mapper',
+            'data-source/data-source-validator',
+            'data-source/device-storage-data-source',
+            'data-source/in-memory-data-source',
+            'data-source/keychain-data-source',
+            'data-source/query',
+            'data-source/realm-data-source',
+            'data-source/timed-cache-data-source',
+            'data-source/void-data-source',
           ]
         },
-        'Interactor/Interactor',
+        'interactor/interactor',
         {
           type: 'category',
           label: 'Repository',
           items: [
-            'Repository/Repository',
-            'Repository/CacheRepository',
-            'Repository/Operation',
-            'Repository/RepositoryMapper',
-            'Repository/SingleDataSourceRepository',
-            'Repository/VoidRepository',
+            'repository/repository',
+            'repository/cache-repository',
+            'repository/operation',
+            'repository/repository-mapper',
+            'repository/single-data-source-repository',
+            'repository/void-repository',
           ]
         }
       ]
