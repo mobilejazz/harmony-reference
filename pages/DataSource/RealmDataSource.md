@@ -1,6 +1,5 @@
 ---
 title: Realm Data Soure
-permalink: /data-source/realm-data-soure/
 ---
 
 # RealmDataSource

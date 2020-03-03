@@ -1,6 +1,5 @@
 ---
 title: Repository Mapper
-permalink: /repository/repository-mapper/
 ---
 
 import Tabs from '@theme/Tabs';

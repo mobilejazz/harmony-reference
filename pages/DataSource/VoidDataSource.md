@@ -1,6 +1,5 @@
 ---
 title: Void Data Source
-permalink: /data-source/void-data-source/
 ---
 
 import Tabs from '@theme/Tabs';

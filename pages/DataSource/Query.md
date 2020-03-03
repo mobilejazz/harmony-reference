@@ -1,6 +1,5 @@
 ---
 title: Query
-permalink: /data-source/query/
 ---
 
 import Tabs from '@theme/Tabs';

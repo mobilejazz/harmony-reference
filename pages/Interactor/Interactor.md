@@ -1,6 +1,5 @@
 ---
 title: Interactor
-permalink: /interactor/
 ---
 
 import Tabs from '@theme/Tabs';

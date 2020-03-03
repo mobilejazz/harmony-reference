@@ -1,6 +1,5 @@
 ---
 title: VoidRepository
-permalink: /repository/void-repository/
 ---
 
 import Tabs from '@theme/Tabs';

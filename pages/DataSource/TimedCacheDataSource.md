@@ -1,6 +1,5 @@
 ---
 title: Timed Cache Data Source
-permalink: /data-source/timed-cache-data-source/
 ---
 
 # TimedCacheDataSource

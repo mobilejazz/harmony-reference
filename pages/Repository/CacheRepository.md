@@ -1,6 +1,5 @@
 ---
 title: Cache Repository
-permalink: /repository/cache-repository/
 ---
 
 import Tabs from '@theme/Tabs';

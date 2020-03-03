@@ -1,6 +1,5 @@
 ---
 title: Single Data Source Repository
-permalink: /repository/single-data-source-repository/
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,6 +1,5 @@
 ---
 title: Keychain Data Source
-permalink: /data-source/keychain-data-source/
 ---
 
 # KeychainDataSource

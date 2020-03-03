@@ -1,6 +1,5 @@
 ---
 title: Data Source Mapper
-permalink: /data-source/data-source-mapper/
 ---
 
 import Tabs from '@theme/Tabs';

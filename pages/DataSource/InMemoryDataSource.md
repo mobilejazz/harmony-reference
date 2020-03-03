@@ -1,6 +1,5 @@
 ---
 title: In Memory Data Source
-permalink: /data-source/in-memory-data-source/
 ---
 
 import Tabs from '@theme/Tabs';

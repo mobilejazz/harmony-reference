@@ -1,6 +1,5 @@
 ---
 title: Executor
-permalink: /executor/
 ---
 
 import Tabs from '@theme/Tabs';

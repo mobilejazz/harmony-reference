@@ -1,6 +1,5 @@
 ---
 title: Repository
-permalink: /repository/repository/
 ---
 
 import Tabs from '@theme/Tabs';

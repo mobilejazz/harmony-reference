@@ -1,6 +1,5 @@
 ---
 title: Operation
-permalink: /repository/operation/
 ---
 
 import Tabs from '@theme/Tabs';

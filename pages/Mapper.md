@@ -1,6 +1,5 @@
 ---
 title: Mapper
-permalink: /mapper/
 ---
 
 import Tabs from '@theme/Tabs';

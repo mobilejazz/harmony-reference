@@ -1,6 +1,5 @@
 ---
 title: Logger
-permalink: /logger/
 ---
 
 import Tabs from '@theme/Tabs';

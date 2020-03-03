@@ -1,6 +1,5 @@
 ---
 title: Data Source
-permalink: /data-source/data-source/
 ---
 
 import Tabs from '@theme/Tabs';

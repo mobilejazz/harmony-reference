@@ -1,6 +1,5 @@
 ---
 title: Data Source Validator
-permalink: /data-source/data-source-validator/
 ---
 
 # DataSourceValidator

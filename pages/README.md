@@ -1,6 +1,5 @@
 ---
 title: Harmony
-permalink: /
 ---
 
 # Harmony

@@ -1,6 +1,5 @@
 ---
 title: Device Storage Data Source
-permalink: /data-source/device-storage-data-source/
 ---
 
 import Tabs from '@theme/Tabs';
