@@ -3,26 +3,56 @@ title: Query
 permalink: /data-source/query/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Query
 
 A `Query` object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action. 
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+open class Query
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 public protocol Query { }
 ```
 
-```kotlin
-// Kotlin
-open class Query
-```
+</TabItem>
+</Tabs>
 
 Note that a `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](DataSource.md). 
 
 ## Usage
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+class SearchQuery(val text: String): Query()
+
+// Searching in network
+itemsNetworkDataSource.getAll(SearchQuery("lorem ipsim"))
+// Searching in local storage
+itemsStorageDataSource.getAll(SearchQuery("lorem ipsim"))
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 struct SearchQuery: Query {
     let text : String
 }
@@ -33,15 +63,8 @@ itemsNetworkDataSource.getAll(SearchQuery("lorem ipsum"))
 itemsStorageDataSource.getAll(SearchQuery("lorem ipsum"))
 ```
 
-```kotlin
-// Kotlin
-class SearchQuery(val text: String): Query()
-
-// Searching in network
-itemsNetworkDataSource.getAll(SearchQuery("lorem ipsim"))
-// Searching in local storage
-itemsStorageDataSource.getAll(SearchQuery("lorem ipsim"))
-```
+</TabItem>
+</Tabs>
 
 ## Default implementations
 
@@ -58,8 +81,27 @@ itemsStorageDataSource.getAll(SearchQuery("lorem ipsim"))
 
 Queries must be pro-actively supported in each [`DataSource`](DataSource.md) implementation. A typical appearance of an implemented `get` method from a `GetDataSource` would be:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+override fun get(query: Query): Future<MyObject> = Future {
+    when (query) {
+        is KeyQuery -> {
+          return getObjectByIdMethod(query.key)
+        }
+        else -> notSupportedQuery()
+    }
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 func get(_ query: Query) -> Future<MyObject> {
     switch query.self {
     case let query as IdQuery<String>:
@@ -72,17 +114,8 @@ func get(_ query: Query) -> Future<MyObject> {
 }
 ```
 
-```kotlin
-// Kotlin
-override fun get(query: Query): Future<MyObject> = Future {
-    when (query) {
-        is KeyQuery -> {
-          return getObjectByIdMethod(query.key)
-        }
-        else -> notSupportedQuery()
-    }
-}
-```
+</TabItem>
+</Tabs>
 
 Note the `default:` / `else` behavior. When using an unsupported query, an exception/fatalError is raised as this is an illegal call.
 
@@ -90,17 +123,27 @@ Note the `default:` / `else` behavior. When using an unsupported query, an excep
 
 In order to create a key-value environment for data sources as in [`InMemoryDataSource<T>`](InMemoryDataSource.md), [`DeviceStorageDataSource<T>`](DeviceStorageDataSource.md) or any custom implementation, there is the `KeyQuery` interface/protocol to implement:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+open class KeyQuery(val key: String) : Query()
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 public protocol KeyQuery : Query {
     var key : String { get }
 }
 ```
 
-```kotlin
-// Kotlin
-open class KeyQuery(val key: String) : Query()
-```
+</TabItem>
+</Tabs>
 
 Only queries adopting this structure can be used in Key-Value based DataSources.
 
@@ -112,14 +155,24 @@ Note that the following default queries already have support for `KeyQuery`:
 
 Custom queries must adopt this form to be used in Key-Value data sources. For example, returning to the top example `SearchQuery`:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+class SearchQuery(val text: String): KeyQuery(text)
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 extension SearchQuery : KeyQuery {
     public var key : String { return text }
 }
 ```
 
-```kotlin
-// Kotlin
-class SearchQuery(val text: String): KeyQuery(text)
-```
+</TabItem>
+</Tabs>

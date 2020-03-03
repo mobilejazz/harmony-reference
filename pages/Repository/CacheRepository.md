@@ -3,6 +3,9 @@ title: Cache Repository
 permalink: /repository/cache-repository/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # CacheRepository
 
 `CacheRepository<T>` implements `GetRepository`, `PutRepository` and `DeleteRepository` and encapuslates two [`DataSource`](../DataSource/DataSource.md) instances: one representing a **main** data source and another one representing a **cache** data source.
@@ -11,8 +14,25 @@ Using the different supported operation types, the repository will fetch/push da
 
 ## Usage
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+val networkDataSource = MyNetworkDataSource()
+val storageDataSource = MyStorageDataSource()
+
+val repository = CacheRepository(storageDataSource, storageDataSource, storageDataSource, networkDataSource, networkDataSource, networkDataSource)
+
+val future = repository.get(IdQuery("my-key"), MainSyncOperation)
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 let networkDataSource = MyNetworkDataSource()
 let storageDataSource = MyStorageDataSource()
 
@@ -21,15 +41,8 @@ let repository = CacheRepository(main: networkDataSource, cache: storageDataSour
 let future = repository.get("myKey", operation: CacheSyncOperation())
 ```
 
-```kotlin
-// Kotlin
-val networkDataSource = MyNetworkDataSource()
-val storageDataSource = MyStorageDataSource()
-
-val repository = CacheRepository(storageDataSource, storageDataSource, storageDataSource, networkDataSource, networkDataSource, networkDataSource)
-
-val future = repository.get(IdQuery("my-key"), MainSyncOperation)
-```
+</TabItem>
+</Tabs>
 
 ## Operation Types
 

@@ -2,4 +2,4 @@
 title: Introduction
 ---
 
-Lorem Ipsum.
+Welcome to the Harmony reference site.

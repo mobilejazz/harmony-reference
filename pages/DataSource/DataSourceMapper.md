@@ -3,14 +3,38 @@ title: Data Source Mapper
 permalink: /data-source/data-source-mapper/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # DataSourceMapper
 
 `DataSourceMapper<In,Out>` encapuslates a [`DataSource`](DataSource.md) instance of type `In` and exposes a new interface of [`DataSource`](DataSource.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../Mapper.md) and [`Mapper<Out,In>`](../Mapper.md).
 
 ## Usage
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+// Kotlin
+val deviceStorageDataSource = InMemoryDataSource<String, A>()
+val dataSourceMapper = DataSourceMapper(deviceStorageDataSource,
+                                        deviceStorageDataSource,
+                                        deviceStorageDataSource,
+                                        AtoBMapper(),
+                                        BtoAMapper())
+  
+dataSourceMapper.put("fromKey", B())
+dataSourceMapper.get("fromKey")
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 let dataSource = DataSourceMapper(InMemoryDataSource<A>(),
                                   toInMapper: MyB2AMapper(),
                                   toOutMapper: MyA2BMapper())
@@ -19,18 +43,8 @@ dataSource.put(B(), forId: "myKey")
 dataSource.get("myKey")
 ```
 
-```kotlin
-// Kotlin
-val deviceStorageDataSource = InMemoryDataSource<String, A>()
-val dataSourceMapper = DataSourceMapper(deviceStorageDataSource,
-                                        deviceStorageDataSource,
-                                        deviceStorageDataSource, 
-                                        AtoBMapper(), 
-                                        BtoAMapper())
-  
-dataSourceMapper.put("fromKey", B())
-dataSourceMapper.get("fromKey")
-```
+</TabItem>
+</Tabs>
 
 ## Query Types
 

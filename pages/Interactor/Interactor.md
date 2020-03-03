@@ -3,6 +3,9 @@ title: Interactor
 permalink: /interactor/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Interactor
 
 ## Introduction
@@ -15,8 +18,22 @@ As interactors classes have one single responsibility, all interactors will have
 
 For example, we could have an interactor that returns the current time:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+class CurrentTimeInteractor {
+    operator fun invoke(): Date = Date()
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 struct CurrentTimeInteractor {
     func execute() -> Date {
         return Date()
@@ -24,12 +41,8 @@ struct CurrentTimeInteractor {
 }
 ```
 
-```kotlin
-// Kotlin
-class CurrentTimeInteractor {
-    operator fun invoke(): Date = Date()
-}
-```
+</TabItem>
+</Tabs>
 
 ## Composition
 
@@ -37,8 +50,25 @@ Interactors can perform from very easy to extremely complex operations. For this
 
 For example, we could have an interactor that returns the time between now and a date:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+class ElapsedTimeSinceNowInteractor(val currentTimeInteractor: CurrentTimeInteractor) {
+    operator fun invoke(date: Date): Long {
+        val now = currentTimeInteractor()
+        return now.time - date.time
+    }
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 struct ElapsedTimeSinceNowInteractor {
     private let currentTime : CurrentTimeInteractor
     func execute(from date: Date) -> TimeInterval {
@@ -48,15 +78,8 @@ struct ElapsedTimeSinceNowInteractor {
 }
 ```
 
-```kotlin
-// Kotlin
-class ElapsedTimeSinceNowInteractor(val currentTimeInteractor: CurrentTimeInteractor) {
-    operator fun invoke(date: Date): Long {
-        val now = currentTimeInteractor()
-        return now.time - date.time
-    }
-}
-```
+</TabItem>
+</Tabs>
 
 ## Threading
 
@@ -64,8 +87,35 @@ Every usecase implemented within an interactor must be wrapped inside an executo
 
 For this reason, every interactor must have in its constructor/initializer an executor.
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+class CurrentTimeInteractor(val executor: Executor) {
+    operator fun invoke(): Future<Date> {
+        return executor.submit(Callable {
+            Date()
+        })
+    }
+}
+
+class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
+    operator fun invoke(date: Date): Future<Long> {
+        return executor.submit(Callable {
+            val now = currentTimeInteractor().get()
+            now.time - date.time
+        })
+    }
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 struct CurrentTimeInteractor {
     private let executor : Executor
     func execute() -> Future<Date> {
@@ -87,10 +137,22 @@ struct ElapsedTimeSinceNowInteractor {
 }
 ```
 
+</TabItem>
+</Tabs>
+
+>Note that the above is obtaining synchronoulsy the result of the `currentTime` interactor, which might lead to a **deadlock** if the executor of both interactors are using the same single-thread executor / serial queue.
+
+In order to solve this issue, it is a good practice to include an optional executor parameter within the interactor's `execute` method:
+
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
 ```kotlin
-// Kotlin
 class CurrentTimeInteractor(val executor: Executor) {
-    operator fun invoke(): Future<Date> {
+    operator fun invoke(executor: Executor = this.executor): Future<Date> {
         return executor.submit(Callable {
             Date()
         })
@@ -100,19 +162,17 @@ class CurrentTimeInteractor(val executor: Executor) {
 class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
     operator fun invoke(date: Date): Future<Long> {
         return executor.submit(Callable {
-            val now = currentTimeInteractor().get()
+            val now = currentTimeInteractor(DirectExecutor).get()
             now.time - date.time
         })
     }
 }
 ```
 
->Note that the above is obtaining synchronoulsy the result of the `currentTime` interactor, which might lead to a **deadlock** if the executor of both interactors are using the same single-thread executor / serial queue.
-
-In order to solve this issue, it is a good practice to include an optional executor parameter within the interactor's `execute` method:
+</TabItem>
+<TabItem value="swift">
 
 ```swift
-// Swift
 struct CurrentTimeInteractor {
     private let executor : Executor
     func execute(in executor: Executor? = nil) -> Future<Date> {
@@ -135,25 +195,8 @@ struct ElapsedTimeSinceNowInteractor {
 }
 ```
 
-```kotlin
-// Kotlin
-class CurrentTimeInteractor(val executor: Executor) {
-    operator fun invoke(executor: Executor = this.executor): Future<Date> {
-        return executor.submit(Callable {
-            Date()
-        })
-    }
-}
-
-class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
-    operator fun invoke(date: Date): Future<Long> {
-        return executor.submit(Callable {
-            val now = currentTimeInteractor(DirectExecutor).get()
-            now.time - date.time
-        })
-    }
-}
-```
+</TabItem>
+</Tabs>
 
 This example is using a [`DirectExecutor`](Executor.md) to perform synchronously.
 
@@ -229,36 +272,13 @@ Same applies with custom interactors composing other custom interactors.
 
 For example:
 
-```swift
-// Swift
-struct CountAllUsersInteractor {
-    private let executor : Executor
-    private let getUsers : Interactor.GetAllByQuery<User>
-
-    func execute(in: Executor? = nil) -> Future<UInt> {
-        let executor = executor ?? self.executor
-        return executor.submit { resolver in 
-            let array = try getUsers.execute(AllObjectsQuery(), in: DirectExecutor()).get().result
-            resolver.set(array.count)
-        }
-    }
-}
-
-struct UserLimitReachedInteractor {
-    private let executor : Executor
-    private let userCount : CountAllUsersInteractor
-
-    func execute(limit : Int) -> Future <Bool> {
-        return executor.submit { resolver in
-            let count = try userCount.execute(in: DirectExecutor()).get().result
-            resolver.set(count > limit)
-        }
-    }
-}
-```
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
 class CountAllUsersInteractor constructor (
     private val executor: Executor = AppExecutor,
     private val getUsers: GetAllInteractor<User>) {
@@ -286,3 +306,36 @@ class UserLimitReachedInteractor constructor(
 
 }
 ```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
+struct CountAllUsersInteractor {
+    private let executor : Executor
+    private let getUsers : Interactor.GetAllByQuery<User>
+
+    func execute(in: Executor? = nil) -> Future<UInt> {
+        let executor = executor ?? self.executor
+        return executor.submit { resolver in 
+            let array = try getUsers.execute(AllObjectsQuery(), in: DirectExecutor()).get().result
+            resolver.set(array.count)
+        }
+    }
+}
+
+struct UserLimitReachedInteractor {
+    private let executor : Executor
+    private let userCount : CountAllUsersInteractor
+
+    func execute(limit : Int) -> Future <Bool> {
+        return executor.submit { resolver in
+            let count = try userCount.execute(in: DirectExecutor()).get().result
+            resolver.set(count > limit)
+        }
+    }
+}
+```
+
+</TabItem>
+</Tabs>

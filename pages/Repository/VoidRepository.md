@@ -3,14 +3,33 @@ title: VoidRepository
 permalink: /repository/void-repository/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # VoidRepository
 
 `VoidRepository<T>` is an empty implementation of `GetRepository`, `PutRepository` and `DeleteRepository`. Any call to these functions will result in an error being thrown.
 
 ## Usage
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+val repository = VoidRepository<String>()
+repository.get("sampleKey").onComplete(onSuccess = {}, onFailure = {
+    // Error is a UnsupportedOperationException
+    print(it)
+})
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 let repository = VoidRepository<String>()
 repository.get("sampleKey", operation: DefaultOperation()).fail { error in
     // Error is of type CoreError.NotImplemented
@@ -18,14 +37,8 @@ repository.get("sampleKey", operation: DefaultOperation()).fail { error in
 }
 ```
 
-```kotlin
-// Kotlin
-val repository = VoidRepository<String>()
-repository.get("sampleKey").onComplete(onSuccess = {}, onFailure = {
-    // Error is a UnsupportedOperationException
-    print(it)
-})
-```
+</TabItem>
+</Tabs>
 
 Note that the example above is using the extension methods of `Repository` that encapsulate queries of type `IdQuery<T>`.
 
@@ -45,8 +58,27 @@ Together with `VoidRepository<T>` there are also similar implementations for:
 
 Find below an example of implementation of a `VoidRepository<T>`:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+class VoidRepository<V> : GetRepository<V>, PutRepository<V>, DeleteRepository {
+    override fun get(query: Query, operation: Operation): Future<V> = Future { notSupportedOperation() }
+    override fun getAll(query: Query, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
+    override fun put(query: Query, value: V?, operation: Operation): Future<V> = Future { notSupportedOperation() }
+    override fun putAll(query: Query, value: List<V>?, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
+    override fun delete(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
+    override fun deleteAll(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 public class VoidRepository<T> : GetRepository, PutRepository, DeleteRepository {
     public init() { }
     public func get(_ query: Query, operation: Operation) -> Future<T> { return Future(CoreError.NotImplemented()) }
@@ -58,14 +90,5 @@ public class VoidRepository<T> : GetRepository, PutRepository, DeleteRepository 
 }
 ```
 
-```kotlin
-// Kotlin
-class VoidRepository<V> : GetRepository<V>, PutRepository<V>, DeleteRepository {
-    override fun get(query: Query, operation: Operation): Future<V> = Future { notSupportedOperation() }
-    override fun getAll(query: Query, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
-    override fun put(query: Query, value: V?, operation: Operation): Future<V> = Future { notSupportedOperation() }
-    override fun putAll(query: Query, value: List<V>?, operation: Operation): Future<List<V>> = Future { notSupportedOperation() }
-    override fun delete(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
-    override fun deleteAll(query: Query, operation: Operation): Future<Unit> = Future { notSupportedOperation() }
-}
-```
+</TabItem>
+</Tabs>

@@ -3,14 +3,34 @@ title: Data Source
 permalink: /data-source/data-source/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # DataSource
 
 A `DataSource` is an interace for those classes responsible of fetching and managing raw data. This data can be manipulated in many ways as for example being stored in a local database, being sent via a network or socket interface or any third party services (sending emails via Sengrid or SMS via another service).
 
 ## Usage
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+val dataSource = MyCustomGetDataSource()
+dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
+    println(it)
+}, onFailure = {
+    println(it.localizedMessage)
+})
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 let dataSource = MyCustomGetDataSource()
 dataSource.get(IdQuery("myKey")).then { value in
     print("Success: \(value)")
@@ -19,15 +39,8 @@ dataSource.get(IdQuery("myKey")).then { value in
 }
 ```
 
-```kotlin
-// Kotlin
-val dataSource = MyCustomGetDataSource()
-dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
-    println(it)
-}, onFailure = {
-    println(it.localizedMessage)
-})
-```
+</TabItem>
+</Tabs>
 
 ## Query
 
@@ -41,10 +54,25 @@ All actions handled by a `DataSource` are grouped in a simple CRUD.
 
 ### Get
 
-Fetch related functions. 
+Fetch related functions.
+
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+interface GetDataSource<V> : DataSource {
+    fun get(query: Query): Future<V>
+    fun getAll(query: Query): Future<List<V>>
+}
+```
+
+</TabItem>
+<TabItem value="swift">
 
 ```swift
-// Swift
 public protocol GetDataSource : DataSource {
     associatedtype T
     func get(_ query: Query) -> Future<T>
@@ -52,13 +80,8 @@ public protocol GetDataSource : DataSource {
 }
 ```
 
-```kotlin
-// Kotlin
-interface GetDataSource<V> : DataSource {
-    fun get(query: Query): Future<V>
-    fun getAll(query: Query): Future<List<V>>
-}
-```
+</TabItem>
+</Tabs>
 
 ### Put
 
@@ -66,8 +89,23 @@ Actions related functions. PUT methods will be responsible of editing, modifying
 
 Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](Query.md). In the case of `putAll`, an empty array can be passed.
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+interface PutDataSource<V> : DataSource {
+    fun put(query: Query, value: V?): Future<V>
+    fun putAll(query: Query, value: List<V>? = emptyList()): Future<List<V>>
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 public protocol PutDataSource : DataSource {
     associatedtype T
     func put(_ value: T?, in query: Query) -> Future<T>
@@ -75,13 +113,8 @@ public protocol PutDataSource : DataSource {
 }
 ```
 
-```kotlin
-// Kotlin
-interface PutDataSource<V> : DataSource {
-    fun put(query: Query, value: V?): Future<V>
-    fun putAll(query: Query, value: List<V>? = emptyList()): Future<List<V>>
-}
-```
+</TabItem>
+</Tabs>
 
 ### Delete
 
@@ -89,25 +122,40 @@ Deletion related functions.
 
 Note that only a [`Query`](Query.md) is required and no value is returned rather than a Future encapsulating the output error.
 
-```swift
-// Swift
-public protocol DeleteDataSource : DataSource {
-    func delete(_ query: Query) -> Future<Void>
-    func deleteAll(_ query: Query) -> Future<Void>
-}
-```
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
 interface DeleteDataSource : DataSource {
     fun delete(query: Query): Future<Unit>
     fun deleteAll(query: Query): Future<Unit>
 }
 ```
 
+</TabItem>
+<TabItem value="swift">
+
+```swift
+public protocol DeleteDataSource : DataSource {
+    func delete(_ query: Query) -> Future<Void>
+    func deleteAll(_ query: Query) -> Future<Void>
+}
+```
+
+</TabItem>
+</Tabs>
+
 ## `IdQuery` CRUD extensions
 
 All  `GetDataSource`, `PutDataSource` and `DeleteDataSource` interfaces are extended with methods to access the CRUD functions by an Id:
+
+<Tabs defaultValue="swift" values={[
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="swift">
 
 ```swift
 // Swift
@@ -127,41 +175,60 @@ extension DeleteDataSource {
 }
 ```
 
-```kotlin
-// TODO
-```
+</TabItem>
+</Tabs>
 
 This way, code that originally looked like this:
 
-```swift
-// Swift
-dataSource.get(IdQuery("myKey"))
-dataSource.put(myObject, in:IdQuery("myKey"))
-dataSource.delete(IdQuery("myKey"))
-```
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
 dataSource.get(ByIdentifierQuery("myKey"))
 dataSource.put(ByIdentifierQuery("myKey"), myObject)
 dataSource.delete(ByIdentifierQuery("myKey"))
 ```
 
-can be written as follows:
+</TabItem>
+<TabItem value="swift">
 
 ```swift
-// Swift
+dataSource.get(IdQuery("myKey"))
+dataSource.put(myObject, in:IdQuery("myKey"))
+dataSource.delete(IdQuery("myKey"))
+```
+
+</TabItem>
+</Tabs>
+
+can be written as follows:
+
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+dataSource.get("myKey")
+dataSource.put("myKey", myObject)
+dataSource.delete("myKey")
+```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
 dataSource.get("myKey")
 dataSource.put(myObject, forId:"myKey")
 dataSource.delete("myKey")
 ```
 
-```kotlin
-// Kotlin
-dataSource.get("myKey")
-dataSource.put("myKey", myObject)
-dataSource.delete("myKey")
-```
+</TabItem>
+</Tabs>
 
 ## `DataSource` Implementations
 

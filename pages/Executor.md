@@ -3,6 +3,9 @@ title: Executor
 permalink: /executor/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Executor
 
 ## Swift
@@ -109,8 +112,23 @@ future.then { item in
 
 Executors can be netsed (an block using an executor being called in another executor). However, it might lead to deadlocks if not handled correctly.
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+val executor: Executor = AppExecutor()
+executor.submit({ 
+    executor.submit({ })
+})
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 let executor : Executor = DispatchQueue(label: "serialQueue")
 executor.submit { end in 
     executor.submit { end in end() }
@@ -118,13 +136,8 @@ executor.submit { end in
 }
 ```
 
-```kotlin
-// Kotlin
-val executor: Executor = AppExecutor()
-executor.submit({ 
-    executor.submit({ })
-})
-```
+</TabItem>
+</Tabs>
 
 This example above is nesting two executor calls, where the executor is based on a serial queue / single thread. This means that when the second call to `submit` happens, the queue will block further code execution waiting for the first call to `submit` ends, which won't happen as the code is now stopped.
 

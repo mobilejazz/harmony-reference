@@ -3,6 +3,9 @@ title: Repository
 permalink: /repository/repository/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Repository
 
 A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](../DataSource/DataSource.md)s. This redirect semantic is encapsulated in [`Operation`](Operation.md) objects.
@@ -11,17 +14,13 @@ A good example of `Repository` is the [`CacheRepository`](CacheRepository.md), w
 
 ## Usage
 
-```swift
-// Swift
-let networkDataSource = MyNetworkDataSource()
-let storageDataSource = MyStorageDataSource()
-let repository = CacheRepository(main: networkDataSource, cache: storageDataSource)
-
-let future = repository.get(IdQuery("myKey"), operation: MainSyncOperation())
-```
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
 val networkDataSource = MyNetworkDataSource()
 val storageDataSource = MyStorageDataSource()
 
@@ -29,6 +28,20 @@ val repository = NetworkStorageRepository(networkDataSource, networkDataSource, 
 
 val future = repository.get(IdQuery("my-key"), StorageSyncOperation)
 ```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
+let networkDataSource = MyNetworkDataSource()
+let storageDataSource = MyStorageDataSource()
+let repository = CacheRepository(main: networkDataSource, cache: storageDataSource)
+
+let future = repository.get(IdQuery("myKey"), operation: MainSyncOperation())
+```
+
+</TabItem>
+</Tabs>
 
 ## Operation
 
@@ -44,8 +57,23 @@ The `Repository` functions replicate the [`DataSource`](../DataSource/DataSoure.
 
 Fetch related functions.
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+interface GetRepository<V> : Repository {
+    fun get(query: Query, operation: Operation = DefaultOperation): Future<V>
+    fun getAll(query: Query, operation: Operation = DefaultOperation): Future<List<V>>
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 public protocol GetRepository : Repository {
     associatedtype T
     func get(_ query: Query, operation: Operation) -> Future<T>
@@ -53,20 +81,30 @@ public protocol GetRepository : Repository {
 }
 ```
 
-```kotlin
-// Kotlin
-interface GetRepository<V> : Repository {
-    fun get(query: Query, operation: Operation = DefaultOperation): Future<V>
-    fun getAll(query: Query, operation: Operation = DefaultOperation): Future<List<V>>
-}
-```
+</TabItem>
+</Tabs>
 
 ### Put
 
 Actions related functions.
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+interface PutRepository<V> : Repository {
+    fun put(query: Query, value: V?, operation: Operation = DefaultOperation): Future<V>
+    fun putAll(query: Query, value: List<V>? = emptyList(), operation: Operation = DefaultOperation): Future<List<V>>
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 public protocol PutRepository : Repository {
     associatedtype T
     func put(_ value: T?, in query: Query, operation: Operation) -> Future<T>
@@ -74,40 +112,62 @@ public protocol PutRepository : Repository {
 }
 ```
 
-```kotlin
-// Kotlin
-interface PutRepository<V> : Repository {
-    fun put(query: Query, value: V?, operation: Operation = DefaultOperation): Future<V>
-    fun putAll(query: Query, value: List<V>? = emptyList(), operation: Operation = DefaultOperation): Future<List<V>>
-}
-```
+</TabItem>
+</Tabs>
 
 ### Delete
 
 Deletion related functions.
 
-```swift
-// Swift
-public protocol DeleteRepository : Repository {
-    func delete(_ query: Query, operation: Operation) -> Future<Void>
-    func deleteAll(_ query: Query, operation: Operation) -> Future<Void>
-}
-```
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
 interface DeleteRepository : Repository {
     fun delete(query: Query, operation: Operation = DefaultOperation): Future<Unit>
     fun deleteAll(query: Query, operation: Operation = DefaultOperation): Future<Unit>
 }
 ```
 
+</TabItem>
+<TabItem value="swift">
+
+```swift
+public protocol DeleteRepository : Repository {
+    func delete(_ query: Query, operation: Operation) -> Future<Void>
+    func deleteAll(_ query: Query, operation: Operation) -> Future<Void>
+}
+```
+
+</TabItem>
+</Tabs>
+
 ## `IdQuery` CRUD extensions
 
 Similar to the [`DataSource`](../DataSource/DataSoure.md) public interface,  all  `GetRepository`, `PutRepository` and `DeleteRepository` interfaces are extended with methods to access the CRUD functions by an Id:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+fun <K, V> GetRepository<V>.get(id: K, operation: Operation = DefaultOperation): Future<V> = get(IdQuery(id), operation)
+fun <K, V> GetRepository<V>.getAll(ids: List<K>, operation: Operation = DefaultOperation): Future<List<V>> = getAll(IdsQuery(ids), operation)
+fun <K, V> PutRepository<V>.put(id: K, value: V?, operation: Operation = DefaultOperation): Future<V> = put(IdQuery(id), value, operation)
+fun <K, V> PutRepository<V>.putAll(ids: List<K>, values: List<V>? = emptyList(), operation: Operation = DefaultOperation) = putAll(IdsQuery(ids), values, operation)
+fun <K> DeleteRepository.delete(id: K, operation: Operation = DefaultOperation) = delete(IdQuery(id), operation)
+fun <K> DeleteRepository.deleteAll(ids: List<K>, operation: Operation = DefaultOperation) = deleteAll(IdsQuery(ids), operation)
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 extension GetRepository {
     public func get<K>(_ id: K, operation: Operation) -> Future<T> where K:Hashable { ... }
     public func getAll<K>(_ id: K, operation: Operation) -> Future<[T]> where K:Hashable { ... }
@@ -122,46 +182,60 @@ extension DeleteRepository {
 }
 ```
 
-```kotlin
-fun <K, V> GetRepository<V>.get(id: K, operation: Operation = DefaultOperation): Future<V> = get(IdQuery(id), operation)
-fun <K, V> GetRepository<V>.getAll(ids: List<K>, operation: Operation = DefaultOperation): Future<List<V>> = getAll(IdsQuery(ids), operation)
-fun <K, V> PutRepository<V>.put(id: K, value: V?, operation: Operation = DefaultOperation): Future<V> = put(IdQuery(id), value, operation)
-fun <K, V> PutRepository<V>.putAll(ids: List<K>, values: List<V>? = emptyList(), operation: Operation = DefaultOperation) = putAll(IdsQuery(ids), values, operation)
-fun <K> DeleteRepository.delete(id: K, operation: Operation = DefaultOperation) = delete(IdQuery(id), operation)
-fun <K> DeleteRepository.deleteAll(ids: List<K>, operation: Operation = DefaultOperation) = deleteAll(IdsQuery(ids), operation)
-```
+</TabItem>
+</Tabs>
 
 This way, code that originally looked like this:
 
-```swift
-// Swift
-repository.get(IdQuery("myKey"), operation: MyCustomOperation())
-repository.put(myObject, in:IdQuery("myKey"), operation: MyCustomOperation())
-repository.delete(IdQuery("myKey"), operation: MyCustomOperation())
-```
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
 repository.get(IdQuery("myKey"))
 repository.put(IdQuery("myKey"), myObject)
 repository.delete(IdQuery("myKey"))
 ```
 
-can be written as follows:
+</TabItem>
+<TabItem value="swift">
 
 ```swift
-// Swift
+repository.get(IdQuery("myKey"), operation: MyCustomOperation())
+repository.put(myObject, in:IdQuery("myKey"), operation: MyCustomOperation())
+repository.delete(IdQuery("myKey"), operation: MyCustomOperation())
+```
+
+</TabItem>
+</Tabs>
+
+can be written as follows:
+
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+repository.get("myKey")
+repository.put("myKey", myObject)
+repository.delete("myKey")
+```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
 repository.get("myKey", operation: MyCustomOperation())
 repository.put(myObject, forId:"myKey", operation: MyCustomOperation())
 repository.delete("myKey", operation: MyCustomOperation())
 ```
 
-```kotlin
-// Kotlin
-repository.get("myKey")
-repository.put("myKey", myObject)
-repository.delete("myKey")
-```
+</TabItem>
+</Tabs>
 
 ## `Repository` Implementations
 

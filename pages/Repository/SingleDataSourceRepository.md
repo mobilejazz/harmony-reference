@@ -3,6 +3,9 @@ title: Single Data Source Repository
 permalink: /repository/single-data-source-repository/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # SingleDataSourceRepository
 
 The `SingleDataSourceRepository<T>` redirects all calls to the single data source of type `T` that encapsulates.
@@ -11,20 +14,30 @@ This repository is commonly used when there is only one data source to manipulat
 
 ## Usage
 
-```swift
-// Swift
-let dataSource = MyDataSource()
-let repository = SingleDataSourceRepository(dataSource)
-repository.get(IdQuery("myKey"), operation: DefaultOperation())
-```
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
 val datasource = MyDataSource()
 val repository = SingleDataSourceRepository(datasource /*get datasource*/, datasource /*put datasource*/, datasource /*delete datasource*/)
 
 repository.get(IdQuery("myKey"), DefaultOperation)
 ```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
+let dataSource = MyDataSource()
+let repository = SingleDataSourceRepository(dataSource)
+repository.get(IdQuery("myKey"), operation: DefaultOperation())
+```
+
+</TabItem>
+</Tabs>
 
 ## Operation Types
 
@@ -42,8 +55,22 @@ Together with `SingleDataSourceRepository<T>` there are implementations deciated
 
 There are extensions of `GetDataSource`, `PutDataSource` and `DeleteDataSource` to get a `SingleXXXDataSourceRepository<T>`:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+fun <V>GetDataSource<V>.toGetRepository() = SingleGetDataSourceRepository(this)
+fun <V>PutDataSource<V>.toPutRepository() = SinglePutDataSourceRepository(this)
+fun DeleteDataSource.toDeleteRepository() = SingleDeleteDataSourceRepository(this)
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 extension GetDataSource {
     public func toGetRepository() -> SingleGetDataSourceRepository<Self,T> {
         return SingleGetDataSourceRepository(self)
@@ -63,26 +90,32 @@ extension DeleteDataSource {
 }
 ```
 
-```kotlin
-// Kotlin
-fun <V>GetDataSource<V>.toGetRepository() = SingleGetDataSourceRepository(this)
-fun <V>PutDataSource<V>.toPutRepository() = SinglePutDataSourceRepository(this)
-fun DeleteDataSource.toDeleteRepository() = SingleDeleteDataSourceRepository(this)
-```
+</TabItem>
+</Tabs>
 
 This allows the following code:
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+val getDataSource = MyGetDataSource()
+val gteRepository = getDataSource.toGetRepository()
+// ...
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 let getDataSource = MyGetDataSource()
 let getRepository = getDataSource.toGetRepository()
 
 // And same for PutDataSource and DeleteDataSource
 ```
 
-```kotlin
-// Kotlin
-val getDataSource = MyGetDataSource()
-val gteRepository = getDataSource.toGetRepository()
-// ...
-```
+</TabItem>
+</Tabs>

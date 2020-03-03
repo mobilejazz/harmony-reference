@@ -3,14 +3,33 @@ title: Device Storage Data Source
 permalink: /data-source/device-storage-data-source/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # DeviceStorageDataSource
 
 `DeviceStorageDataSource<T>` is a key-value storage that implements `GetDataSource`, `PutDataSource` and `DeleteDataSource` storing values into the device memory (`UserDefaults` in iOS and `SharedPreferences` in Android).
 
 ## Usage
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+val dataSource = DeviceStorageDataSource<Double>(...)
+
+dataSource.put("pi", 3.14159265359)
+dataSource.get("pi")
+dataSource.delete("pi")
+```
+
+</TabItem>
+<TabItem value="swift">
+
 ```swift
-// Swift
 let dataSource = DeviceStorageDataSource<Double>()
 
 dataSource.put(3.14159265359, forId: "pi")
@@ -18,14 +37,8 @@ dataSource.get("pi").then { pi in print("pi: \(pi)") }.fail { error in }
 dataSource.delete("pi")
 ```
 
-```kotlin
-// Kotlin
-val dataSource = DeviceStorageDataSource<Double>(...)
-
-dataSource.put("pi", 3.14159265359)
-dataSource.get("pi")
-dataSource.delete("pi")
-```
+</TabItem>
+</Tabs>
 
 Note that the example above is using the extension methods of DataSoruce that encapsulate queries of type `IdQuery<T>`.
 
@@ -42,9 +55,11 @@ To store any different type, use a [`DataSourceMapper<In,Out>`](DataSourceMapper
 ### Kotlin exclusive implementations
 
 #### SerializationDataSourceMapper
+
 If you want to fetch/store custom objects, you need to use a `SerializationDataSourceMapper<T>` class to be able to serialize and deserialize the object. This is a limitation from `SharedPreferences`.
 
 For example:
+
 ```kotlin
 // Kotlin
 val toStringMapper = ModelToStringMapper<ItemEntity>(gson)
@@ -70,9 +85,11 @@ val result = itemEntityDeviceStorageDataSource.get(KeyQuery("1")).get()
 ```
 
 #### `@Deprecated` DeviceStorageObjectAssemblerDataSource
+
 Use SerializationDataSourceMapper instead.
 
 For example:
+
 ```kotlin
 // Kotlin
 val toStringMapper = ModelToStringMapper<ItemEntity>(gson)

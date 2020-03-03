@@ -3,15 +3,23 @@ title: Logger
 permalink: /logger/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Logger
 
 `Logger` is an interface that helps decouple client classes from concrete implementations of a logging system.
 
 ## Usage
 
-```kotlin
-// Kotlin
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+    { label: 'TypeScript', value: 'typescript', },
+]}>
+<TabItem value="kotlin">
 
+```kotlin
 val logger = if (BuildConfig.DEBUG) {
     AndroidLogger() or ConsoleLogger()
 } else {
@@ -21,9 +29,10 @@ val logger = if (BuildConfig.DEBUG) {
 val manager = NetworkManager(logger) // This class is an example 
 ```
 
-```swift
-// Swift
+</TabItem>
+<TabItem value="swift">
 
+```swift
 #if DEBUG
     let logger = DeviceConsoleLogger()
 #else
@@ -33,9 +42,10 @@ val manager = NetworkManager(logger) // This class is an example
 let manager = NetworkManager(logger) // This class is an example 
 ```
 
-```typescript
-// TypeScript
+</TabItem>
+<TabItem value="typescript">
 
+```typescript
 let logger: Logger;
 
 if (isDebug) {
@@ -52,13 +62,21 @@ this.logger.logKeyValue('foo', 'bar');
 this.logger.log(LogLevel.Debug, 'network', 'Communication wires deployed');
 ```
 
+</TabItem>
+</Tabs>
+
 ## Log Levels
 
 The logger defines the following log levels (by increasing severity):
 
-```kotlin
-// Kotlin
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+    { label: 'TypeScript', value: 'typescript', },
+]}>
+<TabItem value="kotlin">
 
+```kotlin
 enum class Level(val representation: String) {
   VERBOSE("VERBOSE"),
   DEBUG("DEBUG"),
@@ -68,9 +86,10 @@ enum class Level(val representation: String) {
 }
 ```
 
-```swift
-// Swift
+</TabItem>
+<TabItem value="swift">
 
+```swift
 /// Information that gets logged can be labeled as one of the following informative labels.
 @objc(MJLogLevel) public enum LogLevel: Int {
     case trace
@@ -82,9 +101,10 @@ enum class Level(val representation: String) {
 }
 ```
 
-```typescript
-// TypeScript
+</TabItem>
+<TabItem value="typescript">
 
+```typescript
 enum LogLevel {
     Trace,
     Debug,
@@ -95,11 +115,19 @@ enum LogLevel {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 ## API
 
-```kotlin
-// Kotlin
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+    { label: 'TypeScript', value: 'typescript', },
+]}>
+<TabItem value="kotlin">
 
+```kotlin
   /** Logs a String object using a given level.  */
   fun log(level: Level, tag: String? = null, message: String)
 
@@ -131,9 +159,10 @@ enum LogLevel {
   val deviceIdentifier: String
 ```
 
-```swift
-// Swift
+</TabItem>
+<TabItem value="swift">
 
+```swift
 /// Abstracts concrete implementations of a logger system.
 @objc(MJLogger) public protocol Logger {
     
@@ -154,9 +183,10 @@ enum LogLevel {
 }
 ```
 
-```typescript
-// TypeScript
+</TabItem>
+<TabItem value="typescript">
 
+```typescript
 interface Logger {
     logKeyValue(key: string, value: any): void;
 
@@ -164,14 +194,22 @@ interface Logger {
     log(level: LogLevel, tag: string, message: string): void;
 }
 ```
+
 - `logKeyValue`: logs a key-value pair.
 - `log`: method has two signatures, the difference being an optional `tag` parameter.
 
+</TabItem>
+</Tabs>
+
 ### Default implementations
 
-```kotlin
-// Kotlin
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
+```kotlin
 // Kotlin has default implementations for each log level.
 
   /** Log a verbose message with optional format args.  */
@@ -188,14 +226,12 @@ interface Logger {
   fun v(message: String, vararg args: Any) {
     this.log(Level.VERBOSE, null, message)
   }
-
-  ...
-
 ```
 
-```swift
-// Swift
+</TabItem>
+<TabItem value="swift">
 
+```swift
 // MARK: - Default implementations
 public extension Logger {
     /// Logs a String message using an info level.
@@ -227,13 +263,20 @@ public extension Logger {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 ### Alias methods (Typescript)
 
 There are also few alias methods available, one for each log level, all of them with an optional first 
 parameter: `tag`.
-```typescript
-// TypeScript
 
+<Tabs defaultValue="typescript" values={[
+    { label: 'TypeScript', value: 'typescript', },
+]}>
+<TabItem value="typescript">
+
+```typescript
 interface Logger {
     trace(message: string): void;
     trace(tag: string, message: string): void;
@@ -254,6 +297,9 @@ interface Logger {
     fatal(tag: string, message: string): void;
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## Default implementations
 

@@ -3,24 +3,22 @@ title: Repository Mapper
 permalink: /repository/repository-mapper/
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # RepositoryMapper
 
 `RepositoryMapper<In,Out>` encapuslates a [`Repository`](Repository.md) instance of type `In` and exposes a new interface of [`Repository`](Repository.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../Mapper.md) and [`Mapper<Out,In>`](../Mapper.md).
 
 ## Usage
 
-```swift
-// Swift
-let repository = RepositoryMapper(MyCustomRepository<A>(),
-                                  toInMapper: MyB2AMapper(),
-                                  toOutMapper: MyA2BMapper())
-
-repository.put(B(), forId: "myKey", operation: DefaultOperation())
-repository.get("myKey", operation: DefaultOperation())
-```
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
 fun provideDataRepositoryMapper(dataMapperHarmony: Mapper<@JvmSuppressWildcards DataEntity, @JvmSuppressWildcards DataModel>,
                                 dataEntityMapperHarmony: Mapper<@JvmSuppressWildcards DataModel, @JvmSuppressWildcards DataEntity> ):
     RepositoryMapper<DataEntity, DataModel> {
@@ -38,6 +36,21 @@ fun provideDataRepositoryMapper(dataMapperHarmony: Mapper<@JvmSuppressWildcards 
         dataMapperHarmony,
         dataEntityMapperHarmony)
 ```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
+let repository = RepositoryMapper(MyCustomRepository<A>(),
+                                  toInMapper: MyB2AMapper(),
+                                  toOutMapper: MyA2BMapper())
+
+repository.put(B(), forId: "myKey", operation: DefaultOperation())
+repository.get("myKey", operation: DefaultOperation())
+```
+
+</TabItem>
+</Tabs>
 
 ## Operation Types
 
