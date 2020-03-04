@@ -5,7 +5,7 @@ module.exports = {
   tagline: 'The tagline of Harmony Reference',
   url: 'https://harmony.mobilejazz.com',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  favicon: 'favicon/favicon.ico',
   organizationName: 'mobilejazz', // Usually your GitHub org/user name.
   projectName: 'harmony-reference', // Usually your repo name.
   themeConfig: {
@@ -13,7 +13,7 @@ module.exports = {
       title: 'Harmony',
       logo: {
         alt: 'Harmony Reference Logo',
-        src: 'img/logo.svg',
+        src: 'svg/as_harmony_logo_imagotype.svg',
       },
       links: [
         {to: 'docs/introduction', label: 'Reference', position: 'left'},
@@ -27,45 +27,53 @@ module.exports = {
     footer: {
       style: 'dark',
       links: [
-        // {
-        //   title: 'Docs',
-        //   items: [
-        //     {
-        //       label: 'Style Guide',
-        //       to: 'docs/doc1',
-        //     },
-        //     {
-        //       label: 'Second Doc',
-        //       to: 'docs/doc2',
-        //     },
-        //   ],
-        // },
-        // {
-        //   title: 'Community',
-        //   items: [
-        //     {
-        //       label: 'Stack Overflow',
-        //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-        //     },
-        //     {
-        //       label: 'Discord',
-        //       href: 'https://discordapp.com/invite/docusaurus',
-        //     },
-        //   ],
-        // },
-        // {
-        //   title: 'Social',
-        //   items: [
-        //     {
-        //       label: 'GitHub',
-        //       href: 'https://github.com/facebook/docusaurus',
-        //     },
-        //     {
-        //       label: 'Twitter',
-        //       href: 'https://twitter.com/docusaurus',
-        //     },
-        //   ],
-        // },
+        {
+          title: 'Docs',
+          items: [
+            {
+              label: 'Introduction',
+              to: 'pages/introduction',
+            },
+            {
+              label: 'Reference',
+              to: 'pages/executor',
+            },
+          ],
+        },
+        {
+          title: 'Company',
+          items: [
+            {
+              label: 'Mobile Jazz',
+              href: 'https://mobilejazz.com',
+            },
+            {
+              label: 'Behance',
+              href: 'https://www.behance.net/MobileJazz',
+            },
+            {
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/company/mobilejazz',
+            },
+          ],
+        },
+        {
+          title: 'Social',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/mobilejazz',
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/mobilejazzcom',
+            },
+            {
+              label: 'Facebook',
+              href: 'https://www.facebook.com/mobilejazzcom',
+            },
+          ],
+        },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Mobile Jazz`,
     },
