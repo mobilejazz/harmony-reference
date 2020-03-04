@@ -1,19 +1,19 @@
-FROM jekyll/jekyll:3.8 AS build
+# Install the node dependencies for the jekyll website
+FROM node:erbium-alpine AS node-build
 
-ENV WORKDIR /var/www/web
+ENV WORKDIR /usr/src/application/frontend
 
 WORKDIR ${WORKDIR}
 
-COPY . ${WORKDIR}/
+COPY . .
 
-RUN mkdir ${WORKDIR}/_site
+RUN apk add --no-cache bash git && npm ci
 
-RUN jekyll build --trace
-
+# Final nginx image with the website compiled
 FROM nginx:1.15.8-alpine
 
 WORKDIR /usr/share/nginx/html
 
 COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=build /var/www/web/_site .
+COPY --from=node-build /usr/src/application/frontend/build .
