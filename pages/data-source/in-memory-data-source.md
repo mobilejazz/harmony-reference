@@ -1,11 +1,9 @@
 ---
-title: In Memory Data Source
+title: InMemoryDataSource
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# InMemoryDataSource
 
 `InMemoryDataSource<T>` is a key-value storage that implements `GetDataSource`, `PutDataSource` and `DeleteDataSource` storing values as live references during the instance life cycle.
 

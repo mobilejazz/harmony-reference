@@ -5,8 +5,6 @@ title: Interactor
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Interactor
-
 ## Introduction
 
 An interactor is based in a design pattern called **Command Pattern**. A *command* has the exclusive and unique responsibility of performing one single operation. In other words, a *command* is an application's *use case*. Typically, an application will have many different *interactor* classes, each one responsible of executing atomically a different *use case*.

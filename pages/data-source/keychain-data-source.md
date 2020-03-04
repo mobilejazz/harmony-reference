@@ -1,8 +1,6 @@
 ---
-title: Keychain Data Source
+title: KeychainDataSource
 ---
-
-# KeychainDataSource
 
 `KeychainDataSource<T>` is a Swift key-value storage that implements `GetDataSource`, `PutDataSource` and `DeleteDataSource` storing values into the device Keychain. Type `T` is required to be `Codable`.
 

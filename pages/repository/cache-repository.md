@@ -1,11 +1,9 @@
 ---
-title: Cache Repository
+title: CacheRepository
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# CacheRepository
 
 `CacheRepository<T>` implements `GetRepository`, `PutRepository` and `DeleteRepository` and encapuslates two [`DataSource`](../data-source/data-source.md) instances: one representing a **main** data source and another one representing a **cache** data source.
 

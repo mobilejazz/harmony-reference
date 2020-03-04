@@ -16,7 +16,7 @@ module.exports = {
         'mapper',
         {
           type: 'category',
-          label: 'Data Source',
+          label: 'DataSource',
           items: [
             'data-source/data-source',
             'data-source/data-source-mapper',

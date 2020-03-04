@@ -5,8 +5,6 @@ title: Operation
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Operation
-
 The [`Operation`](operation.md) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
 
 <Tabs defaultValue="kotlin" values={[

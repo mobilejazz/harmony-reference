@@ -5,8 +5,6 @@ title: Mapper
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Mapper
-
 A `Mapper` object defines a mapping method `map` between two object types.
 
 <Tabs defaultValue="kotlin" values={[

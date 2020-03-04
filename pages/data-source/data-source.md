@@ -1,11 +1,9 @@
 ---
-title: Data Source
+title: DataSource
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# DataSource
 
 A `DataSource` is an interace for those classes responsible of fetching and managing raw data. This data can be manipulated in many ways as for example being stored in a local database, being sent via a network or socket interface or any third party services (sending emails via Sengrid or SMS via another service).
 

@@ -1,11 +1,9 @@
 ---
-title: Data Source Mapper
+title: DataSourceMapper
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# DataSourceMapper
 
 `DataSourceMapper<In,Out>` encapuslates a [`DataSource`](data-source.md) instance of type `In` and exposes a new interface of [`DataSource`](data-source.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../mapper.md) and [`Mapper<Out,In>`](../mapper.md).
 

@@ -1,11 +1,9 @@
 ---
-title: Void Data Source
+title: VoidDataSource
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# VoidDataSource
 
 `VoidDataSource<T>` is an empty implementation of `GetDataSource`, `PutDataSource` and `DeleteDataSource`. Any call to these functions will result in an error being thrown.
 

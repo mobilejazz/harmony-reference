@@ -5,8 +5,6 @@ title: VoidRepository
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# VoidRepository
-
 `VoidRepository<T>` is an empty implementation of `GetRepository`, `PutRepository` and `DeleteRepository`. Any call to these functions will result in an error being thrown.
 
 ## Usage

@@ -5,8 +5,6 @@ title: Query
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Query
-
 A `Query` object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action. 
 
 <Tabs defaultValue="kotlin" values={[

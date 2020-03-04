@@ -5,8 +5,6 @@ title: Logger
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Logger
-
 `Logger` is an interface that helps decouple client classes from concrete implementations of a logging system.
 
 ## Usage

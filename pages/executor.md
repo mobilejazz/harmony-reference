@@ -5,8 +5,6 @@ title: Executor
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Executor
-
 ## Swift
 
 An executor is an abstract definition of an object responsible of executing a block of code.

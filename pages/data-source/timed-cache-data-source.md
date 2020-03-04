@@ -1,8 +1,6 @@
 ---
-title: Timed Cache Data Source
+title: TimedCacheDataSource
 ---
-
-# TimedCacheDataSource
 
 `TimedCacheDataSource<T>` is a key-value data source that implements `GetDataSource`, `PutDataSource` and `DeleteDataSource`. It acts as a TLRU cache (Time aware Least Recently Used) over a contained data source by implementing a local in-memory storage to cache values of type `T`.
 

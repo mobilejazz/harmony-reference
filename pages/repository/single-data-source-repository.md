@@ -1,11 +1,9 @@
 ---
-title: Single Data Source Repository
+title: SingleDataSourceRepository
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# SingleDataSourceRepository
 
 The `SingleDataSourceRepository<T>` redirects all calls to the single data source of type `T` that encapsulates.
 

@@ -1,11 +1,9 @@
 ---
-title: Device Storage Data Source
+title: DeviceStorageDataSource
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# DeviceStorageDataSource
 
 `DeviceStorageDataSource<T>` is a key-value storage that implements `GetDataSource`, `PutDataSource` and `DeleteDataSource` storing values into the device memory (`UserDefaults` in iOS and `SharedPreferences` in Android).
 

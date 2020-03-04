@@ -1,8 +1,6 @@
 ---
-title: Data Source Validator
+title: DataSourceValidator
 ---
-
-# DataSourceValidator
 
 `DataSourceValidator<T>` encapuslates a [`DataSource`](data-source.md) instance and validates all objects fetched in the `GetDataSource` functions.
 
