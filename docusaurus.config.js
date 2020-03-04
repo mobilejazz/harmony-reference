@@ -84,7 +84,7 @@ module.exports = {
       {
         docs: {
           path: 'pages',
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./src/sidebars.js'),
           editUrl: 'https://github.com/mobilejazz/harmony-reference/edit/master/',
         },
         theme: {
