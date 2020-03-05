@@ -2,7 +2,7 @@
 
 ## Contributing to the documentation
 
-- The documentation is located the `pages` folder
+- The documentation is located the [`pages` folder](pages)
 - New contributions should follow GitFlow: create a `feature/*` branch, merge it to `develop` and finally merge it to `master``
 - You don't need to know anything about Docusaurus, and you don't need to run the project locally to update the documentation.
 
@@ -19,7 +19,7 @@ title: Executor
 
 ### Editing the sidebar menu
 
-- The sidebar menu is defined in (`/src/sidebars.js`)[src/sidebars.js].
+- The sidebar menu is defined in [`/src/sidebars.js`](src/sidebars.js).
 - The file path inside the `pages` folder without the extension is the ID of the document. So for example, the ID of `/interactor/interactor.md` is `interactor/interactor`. Use that ID when adding the page on the sidebar.
 
 ## Development
