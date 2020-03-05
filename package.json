@@ -1,22 +1,30 @@
 {
-  "name": "harmony-docs",
-  "version": "1.0.0",
-  "description": "A Jekyll project to generate a site for the Harmony references documents.",
-  "main": "index.js",
+  "name": "@mobilejazz/harmony-reference",
+  "version": "1.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bundle exec jekyll serve",
-    "build": "bundle exec jekyll build"
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@bitbucket.org:mobilejazz/harmony-docs.git"
-  },
-  "author": "Mobile Jazz",
-  "license": "UNLICENSED",
-  "homepage": "https://bitbucket.org/mobilejazz/harmony-docs#readme",
   "dependencies": {
-    "normalize.css": "^8.0.1",
-    "pygments-css": "git+https://github.com/richleland/pygments-css.git"
+    "@docusaurus/core": "^2.0.0-alpha.43",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.43",
+    "classnames": "^2.2.6",
+    "prismjs": "^1.19.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
