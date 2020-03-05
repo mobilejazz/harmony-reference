@@ -19,7 +19,7 @@ title: Executor
 
 ### Editing the sidebar menu
 
-- The sidebar menu is defined in (`/src/sidebars.js`)[src/sidebars.js].
+- The sidebar menu is defined in [`/src/sidebars.js`](src/sidebars.js).
 - The file path inside the `pages` folder without the extension is the ID of the document. So for example, the ID of `/interactor/interactor.md` is `interactor/interactor`. Use that ID when adding the page on the sidebar.
 
 ## Development
