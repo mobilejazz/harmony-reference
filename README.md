@@ -2,7 +2,7 @@
 
 ## Contributing to the documentation
 
-- The documentation is located the `pages` folder
+- The documentation is located the [`pages` folder](pages)
 - New contributions should follow GitFlow: create a `feature/*` branch, merge it to `develop` and finally merge it to `master``
 - You don't need to know anything about Docusaurus, and you don't need to run the project locally to update the documentation.
 
