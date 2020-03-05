@@ -7,7 +7,7 @@ WORKDIR ${WORKDIR}
 
 COPY . .
 
-RUN apk add --no-cache bash git && npm ci
+RUN apk add --no-cache bash git && npm ci && npm run build
 
 # Final nginx image with the website compiled
 FROM nginx:1.15.8-alpine
