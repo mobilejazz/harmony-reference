@@ -41,16 +41,11 @@ steps:
       - echo "$SSH_KNOWN_HOSTS" >~/.ssh/known_hosts
       - chmod 644 ~/.ssh/known_hosts
 
-      - ls
-      ## moving to bin folder
-      - cd bin/
-      - ls
-
       ## Starting the deployment script for the staging environment
-      - deploy.sh
+      - ./bin/deploy.sh
 
       ## Sending the docker compose files to the server to be executed
-      - ./exec.sh
+      - ./bin/exec.sh
 
 trigger:
   branch:
