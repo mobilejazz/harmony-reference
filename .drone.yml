@@ -20,7 +20,7 @@ steps:
         from_secret: SSH_KNOWN_HOSTS
     commands:
       - sleep 5 # just to let docker to be ready
-
+      - cd bin
       - echo "Configuring the ssh"
 
       ## Install ssh-agent if not already installed, it's required by docker.
@@ -41,11 +41,12 @@ steps:
       - echo "$SSH_KNOWN_HOSTS" >~/.ssh/known_hosts
       - chmod 644 ~/.ssh/known_hosts
 
+      - ls
       ## Starting the deployment script for the staging environment
-      - ./bin/deploy.sh
+      - ./deploy.sh
 
       ## Sending the docker compose files to the server to be executed
-      - ./bin/exec.sh
+      - ./exec.sh
 
 trigger:
   branch:
