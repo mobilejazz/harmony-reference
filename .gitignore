@@ -26,5 +26,7 @@ vendor
 
 
 docker/.env
+docker/cd/.env
+bin/cd/env-vars.sh
 
 .idea/*
