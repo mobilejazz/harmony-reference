@@ -47,7 +47,7 @@ steps:
       - ls
 
       ## Starting the deployment script for the staging environment
-      - ./deploy.sh
+      - deploy.sh
 
       ## Sending the docker compose files to the server to be executed
       - ./exec.sh
