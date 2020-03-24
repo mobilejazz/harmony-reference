@@ -41,8 +41,7 @@ steps:
       - chmod 644 ~/.ssh/known_hosts
 
       - cd bin
-      - chmod +x deploy.sh
-      - sh deploy.sh
+      - ./deploy.sh
 
       ## Sending the docker compose files to the server to be executed
       - ./exec.sh
