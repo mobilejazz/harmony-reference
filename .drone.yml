@@ -42,7 +42,7 @@ steps:
 
       - cd bin
       - chmod +x deploy.sh
-      - bash deploy.sh
+      - sh deploy.sh
 
       ## Sending the docker compose files to the server to be executed
       - ./exec.sh
