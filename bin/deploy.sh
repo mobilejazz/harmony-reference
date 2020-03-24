@@ -16,4 +16,4 @@ docker push joselufo/harmony-reference:"$DOCKER_IMAGE_TAG"
 echo "Transfering files to the server"
 
 # copying all the require files to run the application into the server
-scp ../docker/compose.yml ../docker/compose.prod.yml up.sh ../docker/.env root@"${SERVER_ADDRESS}":~/app/
+scp ../docker/compose.yml ../docker/compose.prod.yml up.sh ../docker/.env root@"$SERVER_ADDRESS":~/app/
