@@ -48,7 +48,7 @@ steps:
 
 trigger:
   branch:
-    - develop
+    - master
   event:
     - push
 
