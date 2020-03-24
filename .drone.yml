@@ -51,7 +51,7 @@ steps:
 
 trigger:
   branch:
-    - feature/continous-integration
+    - develop
   event:
     - push
 
