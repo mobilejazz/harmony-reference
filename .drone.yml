@@ -49,11 +49,11 @@ steps:
       ## Sending the docker compose files to the server to be executed
       - ./exec.sh
 
-#trigger:
-#  branch:
-#    - develop
-#  event:
-#    - push
+trigger:
+  branch:
+    - feature/continous-integration
+  event:
+    - push
 
 volumes:
   - name: dockersock
