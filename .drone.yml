@@ -50,6 +50,7 @@ steps:
       ## Sending the docker compose files to the server to be executed
       - ./exec.sh
 
+        # wip
 trigger:
   branch:
     - develop
