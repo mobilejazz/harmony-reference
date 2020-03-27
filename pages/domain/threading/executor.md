@@ -107,7 +107,10 @@ future.then { item in
 
 ## Nesting Executors
 
-Executors can be netsed (an block using an executor being called in another executor). However, it might lead to deadlocks if not handled correctly.
+Executors can be netsed (an block using an executor being called in another executor). 
+:::warning Deadlock
+It might lead to deadlocks if not handled correctly.
+:::
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },

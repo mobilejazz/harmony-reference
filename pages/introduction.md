@@ -4,7 +4,7 @@ title: Introduction
 
 import LinkCard from '@site/src/components/link-card';
 
-Welcome to the Harmony reference site.
+Welcome to the **Harmony** reference site.
 
 Harmony is a multiplatform framework for creating applications in easy, fast and robust way.
 

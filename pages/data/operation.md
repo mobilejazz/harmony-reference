@@ -27,7 +27,9 @@ public protocol Operation { }
 </TabItem>
 </Tabs>
 
-Note that an `Operation` depends exclusively on a custom implementation of a [`Repository`](repository.md). Each [`Repository`](repository.md) implementation will delcare it's supported `Operations`.
+:::tip Note
+An `Operation` depends exclusively on a custom implementation of a [`Repository`](data/repository/repository). Each [`Repository`](data/repository/repository) implementation will delcare it's supported `Operations`.
+:::
 
 ## Usage
 
@@ -64,7 +66,11 @@ repository.get(IdQuery("myKey"), operation: MyRetryOnceIfErrorOperation())
 
 - `DefaultOperation`: Empty operation. To be used when none operation is required or as a default behavior.
 
-> **All repositories must accept this operation and perform its expectec behavior.**
+:::tip Important
+All repositories must accept this operation and perform its expectec behavior.
+:::
+
+
 
 Any other custom operation will be declared together with its [`Repository`](repository.md) implementation.
 

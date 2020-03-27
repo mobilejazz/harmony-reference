@@ -27,7 +27,9 @@ public protocol Query { }
 </TabItem>
 </Tabs>
 
-Note that a `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](data-source.md).
+:::tip Note
+A `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](data-source.md).
+:::
 
 ## Usage
 
@@ -114,7 +116,9 @@ func get(_ query: Query) -> Future<MyObject> {
 </TabItem>
 </Tabs>
 
-Note the `default:` / `else` behavior. When using an unsupported query, an exception/fatalError is raised as this is an illegal call.
+:::tip Note
+The `default:` / `else` behavior. When using an unsupported query, an exception/fatalError is raised as this is an illegal call.
+:::
 
 ## `KeyQuery` support
 

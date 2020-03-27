@@ -53,10 +53,10 @@ module.exports = {
                                         'data/repository/cache-repository',
                                         'data/repository/repository-mapper',
                                         'data/repository/single-data-source-repository',
-                                        'data/repository/void-repository',
+                                        'data/repository/void-repository'
                                     ]
                                 },
-                                'data/repository/howtorepository'
+                                'data/repository/how-to-repository'
                             ]
                         },
                         {
@@ -64,14 +64,21 @@ module.exports = {
                             label: 'DataSource',
                             items: [
                                 'data/data-source/data-source',
-                                'data/data-source/data-source-mapper',
+                                {
+                                    type: 'category',
+                                    label: 'Default implementations',
+                                    items: [
+                                    'data/data-source/data-source-mapper',
                                 'data/data-source/data-source-validator',
                                 'data/data-source/device-storage-data-source',
                                 'data/data-source/in-memory-data-source',
                                 'data/data-source/keychain-data-source',
                                 'data/data-source/realm-data-source',
                                 'data/data-source/timed-cache-data-source',
-                                'data/data-source/void-data-source',
+                                'data/data-source/void-data-source'
+                                    ]
+                                },
+                                'data/data-source/how-to-data-source'                        
                             ]
                         },
                         'data/query',
