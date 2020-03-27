@@ -8,20 +8,23 @@ Before you start to work with Harmony, you need to know and understand some conc
 Harmony is based on clean architecture. Clean architecture has 3 different layers: **application**, **domain** and **data**. Each layer has one responsability. Also, they are connected to each other but got boundaries. https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 ### Application layer
-[Android](application/android)
+Application or presentation layer will include all views and also specific platform stuff.
+[Android](../application/android.md)
 
-[iOS](application/ios)
+[iOS](../application/ios)
 
-[Frontend](application/frontend)
+[Frontend](../application/frontend)
 
-[Backend](application/backend)
+[Backend](../application/backend)
 
 
 ### Domain layer
-[Domain](domain/interactor)
+[Domain](../domain/interactor/interactor)
+Domain layer will include all business logic and interact between Data and Presentation layer by means of interface and interactors.
 
 ### Data layer
-[Data](data/repository)
+Data layer will include POJOs and means to get Data from cloud or local storage.
+[Data](../data/repository/repository)
 
 ## Software
 
