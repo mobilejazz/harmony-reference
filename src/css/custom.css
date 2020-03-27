@@ -22,3 +22,53 @@
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
+.cards-row {
+  display: flex;
+  margin: 0 -8px;
+}
+
+.cards-row > * {
+  flex-grow: 1;
+  flex-basis: 0;
+  margin: 0 8px;
+}
+
+.link-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.link-card:hover {
+  border-color: var(--ifm-pagination-nav-color-hover);;
+  text-decoration: none;
+}
+
+.link-card:hover .link-card__footer {
+  background-color: #fafafa;
+  border-top-color: var(--ifm-pagination-nav-color-hover);
+}
+
+.link-card__content {
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.link-card__title {
+  text-align: center;
+  font-size: 24px;
+}
+
+.link-card__description {
+  text-align: center;
+  margin: 0;
+}
+
+.link-card__footer {
+  padding: 16px;
+  text-align: right;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0 0 5px 5px;
+}
