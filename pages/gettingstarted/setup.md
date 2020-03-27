@@ -2,8 +2,8 @@
 title: Setup
 ---
 
- In this section you are going to find step by step how to install and use Harmony framwework. 
-# Android
+In this section you are going to find step by step how to install and use Harmony framwework.
+## Android
 
 https://github.com/mobilejazz/harmony-kotlin/
 
@@ -26,7 +26,7 @@ dependencies {
 }
 ```
 
-# iOS
+## iOS
 
 https://github.com/mobilejazz/harmony-swift
 
@@ -51,11 +51,35 @@ pod install
 Step 4. From now on, you need to open .xcworkspace file
 
 
-# PHP
+## PHP
 
-Under development
+https://github.com/mobilejazz/harmony-php
 
-# Typescript
+Step 1. Clone repo `git clone git@github.com:mobilejazz/harmony-php.git`
+```
+git clone git@github.com:mobilejazz/harmony-php.git
+```
+
+Step 2. Add Harmony PHP on the autoload section of you composer.json
+```
+Ex.
+...
+"autoload": {
+    "psr-4": {
+        ...,
+        "harmony\\core\\": "harmony-php/core/src/",
+        "harmony\\eloquent\\": "harmony-php/eloquent/src/"
+    }
+},
+...
+```
+
+Step 3. run `composer update`
+```
+composer update
+```
+
+## Typescript
 
 Under development
 

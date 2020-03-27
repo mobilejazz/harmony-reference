@@ -29,3 +29,4 @@ Data layer will include POJOs and means to get Data from cloud or local storage.
 ## Software
 
 You need [Android Studio](https://developer.android.com/studio) or [Xcode](https://developer.apple.com/xcode/) for mobile platforms. For iOS or MacOS you also need [CocoaPods](https://cocoapods.org/) installed in your system.
+We recommend PHPStorm as IDE for backend PHP development
