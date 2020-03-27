@@ -137,7 +137,9 @@ struct ElapsedTimeSinceNowInteractor {
 </TabItem>
 </Tabs>
 
->Note that the above is obtaining synchronoulsy the result of the `currentTime` interactor, which might lead to a **deadlock** if the executor of both interactors are using the same single-thread executor / serial queue.
+:::important Important
+Note the naming conventions used in Swift: `Interactor` is a struct used to define a namespace and all default interactors are nested classes defined within that struct (namespace).
+:::
 
 In order to solve this issue, it is a good practice to include an optional executor parameter within the interactor's `execute` method:
 
@@ -263,9 +265,11 @@ Similar to the [`Repository`](../repository/repository.md) public interface, all
 
 ## Default Interactors Composition
 
-Typically, your custom interactors will require repositories to access the data manipulation layer. However, it is recomended to **compose default interactors** instead of having direct references to repositories.
-
-Same applies with custom interactors composing other custom interactors.
+Typically, your custom interactors will require repositories to access the data manipulation layer.
+ 
+:::tip tip
+It is recomended to **compose default interactors** instead of having direct references to repositories. Same applies with custom interactors composing other custom interactors.
+:::
 
 For example:
 
