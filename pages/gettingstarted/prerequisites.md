@@ -2,6 +2,8 @@
 title: Prerequisites
 ---
 
+import LinkCard from '@site/src/components/link-card';
+
 Before you start to work with Harmony, you need to know and understand some concepts. Also it's important to have some background related with the platform. One of the greatest things of Harmony is that it allows to switch beetwen platforms very easy because the concepts are the same and the implementation is similar.
 
 ## Clean Architecture.
@@ -9,14 +11,36 @@ Harmony is based on clean architecture. Clean architecture has 3 different layer
 
 ### Application layer
 Application or presentation layer will include all views and also specific platform stuff.
-[Android](../application/android.md)
 
-[iOS](../application/ios)
-
-[Frontend](../application/frontend)
-
-[Backend](../application/backend)
-
+<div class="cards-row">
+  <LinkCard
+      href="../application/android.md"
+      title="Android"
+      description=""
+      footer="Getting Started">
+  </LinkCard>
+  <LinkCard
+      href="../application/ios.md"
+      title="iOS"
+      description=""
+      footer="Getting Started">
+  </LinkCard>
+</div>
+.
+<div class="cards-row">
+  <LinkCard
+      href="../application/frontend"
+      title="Frontend"
+      description=""
+      footer="Getting Started">
+  </LinkCard>
+  <LinkCard
+      href="../application/backend"
+      title="Backend"
+      description=""
+      footer="Getting Started">
+  </LinkCard>
+</div>
 
 ### Domain layer
 [Domain](../domain/interactor/interactor)

@@ -1,14 +1,21 @@
 ---
-title: Threading
+title: Threading & Asynchrony
 ---
 
-Every usecase implemented within an interactor must be wrapped inside an executor (defined upon initialization). This will grant the developer the ability to decide how the code will be executed (main thread, background thread in serial, background thread in parallel, etc.).
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-For this reason, every interactor must have in its constructor/initializer an executor.
+Before reading this page, it's highly recommended to read about [Executors](executor.md).
+
+
+In order to work with asynchronous interactors, on Swift & Kotlin every usecase implemented within an interactor must be wrapped inside an executor (defined upon initialization). This will grant the developer the ability to decide how the code will be executed (main thread, background thread in serial, background thread in parallel, etc.).
+
+Note that on Typescript, we just need to use the built-in `async`/`await` decorators to manage asynchronous methods.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -47,7 +54,7 @@ struct CurrentTimeInteractor {
 struct ElapsedTimeSinceNowInteractor {
     private let executor : Executor
     private let currentTime : CurrentTimeInteractor
-    func execute(from date: Date) -> TimeInterval {
+    func execute(from date: Date) -> Future<TimeInterval> {
         return execute.submit { resolver in 
             let now = try currentTime.execute().get().result
             resolver.set(now.timeIntervalSince(date))
@@ -57,9 +64,34 @@ struct ElapsedTimeSinceNowInteractor {
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export class CurrentTimeInteractor {
+    async execute(): Promise<Date> {
+        return new Date()
+    }
+}
+
+export class ElapsedTimeSinceNowInteractor {
+    constructor(
+        private readonly currentTime: CurrentTimeInteractor,
+    ) {}
+    async execute(date: Date): Promise<number> {
+        let now = await this.currentTime.execute()
+        return (now.getTime() - date.getTime()) / 1000.0;
+    }
+}
+```
+
+</TabItem>
 </Tabs>
 
->Note that the above is obtaining synchronoulsy the result of the `currentTime` interactor, which might lead to a **deadlock** if the executor of both interactors are using the same single-thread executor / serial queue.
+:::warning Deadlock warning
+The code above might generate deadlocks in Swift & Kotlin. Code is running synchronously and if both interactors are using the same serial executor, it will generate a deadlock. 
+:::
+
+Meanwhile in Typescript we can use the `await` decorator to convert an asynchronous interactor into synchronous, in Swift and Kotlin we need to specify which executor to be used in order to run synchronously without creating a deadlock.
 
 In order to solve this issue, it is a good practice to include an optional executor parameter within the interactor's `execute` method:
 
@@ -94,9 +126,9 @@ class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInter
 ```swift
 struct CurrentTimeInteractor {
     private let executor : Executor
+
     func execute(in executor: Executor? = nil) -> Future<Date> {
-        let executor = executor ?? self.executor
-        return executor.submit { resolver in
+        return (executor ?? self.executor).submit { resolver in
             resovler.set(Date())
         }
     }
@@ -105,8 +137,9 @@ struct CurrentTimeInteractor {
 struct ElapsedTimeSinceNowInteractor {
     private let executor : Executor
     private let currentTime : CurrentTimeInteractor
-    func execute(from date: Date) -> TimeInterval {
-        return execute.submit { resolver in 
+
+    func execute(from date: Date, in executor: Executor? = nil) -> TimeInterval {
+        return (executor ?? self.executor).submit { resolver in 
             let now = try currentTime.execute(in: DirectExecutor()).get().result
             resolver.set(now.timeIntervalSince(date))
         }
@@ -117,4 +150,4 @@ struct ElapsedTimeSinceNowInteractor {
 </TabItem>
 </Tabs>
 
-This example is using a [`DirectExecutor`](executor.md) to perform synchronously.
+As shown, by using a [`DirectExecutor`](executor.md) we can run synchronously within the top-most interactor's executor thread.
