@@ -18,6 +18,7 @@ For example, we could have an interactor that returns the current time:
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -39,6 +40,17 @@ struct CurrentTimeInteractor {
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export class CurrentTimeInteractor {
+    execute(): Date {
+        return new Date();
+    }
+}
+```
+
+</TabItem>
 </Tabs>
 
 ## Composition
@@ -50,6 +62,7 @@ For example, we could have an interactor that returns the time between now and a
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -76,60 +89,16 @@ struct ElapsedTimeSinceNowInteractor {
 ```
 
 </TabItem>
-</Tabs>
+<TabItem value="typescript">
 
-## Threading
-
-Every usecase implemented within an interactor must be wrapped inside an executor (defined upon initialization). This will grant the developer the ability to decide how the code will be executed (main thread, background thread in serial, background thread in parallel, etc.).
-
-For this reason, every interactor must have in its constructor/initializer an executor.
-
-<Tabs defaultValue="kotlin" values={[
-    { label: 'Kotlin', value: 'kotlin', },
-    { label: 'Swift', value: 'swift', },
-]}>
-<TabItem value="kotlin">
-
-```kotlin
-class CurrentTimeInteractor(val executor: Executor) {
-    operator fun invoke(): Future<Date> {
-        return executor.submit(Callable {
-            Date()
-        })
-    }
-}
-
-class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
-    operator fun invoke(date: Date): Future<Long> {
-        return executor.submit(Callable {
-            val now = currentTimeInteractor().get()
-            now.time - date.time
-        })
-    }
-}
-```
-
-</TabItem>
-<TabItem value="swift">
-
-```swift
-struct CurrentTimeInteractor {
-    private let executor : Executor
-    func execute() -> Future<Date> {
-        return executor.submit { resolver in
-            resovler.set(Date())
-        }
-    }
-}
-
-struct ElapsedTimeSinceNowInteractor {
-    private let executor : Executor
-    private let currentTime : CurrentTimeInteractor
-    func execute(from date: Date) -> TimeInterval {
-        return execute.submit { resolver in 
-            let now = try currentTime.execute().get().result
-            resolver.set(now.timeIntervalSince(date))
-        }
+```typescript
+export class ElapsedTimeSinceNowInteractor {
+    constructor(
+        private readonly currentTime: CurrentTimeInteractor,
+    ) {}
+    execute(date: Date): number {
+        let now = currentTime.execute()
+        return (now.getTime() - date.getTime()) / 1000.0;
     }
 }
 ```
@@ -137,67 +106,9 @@ struct ElapsedTimeSinceNowInteractor {
 </TabItem>
 </Tabs>
 
-:::important Important
-Note the naming conventions used in Swift: `Interactor` is a struct used to define a namespace and all default interactors are nested classes defined within that struct (namespace).
-:::
+## Asynchrony 
 
-In order to solve this issue, it is a good practice to include an optional executor parameter within the interactor's `execute` method:
-
-<Tabs defaultValue="kotlin" values={[
-    { label: 'Kotlin', value: 'kotlin', },
-    { label: 'Swift', value: 'swift', },
-]}>
-<TabItem value="kotlin">
-
-```kotlin
-class CurrentTimeInteractor(val executor: Executor) {
-    operator fun invoke(executor: Executor = this.executor): Future<Date> {
-        return executor.submit(Callable {
-            Date()
-        })
-    }
-}
-
-class ElapsedTimeSinceNowInteractor(val executor: Executor, val currentTimeInteractor: CurrentTimeInteractor) {
-    operator fun invoke(date: Date): Future<Long> {
-        return executor.submit(Callable {
-            val now = currentTimeInteractor(DirectExecutor).get()
-            now.time - date.time
-        })
-    }
-}
-```
-
-</TabItem>
-<TabItem value="swift">
-
-```swift
-struct CurrentTimeInteractor {
-    private let executor : Executor
-    func execute(in executor: Executor? = nil) -> Future<Date> {
-        let executor = executor ?? self.executor
-        return executor.submit { resolver in
-            resovler.set(Date())
-        }
-    }
-}
-
-struct ElapsedTimeSinceNowInteractor {
-    private let executor : Executor
-    private let currentTime : CurrentTimeInteractor
-    func execute(from date: Date) -> TimeInterval {
-        return execute.submit { resolver in 
-            let now = try currentTime.execute(in: DirectExecutor()).get().result
-            resolver.set(now.timeIntervalSince(date))
-        }
-    }
-}
-```
-
-</TabItem>
-</Tabs>
-
-This example is using a [`DirectExecutor`](executor.md) to perform synchronously.
+All the examples on this page show synchronous interactors. To read about asynchronous interactors (and threading), visit the page **Threading & Asynchrony**.
 
 ## Default Interactors
 
@@ -207,53 +118,99 @@ Default interators have one method called `execute` (in Kotlin, it is using the 
 
 ### Get
 
-Get interactors require a `GetRepository` and an `Executor` upon initialization.
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+]}>
+<TabItem value="kotlin">
 
-Swift:
+```kotlin
+- GetInteractor<T>
+- GetAllInteractor<T>
+```
+</TabItem>
+<TabItem value="swift">
 
-- `Interactor.Get<T>`
-- `Interactor.GetByQuery<T>`
-- `Interactor.GetAll<T>`
-- `Interactor.GetAllByQuery<T>`
+```swift
+- Interactor.Get<T>
+- Interactor.GetByQuery<T>
+- Interactor.GetAll<T>
+- Interactor.GetAllByQuery<T>
+```
+</TabItem>
+<TabItem value="typescript">
 
-Kotlin:
-
-- `GetInteractor<T>`
-- `GetAllInteractor<T>`
+```typescript
+- GetInteractor<T>
+- GetAllInteractor<T>
+```
+</TabItem>
+</Tabs>
 
 ### Put
 
-Put interactors require a `PutRepository` and an `Executor` upon initialization.
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+]}>
+<TabItem value="kotlin">
 
-Swift:
+```kotlin
+- PutInteractor<T>
+- PutAllInteractor<T>
+```
+</TabItem>
+<TabItem value="swift">
 
-- `Interactor.Put<T>`
-- `Interactor.PutByQuery<T>`
-- `Interactor.PutAll<T>`
-- `Interactor.PutAllByQuery<T>`
+```swift
+- Interactor.Put<T>
+- Interactor.PutByQuery<T>
+- Interactor.PutAll<T>
+- Interactor.PutAllByQuery<T>
+```
+</TabItem>
+<TabItem value="typescript">
 
-Kotlin:
-
-- `PutInteractor<T>`
-- `PutAllInteractor<T>`
+```typescript
+- PutInteractor<T>
+- PutAllInteractor<T>
+```
+</TabItem>
+</Tabs>
 
 ### Delete
 
-Delete interactors require a `DeleteRepository` and an `Executor` upon initialization.
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+]}>
+<TabItem value="kotlin">
 
-Swift:
+```kotlin
+- DeleteInteractor
+```
+</TabItem>
+<TabItem value="swift">
 
-- `Interactor.Delete`
-- `Interactor.DeleteByQuery`
-- `Interactor.DeleteAll`
-- `Interactor.DeleteAllByQuery`
+```swift
+- Interactor.Delete
+- Interactor.DeleteByQuery
+```
+</TabItem>
+<TabItem value="typescript">
 
-Kotlin:
+```typescript
+- DeleteInteractor
+```
+</TabItem>
+</Tabs>
 
-- `DeleteInteractor`
-- `DeleteAllInteractor`
-
->Note the naming conventions used in Swift: `Interactor` is a struct used to define a namespace and all default interactors are nested classes defined within that struct (namespace).
+:::important Important
+Note the naming conventions used in Swift: `Interactor` is a struct used to define a namespace and all default interactors are nested classes defined within that struct (namespace).
+:::
 
 ### Swift Notes
 
@@ -271,11 +228,10 @@ Typically, your custom interactors will require repositories to access the data 
 It is recomended to **compose default interactors** instead of having direct references to repositories. Same applies with custom interactors composing other custom interactors.
 :::
 
-For example:
-
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -334,6 +290,31 @@ struct UserLimitReachedInteractor {
             let count = try userCount.execute(in: DirectExecutor()).get().result
             resolver.set(count > limit)
         }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="typescript">
+
+```typescript
+export class CountAllUsersInteractor {
+    constructor(
+        readonly getUsers: GetAllInteractor<User>,
+    ){}
+    async execute(): Promise<number> {
+        let array = await this.getUsers.execute(new AllObjectsQuery());
+        return array.count;
+    }
+}
+
+export class UserLimitReachedInteractor {
+    constructor(
+        private readonly userCount: CountAllUsersInteractor,
+    ) {}
+    async execute(limit: number): Promise<boolean> {
+        let count = this.userCount.execute();
+        return count > limit;
     }
 }
 ```
