@@ -5,12 +5,21 @@ title: Executor
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+Executors are the objects responsibles of executing portions of code in the appropiate thread. Becuase threading is sometihng very specific on each platform, this section is describing executors separately for each platform.
+
+Then, find the list of default implementations for each platform.  
+
+# Platform Overview
 ## Swift
 
 An executor is an abstract definition of an object responsible of executing a block of code.
 
+<Tabs defaultValue="swift" values={[
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="swift">
+
 ```swift
-// Swift
 public protocol Executor {
     var name : String? { get }
     var executing : Bool { get }
@@ -18,18 +27,28 @@ public protocol Executor {
 }
 ```
 
+</TabItem>
+</Tabs>
+
 Note that the `submit` function exposes a closure/lambda that includes inside another closure/lambda. This nested block must be called once the execution finishes.
 
 ### Usage
 
+<Tabs defaultValue="swift" values={[
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="swift">
+
 ```swift
-// Swift
 let executor : Executor = [...]
 executor.submit { end in 
     // Do custom stuff and once finished call end
     end()
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## Kotlin
 
@@ -48,6 +67,11 @@ More information:
 
 ### Usage
 
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+]}>
+<TabItem value="kotlin">
+
 ```kotlin
 val executor: Executor = [...]
 
@@ -58,7 +82,12 @@ executor.submit(Callable { ... })
 executor.execute({ ... })
 ```
 
-## Default implementations
+</TabItem>
+</Tabs>
+
+# Default implementations
+
+Find below the list of default implementations:
 
 - `DirectExecutor`: executes the code on the calling thread synchronously.
 
