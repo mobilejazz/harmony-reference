@@ -49,7 +49,7 @@ Curl example:
 curl -X POST "http://HOST/auth/token" -H "Authorization: Basic YXBwbGljYXRpb246c2VjcmV0" -H "Content-Type: application/json" -d "{ \"grant_type\": \"refresh_token\", \"refresh_token\": \"THE_REFRESH_TOKEN\"}"
 ```
 
-## 2. Authenticate by client credentials
+## 3. Authenticate by client credentials
 
 Send a `POST` with the following body:
 ```json
