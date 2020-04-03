@@ -175,3 +175,7 @@ To solve this, there are two options:
 1. When nesting executor calls, use the `DirectExecutor` on all nested executor references. The `DirectExecutor` will execute the code in the same thread/queue, not creating any deadlock.
 
 2. Use concurrent executors. However, be aware that when using concurrent executors, all code used within an executor must be thread-safe. To avoid threading issues, it is always a safer option to not use concurrent executors.
+
+:::tip Using executors in a presenter
+Execute/invoke methods use the AppExecutor per default in a presenter. We don't need to specify an executor in the presenter.
+:::

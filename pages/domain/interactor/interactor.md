@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 An interactor is based in a design pattern called **Command Pattern**. A *command* has the exclusive and unique responsibility of performing one single operation. In other words, a *command* is an application's *use case*. Typically, an application will have many different *interactor* classes, each one responsible of executing atomically a different *use case*.
 
-By having interactors, the buisness logic of your app is not going to be duplicated nor spread along the application layer. All business logic is going to be wrapped inside interactors.
+By having interactors, the business logic of your app is not going to be duplicated nor spread along the application layer. All business logic is going to be wrapped inside interactors.
 
 As interactors classes have one single responsibility, all interactors will have one (and only one) public method that will be called `execute` (or will start with this name).
 
@@ -108,7 +108,7 @@ export class ElapsedTimeSinceNowInteractor {
 
 ## Asynchrony 
 
-All the examples on this page show synchronous interactors. To read about asynchronous interactors (and threading), visit the page **Threading & Asynchrony**.
+All the examples on this page show synchronous interactors. To read about asynchronous interactors (and threading), visit the page [**Threading & Asynchrony**](../threading/threading).
 
 ## Default Interactors
 
@@ -321,3 +321,75 @@ export class UserLimitReachedInteractor {
 
 </TabItem>
 </Tabs>
+
+## Best Practices
+
+- Try to wrap generic interactors inside a custom one. It has better naming, encapsulate a specific logic and reusable.
+
+- All interactors will receive a **executor via constructor**.
+
+- Also, supply a executor in the invoke/execute method doing reference to the contructor one as default. It gives us the possibility to change it for a particular execution.
+
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+<TabItem value="kotlin">
+
+```kotlin
+class CurrentTimeInteractor(private val executor: Executor) {
+    operator fun invoke(executor: Executor = this.executor): Date = Date()
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
+struct CurrentTimeInteractor(private let executor : Executor) {
+    func execute(executor: Executor = this.executor) -> Date {
+        return Date()
+    }
+}
+```
+
+</TabItem>
+</Tabs>
+
+- In the constructor, always have **interactor references**, avoid repository references. Adding one more layer of abstraction.
+
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
+    { label: 'Swift', value: 'swift', },
+]}>
+
+
+<TabItem value="kotlin">
+
+```kotlin
+class CurrentTimeInteractor(private val executor: Executor, 
+                            private val getTimeZones: GetInteractor<TimeZones>) {
+    operator fun invoke(executor: Executor = this.executor): Date = 
+    executor.submit(Callable{
+        Date()
+    })
+}
+```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
+struct CurrentTimeInteractor(private let executor : Executor, 
+                            private let getTimeZones: GetInteractor<TimeZones>) {
+    func execute(executor: Executor = this.executor) -> Date {
+        return Date()
+    }
+}
+```
+
+</TabItem>
+</Tabs>
+
+
+
