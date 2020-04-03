@@ -34,8 +34,8 @@ module.exports = {
           label: 'Domain',
           items: [
             'domain/interactor/interactor',
+            'domain/threading/executor',
             'domain/threading/threading',
-            'domain/threading/executor'
           ]
         },
         {
@@ -123,6 +123,14 @@ module.exports = {
             }
           ]
         }
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Best Practices',
+      items: [
+        'best-practice/naming-convention',
+        'best-practice/dependency-injection'
       ]
     },
     {
