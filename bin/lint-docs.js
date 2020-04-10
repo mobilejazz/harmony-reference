@@ -32,7 +32,7 @@ function validateFrontMatter(file, content) {
   const hasFrontMatter = Object.keys(attrs).length !== 0;
 
   if (!('title' in attrs)) {
-    return ['Front matter should at least have "title" property defined.'];
+    return ['Front matter should have "title" property defined.'];
   }
 
   return [];
@@ -93,11 +93,13 @@ function validateLinks(file, content) {
   return errors;
 }
 
-function validateFileContent(file) {
+function validateFile(file) {
   const content = readFileSync(file, 'utf-8');
   let errors = [];
 
   const validators = [
+    validateLowerCase,
+    validateExtension,
     validateLinks,
     validateNoTopLevelTitle,
     validateFrontMatter,
@@ -105,26 +107,6 @@ function validateFileContent(file) {
 
   validators.forEach(validate => {
     const validationErrors = validate(file, content);
-
-    if (validationErrors.length) {
-      errors = errors.concat(validationErrors);
-    }
-  });
-
-  return errors;
-}
-
-function validateFile(file) {
-  let errors = [];
-
-  const validators = [
-    validateLowerCase,
-    validateExtension,
-    validateFileContent,
-  ];
-
-  validators.forEach(validate => {
-    const validationErrors = validate(file);
 
     if (validationErrors.length) {
       errors = errors.concat(validationErrors);
