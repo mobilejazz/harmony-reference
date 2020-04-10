@@ -16,6 +16,10 @@
   --ifm-code-font-size: 95%;
 }
 
+.footer .footer__col {
+  text-align: center;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;
