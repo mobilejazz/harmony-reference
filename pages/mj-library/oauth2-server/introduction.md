@@ -76,4 +76,8 @@ Then, an endpoint can be secured as easy as doing `@UseGuard(OAuth2Guard)`.
 
 ## 3. Defining the SQL Database
 
-The library will require a SQL connector. As listed above, in this case we can use the `TypeORMSQLInterface` class. However, the SQL database for the OAuth must still be defined as explained in the [SQL Schema page](sql-schema).
+The library will require a SQL connector. As listed above, in this case we can use the `TypeORMSQLInterface` class. However, the SQL database for the OAuth must still be defined, which must conform to the following SQL Schema:
+
+- [MySQL Schema](https://github.com/mobilejazz/harmony-typescript/blob/develop/packages/nest/src/oauth/data/datasource/mysql-oauth.sql)
+- [PostgresSQL Schema](https://github.com/mobilejazz/harmony-typescript/blob/develop/packages/nest/src/oauth/data/datasource/postgres-oauth.sql)
+
