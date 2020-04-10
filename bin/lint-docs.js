@@ -121,10 +121,10 @@ function validateFile(file) {
   const errors = files.map(validateFile).filter(f => f.errors.length > 0);
 
   errors.forEach(entry => {
-    console.log(colors.yellow(entry.file.replace(docsPath, '')));
+    console.log('📄 ' + colors.yellow(entry.file.replace(docsPath, '')));
 
     entry.errors.forEach(error => {
-      console.log(`    - ${error}`);
+      console.log(`    💥 ${error}`);
     });
 
     console.log('');
@@ -133,5 +133,7 @@ function validateFile(file) {
   if (!!errors.length) {
     // Signal that there were errors
     process.exit(1);
+  } else {
+    console.log('✅ There are no issues! 🎉🎉')
   }
 })();
