@@ -8,11 +8,11 @@ Welcome to the Harmony reference site.
 
 Harmony is a multiplatform framework for creating applications in easy, fast and robust way.
 
-Harmony docs help you to learn and use Harmony. Each platform has examples of usage and also a [samples](gettingstarted/samples) that covers all topics.
+Harmony docs help you to learn and use Harmony. Each platform has examples of usage and also a [samples](getting-started/samples) that covers all topics.
 
-<div class="cards-row">
-	  <LinkCard
-      href="gettingstarted/prerequisites"
+<div className="cards-row">
+  <LinkCard
+      href="getting-started/prerequisites"
       title="Learn"
       description="Read Getting Started section to know how to install Harmony"
       footer="Getting Started">

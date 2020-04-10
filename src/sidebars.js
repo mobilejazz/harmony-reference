@@ -11,9 +11,9 @@ module.exports = {
       type: "category",
       label: "Getting Started",
       items: [
-        'gettingstarted/prerequisites',
-        'gettingstarted/setup',
-        'gettingstarted/samples',
+        'getting-started/prerequisites',
+        'getting-started/setup',
+        'getting-started/samples',
       ]
     },
     {
@@ -102,21 +102,21 @@ module.exports = {
               type: 'category',
               label: 'OAuth2Server',
               items: [
-                'mj-library/oauth2server/Introduction',
-                'mj-library/oauth2server/OAuth2ServerExample',
-                'mj-library/oauth2server/OAuth2ServerModels',
-                'mj-library/oauth2server/OAuthProvider',
-                'mj-library/oauth2server/OAuthUser',
-                'mj-library/oauth2server/SQLInterface',
+                'mj-library/oauth2-server/introduction',
+                'mj-library/oauth2-server/oauth2-server-example',
+                'mj-library/oauth2-server/oauth2-server-models',
+                'mj-library/oauth2-server/oauth-provider',
+                'mj-library/oauth2-server/oauth-user',
+                'mj-library/oauth2-server/sql-interface',
                 {
                   type: 'category',
                   label: 'Interactors',
                   items: [
-                    'mj-library/oauth2server/Interactors/AuthControllerInteractor',
-                    'mj-library/oauth2server/Interactors/GetOAuthUserInteractor',
-                    'mj-library/oauth2server/Interactors/LoginOAuthUserInteractor',
-                    'mj-library/oauth2server/Interactors/OAuth2GuardInteractor',
-                    'mj-library/oauth2server/Interactors/ValidateScopeInteractor',
+                    'mj-library/oauth2-server/interactors/auth-controller-interactor',
+                    'mj-library/oauth2-server/interactors/get-oauth-user-interactor',
+                    'mj-library/oauth2-server/interactors/login-oauth-user-interactor',
+                    'mj-library/oauth2-server/interactors/oauth2-guard-interactor',
+                    'mj-library/oauth2-server/interactors/validate-scope-interactor',
                   ]
                 }
               ]
@@ -129,8 +129,8 @@ module.exports = {
       type: 'category',
       label: 'Best Practices',
       items: [
-        'best-practice/naming-convention',
-        'best-practice/dependency-injection'
+        'best-practices/naming-convention',
+        'best-practices/dependency-injection'
       ]
     },
     {
