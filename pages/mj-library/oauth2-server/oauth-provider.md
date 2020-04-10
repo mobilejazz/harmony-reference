@@ -14,7 +14,7 @@ export interface OAuthProvider {
 }
 ```
 
-It exposes two methods, one for obtaining a [`OAuth2BaseModel`](pages/mj-library/oauth2server/OAuth2ServerModels.md) and a [`OAuth2UserModel`](pages/mj-library/oauth2server/OAuth2ServerModels.md).
+It exposes two methods, one for obtaining a [`OAuth2BaseModel`](mj-library/oauth2-server/oauth2-server-models) and a [`OAuth2UserModel`](mj-library/oauth2-server/oauth2-server-models).
 
 Currently, there is only one implementation of that provider (described below), but new implementations can be provided if required.
 
@@ -34,7 +34,7 @@ export class OAuthSqlProvider implements OAuthProvider {
 }
 ```
 
-Required on its constructor, there is a [`SQLInterface`](pages/mj-library/oauth2server/SQLInterface.md), which is going to be the entry point to the SQL database.
+Required on its constructor, there is a [`SQLInterface`](mj-library/oauth2-server/sql-interface), which is going to be the entry point to the SQL database.
 
 Also, the database must conform to the SQL Schema defined in:
 

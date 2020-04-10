@@ -5,7 +5,7 @@ title: RepositoryMapper
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`RepositoryMapper<In,Out>` encapuslates a [`Repository`](repository.md) instance of type `In` and exposes a new interface of [`Repository`](repository.md) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../mapper.md) and [`Mapper<Out,In>`](../mapper.md).
+`RepositoryMapper<In,Out>` encapuslates a [`Repository`](repository) instance of type `In` and exposes a new interface of [`Repository`](repository) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../mapper) and [`Mapper<Out,In>`](../mapper).
 
 ## Usage
 
@@ -51,7 +51,7 @@ repository.get("myKey", operation: DefaultOperation())
 
 ## Operation Types
 
-Any [`Operation`](operation.md) can be passed to a `RepositoryMapper<In,Out>`.
+Any [`Operation`](operation) can be passed to a `RepositoryMapper<In,Out>`.
 
 ## Other Implementations
 

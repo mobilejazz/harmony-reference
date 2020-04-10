@@ -2,7 +2,7 @@
 title: RealmDataSource
 ---
 
-`RealmDataSource<E,O>` is a swift implementation of an interface for Realm conforming to [`DataSource`](data-source.md) (`GetDataSoruce`, `PutDataSource` and `DeleteDataSource`). It automatically maps entities to realm objects (it requires object mappers) and can run queries to fetch, store and delete objects.
+`RealmDataSource<E,O>` is a swift implementation of an interface for Realm conforming to [`DataSource`](data-source) (`GetDataSoruce`, `PutDataSource` and `DeleteDataSource`). It automatically maps entities to realm objects (it requires object mappers) and can run queries to fetch, store and delete objects.
 
 Its interface exposes two generics:
 
@@ -11,7 +11,7 @@ Its interface exposes two generics:
 
 Upon initialization, it requires of two mappers:
 
-- `O` to `E` mapper (realm to entity): Using the default [`Mapper`](mapper.md) interface.
+- `O` to `E` mapper (realm to entity): Using the default [`Mapper`](mapper) interface.
 - `E` to `O` mapper (entity to realm): Using a custom interface called `RealmMapper`.
 
 ## Usage
@@ -63,7 +63,7 @@ Note that the example above is using the extension methods of `DataSoruce` that 
 
 ## `RealmQuery` protocol
 
-A `RealmQuery` is a protocol that exposes a predicate. Any [`Query`](query.md) can adopt this protocol and generate a predicate to represent its equivalent realm predicate.
+A `RealmQuery` is a protocol that exposes a predicate. Any [`Query`](query) can adopt this protocol and generate a predicate to represent its equivalent realm predicate.
 
 ```swift
 public protocol RealmQuery : Query {
@@ -155,6 +155,6 @@ open class RealmMapper <In:RealmEntity, Out:Object> {
 }
 ```
 
-This class is very similar to [`Mapper`](mapper.md), but add an extra parameter in the `map` function to pass the `Realm` instance where the map takes place.
+This class is very similar to [`Mapper`](mapper), but add an extra parameter in the `map` function to pass the `Realm` instance where the map takes place.
 
 Note: very often while mapping entities (that contain server primary key) to realm objects (which have its own primary key) it will be required to first search if there is already a realm object representation of that entity. This is accomplished using the `findId` functions listed above.

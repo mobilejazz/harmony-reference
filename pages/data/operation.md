@@ -5,7 +5,7 @@ title: Operation
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The [`Operation`](operation.md) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
+The [`Operation`](operation) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -72,11 +72,11 @@ All repositories must accept this operation and perform its expectec behavior.
 
 
 
-Any other custom operation will be declared together with its [`Repository`](repository.md) implementation.
+Any other custom operation will be declared together with its [`Repository`](repository) implementation.
 
 ## Using Operations in Repositories
 
-Operations must be pro-actively supported in each [`Repository`](repository.md) implementation. A typical appearance of an implemented `get` method from a `GetRepository` would be:
+Operations must be pro-actively supported in each [`Repository`](repository) implementation. A typical appearance of an implemented `get` method from a `GetRepository` would be:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },

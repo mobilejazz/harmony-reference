@@ -41,13 +41,13 @@ Note that the example above is using the extension methods of DataSoruce that en
 
 ## Query Types
 
-All queries must adopt the [`KeyQuery`](query.md) interface as the `DeviceStorageDataSource<T>` is based on a key-value pattern.
+All queries must adopt the [`KeyQuery`](query) interface as the `DeviceStorageDataSource<T>` is based on a key-value pattern.
 
 ## Object Types
 
 Even if `DeviceStorageDataSource<T>` has a generic type, there are restrictions on which types can be used. These restrictions are the ones defined by `UserDefaults` in iOS and `SharedPreferences` on Android.
 
-To store any different type, use a [`DataSourceMapper<In,Out>`](data-source-mapper.md) to transfrom (map) the type to a compatible one.
+To store any different type, use a [`DataSourceMapper<In,Out>`](data-source-mapper) to transfrom (map) the type to a compatible one.
 
 ### Kotlin exclusive implementations
 

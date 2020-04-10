@@ -21,13 +21,13 @@ The `KeychainService` class is a wrapper on the iOS Keychain. For more details, 
 
 ## Query Types
 
-All queries must adopt the [`KeyQuery`](query.md) interface as the `KeychainDataSource<T>` is based on a key-value pattern.
+All queries must adopt the [`KeyQuery`](query) interface as the `KeychainDataSource<T>` is based on a key-value pattern.
 
 ## Object Types
 
 Even if `KeychainDataSource<T>` has a generic type, the Keychain can only store `Data`. However, the class has a built-in data conversion for any type `T` that is `Codable`.
 
-Otherwise, a [`DataSourceMapper<In,Out>`](data-source-mapper.md) can be used to map any type `T` to `Data`.
+Otherwise, a [`DataSourceMapper<In,Out>`](data-source-mapper) can be used to map any type `T` to `Data`.
 
 ## Error Handling
 

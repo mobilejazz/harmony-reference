@@ -15,7 +15,7 @@ The model defined in the class `OAuthBaseModel` supports:
 - Request Authentication
 - Client Credentials Authentication
 
-To create an instance of the class, no parameters are requried. For more information read the documentation associated to the [`OAuthProvider`](pages/mj-library/oauth2server/OAuthProvider.md).
+To create an instance of the class, no parameters are requried. For more information read the documentation associated to the [`OAuthProvider`](mj-library/oauth2-server/oauth-provider).
 
 ## 2. OAuthUserModel
 
@@ -28,8 +28,8 @@ The model defined in the class `OAuthUserModel` (subclass of `OAuthBaseModel`) s
 
 To create an instance of the class, it's required to provide instances of:
 
-- [`LoginOAuthUserInteractor`](pages/mj-library/oauth2server/Interactors/LoginOAuthUserInteractor.md)
-- [`GetOAuthUserInteractor`](pages/mj-library/oauth2server/Interactors/GetOAuthUserInteractor.md) 
-- [`ValidateScopeInteractor`](pages/mj-library/oauth2server/Interactors/ValidateScopeInteractor.md)
+- [`LoginOAuthUserInteractor`](mj-library/oauth2-server/interactors/login-oauth-user-interactor)
+- [`GetOAuthUserInteractor`](mj-library/oauth2-server/interactors/get-oauth-user-interactor)
+- [`ValidateScopeInteractor`](mj-library/oauth2-server/interactors/validate-scope-interactor)
 
-For more information read the documentation associated to the [`OAuthProvider`](pages/mj-library/oauth2server/OAuthProvider.md).
+For more information read the documentation associated to the [`OAuthProvider`](mj-library/oauth2-server/oauth-provider).

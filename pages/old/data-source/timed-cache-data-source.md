@@ -28,7 +28,7 @@ dataSource.delete("object")
 
 ## Query Types
 
-All queries must adopt the [`KeyQuery`](query.md) interface as the `TimedCacheDataSource<T>` is based on a key-value pattern. Otherwise, the cache is just ignored and all queries are forwarded to the contained data source.
+All queries must adopt the [`KeyQuery`](query) interface as the `TimedCacheDataSource<T>` is based on a key-value pattern. Otherwise, the cache is just ignored and all queries are forwarded to the contained data source.
 
 ## Object Types
 

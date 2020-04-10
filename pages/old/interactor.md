@@ -195,11 +195,11 @@ struct ElapsedTimeSinceNowInteractor {
 </TabItem>
 </Tabs>
 
-This example is using a [`DirectExecutor`](executor.md) to perform synchronously.
+This example is using a [`DirectExecutor`](executor) to perform synchronously.
 
 ## Default Interactors
 
-In order to access the CRUD operations of a [`Repository`](../repository/repository.md), there are interactors for each CRUD operation.
+In order to access the CRUD operations of a [`Repository`](../repository/repository), there are interactors for each CRUD operation.
 
 Default interators have one method called `execute` (in Kotlin, it is using the `invoke` operator) which contains the same parameters than the Repository functions, plus an optional `Executor`.
 
@@ -263,7 +263,7 @@ For each interactor there are two sub-types: `Interactor.XXX` and `Interactor.XX
 
 ### `IdQuery` CRUD extensions
 
-Similar to the [`Repository`](../repository/repository.md) public interface, all default interactors interfaces are extended with methods to access the CRUD functions by an Id using the `IdQuery`.
+Similar to the [`Repository`](../repository/repository) public interface, all default interactors interfaces are extended with methods to access the CRUD functions by an Id using the `IdQuery`.
 
 ## Default Interactors Composition
 

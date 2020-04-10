@@ -12,7 +12,7 @@ Find below a step by step guide on how to use it.
 
 First, we must create a `OAuth2Server` instance, which will be the object responsible of processing incoming authorization requests, as well as for authenticating incoming clients and users.
 
-To create the `OAuth2Server` instance, we can use the class [`OAuthProvider`](pages/mj-library/oauth2server/OAuthProvider.md). This class will provide us the *Model* required by the `OAuth2Server` constructor. For example:
+To create the `OAuth2Server` instance, we can use the class [`OAuthProvider`](mj-library/oauth2-server/oauth-provider). This class will provide us the *Model* required by the `OAuth2Server` constructor. For example:
 
 ```typescript
 // TypeScript
@@ -33,7 +33,7 @@ We have now the `OAuth2Server` instance configured and ready to go.
 
 In this case, a new endpoint must be defined, typically being a `POST` at `/auth/token`.
 
-For this purpose, the library has a specific interactor called [`AuthControllerInteractor`](pages/mj-library/oauth2server/Interactors/AuthControllerInteractor.md).
+For this purpose, the library has a specific interactor called [`AuthControllerInteractor`](mj-library/oauth2-server/interactors/auth-controller-interactor).
 
 As an example of usage, a NestJS controller would be like:
 
@@ -55,7 +55,7 @@ export class AuthController {
 
 ## 3. Securing endpoints
 
-This is typically achieved by **Guards**. In this case, the library offers an interactor that contains all the logic the guards needs. This is the [`OAuth2GuardInteractor`](pages/mj-library/oauth2server/Interactors/OAuth2GuardInteractor.md).
+This is typically achieved by **Guards**. In this case, the library offers an interactor that contains all the logic the guards needs. This is the [`OAuth2GuardInteractor`](mj-library/oauth2-server/interactors/oauth2-guard-interactor).
 
 Therefore, writing a guard is as easy as shown:
 
@@ -78,4 +78,4 @@ Then, an endpoint can be secured as easy as doing `@UseGuard(OAuth2Guard)`.
 
 ## 3. Defining the SQL Database
 
-The library will require a SQL connector. As listed above, in this case we can use the `TypeORMSQLInterface` class. However, the SQL database for the OAuth must still be defined as explained in the [SQL Schema page](SQLSchema.md).
+The library will require a SQL connector. As listed above, in this case we can use the `TypeORMSQLInterface` class. However, the SQL database for the OAuth must still be defined as explained in the [SQL Schema page](SQLSchema).

@@ -5,7 +5,7 @@ title: Threading & Asynchrony
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Before reading this page, it's highly recommended to read about [Executors](executor.md).
+Before reading this page, it's highly recommended to read about [Executors](executor).
 
 
 In order to work with asynchronous interactors, on Swift & Kotlin every usecase implemented within an interactor must be wrapped inside an executor (defined upon initialization). This will grant the developer the ability to decide how the code will be executed (main thread, background thread in serial, background thread in parallel, etc.).
@@ -150,4 +150,4 @@ struct ElapsedTimeSinceNowInteractor {
 </TabItem>
 </Tabs>
 
-As shown, by using a [`DirectExecutor`](executor.md) we can run synchronously within the top-most interactor's executor thread.
+As shown, by using a [`DirectExecutor`](executor) we can run synchronously within the top-most interactor's executor thread.

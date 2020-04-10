@@ -38,7 +38,7 @@ repository.get(IdQuery("myKey"), operation: DefaultOperation())
 
 ## Operation Types
 
-Any operation can be passed to this repository, at is directly forwarding everything to its encapsulated [`DataSource`](../data-source/data-source.md). It is recomended to use a `DefaultOperation` as convention.
+Any operation can be passed to this repository, at is directly forwarding everything to its encapsulated [`DataSource`](../data-source/data-source). It is recomended to use a `DefaultOperation` as convention.
 
 ## Other Implementations
 
