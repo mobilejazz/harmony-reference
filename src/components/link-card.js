@@ -3,7 +3,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 function LinkCard(props) {
   const isAbsolute = /http/.test(props.href);
-  const href = isAbsolute ? props.href : useBaseUrl(props.href);
+  const href = isAbsolute ? props.href : useBaseUrl(`docs/${props.href}`);
 
   return (
     <a className="link-card" href={href}>
