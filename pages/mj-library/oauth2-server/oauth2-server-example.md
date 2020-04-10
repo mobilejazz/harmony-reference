@@ -1,8 +1,6 @@
 ---
-title: Usage Example
+title: Usage example of `OAuth2Server`
 ---
-
-# Example of usage of the `OAuth2Server`
 
 Find [this repository](https://github.com/pedroetb/node-oauth2-server-example) that explains in detail how to use the `OAuth2Server`. However, find below some examples as a fast guide.
 

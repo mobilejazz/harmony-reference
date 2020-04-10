@@ -1,8 +1,6 @@
 ---
-title: OAuth2 Models
+title: Models
 ---
-
-# OAuth2Server Models
 
 The library `OAuth2Server` requires a model in order define the exact capabilities and implementation of the server.
 

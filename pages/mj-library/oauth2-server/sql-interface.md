@@ -1,8 +1,6 @@
 ---
-title: SQLInterface
+title: SQL Interface
 ---
-
-# SQLInterface
 
 An interface for an SQL database entry point.
 

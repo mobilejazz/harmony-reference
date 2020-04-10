@@ -1,9 +1,6 @@
 ---
 title: Logger
-permalink: /logger/
 ---
-
-# Logger
 
 `Logger` is an interface that helps decouple client classes from concrete implementations of a logging system.
 

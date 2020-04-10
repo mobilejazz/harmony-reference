@@ -2,8 +2,6 @@
 title: Injection Provider
 ---
 
-# OAuthProvider
-
 The `OAuthProvider` class is an interface for the dependency injection definition:
 
 ```typescript

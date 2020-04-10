@@ -9,8 +9,9 @@ Executors are the objects responsibles of executing portions of code in the appr
 
 Then, find the list of default implementations for each platform.  
 
-# Platform Overview
-## Swift
+## Platform Overview
+
+### Swift
 
 An executor is an abstract definition of an object responsible of executing a block of code.
 
@@ -32,7 +33,7 @@ public protocol Executor {
 
 Note that the `submit` function exposes a closure/lambda that includes inside another closure/lambda. This nested block must be called once the execution finishes.
 
-### Usage
+#### Usage
 
 <Tabs defaultValue="swift" values={[
     { label: 'Swift', value: 'swift', },
@@ -50,7 +51,7 @@ executor.submit { end in
 </TabItem>
 </Tabs>
 
-## Kotlin
+### Kotlin
 
 A executor service creates and maintains a reusable pool of threads for executing submitted tasks.
 
@@ -61,11 +62,12 @@ To provide an abstraction from Guava `ListenableFuture` and `ListeningExecutorSe
 - `Executor` --> `ListeningExecutorService`
 - `Future` --> `ListenableFuture`
 
-More information: 
+More information:
+
 - [https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executor.html](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executor.html)
 - [https://github.com/google/guava/wiki/ListenableFutureExplained](https://github.com/google/guava/wiki/ListenableFutureExplained)
 
-### Usage
+#### Usage
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -85,7 +87,7 @@ executor.execute({ ... })
 </TabItem>
 </Tabs>
 
-# Default implementations
+## Default implementations
 
 Find below the list of default implementations:
 

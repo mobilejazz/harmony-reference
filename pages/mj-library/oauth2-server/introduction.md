@@ -1,8 +1,6 @@
 ---
-title: Introduction
+title: OAuth2 TypeScript Server
 ---
-
-# OAuth2 TypeScript Server
 
 This OAuth2 typescript library is based on the [OAuth2Server library](https://oauth2-server.readthedocs.io). It implements the additional compontents to manage tokens and store them.
 

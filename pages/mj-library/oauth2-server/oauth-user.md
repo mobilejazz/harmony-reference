@@ -2,8 +2,6 @@
 title: User Interface
 ---
 
-# OAuthUser
-
 An interface that defines an identifier for the user.
 
 ```typescript
