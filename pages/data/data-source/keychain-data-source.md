@@ -21,7 +21,7 @@ The `KeychainService` class is a wrapper on the iOS Keychain. For more details, 
 
 ## Query Types
 
-All queries must adopt the [`KeyQuery`](query) interface as the `KeychainDataSource<T>` is based on a key-value pattern.
+All queries must adopt the [`KeyQuery`](../query) interface as the `KeychainDataSource<T>` is based on a key-value pattern.
 
 ## Object Types
 

@@ -11,7 +11,7 @@ Its interface exposes two generics:
 
 Upon initialization, it requires of two mappers:
 
-- `O` to `E` mapper (realm to entity): Using the default [`Mapper`](mapper) interface.
+- `O` to `E` mapper (realm to entity): Using the default [`Mapper`](../mapper) interface.
 - `E` to `O` mapper (entity to realm): Using a custom interface called `RealmMapper`.
 
 ## Usage
@@ -155,6 +155,6 @@ open class RealmMapper <In:RealmEntity, Out:Object> {
 }
 ```
 
-This class is very similar to [`Mapper`](mapper), but add an extra parameter in the `map` function to pass the `Realm` instance where the map takes place.
+This class is very similar to [`Mapper`](../mapper), but add an extra parameter in the `map` function to pass the `Realm` instance where the map takes place.
 
 Note: very often while mapping entities (that contain server primary key) to realm objects (which have its own primary key) it will be required to first search if there is already a realm object representation of that entity. This is accomplished using the `findId` functions listed above.

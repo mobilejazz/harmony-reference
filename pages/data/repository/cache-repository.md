@@ -43,7 +43,7 @@ let future = repository.get("myKey", operation: CacheSyncOperation())
 
 ## Operation Types
 
-The [`Operation`](operation) types supported in `CacheRepository<T>` are:
+The [`Operation`](../operation) types supported in `CacheRepository<T>` are:
 
 ### `DefaultOperation`
 

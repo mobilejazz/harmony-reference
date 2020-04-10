@@ -28,7 +28,7 @@ public protocol Operation { }
 </Tabs>
 
 :::tip Note
-An `Operation` depends exclusively on a custom implementation of a [`Repository`](data/repository/repository). Each [`Repository`](data/repository/repository) implementation will delcare it's supported `Operations`.
+An `Operation` depends exclusively on a custom implementation of a [`Repository`](repository/repository). Each [`Repository`](repository/repository) implementation will delcare it's supported `Operations`.
 :::
 
 ## Usage
@@ -70,13 +70,11 @@ repository.get(IdQuery("myKey"), operation: MyRetryOnceIfErrorOperation())
 All repositories must accept this operation and perform its expectec behavior.
 :::
 
-
-
-Any other custom operation will be declared together with its [`Repository`](repository) implementation.
+Any other custom operation will be declared together with its [`Repository`](repository/repository) implementation.
 
 ## Using Operations in Repositories
 
-Operations must be pro-actively supported in each [`Repository`](repository) implementation. A typical appearance of an implemented `get` method from a `GetRepository` would be:
+Operations must be pro-actively supported in each [`Repository`](repository/repository) implementation. A typical appearance of an implemented `get` method from a `GetRepository` would be:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
