@@ -4,7 +4,7 @@ const globby = require('globby');
 const frontMatter = require('front-matter');
 const colors = require('colors/safe');
 const markdownLinkExtractor = require('markdown-link-extractor');
-const docsPath = join(__dirname, '../pages');
+const docsPath = join(__dirname, '../docs');
 
 function validateLowerCase(file) {
   const docsFile = file.replace(docsPath, '');

@@ -32,11 +32,15 @@ module.exports = {
           items: [
             {
               label: 'Introduction',
-              to: 'pages/introduction',
+              to: 'docs/introduction',
             },
             {
-              label: 'Reference',
-              to: 'pages/executor',
+              label: 'Getting Started',
+              to: 'docs/getting-started/prerequisites',
+            },
+            {
+              label: 'Fundamentals',
+              to: 'docs/domain/interactor/interactor',
             },
           ],
         },
@@ -83,7 +87,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          path: 'pages',
+          path: 'docs',
           sidebarPath: require.resolve('./src/sidebars.js'),
           editUrl: 'https://github.com/mobilejazz/harmony-reference/edit/master/',
         },
