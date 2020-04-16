@@ -2,7 +2,10 @@
 
 cd ~/app || exit
 
-cat password.txt | docker login --username joselufo --password-stdin
+source env-vars-pull.sh
+
+# Log in into the gitlab container register to push the docker image built
+docker login registry.mobilejazz.com  --username "$DOCKER_REGISTRY_USER" --password "$DOCKER_REGISTRY_PASSWORD" || exit
 
 # create an array with all the docker-compose files in the directory
 mapfile -t docker_compose_files < <(ls | grep 'compose')
