@@ -3,7 +3,7 @@
 # get the commit id for the latest commit in HEAD
 DOCKER_IMAGE_TAG="$(git rev-parse --short HEAD)"
 
-. ./env-vars-deploy.sh
+# . ./env-vars-deploy.sh
 
 # first prepare build the image
 docker build -t registry.mobilejazz.com/harmony/documentation:"$DOCKER_IMAGE_TAG" -f ../Dockerfile ../.
