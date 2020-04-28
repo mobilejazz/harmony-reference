@@ -46,13 +46,13 @@ Application or presentation layer will include all views and also specific platf
 
 ### Domain layer
 
-[Domain](../domain/interactor/interactor)
+[Domain](docs/fundamentals/domain/interactor/interactor)
 Domain layer will include all business logic and interact between Data and Presentation layer by means of interface and interactors.
 
 ### Data layer
 
 Data layer will include POJOs and means to get Data from cloud or local storage.
-[Data](../data/repository/repository)
+[Data](docs/fundamentals/data/repository/repository)
 
 ## Software
 

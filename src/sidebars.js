@@ -19,23 +19,36 @@ module.exports = {
     {
       type: 'category',
       label: 'Fundamentals',
-      items: [{
+      items: [
+        'fundamentals/concepts',
+        {
         type: 'category',
         label: 'Application',
         items: [
-          'application/android',
-          'application/ios',
-          'application/backend',
-          'application/frontend'
+          'fundamentals/application/android',
+          'fundamentals/application/ios',
+          'fundamentals/application/backend',
+          'fundamentals/application/frontend'
         ]
       },
         {
           type: 'category',
           label: 'Domain',
           items: [
-            'domain/interactor/interactor',
-            'domain/threading/executor',
-            'domain/threading/threading',
+            'fundamentals/domain/model',
+            'fundamentals/domain/interactor',
+            {
+              type: 'category',
+              label: 'Threading',
+              items: [
+                'fundamentals/domain/threading',
+                'fundamentals/domain/threading/java',
+                'fundamentals/domain/threading/kotlin',
+                'fundamentals/domain/threading/swift',
+                'fundamentals/domain/threading/typescript',
+                'fundamentals/domain/threading/php'
+              ]
+            }
           ]
         },
         {
@@ -45,45 +58,45 @@ module.exports = {
             type: 'category',
             label: 'Repository',
             items: [
-              'data/repository/repository',
+              'fundamentals/data/repository/repository',
               {
                 type: 'category',
                 label: 'Default implementations',
                 items: [
-                  'data/repository/cache-repository',
-                  'data/repository/repository-mapper',
-                  'data/repository/single-data-source-repository',
-                  'data/repository/void-repository'
+                  'fundamentals/data/repository/cache-repository',
+                  'fundamentals/data/repository/repository-mapper',
+                  'fundamentals/data/repository/single-data-source-repository',
+                  'fundamentals/data/repository/void-repository'
                 ]
               },
-              'data/repository/how-to-repository'
+              'fundamentals/data/repository/how-to-repository'
             ]
           },
             {
               type: 'category',
               label: 'DataSource',
               items: [
-                'data/data-source/data-source',
+                'fundamentals/data/data-source/data-source',
                 {
                   type: 'category',
                   label: 'Default implementations',
                   items: [
-                    'data/data-source/data-source-mapper',
-                    'data/data-source/data-source-validator',
-                    'data/data-source/device-storage-data-source',
-                    'data/data-source/in-memory-data-source',
-                    'data/data-source/keychain-data-source',
-                    'data/data-source/realm-data-source',
-                    'data/data-source/timed-cache-data-source',
-                    'data/data-source/void-data-source'
+                    'fundamentals/data/data-source/data-source-mapper',
+                    'fundamentals/data/data-source/data-source-validator',
+                    'fundamentals/data/data-source/device-storage-data-source',
+                    'fundamentals/data/data-source/in-memory-data-source',
+                    'fundamentals/data/data-source/keychain-data-source',
+                    'fundamentals/data/data-source/realm-data-source',
+                    'fundamentals/data/data-source/timed-cache-data-source',
+                    'fundamentals/data/data-source/void-data-source'
                   ]
                 },
-                'data/data-source/how-to-data-source'
+                'fundamentals/data/data-source/how-to-data-source'
               ]
             },
-            'data/query',
-            'data/mapper',
-            'data/operation'
+            'fundamentals/data/query',
+            'fundamentals/data/mapper',
+            'fundamentals/data/operation'
           ]
         }
       ]
