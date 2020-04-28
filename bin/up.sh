@@ -16,4 +16,4 @@ cat .env-prod >> .env
 # todo: instead of hardcode the indexes, do it dinamically
 # execute docker-compose command with all the compose files to merge it
 docker-compose -f "${docker_compose_files[0]}" -f "${docker_compose_files[1]}" pull
-docker-compose -f "${docker_compose_files[0]}" -f "${docker_compose_files[1]}" up -d --remove-orphans
+docker-compose -f "${docker_compose_files[0]}" -f "${docker_compose_files[1]}" up -d
