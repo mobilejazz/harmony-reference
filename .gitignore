@@ -28,5 +28,7 @@ vendor
 docker/.env
 docker/cd/.env
 bin/cd/env-vars.sh
+bin/env-vars-deploy.sh
+bin/env-vars-pull.sh
 
 .idea/*
