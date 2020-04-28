@@ -8,8 +8,6 @@ services:
       - LETSENCRYPT_EMAIL=harmony@mobilejazz.com
   drone-server:
     image: drone/drone:1.6.4
-    env_file:
-      - .env-prod
     volumes:
       - /var/lib/drone:/data
     environment:
@@ -20,7 +18,7 @@ services:
       - DRONE_AGENTS_ENABLED=true
       - DRONE_SERVER_HOST=drone-harmony.mobilejazz.com
       - DRONE_SERVER_PROTO=https
-      - DRONE_USER_CREATE=username:joselufo,machine:false,admin:true,token:29971c7617c44e9e014474989e18ae73
+      - DRONE_USER_CREATE=username:$DRONE_USER,machine:false,admin:true,token:$DRONE_USER_PASSWORD
       - DRONE_TLS_AUTOCERT=false
       - VIRTUAL_HOST=drone-harmony.mobilejazz.com
       - LETSENCRYPT_HOST=drone-harmony.mobilejazz.com
@@ -31,7 +29,6 @@ services:
     restart: unless-stopped
   drone-runner-docker:
     image: drone/drone-runner-docker:latest
-      - .env-prod
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
