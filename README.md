@@ -1,5 +1,7 @@
 # Harmony Reference
 
+test
+
 ## Contributing to the documentation
 
 - The documentation is located the [`docs` folder](docs)
