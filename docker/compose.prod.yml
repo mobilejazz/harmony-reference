@@ -37,7 +37,7 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - DRONE_RPC_HOST=drone-harmony.mobilejazz.com
-      - DRONE_RPC_PROTO=https
+      - DRONE_RPC_HOST=drone-server
+      - DRONE_RPC_PROTO=http
       - DRONE_RPC_SECRET=$DRONE_RPC_SECRET
       - DRONE_RUNNER_CAPACITY=2
