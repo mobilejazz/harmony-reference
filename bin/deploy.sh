@@ -11,10 +11,6 @@ docker build -t registry.mobilejazz.com/harmony/documentation:"$DOCKER_IMAGE_TAG
 # copying and adding the new docker image tag into the enviroment file
 echo "HARMONY_REFERENCE_VERSION=${DOCKER_IMAGE_TAG}" > ../docker/.env
 
-echo "$DOCKER_REGISTRY_USER"
-echo "$DOCKER_REGISTRY_PASSWORD"
-
-#docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" registry.mobilejazz.com || exit
 docker login --username "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" registry.mobilejazz.com || exit
 
 docker push registry.mobilejazz.com/harmony/documentation:"$DOCKER_IMAGE_TAG"
