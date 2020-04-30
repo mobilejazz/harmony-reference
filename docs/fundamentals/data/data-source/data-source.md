@@ -5,47 +5,23 @@ title: Concept
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A `DataSource` is an interace for those classes responsible of fetching and managing raw data. This data can be manipulated in many ways as for example being stored in a local database, being sent via a network or socket interface or any third party services (sending emails via Sengrid or SMS via another service).
+A `DataSource` is an interace for those classes responsible of managing sources of data.
 
-## Usage
+Among the Harmony architecture, the data source is the first component that provides a defined public interface for data manipulation. Every action that a data source does must be bundled within its interface. 
 
-<Tabs defaultValue="kotlin" values={[
-    { label: 'Kotlin', value: 'kotlin', },
-    { label: 'Swift', value: 'swift', },
-]}>
-<TabItem value="kotlin">
+Data Sources are splitted in three groups taking into account the action to be done: 
 
-```kotlin
-val dataSource = MyCustomGetDataSource()
-dataSource.get(ByIdentifierQuery("myKey")).onComplete(onSuccess = {
-    println(it)
-}, onFailure = {
-    println(it.localizedMessage)
-})
-```
+- **Get** is the responsible of all actions that fetch data from external sources
+- **Put** is the responsible of all actions that modify and push data to external sources
+- **Delete** is the responsible of all action that delete data from external sources
 
-</TabItem>
-<TabItem value="swift">
+Data sources can accomplish many different things and can adapt to your project requirements and necessities. For example, from storing/fetching data in a local databases, to send data via an HTTP/Socket client or any third party services.
 
-```swift
-let dataSource = MyCustomGetDataSource()
-dataSource.get(IdQuery("myKey")).then { value in
-    print("Success: \(value)")
-}.fail { error in 
-    print("Failure: \(error)")
-}
-```
+In an effort to make data sources decoupled from the requirements of external sources, data sources use the concept of [`Query`](../query): an object that itself intrinsically defines how data must be manipulated, containing all attributes required to execute the action.
 
-</TabItem>
-</Tabs>
+For more information, read the [`Query`](query) reference.
 
-## Query
-
-A [`Query`](../query) object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
-
-For more information, read the [`Query`](../query) reference.
-
-## API
+## Interfaces
 
 All actions handled by a `DataSource` are grouped in a simple CRUD.
 

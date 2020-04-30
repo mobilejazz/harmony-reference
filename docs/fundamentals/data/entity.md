@@ -1,12 +1,13 @@
 ---
 title: Entity
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 Entities represent the models of the data layer and are just plain objects, without any specific built-in logic. Harmony doesn't provide a base entity, as this is something delegated to every project.
 
-The data layer must contain its own entities, that are decoupled from the domain layer and from any underlaying third party library.
+The data layer must contain its own entities, that are decoupled from the domain layer and from any underlaying third party library. Entities must be the types exposed by data soruces and repositories. 
 
 Typically, we use the naming convention of attaching `Entity` as a suffix in the name of our entities. 
 
@@ -59,4 +60,8 @@ export class User {
 
 </TabItem>
 </Tabs>
-  
+
+
+:::important Important
+The Data layer can potentially contain more model objects if needed. For example, if you plan to use an ORM library, you might want to have your own ORM object models rather than mixing them with the entities.
+:::
