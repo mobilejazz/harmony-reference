@@ -11,7 +11,7 @@ module.exports = {
       type: "category",
       label: "Getting Started",
       items: [
-        'getting-started/prerequisites',
+        'getting-started/overview',
         'getting-started/setup',
         'getting-started/samples',
       ]
@@ -54,29 +54,15 @@ module.exports = {
         {
           type: 'category',
           label: 'Data',
-          items: [{
-            type: 'category',
-            label: 'Repository',
-            items: [
-              'fundamentals/data/repository/repository',
-              {
-                type: 'category',
-                label: 'Default implementations',
-                items: [
-                  'fundamentals/data/repository/cache-repository',
-                  'fundamentals/data/repository/repository-mapper',
-                  'fundamentals/data/repository/single-data-source-repository',
-                  'fundamentals/data/repository/void-repository'
-                ]
-              },
-              'fundamentals/data/repository/how-to-repository'
-            ]
-          },
+          items: [
+            'fundamentals/data/entity',
             {
               type: 'category',
               label: 'DataSource',
               items: [
                 'fundamentals/data/data-source/data-source',
+                'fundamentals/data/data-source/query',
+                'fundamentals/data/data-source/how-to-data-source',
                 {
                   type: 'category',
                   label: 'Default implementations',
@@ -91,12 +77,34 @@ module.exports = {
                     'fundamentals/data/data-source/void-data-source'
                   ]
                 },
-                'fundamentals/data/data-source/how-to-data-source'
               ]
             },
-            'fundamentals/data/query',
-            'fundamentals/data/mapper',
-            'fundamentals/data/operation'
+            {
+            type: 'category',
+            label: 'Repository',
+            items: [
+              'fundamentals/data/repository/repository',
+              'fundamentals/data/repository/operation',
+              'fundamentals/data/repository/how-to-repository',
+              {
+                type: 'category',
+                label: 'Default implementations',
+                items: [
+                  'fundamentals/data/repository/cache-repository',
+                  'fundamentals/data/repository/repository-mapper',
+                  'fundamentals/data/repository/single-data-source-repository',
+                  'fundamentals/data/repository/void-repository'
+                ]
+              },
+            ]
+          },
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Common',
+          items: [
+            'fundamentals/common/mapper',
           ]
         }
       ]

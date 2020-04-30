@@ -1,4 +1,4 @@
 ---
-title: 'Create your own DataSource'
+title: Custom Data Sources
 ---
 
