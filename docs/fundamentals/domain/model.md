@@ -4,7 +4,7 @@ title: Model
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
- Models are just plain objects, without any specific built-in logic. Harmony doesn't provide a base model, as this is something delegated to every project.
+Models are just plain objects, without any specific built-in logic. Harmony doesn't provide a base model, as this is something delegated to every project.
 
 The domain layer must contain its own models, that are decoupled from the framework and from the data layer.
 
