@@ -4,25 +4,29 @@ title: Introduction
 
 import LinkCard from '@site/src/components/link-card';
 
-Welcome to the Harmony reference site.
+Mobile Jazz is a technological consultancy agency that works in many different platforms and technologies. In an effort to improve our efficiency, we have built a working methodology that specifies best practices, software architectural patterns and many other software development related guidelines.
 
-Harmony is a multiplatform framework for creating applications in easy, fast and robust way.
+The Harmony framework is available in the following languages:
 
-Harmony docs help you to learn and use Harmony. Each platform has examples of usage and also a [samples](getting-started/samples) that covers all topics.
+- Kotlin
+- Swift
+- Typescript
+- PHP
+   
+This documentation reference will help you to learn the foundations and best practices that Harmony defines.
 
 <div className="cards-row">
   <LinkCard
       href="getting-started/prerequisites"
       title="Learn"
-      description="Read Getting Started section to know how to install Harmony"
+      description="Discover how to install Harmony"
       footer="Getting Started">
   </LinkCard>
   <LinkCard
-      href="domain/interactor/interactor"
-      title="Fundamentals"
-      description="Read the main documentation section to know how"
-      footer="Fundamentals">
+      href="fundamentals/concepts"
+      title="Explore"
+      description="Learn about the Harmony fundamentals"
+      footer="Introduction to Harmony concepts">
   </LinkCard>
 </div>
 
-In case that you find some error or you want to improve it, please open an issue or feel free to create a PR in the following repository https://github.com/mobilejazz/harmony-reference
