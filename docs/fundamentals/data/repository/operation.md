@@ -28,7 +28,7 @@ public protocol Operation { }
 </Tabs>
 
 :::tip Note
-An `Operation` depends exclusively on a custom implementation of a [`Repository`](repository/repository). Each [`Repository`](repository/repository) implementation will delcare it's supported `Operations`.
+An `Operation` depends exclusively on a custom implementation of a [`Repository`](/docs/fundamentals/data/repository/repository). Each [`Repository`](/docs/fundamentals/data/repository/repository) implementation will delcare it's supported `Operations`.
 :::
 
 ## Usage
