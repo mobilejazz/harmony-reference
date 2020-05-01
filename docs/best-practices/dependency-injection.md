@@ -15,16 +15,16 @@ import TabItem from '@theme/TabItem';
 
 <TabItem value="mobile-jazz">
 
-In Mobile Jazz, we like to got our own dependency injection framework. We use it in all platforms. It has three main concepts: *Provider*, *Component* and *Module*.
+In Mobile Jazz, we defined our own dependency injection pattern. We use it in all the language that we are currently supporting and allows us to have a standarize way. It has three main concepts: *Provider*, *Component* and *Module*.
 
 #### Provider
-A provider is a **file** that contains a component and a module. Each provider should be a feature, topic or part of the application.
+A provider is a **file** that contains a component and a module. For example, it can be a feature or a topic that it's part of your application.
 
 #### Component
-A component is an **interface** that declares everything that we want to expose. It could be a variable or a function that return an instance.
+A component is an **interface** that expose the public contract of your module.
 
 #### Module
-A module is a **class** that implements a component and specify how we are going to supply each component. A module has a constructor to provide every dependency that it has. Also, inside the module we can build every other dependency that we need in order to supply the component.
+A module is a **class** that implements a component and specify how we are going to supply each component. A module has a constructor to provide every dependency that it needs. Also, inside the module we can build every other dependency that we need in order to supply the component.
 
 Find an example in Kotlin:
 
