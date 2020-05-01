@@ -5,7 +5,7 @@ title: Concept
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](../data-source/data-source)s. This redirect semantic is encapsulated in [`Operation`](../operation) objects.
+A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](/docs/fundamentals/data/data-source/data-source)s. This redirect semantic is encapsulated in [`Operation`](operation) objects.
 
 A good example of `Repository` is the [`CacheRepository`](cache-repository), which depending on the `Operation` used on each request can obtain data from an storage-based data source or from a main-based data source. The most basic repository is the [`SingleDataSourceRepository`](single-data-source-repository) which redirects all calls to the single data source that encapsulates.
 
@@ -42,13 +42,13 @@ let future = repository.get(IdQuery("myKey"), operation: MainSyncOperation())
 
 ## Operation
 
-The [`Operation`](../operation) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
+The [`Operation`](operation) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
 
-For more information, read the [`Operation`](../operation) reference.
+For more information, read the [`Operation`](operation) reference.
 
 ## API
 
-The `Repository` functions replicate the [`DataSource`](../data-source/data-source) public API, adding an extra parameter of type `Operation` on each function.
+The `Repository` functions replicate the [`DataSource`](/docs/fundamentals/data/data-source/data-source) public API, adding an extra parameter of type `Operation` on each function.
 
 ### Get
 
@@ -144,7 +144,7 @@ public protocol DeleteRepository : Repository {
 
 ## `IdQuery` CRUD extensions
 
-Similar to the [`DataSource`](../data-source/data-source) public interface,  all  `GetRepository`, `PutRepository` and `DeleteRepository` interfaces are extended with methods to access the CRUD functions by an Id:
+Similar to the [`DataSource`](/docs/fundamentals/data/data-source/data-source) public interface,  all  `GetRepository`, `PutRepository` and `DeleteRepository` interfaces are extended with methods to access the CRUD functions by an Id:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },

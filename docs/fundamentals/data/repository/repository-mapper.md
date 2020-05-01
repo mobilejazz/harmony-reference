@@ -51,7 +51,7 @@ repository.get("myKey", operation: DefaultOperation())
 
 ## Operation Types
 
-Any [`Operation`](../operation) can be passed to a `RepositoryMapper<In,Out>`.
+Any [`Operation`](operation) can be passed to a `RepositoryMapper<In,Out>`.
 
 ## Other Implementations
 

@@ -60,7 +60,7 @@ public protocol GetDataSource : DataSource {
 
 Actions related functions. PUT methods will be responsible of editing, modifying, sending or any other action related method.
 
-Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](../query). In the case of `putAll`, an empty array can be passed.
+Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](query). In the case of `putAll`, an empty array can be passed.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -93,7 +93,7 @@ public protocol PutDataSource : DataSource {
 
 Deletion related functions.
 
-Note that only a [`Query`](../query) is required and no value is returned rather than a Future encapsulating the output error.
+Note that only a [`Query`](query) is required and no value is returned rather than a Future encapsulating the output error.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
