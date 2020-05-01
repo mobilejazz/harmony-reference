@@ -117,8 +117,7 @@ module.exports = {
           type: 'category',
           label: 'Libraries',
           items: [
-            'mj-library/vastra',
-            'mj-library/colloc',
+            'mj-library/mjlibraries',
             {
               type: 'category',
               label: 'OAuth2Server',
