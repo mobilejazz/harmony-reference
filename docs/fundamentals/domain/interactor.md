@@ -108,7 +108,7 @@ export class ElapsedTimeSinceNowInteractor {
 
 ## Asynchrony 
 
-All the examples on this page show synchronous interactors. To read about asynchronous interactors (and threading), visit the page [**Threading & Asynchrony**](../threading/threading).
+All the examples on this page show synchronous interactors. To read about asynchronous interactors (and threading), visit the page [**Threading & Asynchrony**](/docs/fundamentals/domain/threading).
 
 ## Default Interactors
 

@@ -39,7 +39,7 @@ Note that the example above is using the extension methods of DataSoruce that en
 
 ## Query Types
 
-All queries must adopt the [`KeyQuery`](../query) interface as the `InMemoryDataSource<T>` is based on a key-value pattern.
+All queries must adopt the [`KeyQuery`](query) interface as the `InMemoryDataSource<T>` is based on a key-value pattern.
 
 ## Object Types
 
