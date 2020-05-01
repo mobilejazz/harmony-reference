@@ -5,7 +5,7 @@ title: DataSourceMapper
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`DataSourceMapper<In,Out>` encapuslates a [`DataSource`](data-source) instance of type `In` and exposes a new interface of [`DataSource`](data-source) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](../mapper) and [`Mapper<Out,In>`](../mapper).
+`DataSourceMapper<In,Out>` encapuslates a [`DataSource`](data-source) instance of type `In` and exposes a new interface of [`DataSource`](data-source) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](/docs/fundamentals/common/mapper) and [`Mapper<Out,In>`](/docs/fundamentals/common/mapper).
 
 ## Usage
 
@@ -45,7 +45,7 @@ dataSource.get("myKey")
 
 ## Query Types
 
-Any [`Query`](../query) can be passed to a `DataSourceMapper<In,Out>`.
+Any [`Query`](/docs/fundamentals/data/data-source/query) can be passed to a `DataSourceMapper<In,Out>`.
 
 ## Other Implementations
 
