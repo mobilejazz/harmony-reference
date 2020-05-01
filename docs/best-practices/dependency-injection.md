@@ -5,37 +5,17 @@ title: Dependency Injection
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="android" values={[
+<Tabs defaultValue="mobile-jazz" values={[
+{ label: 'Mobile Jazz', value: 'mobile-jazz', },
     { label: 'Android', value: 'android', },
-    { label: 'Kotlin Multiplatform', value: 'kotlin-multiplatform', },
     { label: 'Swift', value: 'swift', },
     { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', }
 ]}>
-<TabItem value="android">
 
-In Android framework, we use [Dagger](https://dagger.dev/). Dagger is a fully static, compile-time dependency injection framework for both Java and Android. It is an adaptation of an earlier version created by Square and now maintained by Google.
+<TabItem value="mobile-jazz">
 
-Some tutorials: [Dagger tutorial](https://dagger.dev/tutorial/) or more specific for Android [here](https://codelabs.developers.google.com/codelabs/android-dagger/#1)
-
-
-```kotlin
-@Module
-class LibraryBookStateModule {
-
-  @Provides
-  @Singleton
-  fun provideLibraryBookState(context: Context, getUserIdRequiredInteractor: GetUserIdRequiredInteractor): LibraryBookStateProvider {
-    return LibraryBookStateStorageProvider(context, getUserIdRequiredInteractor = getUserIdRequiredInteractor)
-  }
-  
-}
-```
-
-</TabItem>
-
-<TabItem value="kotlin-multiplatform">
-
-In Kotlin Multiplatform, we got our own dependency injection framework. It has three main concepts: *Provider*, *Component* and *Module*.
+In Mobile Jazz, we like to got our own dependency injection framework. We use it in all platforms. It has three main concepts: *Provider*, *Component* and *Module*.
 
 #### Provider
 A provider is a **file** that contains a component and a module. Each provider should be a feature, topic or part of the application.
@@ -45,6 +25,8 @@ A component is an **interface** that declares everything that we want to expose.
 
 #### Module
 A module is a **class** that implements a component and specify how we are going to supply each component. A module has a constructor to provide every dependency that it has. Also, inside the module we can build every other dependency that we need in order to supply the component.
+
+Find an example in Kotlin:
 
 ```kotlin
 All this code is inside a Provider named BikeProvider.
@@ -91,6 +73,29 @@ private val bikeRepository: RepositoryMapper<BikeEntity, Bike> by lazy {
 ```
 
 </TabItem>
+
+<TabItem value="android">
+
+In Android framework, we use [Dagger](https://dagger.dev/). Dagger is a fully static, compile-time dependency injection framework for both Java and Android. It is an adaptation of an earlier version created by Square and now maintained by Google.
+
+Some tutorials: [Dagger tutorial](https://dagger.dev/tutorial/) or more specific for Android [here](https://codelabs.developers.google.com/codelabs/android-dagger/#1)
+
+
+```kotlin
+@Module
+class LibraryBookStateModule {
+
+  @Provides
+  @Singleton
+  fun provideLibraryBookState(context: Context, getUserIdRequiredInteractor: GetUserIdRequiredInteractor): LibraryBookStateProvider {
+    return LibraryBookStateStorageProvider(context, getUserIdRequiredInteractor = getUserIdRequiredInteractor)
+  }
+  
+}
+```
+
+</TabItem>
+
 
 <TabItem value="swift">
 
@@ -170,7 +175,12 @@ class ItemAssembly: Assembly {
 }
 ```
 
+</TabItem>
 
+<TabItem value="typescript">
+</TabItem>
+
+<TabItem value="php">
 </TabItem>
 
 </Tabs>
