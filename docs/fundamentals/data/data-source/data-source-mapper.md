@@ -45,7 +45,7 @@ dataSource.get("myKey")
 
 ## Query Types
 
-Any [`Query`](/docs/fundamentals/data/data-source/query) can be passed to a `DataSourceMapper<In,Out>`.
+Any [`Query`](query) can be passed to a `DataSourceMapper<In,Out>`.
 
 ## Other Implementations
 

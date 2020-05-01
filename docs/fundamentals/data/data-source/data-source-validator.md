@@ -31,7 +31,7 @@ validatedDataSource.get("myKey").recover { error in
 
 ## Query Types
 
-Any [`Query`](../query) accepted by the encapuslated `DataSource` an be used in the `DataSourceValidator<T>`.
+Any [`Query`](query) accepted by the encapuslated `DataSource` an be used in the `DataSourceValidator<T>`.
 
 ## Object Types
 

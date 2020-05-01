@@ -41,7 +41,7 @@ Note that the example above is using the extension methods of `DataSoruce` that 
 
 ## Query Types
 
-Any [`Query`](../query) can be passed to a `VoidDataSource<T>` (and all will result with an error).
+Any [`Query`](query) can be passed to a `VoidDataSource<T>` (and all will result with an error).
 
 ## Other Implementations
 

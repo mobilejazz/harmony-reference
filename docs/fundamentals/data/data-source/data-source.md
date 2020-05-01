@@ -17,9 +17,9 @@ Data Sources are splitted in three groups taking into account the action to be d
 
 Data sources can accomplish many different things and can adapt to your project requirements and necessities. For example, from storing/fetching data in a local databases, to send data via an HTTP/Socket client or any third party services.
 
-In an effort to make data sources decoupled from the requirements of external sources, data sources use the concept of [`Query`](../query): an object that itself intrinsically defines how data must be manipulated, containing all attributes required to execute the action.
+In an effort to make data sources decoupled from the requirements of external sources, data sources use the concept of [`Query`](/docs/fundamentals/data/data-source/query): an object that itself intrinsically defines how data must be manipulated, containing all attributes required to execute the action.
 
-For more information, read the [`Query`](query) reference.
+For more information, read the [`Query`](/docs/fundamentals/data/data-source/query) reference.
 
 ## Interfaces
 
