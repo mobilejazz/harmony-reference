@@ -23,15 +23,15 @@ For more information, read the [`Query`](/docs/fundamentals/data/data-source/que
 
 ## Interfaces
 
-All actions handled by a `DataSource` are grouped in a simple CRUD.
+Find below the interfaces for each data source group:
 
-### Get
-
-Fetch related functions.
+### GET
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
 
@@ -43,7 +43,7 @@ interface GetDataSource<V> : DataSource {
 ```
 
 </TabItem>
-<TabItem value="swift">
+<TabItem value="swift"> 
 
 ```swift
 public protocol GetDataSource : DataSource {
@@ -54,17 +54,44 @@ public protocol GetDataSource : DataSource {
 ```
 
 </TabItem>
+<TabItem value="typescript"> 
+
+```typescript
+export interface GetDataSource<T> extends DataSource {
+    get(query: Query): Promise<T>;
+    getAll(query: Query): Promise<T[]>;
+}
+```
+
+</TabItem>
+<TabItem value="php"> 
+
+```php
+interface GetDataSource {
+    public function get(Query $query): BaseEntity;
+    public function getAll(Query $query): GenericCollection;
+}
+```
+
+</TabItem>
 </Tabs>
 
-### Put
+### PUT
 
-Actions related functions. PUT methods will be responsible of editing, modifying, sending or any other action related method.
+PUT methods will be responsible of handling any editing, modifying, sending or operating action on the data. 
 
-Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](query). In the case of `putAll`, an empty array can be passed.
+Some examples:
+
+- Creating a book
+- Editing a user profile 
+- Liking a picture
+- Sending a push notification
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
 
@@ -87,24 +114,52 @@ public protocol PutDataSource : DataSource {
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export interface PutDataSource<T> extends DataSource {
+    put(value: T, query: Query): Promise<T>;
+    putAll(values: T[], query: Query): Promise<T[]>;
+}
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+interface PutDataSource {
+    public function put(Query $query, BaseEntity $baseModel = null): BaseEntity;
+    public function putAll(
+        Query $query,
+        GenericCollection $baseModels = null
+    ): GenericCollection;
+}
+```
+
+</TabItem>
 </Tabs>
 
-### Delete
+:::important Note
+Note that in the `put` function, the `value` is optional. This happens becasue it is not always required to have an actual `value` to perform the action defined by the [`Query`](query). In the case of `putAll`, an empty array can be passed.
+:::
 
-Deletion related functions.
+### DELETE
 
-Note that only a [`Query`](query) is required and no value is returned rather than a Future encapsulating the output error.
+On delete methods, only a [`Query`](query) is required and no value is returned rather than a promise encapsulating the output error. 
+
+Also, there is only one delete method (no `deleteAll`) as it is considered an atomic action on its own, without distinctions of if deleting one or many.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
 
 ```kotlin
 interface DeleteDataSource : DataSource {
     fun delete(query: Query): Future<Unit>
-    fun deleteAll(query: Query): Future<Unit>
 }
 ```
 
@@ -114,24 +169,59 @@ interface DeleteDataSource : DataSource {
 ```swift
 public protocol DeleteDataSource : DataSource {
     func delete(_ query: Query) -> Future<Void>
-    func deleteAll(_ query: Query) -> Future<Void>
+}
+```
+
+</TabItem>
+<TabItem value="typescript">
+
+```typescript
+export interface DeleteDataSource extends DataSource {
+    delete(query: Query): Promise<void>;
+}
+
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+interface DeleteDataSource{
+    public function delete(Query $query): void;
 }
 ```
 
 </TabItem>
 </Tabs>
 
-## `IdQuery` CRUD extensions
+## Extensions
 
-All  `GetDataSource`, `PutDataSource` and `DeleteDataSource` interfaces are extended with methods to access the CRUD functions by an Id:
+Not all Harmony languages are capable of supporting some extensions. Find below the list of all extensions by supported platform. 
 
-<Tabs defaultValue="swift" values={[
+### Key access
+
+Instead of using `IdQuery` to interface with data sources, there are extensions to syntax sugar the creation of `IdQuery`. 
+
+This means that instead of calling a data source with a query `new IdQuery('my-key')`, it can be used directly the `my-key` identifier. 
+
+<Tabs defaultValue="kotlin" values={[
+    { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
 ]}>
+<TabItem value="kotlin">
+
+```kotlin
+suspend fun <K, V> GetDataSource<V>.get(id: K): V = get(IdQuery(id))
+suspend fun <K, V> GetDataSource<V>.getAll(ids: List<K>): List<V> = getAll(IdsQuery(ids))
+suspend fun <K, V> PutDataSource<V>.put(id: K, value: V?): V = put(IdQuery(id), value)
+suspend fun <K, V> PutDataSource<V>.putAll(ids: List<K>, values: List<V>?) = putAll(IdsQuery(ids), values)
+suspend fun <K> DeleteDataSource.delete(id: K) = delete(IdQuery(id))
+```
+
+</TabItem>
 <TabItem value="swift">
 
 ```swift
-// Swift
 extension GetDataSource {
     public func get<K>(_ id: K) -> Future<T> where K:Hashable { ... }
     public func getAll<K>(_ id: K) -> Future<[T]> where K:Hashable { ... }
@@ -144,14 +234,13 @@ extension PutDataSource {
 
 extension DeleteDataSource {
     public func delete<K>(_ id: K) -> Future<Void> where K:Hashable { ... }
-    public func deleteAll<K>(_ id: K) -> Future<Void> where K:Hashable { ... }
 }
 ```
 
 </TabItem>
 </Tabs>
 
-This way, code that originally looked like this:
+Find below examples by platform:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -160,34 +249,13 @@ This way, code that originally looked like this:
 <TabItem value="kotlin">
 
 ```kotlin
-dataSource.get(ByIdentifierQuery("myKey"))
-dataSource.put(ByIdentifierQuery("myKey"), myObject)
-dataSource.delete(ByIdentifierQuery("myKey"))
-```
-
-</TabItem>
-<TabItem value="swift">
-
-```swift
+// Instead of:
 dataSource.get(IdQuery("myKey"))
-dataSource.put(myObject, in:IdQuery("myKey"))
+dataSource.put(IdQuery("myKey"), object)
 dataSource.delete(IdQuery("myKey"))
-```
-
-</TabItem>
-</Tabs>
-
-can be written as follows:
-
-<Tabs defaultValue="kotlin" values={[
-    { label: 'Kotlin', value: 'kotlin', },
-    { label: 'Swift', value: 'swift', },
-]}>
-<TabItem value="kotlin">
-
-```kotlin
+// Use:
 dataSource.get("myKey")
-dataSource.put("myKey", myObject)
+dataSource.put("myKey", object)
 dataSource.delete("myKey")
 ```
 
@@ -195,47 +263,28 @@ dataSource.delete("myKey")
 <TabItem value="swift">
 
 ```swift
+// Instead of:
+dataSource.get(IdQuery("myKey"))
+dataSource.put(object, in:IdQuery("myKey"))
+dataSource.delete(IdQuery("myKey"))
+// Use:
 dataSource.get("myKey")
-dataSource.put(myObject, forId:"myKey")
+dataSource.put(object, forId:"myKey")
 dataSource.delete("myKey")
 ```
 
 </TabItem>
 </Tabs>
 
-## `DataSource` Implementations
+## Default Implementations
+
+Harmony provides multiple default implementations. 
+
+Find below a list of the most common ones:
 
 - [`VoidDataSource<T>`](void-data-source): Empty data source. All functions when called end with errors.
 - [`InMemoryDataSource<T>`](in-memory-data-source): Data stored in the app live memory.
-- [`DeviceStorageDataSource<T>`](device-storage-data-source): Data stored in `SharedPreferences` (android) or `UserDefaults` (iOS)
+- [`DeviceStorageDataSource<T>`](device-storage-data-source): Local storage data source.
 - [`DataSourceMapper<In,Out>`](data-source-mapper): Mappes the type of a data source.
 - [`DataSourceValidator<T>`](data-source-validator): Validates the objects manipulated by a data source.
-
-### Swift exclusive implementations
-
-- [`TimedCacheDataSource<T>`](timed-cache-data-source): A TLRU cache over a data source.
-- [`RealmDataSource<E,O>`](realm-data-source): Realm based data source. Available at the `MJSWiftCore/Realm` pod subspec.
-- [`KeychainDataSource<T>`](keychain-data-source): Keychain based data source. Available at the `MJSwiftCore/Security` pod subspec.
-- `DataSourceAssembler<T>`: Combines three data sources (get, put, delete) into a single object.
-- `AnyDataSource<T>`: Type erasing for any get+put+delete data source.
-- `AnyGetDataSource<T>`: Type erasing for a get data source.
-- `AnyPutDataSource<T>`: Type erasing for a put data source.
-- `RetryDataSource<T>`: Encapsulates another data source and retries a call when an error happens.
-
-## Swift Notes
-
-### `DataSource` base protocol
-
-In order to have a generic type, all `GetDataSource`, `PutDataSource` and `DeleteDataSource` extends from the following base protocol:
-
-```swift
-public protocol DataSource { }
-```
-
-## Kotlin Notes
-
-### `DataSource` base interface
-
-```kotlin
-interface DataSource
-```
+- [`KeychainDataSource<T>`](keychain-data-source): iOS Keychain based data source. Available at the `MJSwiftCore/Security` pod subspec.
