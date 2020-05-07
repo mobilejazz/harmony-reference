@@ -181,6 +181,40 @@ class ItemAssembly: Assembly {
 </TabItem>
 
 <TabItem value="php">
+  
+In PHP, we are usiging the DI component from each Framework:
+
+* [Laravel Service Provider](https://laravel.com/docs/5.8/providers)
+* [Symfony DependencyInjection Component](https://symfony.com/doc/current/create_framework/dependency_injection.html)
+
+Or a custom Provider using plain PHP [from our Sample](https://github.com/mobilejazz/harmony-php/blob/master/sample/src/app/product/ProductProvider.php):
+
+```php
+...
+protected function registerRepository(): RepositoryMapper
+{
+    $productInMemoryDataSource = new InMemoryDataSource(ProductEntity::class);
+
+    $productRepository = new SingleDataSourceRepository(
+        $productInMemoryDataSource,
+        $productInMemoryDataSource,
+        $productInMemoryDataSource
+    );
+
+    $productRepositoryMapper = new RepositoryMapper(
+        $productRepository,
+        $productRepository,
+        $productRepository,
+        new ProductToProductEntityMapper(),
+        new ProductEntityToProductMapper()
+    );
+
+    return $productRepositoryMapper;
+}
+...
+
+```
+
 </TabItem>
 
 </Tabs>
