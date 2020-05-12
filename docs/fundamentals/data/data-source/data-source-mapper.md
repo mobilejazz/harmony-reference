@@ -12,20 +12,21 @@ import TabItem from '@theme/TabItem';
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
 
 ```kotlin
-// Kotlin
-val deviceStorageDataSource = InMemoryDataSource<String, A>()
-val dataSourceMapper = DataSourceMapper(deviceStorageDataSource,
-                                        deviceStorageDataSource,
-                                        deviceStorageDataSource,
+val dataSource = InMemoryDataSource<String, A>()
+val dataSourceMapper = DataSourceMapper(dataSource,
+                                        dataSource,
+                                        dataSource,
                                         AtoBMapper(),
                                         BtoAMapper())
   
-dataSourceMapper.put("fromKey", B())
-dataSourceMapper.get("fromKey")
+dataSourceMapper.put("myKey", B())
+dataSourceMapper.get("myKey")
 ```
 
 </TabItem>
@@ -33,11 +34,41 @@ dataSourceMapper.get("fromKey")
 
 ```swift
 let dataSource = DataSourceMapper(InMemoryDataSource<A>(),
-                                  toInMapper: MyB2AMapper(),
-                                  toOutMapper: MyA2BMapper())
+                                  toInMapper: BtoAMapper(),
+                                  toOutMapper: AtoBMapper())
 
 dataSource.put(B(), forId: "myKey")
 dataSource.get("myKey")
+```
+
+</TabItem>
+<TabItem value="typescript">
+
+```typescript
+let dataSource = new InMemoryDataSource<A>();
+let dataSourceMapper = new DataSourceMapper(dataSource,
+                                            dataSource,
+                                            dataSource,
+                                            new AtoBMapper(),
+                                            new BtoAMapper());
+  
+dataSourceMapper.put(new IdQuery("myKey"), new B());
+dataSourceMapper.get(new IdQuery("myKey"));
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+$dataSource = new InMemoryDataSource();
+$dataSourceMapper = new DataSourceMapper($dataSource,
+                                         $dataSource,
+                                         $dataSource,
+                                         new AtoBMapper(),
+                                         new BtoAMapper());
+  
+$dataSourceMapper->put(new IdQuery("myKey"), new B());
+$dataSourceMapper->get(new IdQuery("myKey"));
 ```
 
 </TabItem>
