@@ -62,19 +62,16 @@ module.exports = {
               items: [
                 'fundamentals/data/data-source/data-source',
                 'fundamentals/data/data-source/query',
-                'fundamentals/data/data-source/how-to-data-source',
                 {
                   type: 'category',
                   label: 'Default implementations',
                   items: [
+                    'fundamentals/data/data-source/void-data-source',
                     'fundamentals/data/data-source/data-source-mapper',
-                    'fundamentals/data/data-source/data-source-validator',
-                    'fundamentals/data/data-source/device-storage-data-source',
                     'fundamentals/data/data-source/in-memory-data-source',
-                    'fundamentals/data/data-source/keychain-data-source',
-                    'fundamentals/data/data-source/realm-data-source',
-                    'fundamentals/data/data-source/timed-cache-data-source',
-                    'fundamentals/data/data-source/void-data-source'
+                    'fundamentals/data/data-source/device-storage-data-source',
+                    'fundamentals/data/data-source/data-source-validator',
+                    'fundamentals/data/data-source/keychain-data-source'
                   ]
                 },
               ]

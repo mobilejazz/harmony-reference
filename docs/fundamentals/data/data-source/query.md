@@ -5,11 +5,15 @@ title: Query
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A `Query` object itself defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action. 
+A `Query` object defines intrinsically how data must be manipulated, containing inside all parameters required to execute the action.
+
+The base definition of a query is empty, as this object must be customized in custom objects. 
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
 
@@ -25,17 +29,31 @@ public protocol Query { }
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export class Query { }
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+class Query { }
+```
+
+</TabItem>
 </Tabs>
 
-:::tip Note
-A `Query` must be independent of its data source. Calling a query `MyNetworkActionQuery` is wrong (use instead `MyActionQuery`) as queries must be abstracted from its source and can be potentially used in any [`DataSource`](/docs/fundamentals/data/data-source/data-source).
-:::
+For example, if one or many data sources can perform a serch by text, we would define a new query called `SearchQuery` as follows:
 
-## Usage
+
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
 
@@ -43,9 +61,9 @@ A `Query` must be independent of its data source. Calling a query `MyNetworkActi
 class SearchQuery(val text: String): Query()
 
 // Searching in network
-itemsNetworkDataSource.getAll(SearchQuery("lorem ipsim"))
+itemsNetworkDataSource.getAll(SearchQuery("lorem ipsum"))
 // Searching in local storage
-itemsStorageDataSource.getAll(SearchQuery("lorem ipsim"))
+itemsStorageDataSource.getAll(SearchQuery("lorem ipsum"))
 ```
 
 </TabItem>
@@ -63,70 +81,76 @@ itemsStorageDataSource.getAll(SearchQuery("lorem ipsum"))
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export class SearchQuery extends Query {
+    constructor(readonly text: string) { super(); }
+}
+
+// Searching in network
+itemsNetworkDataSource.getAll(new SearchQuery("lorem ipsum"));
+// Searching in local storage
+itemsStorageDataSource.getAll(new SearchQuery("lorem ipsum"));
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+class SearchQuery extends Query {
+    /** @var string */
+    protected $text;
+
+    public function __construct(
+        string $text
+    ) {
+        $this->text = $text;
+    }
+}
+
+// Searching in network
+$itemsNetworkDataSource->getAll(new SearchQuery("lorem ipsum"));
+// Searching in local storage
+$itemsStorageDataSource->getAll(new SearchQuery("lorem ipsum"));
+```
+
+</TabItem>
 </Tabs>
+
+
+:::tip Note
+A query must be **decoupled** from any data source implementation.
+
+Take for example a query called `LastBookReadNerworkQuery`. This is a bad naming as it clearly states a data source implementation. Instead use `LastBookReadQuery` as queries must be abstracted from its source and can potentially be reused in multiple [data sources](/docs/fundamentals/data/data-source/data-source).
+:::
+
+
+
+
 
 ## Default implementations
 
+Harmony provides multiple predefined queries ready to be used. The most popular are:
+
 - `VoidQuery`: Empty query.
-- `IdQuery<T>`: Query by Id of type T.
-- `IdsQuery<T>`: Query containing a collection of Ids. 
-- `AllObjectsQuery`: Generic query to define the action of manipulating all objects.
-- `ObjectQuery<T>`: A query containing an object of type T.
-- `ObjectsQuery<T>`: A query containing a collection of objects of type T.
-- `PaginationQuery`: Abstract pagnation query.
+- `IdQuery`: Query by id.
+- `IdsQuery`: Query containing a collection of Ids. 
 - `PaginationOffsetLimitQuery`: Pagination query by offset and limit.
 
-## Using Queries in DataSources
+Specifically, `IdQuery` is very useful to identify objects by its id. For example, instead of having a `UserIdQuery` and call it into a `UserNetworkDataSource` (or any other user-based data source), just use `IdQuery` with the id of a user. 
 
-Queries must be pro-actively supported in each [`DataSource`](/docs/fundamentals/data/data-source/data-source) implementation. A typical appearance of an implemented `get` method from a `GetDataSource` would be:
-
-<Tabs defaultValue="kotlin" values={[
-    { label: 'Kotlin', value: 'kotlin', },
-    { label: 'Swift', value: 'swift', },
-]}>
-<TabItem value="kotlin">
-
-```kotlin
-override fun get(query: Query): Future<MyObject> = Future {
-    when (query) {
-        is KeyQuery -> {
-          return getObjectByIdMethod(query.key)
-        }
-        else -> notSupportedQuery()
-    }
-}
-```
-
-</TabItem>
-<TabItem value="swift">
-
-```swift
-func get(_ query: Query) -> Future<MyObject> {
-    switch query.self {
-    case let query as IdQuery<String>:
-        return getObjectByIdMethod(id: query.id)
-    case is MyCustomQuery:
-        // ...
-    default:
-        query.fatalError(.get, self)
-    }
-}
-```
-
-</TabItem>
-</Tabs>
-
-:::tip Note
-The `default:` / `else` behavior. When using an unsupported query, an exception/fatalError is raised as this is an illegal call.
-:::
+Review your Harmony platform library to find the complete list of queries available. 
 
 ## `KeyQuery` support
 
-In order to create a key-value environment for data sources as in [`InMemoryDataSource<T>`](/docs/fundamentals/data/data-source/in-memory-data-source), [`DeviceStorageDataSource<T>`](/docs/fundamentals/data/data-source/device-storage-data-source) or any custom implementation, there is the `KeyQuery` interface/protocol to implement:
+In an effort to build a friendly key-value ecosystem for data sources, Harmony defines the concept of `KeyQuery` as a subclass/subinteface of `Query` that exposes an string `key` attribute that can be used as a key for a key-value interface. 
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
 
@@ -144,21 +168,60 @@ public protocol KeyQuery : Query {
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export class KeyQuery extends Query {
+    constructor(public readonly key: string) { super(); }
+}
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+class KeyQuery extends Query {
+    /** @var string */
+    private $key;
+
+    /**
+     * @param string $key
+     */
+    public function __construct(string $key) {
+        $this->key = $key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey(): string {
+        return $this->key;
+    }
+}
+```
+
+</TabItem>
 </Tabs>
 
-Only queries adopting this structure can be used in Key-Value based DataSources.
+For example, the Harmony predefined `IdQuery<T>` adopts `KeyQuery` and is ready to be used in key-value data sources.
 
-Note that the following default queries already have support for `KeyQuery`:
+:::tip Tip
+It's a good practice to build your queries by either inheriting from already existing queries or by adopting `KeyQuery`. 
+:::
 
-- `IdQuery<T>`
-- `IdsQuery<T>`
-- `AllObjectsQuery<T>`
+By doing it so, you will ensure your queries reuse the most amount of attributes and data sources will easily support existing queries out of the box.
 
-Custom queries must adopt this form to be used in Key-Value data sources. For example, returning to the top example `SearchQuery`:
+:::warning
+Only queries adopting `KeyQuery` can be used in key-value-based data sources.
+:::
+
+Coming back to the `SearchQuery` example, we could now make it adopt `KeyQuery`, bringing us the option to use key-value-based data sources as [`InMemoryDataSource`](in-memory-data-source.md) to cache results and improve performance of our system.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
 
@@ -176,4 +239,29 @@ extension SearchQuery : KeyQuery {
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export class SearchQuery extends KeyQuery {
+    constructor(readonly text: string) { super(text); }
+}
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+class SearchQuery extends KeyQuery {
+    /** @var string */
+    protected $text;
+
+    public function __construct(string $text) {
+        parent::__construct($text);
+        $this->text = $text;
+    }
+}
+```
+
+</TabItem>
 </Tabs>
+

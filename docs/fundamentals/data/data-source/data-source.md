@@ -21,6 +21,45 @@ In an effort to make data sources decoupled from the requirements of external so
 
 For more information, read the [`Query`](/docs/fundamentals/data/data-source/query) reference.
 
+## Understanding the abstraction
+A good example of how a data source is organized is to think on how would you do a data source class without Harmony. 
+
+Typically, you would have a **singleton class** containing a **list of methods for all the actions** your system need to support. For example, a typical network class listing all the HTTP requests.
+
+```swift
+class UserNetworkAPIService {
+    func login(username, password): User
+    func fetchUserDetails(id): User
+    func updateProfilePicture(url, userId): User
+}
+```
+
+In Harmony, instead of having this class listing all methods, we would create a data source grouping all methods withing the Get, Put and Delete actions and translating each method with its parameters into a query with its attributes.
+
+```swift
+class IdQuery(id)
+class LoginQuery(username, password)
+class UpdateProfilePictureQuery(url, userId)
+
+class UserNetworkDataSource: GetDataSource<User>, PutDataSource<User> {
+    func get(query): User {
+        if (query istypeof IdQuery) {
+            // fetch user details and return
+        }
+    }
+    func put(user, query): User {
+        if (query istypeof LoginQuery) {
+            // perform login
+        } else if (query istypeof UpdateProfilePictureQuery) {
+            // udpate user profile picture
+        }
+    }
+}
+```
+
+By normalizing how we interface with data sources, we can start building complex compositions of data sources top of it, which is the foundations of Harmony. 
+
+
 ## Interfaces
 
 Find below the interfaces for each data source group:
