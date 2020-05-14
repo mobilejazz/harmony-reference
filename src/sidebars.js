@@ -82,7 +82,6 @@ module.exports = {
             items: [
               'fundamentals/data/repository/repository',
               'fundamentals/data/repository/operation',
-              'fundamentals/data/repository/how-to-repository',
               {
                 type: 'category',
                 label: 'Default implementations',

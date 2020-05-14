@@ -5,11 +5,15 @@ title: Operation
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The [`Operation`](operation) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
+An [`Operation`](operation) object defines intrinsically either how a query must be forwarded to a data source either how data must be manipulated, containing inside all parameters required to execute it.
+
+The base definition of an operation is empty, as this object must be customized in custom objects.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">
 
@@ -25,90 +29,93 @@ public protocol Operation { }
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export interface Operation  {}
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+class Operation { }
+```
+
+</TabItem>
 </Tabs>
 
-:::tip Note
-An `Operation` depends exclusively on a custom implementation of a [`Repository`](/docs/fundamentals/data/repository/repository). Each [`Repository`](/docs/fundamentals/data/repository/repository) implementation will delcare it's supported `Operations`.
-:::
-
-## Usage
+For example, if repositories want recover from a data source failure N times, we could define a custom operation to let repositories know how to behave. The representation of this operation could be:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">
 
 ```kotlin
-object MyRetryOnceIfErrorOperation: Operation()
+data class RecoverOperation(val retries: Int): Operation()
 
-val repository = MyCustomRepository(...)
-
-repository.get(IdQuery("myKey"), MyRetryOnceIfErrorOperation)
+// retrieve a book and try to recover only once if failure 
+bookRepository.get(IdQuery(42), RecoverOperation(1))
 ```
 
 </TabItem>
 <TabItem value="swift">
 
 ```swift
-struct MyRetryOnceIfErrorOperation: Operation { }
+public struct RecoverOperation : Operation { 
+    let retries: Int
+}
 
-// Custom repository implementation that supports MyRetryOnceIfErrorOperation
-let repository = MyCustomRepository(...) 
+// retrieve a book and try to recover only once if failure 
+bookRepository.get(IdQuery(42), operation: RecoverOperation(1))
+```
 
-repository.get(IdQuery("myKey"), operation: MyRetryOnceIfErrorOperation())
+</TabItem>
+<TabItem value="typescript">
+
+```typescript
+export class RecoverOperation implements Operation {
+   constructor(readonly retries: number) { }
+}
+
+// retrieve a book and try to recover only once if failure 
+bookRepository.get(new IdQuery(42), new RecoverOperation(1))
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+class RecoverOperation extends Operation {
+    /** @var int */
+    protected $retries;
+
+    public function __construct(
+        int $retries
+    ) {
+        $this->retries = $retries;
+    }
+}
+
+// retrieve a book and try to recover only once if failure 
+$bookRepository->get(new IdQuery(42), new RecoverOperation(1))
 ```
 
 </TabItem>
 </Tabs>
+
+   
 
 ## Default implementations
 
+Harmony provides multiple predefined operations ready to be used. The most popular are:
+
 - `DefaultOperation`: Empty operation. To be used when none operation is required or as a default behavior.
 
-:::tip Important
-All repositories must accept this operation and perform its expectec behavior.
+:::important IMPORTANT
+All repositories must have a default behavior by supporting the `DefaultOperation`.
 :::
-
-Any other custom operation will be declared together with its [`Repository`](/docs/fundamentals/data/repository/repository) implementation.
-
-## Using Operations in Repositories
-
-Operations must be pro-actively supported in each [`Repository`](/docs/fundamentals/data/repository/repository) implementation. A typical appearance of an implemented `get` method from a `GetRepository` would be:
-
-<Tabs defaultValue="kotlin" values={[
-    { label: 'Kotlin', value: 'kotlin', },
-    { label: 'Swift', value: 'swift', },
-]}>
-<TabItem value="kotlin">
-
-```kotlin
-override fun get(query: Query,operation: Operation): Future<MyObject> = when (operation) {
-    is MyRetryOnceIfErrorOperation -> {...}
-    is MyOtherOperation -> {...}
-    else -> notSupportedOperation()
-}
-```
-
-</TabItem>
-<TabItem value="swift">
-
-```swift
-func get(_ query: Query, operation: Operation) -> Future<MyObject> {
-    switch operation.self {
-    case MyRetryOnceIfErrorOperation():
-        return someDataSource.get(query).recover {
-            return someDatSource.get(query)
-        }
-    case is MyOtherOperation():
-        // ...
-    default:
-        operation.fatalError(.get, self)
-    }
-}
-```
-
-</TabItem>
-</Tabs>
-
-Note the `default:` / `else` behavior. When using an unsupported operation, an exception/fatalError is raised as this is an illegal call.

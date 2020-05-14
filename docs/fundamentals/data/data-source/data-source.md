@@ -235,7 +235,7 @@ interface DeleteDataSource{
 
 ## Extensions
 
-Not all Harmony languages are capable of supporting some extensions. Find below the list of all extensions by supported platform. 
+Not all Harmony languages are capable of supporting all extensions. Find below the list of all extensions by supported platform. 
 
 ### Key access
 

@@ -5,58 +5,92 @@ title: Concept
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A `Repository` is a class responsible of redirecting get/put/delete actions to one or many [`DataSource`](/docs/fundamentals/data/data-source/data-source)s. This redirect semantic is encapsulated in [`Operation`](operation) objects.
+Harmony repositories are responsible of managing the **data business logic** of the application data layer, similar to [interactors](../../domain/interactor.md) being responsible of managing the business logic of the domain layer.
 
-A good example of `Repository` is the [`CacheRepository`](cache-repository), which depending on the `Operation` used on each request can obtain data from an storage-based data source or from a main-based data source. The most basic repository is the [`SingleDataSourceRepository`](single-data-source-repository) which redirects all calls to the single data source that encapsulates.
+Following the interface definition of [data source](../../data/data-source/data-source.md), a repository defines a generic interface representing the three main action groups:
 
-## Usage
+- **Get** is the responsible of all actions that fetch data from one or many data sources
+- **Put** is the responsible of all actions that modify and push data to one or many data sources
+- **Delete** is the responsible of all action that delete data from one or many data sources
 
-<Tabs defaultValue="kotlin" values={[
-    { label: 'Kotlin', value: 'kotlin', },
-    { label: 'Swift', value: 'swift', },
-]}>
-<TabItem value="kotlin">
+Repositories can accomplish many different things. For example, handle retries of failed processes, perform object validations, handling caches, and more. 
 
-```kotlin
-val networkDataSource = MyNetworkDataSource()
-val storageDataSource = MyStorageDataSource()
+In an effort to decouple the business logic of the data layer from the business logic domain layer, repositoreis use the concept of `Operation`: an object that intrinsically defines how a query must be forwarded to a data source.   
 
-val repository = NetworkStorageRepository(networkDataSource, networkDataSource, networkDataSource, storageDataSource, storageDataSource, storageDataSource)
+For more information, read the [`Operation`](operation.md) reference.
 
-val future = repository.get(IdQuery("my-key"), StorageSyncOperation)
-```
+## Understanding the abstraction
 
-</TabItem>
-<TabItem value="swift">
+It's a good idea to use repositories isntead of data sources directly becuase often you will want to do a more elaborated data management (aka. data business logic).
+
+For example, we can think in the case of buidling a simple cache system. Typically, starting from a network API service class, we would write some code similar to: 
 
 ```swift
-let networkDataSource = MyNetworkDataSource()
-let storageDataSource = MyStorageDataSource()
-let repository = CacheRepository(main: networkDataSource, cache: storageDataSource)
+class BookNetworkAPIService {
+    let books = Map<Int:Book>()
 
-let future = repository.get(IdQuery("myKey"), operation: MainSyncOperation())
+    func getBook(id): Book {
+        let isCached = books.contains(id)
+        if (isCached) {
+            return books[id]
+        } else {
+            let book = getBookFromNetwork(id)
+            books[id] = book
+            return book
+        }
+    } 
+}
 ```
 
-</TabItem>
-</Tabs>
+Obviously, the code above is coupling a cache system to a network class. A better option would be to create a cache class on top of the network one, which is what Repository proposes.
 
-## Operation
+```swift
+class BookNetworkDataSource : GetDataSource<Book> {...}
+class BookLocalStorageDataSource : GetDataSource<Book>, PutDataSource<Book> {...}
 
-The [`Operation`](operation) object itself defines intrinsically how a query must be forwarded to a data source, containing inside all parameters required to execute the action.
+// Fetches from cache if available, otherwise use network and udpate cache
+class CacheSyncOperation
 
-For more information, read the [`Operation`](operation) reference.
+class BookRepository : GetRepository<Book> {
 
-## API
+    let network: BookNetworkDataSource
+    let cache: BookLocalStorageDataSource
+
+    func get(query, operation): Book {
+        if (operation istypeof CacheSyncOperation) {
+            let cachedBook = cache.get(query)
+            if (cachedBook) {
+                return cacheBook
+            } else {
+                let book = network.get(query)
+                cache.put(book, query)
+                return book
+            }
+        } else {
+            // Otherwise, return from network
+            return network.get(query)
+        }
+    }
+}
+```
+
+As seen in the example, we are reusing the generic interface of Harmony data sources. This could lead to a generic implementation of a cache repository that can be reused for any kind of data types. (hint: see [CacheRepository](cache-repository.md))
+
+:::important IMPORTANT
+Each repository must represent an **atomic behavior** (keeping its testability). It's possible to compose multiple repositories to achieve a more complex logic. 
+:::
+
+## Interfaces
 
 The `Repository` functions replicate the [`DataSource`](/docs/fundamentals/data/data-source/data-source) public API, adding an extra parameter of type `Operation` on each function.
 
 ### Get
 
-Fetch related functions.
-
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">
 
@@ -79,6 +113,26 @@ public protocol GetRepository : Repository {
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export interface GetRepository<T> extends Repository {
+    get(query: Query, operation: Operation): Promise<T>;
+    getAll(query: Query, operation: Operation): Promise<T[]>;
+}
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+interface GetRepository extends Repository {
+    public function get(Query $query, Operation $operation): BaseEntity;
+    public function getAll(Query $query, Operation $operation): GenericCollection;
+}
+```
+
+</TabItem>
 </Tabs>
 
 ### Put
@@ -88,6 +142,8 @@ Actions related functions.
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">
 
@@ -110,6 +166,26 @@ public protocol PutRepository : Repository {
 ```
 
 </TabItem>
+<TabItem value="typescript">
+
+```typescript
+export interface PutRepository<T> extends Repository {
+    put(value: T, query: Query, operation: Operation): Promise<T>;
+    putAll(values: T[], query: Query, operation: Operation): Promise<T[]>;
+}
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+interface PutRepository extends Repository {
+    public function put(Query $query, Operation $operation, BaseEntity $entity = null): BaseEntity;
+    public function putAll(Query $query, Operation $operation, GenericCollection $collection = null): GenericCollection;
+}
+```
+
+</TabItem>
 </Tabs>
 
 ### Delete
@@ -119,13 +195,14 @@ Deletion related functions.
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
+    { label: 'Typescript', value: 'typescript', },
+    { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">
 
 ```kotlin
 interface DeleteRepository : Repository {
     fun delete(query: Query, operation: Operation = DefaultOperation): Future<Unit>
-    fun deleteAll(query: Query, operation: Operation = DefaultOperation): Future<Unit>
 }
 ```
 
@@ -135,16 +212,39 @@ interface DeleteRepository : Repository {
 ```swift
 public protocol DeleteRepository : Repository {
     func delete(_ query: Query, operation: Operation) -> Future<Void>
-    func deleteAll(_ query: Query, operation: Operation) -> Future<Void>
+}
+```
+
+</TabItem>
+<TabItem value="typescript">
+
+```typescript
+export interface DeleteRepository extends Repository {
+    delete(query: Query, operation: Operation): Promise<void>;
+}
+```
+
+</TabItem>
+<TabItem value="php">
+
+```php
+interface DeleteRepository extends Repository {
+    public function delete(Query $query, Operation $operation): void;
 }
 ```
 
 </TabItem>
 </Tabs>
 
-## `IdQuery` CRUD extensions
+## Extensions
 
-Similar to the [`DataSource`](/docs/fundamentals/data/data-source/data-source) public interface,  all  `GetRepository`, `PutRepository` and `DeleteRepository` interfaces are extended with methods to access the CRUD functions by an Id:
+Not all Harmony languages are capable of supporting all extensions. Find below the list of all extensions by supported platform.
+
+### Key Access
+
+Instead of using IdQuery to interface with repositories, there are extensions to syntax sugar the creation of IdQuery.
+
+This means that instead of calling a repository with a query `new IdQuery('my-key')`, it can be used directly the `my-key` identifier.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -158,7 +258,6 @@ fun <K, V> GetRepository<V>.getAll(ids: List<K>, operation: Operation = DefaultO
 fun <K, V> PutRepository<V>.put(id: K, value: V?, operation: Operation = DefaultOperation): Future<V> = put(IdQuery(id), value, operation)
 fun <K, V> PutRepository<V>.putAll(ids: List<K>, values: List<V>? = emptyList(), operation: Operation = DefaultOperation) = putAll(IdsQuery(ids), values, operation)
 fun <K> DeleteRepository.delete(id: K, operation: Operation = DefaultOperation) = delete(IdQuery(id), operation)
-fun <K> DeleteRepository.deleteAll(ids: List<K>, operation: Operation = DefaultOperation) = deleteAll(IdsQuery(ids), operation)
 ```
 
 </TabItem>
@@ -175,14 +274,13 @@ extension PutRepository {
 }
 extension DeleteRepository {
     public func delete<K>(_ id: K, operation: Operation) -> Future<Void> where K:Hashable { ... }
-    public func deleteAll<K>(_ id: K, operation: Operation) -> Future<Void> where K:Hashable { ... }
 }
 ```
 
 </TabItem>
 </Tabs>
 
-This way, code that originally looked like this:
+Find below examples by platform:
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
@@ -191,78 +289,41 @@ This way, code that originally looked like this:
 <TabItem value="kotlin">
 
 ```kotlin
-repository.get(IdQuery("myKey"))
-repository.put(IdQuery("myKey"), myObject)
-repository.delete(IdQuery("myKey"))
+// Instead of:_
+repository.get(IdQuery("myKey"), operation)
+repository.put(IdQuery("myKey"), object, operation)
+repository.delete(IdQuery("myKey"), operation)
+// Use:
+repository.get("myKey", operation)
+repository.put("myKey", object, opeartion)
+repository.delete("myKey", operation)
 ```
 
 </TabItem>
 <TabItem value="swift">
 
 ```swift
-repository.get(IdQuery("myKey"), operation: MyCustomOperation())
-repository.put(myObject, in:IdQuery("myKey"), operation: MyCustomOperation())
-repository.delete(IdQuery("myKey"), operation: MyCustomOperation())
+// Instead of:
+repository.get(IdQuery("myKey"), operation: operation)
+repository.put(myObject, in:IdQuery("myKey"), operation: operation)
+repository.delete(IdQuery("myKey"), operation: operation)
+// Use:
+repository.get("myKey", operation: operation)
+repository.put(myObject, forId:"myKey", operation: operation)
+repository.delete("myKey", operation: operation)
 ```
 
 </TabItem>
 </Tabs>
 
-can be written as follows:
+## Default Implementations
 
-<Tabs defaultValue="kotlin" values={[
-    { label: 'Kotlin', value: 'kotlin', },
-    { label: 'Swift', value: 'swift', },
-]}>
-<TabItem value="kotlin">
+Harmony provides multiple default implementations.
 
-```kotlin
-repository.get("myKey")
-repository.put("myKey", myObject)
-repository.delete("myKey")
-```
-
-</TabItem>
-<TabItem value="swift">
-
-```swift
-repository.get("myKey", operation: MyCustomOperation())
-repository.put(myObject, forId:"myKey", operation: MyCustomOperation())
-repository.delete("myKey", operation: MyCustomOperation())
-```
-
-</TabItem>
-</Tabs>
-
-## `Repository` Implementations
+Find below a list of the most common ones:
 
 - [`VoidRepository<T>`](void-repository): Empty repository. All functions when called end with errors.
 - [`RepositoryMapper<In,Out>`](repository-mapper): Mappes the type of a repository.
 - [`SingleDataSourceRepository<T>`](single-data-source-repository): Encapuslates a single data source.
 - [`CacheRepository<T>`](cache-repository): Main & Cache repository, fetching from one data source and updating the other one when required.
 
-#### Swift exclusive implementations
-
-- `RepositoryAssembler<T>`: Combines three repositories (get, put, delete) into a single object.
-- `AnyRepository<T>`: Type erasing for any get+put+delete repository.
-- `AnyGetRepository<T>`: Type erasing for a get repository.
-- `AnyPutRepository<T>`: Type erasing for a put repository.
-- `RetryRepository<T>`: Encapsulates another repository and retries a call when an error happens.
-
-## Swift Notes
-
-### `Repository` base protocol
-
-In order to have a generic type, all `GetRepository`, `PutRepository` and `DeleteRepository` extends from the following base protocol:
-
-```swift
-public protocol Repository { }
-```
-
-## Kotlin Notes
-
-### `Repository` base interface
-
-```kotlin
-interface Repository
-```
