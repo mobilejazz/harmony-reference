@@ -5,9 +5,9 @@ title: Concept
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Harmony repositories are responsible of managing the **data business logic** of the application data layer, similar to [interactors](../../domain/interactor.md) being responsible of managing the business logic of the domain layer.
+Harmony repositories are responsible of managing the **data business logic** of the application data layer, similar to [interactors](../../domain/interactor) being responsible of managing the business logic of the domain layer.
 
-Following the interface definition of [data source](../../data/data-source/data-source.md), a repository defines a generic interface representing the three main action groups:
+Following the interface definition of [data source](../../data/data-source/data-source), a repository defines a generic interface representing the three main action groups:
 
 - **Get** is the responsible of all actions that fetch data from one or many data sources
 - **Put** is the responsible of all actions that modify and push data to one or many data sources
@@ -17,7 +17,7 @@ Repositories can accomplish many different things. For example, handle retries o
 
 In an effort to decouple the business logic of the data layer from the business logic domain layer, repositoreis use the concept of `Operation`: an object that intrinsically defines how a query must be forwarded to a data source.   
 
-For more information, read the [`Operation`](operation.md) reference.
+For more information, read the [`Operation`](operation) reference.
 
 ## Understanding the abstraction
 
@@ -74,7 +74,7 @@ class BookRepository : GetRepository<Book> {
 }
 ```
 
-As seen in the example, we are reusing the generic interface of Harmony data sources. This could lead to a generic implementation of a cache repository that can be reused for any kind of data types. (hint: see [CacheRepository](cache-repository.md))
+As seen in the example, we are reusing the generic interface of Harmony data sources. This could lead to a generic implementation of a cache repository that can be reused for any kind of data types. (hint: see [CacheRepository](cache-repository))
 
 :::important IMPORTANT
 Each repository must represent an **atomic behavior** (keeping its testability). It's possible to compose multiple repositories to achieve a more complex logic. 

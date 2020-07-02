@@ -2,8 +2,6 @@
 title: Concepts
 ---
 
-import LinkCard from '@site/src/components/link-card';
-
 Harmony is divided into three main layers. Each layer is responsible of performing a specific set of tasks and processes. 
 
 This division is specially meaningful in order to keep a decoupled modularization between all the frameworks that are required to build a whole system.   
