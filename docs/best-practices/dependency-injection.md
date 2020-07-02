@@ -178,6 +178,16 @@ class ItemAssembly: Assembly {
 </TabItem>
 
 <TabItem value="typescript">
+
+We don't have any custom solution for DI on TypeScript projects. Instead use the framework provided solution:
+
+- [Angular Dependency Injection](https://angular.io/guide/dependency-injection)
+- [NestJS Custom Providers](https://docs.nestjs.com/fundamentals/custom-providers)
+
+:::important Important
+Both Angular and NestJS provide decorators for DI, but **we discourage the usage of these** in the domain or data layers. We promote this so that our code is decoupled from the framework. The data layer shouldn't know anything about the domain layer, and at the same time, the domain layer shouldn't know anything about the app layer.
+:::
+
 </TabItem>
 
 <TabItem value="php">
