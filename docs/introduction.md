@@ -10,21 +10,21 @@ The Harmony framework is available in the following languages:
 
 - Kotlin
 - Swift
-- Typescript
+- TypeScript
 - PHP
    
 This documentation reference will help you to learn the foundations and best practices that Harmony defines.
 
 <div className="cards-row">
   <LinkCard
-      href="getting-started/prerequisites"
-      title="Learn"
+      href="getting-started/overview"
+      title="Start"
       description="Discover how to install Harmony"
       footer="Getting Started">
   </LinkCard>
   <LinkCard
       href="fundamentals/concepts"
-      title="Explore"
+      title="Learn"
       description="Learn about the Harmony fundamentals"
       footer="Introduction to Harmony concepts">
   </LinkCard>

@@ -16,13 +16,13 @@ Application or presentation layer will include all views and also specific platf
 
 <div className="cards-row">
   <LinkCard
-      href="application/android"
+      href="fundamentals/application/android"
       title="Android"
       description=""
       footer="Getting Started">
   </LinkCard>
   <LinkCard
-      href="application/ios"
+      href="fundamentals/application/ios"
       title="iOS"
       description=""
       footer="Getting Started">
@@ -31,13 +31,13 @@ Application or presentation layer will include all views and also specific platf
 
 <div className="cards-row">
   <LinkCard
-      href="application/frontend"
+      href="fundamentals/application/frontend"
       title="Frontend"
       description=""
       footer="Getting Started">
   </LinkCard>
   <LinkCard
-      href="application/backend"
+      href="fundamentals/application/backend"
       title="Backend"
       description=""
       footer="Getting Started">
