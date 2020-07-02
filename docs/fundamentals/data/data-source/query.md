@@ -215,7 +215,7 @@ By doing it so, you will ensure your queries reuse the most amount of attributes
 Only queries adopting `KeyQuery` can be used in key-value-based data sources.
 :::
 
-Coming back to the `SearchQuery` example, we could now make it adopt `KeyQuery`, bringing us the option to use key-value-based data sources as [`InMemoryDataSource`](in-memory-data-source.md) to cache results and improve performance of our system.
+Coming back to the `SearchQuery` example, we could now make it adopt `KeyQuery`, bringing us the option to use key-value-based data sources as [`InMemoryDataSource`](in-memory-data-source) to cache results and improve performance of our system.
 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
