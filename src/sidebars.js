@@ -146,6 +146,13 @@ module.exports = {
               ]
             }
           ]
+        },
+        {
+          type: 'category',
+          label: 'Tips and Tricks',
+          items: [
+            'other/tips/git'
+          ]
         }
       ]
     },
