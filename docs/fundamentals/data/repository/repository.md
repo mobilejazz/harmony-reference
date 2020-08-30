@@ -21,7 +21,7 @@ For more information, read the [`Operation`](operation) reference.
 
 ## Understanding the abstraction
 
-It's a good idea to use repositories isntead of data sources directly becuase often you will want to do a more elaborated data management (aka. data business logic).
+It's a good idea to use repositories instead of data sources directly becuase often you will want to do a more elaborated data management (aka. data business logic).
 
 For example, we can think in the case of buidling a simple cache system. Typically, starting from a network API service class, we would write some code similar to: 
 
