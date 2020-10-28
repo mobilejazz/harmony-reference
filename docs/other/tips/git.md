@@ -1,7 +1,7 @@
 ---
 title: Git
 ---
-Tips and Tricks for Git
+## Tips and Tricks for Git
 
 ### Git Submodules
 
