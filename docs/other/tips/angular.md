@@ -9,6 +9,7 @@ The recommended way to have 0 downtime it's using dockerized builds with a docke
 In case that this isn't possible in your project, here you have a quick fix.
 
 Create this folders on `/dist`:
+
 1. `/dist/previousbuild`
 1. `/dist/nginx` (the new production path)
 
@@ -23,10 +24,13 @@ Create this folders on `/dist`:
 
 `angular.json` add on `projects -> *projectname* -> architect -> build -> options`:
 ```json
+...
 "outputPath": "dist/tempbuild",
+...
 ```
 
 And the result:
+
 1. on build starts, the folder `previousbuild` will be erased
 1. the new build will be created on `tempbuild`
 1. when the new build is done, the previous production build will move to `previousbuild` and the new one will be on
