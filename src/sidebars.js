@@ -152,6 +152,15 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Tips and Tricks',
+      items: [
+        'other/tips/node',
+        'other/tips/angular',
+        'other/tips/git'
+      ]
+    },
+    {
+      type: 'category',
       label: 'Old',
       items: [{
         type: 'category',
