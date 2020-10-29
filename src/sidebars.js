@@ -71,7 +71,8 @@ module.exports = {
                     'fundamentals/data/data-source/in-memory-data-source',
                     'fundamentals/data/data-source/device-storage-data-source',
                     'fundamentals/data/data-source/data-source-validator',
-                    'fundamentals/data/data-source/keychain-data-source'
+                    'fundamentals/data/data-source/keychain-data-source',
+                    'fundamentals/data/data-source/realm-data-source'
                   ]
                 },
               ]

@@ -5,7 +5,7 @@ title: Concept
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A `DataSource` is an interace for those classes responsible of managing sources of data.
+A `DataSource` is an interface for those classes responsible of managing sources of data.
 
 Among the Harmony architecture, the data source is the first component that provides a defined public interface for data manipulation. Every action that a data source does must be bundled within its interface. 
 
