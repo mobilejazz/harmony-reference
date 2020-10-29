@@ -17,7 +17,7 @@ Create this folders on `/dist`:
 ```json
 ...
 "prebuild": "rm -rf dist/previousbuild",
-"build": "npm rebuild node-sass npm install && ng build --prod --source-map --optimization=true --buildOptimizer=true --progress=true",
+"build": "ng build --prod --source-map --optimization=true --buildOptimizer=true --progress=true",
 "postbuild": "mv dist/nginx dist/previousbuild && mv dist/tempbuild dist/nginx",
 ...
 ```
