@@ -41,13 +41,13 @@ struct UserEntity {
 <TabItem value="typescript">
 
 ```typescript
-export class User {
+export class UserEntity {
     constructor(
         readonly id: number,
         readonly createdAt: Date,
         readonly updatedAt: Date,
         readonly name: string,
-    ) {}   
+    ) {}
 }
 ```
 

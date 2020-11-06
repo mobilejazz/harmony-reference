@@ -51,7 +51,7 @@ The data layer is divided in sub-layers:
 
 - [Repository](data/repository/repository)
 - [Data Source](data/data-source/data-source)
-- [Entity]
+- [Entity](data/entity)
 
 For example, the data layer could implement an HTTP client or a database storage, providing fetch / save / delete capabilities from the different data sources.
  
