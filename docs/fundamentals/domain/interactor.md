@@ -18,7 +18,7 @@ For example, we could have an interactor that returns the current time:
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -62,7 +62,7 @@ For example, we could have an interactor that returns the time between now and a
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -121,7 +121,7 @@ Default interators have one method called `execute` (in Kotlin, it is using the 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -153,7 +153,7 @@ Default interators have one method called `execute` (in Kotlin, it is using the 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -185,7 +185,7 @@ Default interators have one method called `execute` (in Kotlin, it is using the 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 
@@ -231,7 +231,7 @@ It is recomended to **compose default interactors** instead of having direct ref
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
 ]}>
 <TabItem value="kotlin">
 

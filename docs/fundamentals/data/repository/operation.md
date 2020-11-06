@@ -12,7 +12,7 @@ The base definition of an operation is empty, as this object must be customized 
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">
@@ -50,7 +50,7 @@ For example, if repositories want recover from a data source failure N times, we
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">

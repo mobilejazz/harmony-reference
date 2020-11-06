@@ -16,7 +16,7 @@ For example, an entity would be something like:
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
@@ -41,13 +41,13 @@ struct UserEntity {
 <TabItem value="typescript">
 
 ```typescript
-export class User {
+export class UserEntity {
     constructor(
         readonly id: number,
         readonly createdAt: Date,
         readonly updatedAt: Date,
         readonly name: string,
-    ) {}   
+    ) {}
 }
 ```
 
