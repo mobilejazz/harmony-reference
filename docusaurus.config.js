@@ -36,11 +36,11 @@ module.exports = {
             },
             {
               label: 'Getting Started',
-              to: 'docs/getting-started/prerequisites',
+              to: 'docs/getting-started/overview',
             },
             {
               label: 'Fundamentals',
-              to: 'docs/domain/interactor/interactor',
+              to: 'docs/fundamentals/concepts',
             },
           ],
         },
