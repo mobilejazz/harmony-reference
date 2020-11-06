@@ -1,11 +1,13 @@
 ---
-title: Angular
+title: Tips and Tricks for Angular
+sidebar_label: Angular
 ---
-## Tips and Tricks for Angular
 
-### Build with 0 downtime on Angular
+## Add cache busting to i18n files
 
-The recommended way to have 0 downtime it's using dockerized builds with a docker registry service.
+## Build with zero downtime on Angular
+
+The recommended way to have zero downtime it's using dockerized builds with a docker registry service.
 In case that this isn't possible in your project, here you have a quick fix.
 
 Create this folders on `/dist`:
@@ -14,6 +16,7 @@ Create this folders on `/dist`:
 1. `/dist/nginx` (the new production path)
 
 `package.json` add on `scripts` section:
+
 ```json
 ...
 "prebuild": "rm -rf dist/previousbuild",
@@ -23,6 +26,7 @@ Create this folders on `/dist`:
 ```
 
 `angular.json` add on `projects -> *projectname* -> architect -> build -> options`:
+
 ```json
 ...
 "outputPath": "dist/tempbuild",

@@ -1,9 +1,9 @@
 ---
-title: Git
+title: Tips and Tricks for Git
+sidebar_label: Git
 ---
-## Tips and Tricks for Git
 
-### Git Submodules
+## Git Submodules
 
 ```bash
 // 1. Add submodule to a new repo
@@ -22,7 +22,7 @@ git pull --recurse-submodules
 
 by [git](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 
-### Delete branch locally and remotely
+## Delete branch locally and remotely
 
 ```bash
 // 1. locally
@@ -34,7 +34,7 @@ git push origin :remoteBranchName
 
 by [FreeCodeCamp](https://forum.freecodecamp.org/t/how-to-delete-a-git-branch-both-locally-and-remotely/13211)
 
-### Apply .gitignore to committed files
+## Apply .gitignore to committed files
 
 ```bash
 // Edit your .gitignore with the file to ignore and run
@@ -43,7 +43,7 @@ git rm --cached /path/to/file
 
 by [SO](https://stackoverflow.com/questions/7527982/applying-gitignore-to-committed-files)
 
-### Git ignore file mode (chmod) changes
+## Git ignore file mode (chmod) changes
 
 ```bash
 // Only current repo
