@@ -1,3 +1,3 @@
 ---
-title: Typescript
+title: TypeScript
 ---

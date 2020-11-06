@@ -70,12 +70,19 @@ function linkExists(file, link) {
 function validateLinks(file, content) {
   const links = markdownLinkExtractor(content).filter(link => !link.includes('http'));
   const errors = [];
+  const imageExts = ['.gif', '.jpg', '.jpeg', '.png', '.webp'];
 
   links.forEach(link => {
     const extension = extname(link);
     const hasExtension = extension !== '';
     const hasPagesPrefix = /^\/?pages\//.test(link);
     const linkDoesNotExist = !linkExists(file, link);
+    const isImage = imageExts.includes(extension);
+
+    // Ignore image links
+    if (isImage) {
+      return;
+    }
 
     if (hasExtension) {
       errors.push(`Remove "${colors.red(link)}" link "${extension}" extension.`);
@@ -95,7 +102,13 @@ function validateLinks(file, content) {
 
 function validateFile(file) {
   const content = readFileSync(file, 'utf-8');
+  const ignoreExts = ['.gif', '.jpg', '.jpeg', '.png', '.webp'];
+  const ext = extname(file);
   let errors = [];
+
+  if (ignoreExts.includes(ext)) {
+    return { file, errors };
+  }
 
   const validators = [
     validateLowerCase,

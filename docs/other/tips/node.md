@@ -1,9 +1,9 @@
 ---
-title: Node
+title: Tips and Tricks for Node.js
+sidebar_label: Node.js
 ---
-## Tips and Tricks for Node
 
-### npm install
+## `npm install`
 
 Unlike with PHP `composer install`, the command `npm install` takes `package.json` and resolves the dependencies which means that you might introduce a version different from the one you tested on.
 

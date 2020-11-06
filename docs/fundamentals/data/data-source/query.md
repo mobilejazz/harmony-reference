@@ -12,7 +12,7 @@ The base definition of a query is empty, as this object must be customized in cu
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
@@ -52,7 +52,7 @@ For example, if one or many data sources can perform a serch by text, we would d
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
@@ -149,7 +149,7 @@ In an effort to build a friendly key-value ecosystem for data sources, Harmony d
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
@@ -220,7 +220,7 @@ Coming back to the `SearchQuery` example, we could now make it adopt `KeyQuery`,
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">

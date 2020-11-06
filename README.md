@@ -1,12 +1,10 @@
 # Harmony Reference
 
-test
-
 ## Contributing to the documentation
 
 - The documentation is located the [`docs` folder](docs)
-- New contributions should follow GitFlow: create a `feature/*` branch, merge it to `develop` and finally merge it to `master``
-- You don't need to know anything about Docusaurus, and you don't need to run the project locally to update the documentation.
+- New contributions should follow GitFlow: create a `feature/*` branch, merge it to `develop` and finally merge it to `master`
+- You don't need to know anything about [Docusaurus](https://v2.docusaurus.io), and you don't need to run the project locally to update the documentation.
 
 ### Adding a new page
 
@@ -26,7 +24,7 @@ title: Executor
 
 ## Development
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/).
+This website is built using [Docusaurus 2](https://v2.docusaurus.io).
 
 ### Initial Setup
 
@@ -38,7 +36,7 @@ This website is built using [Docusaurus 2](https://v2.docusaurus.io/).
 ### Development Server
 
 - Run: `npm start`
-- This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
+- This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ### Build
 

@@ -6,10 +6,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="mobile-jazz" values={[
-{ label: 'Mobile Jazz', value: 'mobile-jazz', },
+    { label: 'Mobile Jazz', value: 'mobile-jazz', },
     { label: 'Android', value: 'android', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', }
 ]}>
 

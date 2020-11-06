@@ -35,7 +35,7 @@ Within the domain layer, there are 3 major concepts:
 - [Models](domain/model)
 - [Threading](domain/threading)
 
-For example, while building a NestJS Restful API the domain would be coupled with multiple Typescript libraries, but wouldn't be using any NestJS package.
+For example, while building a NestJS Restful API the domain would be coupled with multiple TypeScript libraries, but wouldn't be using any NestJS package.
 
 Typically, in the domain layer we would find a big list of interactors (use cases) and model objects that combined provide the functionality defined in the specification. 
 
@@ -51,7 +51,7 @@ The data layer is divided in sub-layers:
 
 - [Repository](data/repository/repository)
 - [Data Source](data/data-source/data-source)
-- [Entity]
+- [Entity](data/entity)
 
 For example, the data layer could implement an HTTP client or a database storage, providing fetch / save / delete capabilities from the different data sources.
  

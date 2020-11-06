@@ -20,6 +20,15 @@
   text-align: center;
 }
 
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-wrapper .hero {
+  flex-grow: 1;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;

@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">

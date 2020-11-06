@@ -35,7 +35,7 @@ https://github.com/mobilejazz/harmony-php/tree/master/sample
 1. Configure server with `localhost` name and `localhost` host.
 2. See `/docker/docker-compose.yml` to know the volumes for each folder.
 
-## Typescript
+## TypeScript
 
 Under development
 

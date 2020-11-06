@@ -89,7 +89,7 @@ The `Repository` functions replicate the [`DataSource`](/docs/fundamentals/data/
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">
@@ -142,7 +142,7 @@ Actions related functions.
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">
@@ -195,7 +195,7 @@ Deletion related functions.
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', }
 ]}>
 <TabItem value="kotlin">

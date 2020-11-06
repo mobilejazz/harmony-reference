@@ -15,7 +15,7 @@ module.exports = {
         alt: 'Harmony Reference Logo',
         src: 'svg/as_harmony_logo_imagotype.svg',
       },
-      links: [
+      items: [
         {to: 'docs/introduction', label: 'Reference', position: 'left'},
         {
           href: 'https://github.com/mobilejazz/harmony-reference',

@@ -70,12 +70,13 @@ Git repository: https://github.com/mobilejazz/harmony-php
 
 Step 1. Clone repo:
 
-```
+```sh
 git clone git@github.com:mobilejazz/harmony-php.git
 ```
 
 Step 2. Add Harmony PHP on the autoload section of you composer.json
-```
+
+```json
 Ex.
 ...
 "autoload": {
@@ -89,34 +90,20 @@ Ex.
 ```
 
 Step 3. run `composer update`
-```
+
+```sh
 composer update
 ```
 
-## Typescript
+## TypeScript
 
-Git repository: https://github.com/mobilejazz/harmony-typescript
+Git respository: https://github.com/mobilejazz/harmony-typescript
 
-Harmony for Typescript is been distributed via NPM.
-
-There are 4 main packages:
+Harmony for TypeScript is distributed via the following NPM packages:
 
 1. [@mobilejazz/harmony-core](https://www.npmjs.com/package/@mobilejazz/harmony-core): Contains all basic tools and repository files.
 2. [@mobilejazz/harmony-nest](https://www.npmjs.com/package/@mobilejazz/harmony-nest): Contains NestJS related files, including the OAuth2 server.
 3. [@mobilejazz/harmony-typeorm](https://www.npmjs.com/package/@mobilejazz/harmony-typeorm): Contains TypeORM related files.
 4. [@mobilejazz/harmony-angular](https://www.npmjs.com/package/@mobilejazz/harmony-angular): Contains Angular related files.
 
-To install them just do a `npm install --save <package>` or link it in your package by writing and later doing an `npm install`:
-
-```json
-{
-    ...
-    "dependencies": {
-        "@mobilejazz/harmony-core": "$latest_version",
-        "@mobilejazz/harmony-nest": "$latest_version",
-        "@mobilejazz/harmony-typeorm": "$latest_version",
-        "@mobilejazz/harmony-angular": "$latest_version",
-        ...
-    }
-}
-```
+Run `npm install --save <package>` to install/update any of these.
