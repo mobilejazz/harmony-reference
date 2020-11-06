@@ -69,7 +69,7 @@ Find below the interfaces for each data source group:
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
@@ -129,7 +129,7 @@ Some examples:
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">
@@ -191,7 +191,7 @@ Also, there is only one delete method (no `deleteAll`) as it is considered an at
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">

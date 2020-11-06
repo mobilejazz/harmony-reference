@@ -35,7 +35,7 @@ Within the domain layer, there are 3 major concepts:
 - [Models](domain/model)
 - [Threading](domain/threading)
 
-For example, while building a NestJS Restful API the domain would be coupled with multiple Typescript libraries, but wouldn't be using any NestJS package.
+For example, while building a NestJS Restful API the domain would be coupled with multiple TypeScript libraries, but wouldn't be using any NestJS package.
 
 Typically, in the domain layer we would find a big list of interactors (use cases) and model objects that combined provide the functionality defined in the specification. 
 

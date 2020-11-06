@@ -224,12 +224,12 @@ public extension Logger {
 }
 ```
 
-### Alias methods (Typescript)
+### Alias methods (TypeScript)
 
 There are also few alias methods available, one for each log level, all of them with an optional first parameter: `tag`.
+
 ```typescript
 // TypeScript
-
 interface Logger {
     trace(message: string): void;
     trace(tag: string, message: string): void;

@@ -93,11 +93,11 @@ Step 3. run `composer update`
 composer update
 ```
 
-## Typescript
+## TypeScript
 
 Git repository: https://github.com/mobilejazz/harmony-typescript
 
-Harmony for Typescript is been distributed via NPM.
+Harmony for TypeScript is been distributed via NPM.
 
 There are 4 main packages:
 

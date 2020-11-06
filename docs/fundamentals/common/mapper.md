@@ -10,7 +10,7 @@ A `Mapper` defines a function to map a value from a type to another type.
 <Tabs defaultValue="kotlin" values={[
     { label: 'Kotlin', value: 'kotlin', },
     { label: 'Swift', value: 'swift', },
-    { label: 'Typescript', value: 'typescript', },
+    { label: 'TypeScript', value: 'typescript', },
     { label: 'PHP', value: 'php', },
 ]}>
 <TabItem value="kotlin">

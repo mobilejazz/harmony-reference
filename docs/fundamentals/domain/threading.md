@@ -31,7 +31,7 @@ Furthermore, as each language has its own threading tools, there is no actual re
   </LinkCard>
   <LinkCard
       href="fundamentals/domain/threading/typescript"
-      title="Typescript"
+      title="TypeScript"
       description=""
       footer="View">
   </LinkCard>
