@@ -3,7 +3,19 @@ title: Tips and Tricks for Angular
 sidebar_label: Angular
 ---
 
-## Add cache busting to i18n files
+## Add cache busting to `ngx-translate` i18n files
+
+**The problem**: translation files cache is not refreshed after deploy.
+
+![](./assets/tips-ngx-tranlate-cache-busting.png)
+
+**Solution**:
+
+1. Install `ngx-build-plus`, this allows to add custom Webpack partial configs.
+2. Update `angular.json` to use `ngx-build-plus` as builder. Replace all instances of `@angular-devkit/build-angular:browser` with `ngx-build-plus:browser`.
+3. Create [`webpack.partial.js`](https://gist.github.com/doup/30b9435f8128b338695fafe885ddf764#file-webpack-partial-js).
+4. Update `package.json` to [use the new Webpack partial](https://gist.github.com/doup/30b9435f8128b338695fafe885ddf764#file-package-json-md)
+5. Update `ngx-translate` `TranslateHttpLoader` config to [use the i18n hash](https://gist.github.com/doup/30b9435f8128b338695fafe885ddf764#file-app-module-ts-md).
 
 ## Build with zero downtime on Angular
 
