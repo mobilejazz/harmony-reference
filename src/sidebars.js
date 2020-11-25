@@ -111,7 +111,8 @@ module.exports = {
       label: 'Best Practices',
       items: [
         'best-practices/naming-convention',
-        'best-practices/dependency-injection'
+        'best-practices/dependency-injection',
+        'best-practices/presenter-specs'
       ]
     },
     {
