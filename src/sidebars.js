@@ -112,7 +112,8 @@ module.exports = {
       items: [
         'best-practices/naming-convention',
         'best-practices/dependency-injection',
-        'best-practices/presenter-specs'
+        'best-practices/presenter-specs',
+        'best-practices/angular'
       ]
     },
     {
