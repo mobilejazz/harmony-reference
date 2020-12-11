@@ -72,7 +72,9 @@ module.exports = {
                     'fundamentals/data/data-source/device-storage-data-source',
                     'fundamentals/data/data-source/data-source-validator',
                     'fundamentals/data/data-source/keychain-data-source',
-                    'fundamentals/data/data-source/realm-data-source'
+                    'fundamentals/data/data-source/realm-data-source',
+                    'fundamentals/data/data-source/raw-sql-data-source',
+                    'fundamentals/data/data-source/sql-row-counter-data-source'
                   ]
                 },
               ]
