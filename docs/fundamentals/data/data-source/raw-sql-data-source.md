@@ -165,7 +165,7 @@ class AgeAndDepartmentFilterQuery extends SQLWherePaginationQuery {
     }
 }
 
-const results = await dataSource.getAll(new AgeAndDepartmentFilterQuery(20, 10));
+const results = await dataSource.getAll(new AgeAndDepartmentFilterQuery(20, 10, 10, 'Applied Maths'));
 ```
 
 :::important Note
