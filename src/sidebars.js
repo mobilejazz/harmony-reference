@@ -115,7 +115,8 @@ module.exports = {
         'best-practices/naming-convention',
         'best-practices/dependency-injection',
         'best-practices/presenter-specs',
-        'best-practices/angular'
+        'best-practices/angular',
+        'best-practices/folders-structures'
       ]
     },
     {
