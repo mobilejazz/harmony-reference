@@ -1,0 +1,13 @@
+{
+    "extends": ["stylelint-config-standard","stylelint-config-rational-order"],
+    "plugins": [
+        "stylelint-scss",
+        "stylelint-order"
+    ],
+    "rules": {
+        "indentation" : 4,
+        "at-rule-no-unknown": null,
+        "scss/at-rule-no-unknown": true,
+        "scss/at-extend-no-missing-placeholder": true
+    }
+}

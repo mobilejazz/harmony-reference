@@ -74,13 +74,19 @@ function validateLinks(file, content) {
 
   links.forEach(link => {
     const extension = extname(link);
-    const hasExtension = extension !== '';
+    const hasExtension = extension !== "";
     const hasPagesPrefix = /^\/?pages\//.test(link);
+    const hasConfigsPrefix = /^\/?configs\//.test(link);
     const linkDoesNotExist = !linkExists(file, link);
     const isImage = imageExts.includes(extension);
 
     // Ignore image links
     if (isImage) {
+      return;
+    }
+
+    // Ignore configs downloads
+    if (hasConfigsPrefix) {
       return;
     }
 
