@@ -112,6 +112,7 @@ module.exports = {
       type: 'category',
       label: 'Best Practices',
       items: [
+        'best-practices/code-standard',
         'best-practices/naming-convention',
         'best-practices/dependency-injection',
         'best-practices/presenter-specs',

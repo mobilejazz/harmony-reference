@@ -60,8 +60,8 @@ function validateNoTopLevelTitle(file, content) {
 function linkExists(file, link) {
   const isAbsolute = /^\/docs\//.test(link);
   const linkFilePath = isAbsolute ?
-    join(docsPath, link.replace('/docs/', '')) :
-    join(dirname(file), link);
+                       join(docsPath, link.replace("/docs/", "")) :
+                       join(dirname(file), link);
   const fileExists = existsSync(`${linkFilePath}.md`) || existsSync(`${linkFilePath}.mdx`);
 
   return fileExists;
@@ -74,13 +74,19 @@ function validateLinks(file, content) {
 
   links.forEach(link => {
     const extension = extname(link);
-    const hasExtension = extension !== '';
+    const hasExtension = extension !== "";
     const hasPagesPrefix = /^\/?pages\//.test(link);
+    const hasConfigsPrefix = /^\/?configs\//.test(link);
     const linkDoesNotExist = !linkExists(file, link);
     const isImage = imageExts.includes(extension);
 
     // Ignore image links
     if (isImage) {
+      return;
+    }
+
+    // Ignore configs downloads
+    if (hasConfigsPrefix) {
       return;
     }
 
