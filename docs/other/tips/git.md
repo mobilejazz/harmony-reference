@@ -72,7 +72,7 @@ An example of how to merge two repos (one with backend code and other with front
 1. `git remote add -f frontend urlToFrontendRepo`
 1. `git fetch --all`
 1. `git merge frontend/master --allow-unrelated-histories`
-1. (optional) In case the first step was skipped, move the content to `backend`:
+1. (optional) In case the first step was skipped, move the content to `frontend`:
     1. `mkdir frontend`
     1. `for file in $(ls | grep -v 'backend' | grep -v 'frontend'); do git mv $file frontend; done;`
     1. `git commit -m "move frontend to subfolder"`
