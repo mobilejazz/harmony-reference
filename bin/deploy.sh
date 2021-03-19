@@ -15,7 +15,5 @@ docker login --username "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" r
 
 docker push registry.mobilejazz.com/harmony/documentation:"$DOCKER_IMAGE_TAG"
 
-echo "$SERVER_USER"@"$SERVER_ADDRESS":"$SERVICE_PATH"
-
 # copying all the require files to run the application into the server
 scp ../docker/compose.yml ../docker/compose.prod.yml up.sh ../docker/.env "$SERVER_USER"@"$SERVER_ADDRESS":"$SERVICE_PATH"
