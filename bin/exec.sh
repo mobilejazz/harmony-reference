@@ -1,4 +1,4 @@
 #!/bin/sh
 
-ssh root@"${SERVER_ADDRESS}" 'cd ~/app && chmod u+x up.sh && ./up.sh'
+ssh ${SERVER_USER}@"${SERVER_ADDRESS}" "cd ${SERVICE_PATH} && chmod u+x up.sh && ./up.sh"
 

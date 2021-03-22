@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: application
 steps:
   - name: staging-deployment
     image: docker:git
@@ -18,6 +18,11 @@ steps:
         from_secret: SSH_PRIVATE_KEY
       SSH_KNOWN_HOSTS:
         from_secret: SSH_KNOWN_HOSTS
+      SERVICE_PATH:
+        from_secret: SERVICE_PATH
+      SERVER_USER:
+        from_secret: SERVER_USER
+
     commands:
       - sleep 5 # just to let docker to be ready
       - echo "Configuring the ssh"
@@ -42,15 +47,13 @@ steps:
 
       - cd bin
       - ./deploy.sh
-
-      ## Sending the docker compose files to the server to be executed
       - ./exec.sh
 
 trigger:
   branch:
-    - master
+  - master
   event:
-    - push
+  - push
 
 volumes:
   - name: dockersock
