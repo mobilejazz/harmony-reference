@@ -61,3 +61,17 @@ volumes:
   - name: dockersock
     host:
       path: /var/run/docker.sock
+
+---
+kind: pipeline
+type: exec
+name: after-host
+
+steps:
+  - name: docker-cleaning
+    commands:
+      - docker image prune -f --all --filter until=1h
+      - docker container prune -f
+
+depends_on:
+  - default
