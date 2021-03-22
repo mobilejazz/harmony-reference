@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ~/app || exit
-
 source env-vars-pull.sh
 
 # Log in into the gitlab container register to push the docker image built
