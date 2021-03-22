@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: application
 steps:
   - name: staging-deployment
     image: docker:git
@@ -47,15 +47,12 @@ steps:
 
       - cd bin
       - ./deploy.sh
-
-      ## Sending the docker compose files to the server to be executed
       - ./exec.sh
-
-        # trigger:
-        #  branch:
-        #    - master
-        #  event:
-        #    - push
+    when:
+      branch:
+        - master
+      event:
+        - push
 
 volumes:
   - name: dockersock
@@ -74,4 +71,4 @@ steps:
       - docker container prune -f
 
 depends_on:
-  - default
+  - application
