@@ -3,6 +3,7 @@ services:
   harmony-reference:
     container_name: harmony-reference
     image: registry.mobilejazz.com/harmony/documentation:$HARMONY_REFERENCE_VERSION
+    restart: unless-stopped
     networks:
         common_network:
     labels:
