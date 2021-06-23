@@ -79,3 +79,16 @@ An example of how to merge two repos (one with backend code and other with front
 1. `git push`
 
 by [saintgimp.org](https://saintgimp.org/2013/01/22/merging-two-git-repositories-into-one-repository-without-losing-file-history/)
+
+## Mirror one existing Repo into a brand new Repo
+
+An example of how to mirror an existing repository to a new repo. The destination repository must be empty.
+
+1. `git clone --mirror git@test.com:user/source.git temp-folder`
+2. Open the folder `cd temp-folder`
+3. Add new origin: `git remote add new-origin git@test.com:user/destination.git`
+4. Push repo to destination: `git push new-origin --mirror`
+5. Navigate back: `cd ..`
+6. Remove cloned repo after mirroring it: `rm -rf temp-folder`
+
+by [Joan Martin](https://gist.github.com/vilanovi/4eb733a4e121ad681367381c7e194229).
