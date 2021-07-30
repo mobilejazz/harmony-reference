@@ -1,59 +1,25 @@
 version: "3.5"
 services:
   harmony-reference:
+    container_name: harmony-reference
     image: registry.mobilejazz.com/harmony/documentation:$HARMONY_REFERENCE_VERSION
-    environment:
-      - VIRTUAL_HOST=harmony.mobilejazz.com
-      - LETSENCRYPT_HOST=harmony.mobilejazz.com
-      - LETSENCRYPT_EMAIL=harmony@mobilejazz.com
-  drone-server:
-    image: drone/drone:1.6.4
-    volumes:
-      - /var/lib/drone:/data
-    environment:
-      - DRONE_GITHUB_CLIENT_ID=$DRONE_GITHUB_CLIENT_ID
-      - DRONE_GITHUB_CLIENT_SECRET=$DRONE_GITHUB_CLIENT_SECRET
-      - DRONE_RPC_SECRET=$DRONE_RPC_SECRET
-      - DRONE_RUNNER_CAPACITY=2
-      - DRONE_AGENTS_ENABLED=true
-      - DRONE_SERVER_HOST=drone-harmony.mobilejazz.com
-      - DRONE_SERVER_PROTO=https
-      - DRONE_USER_CREATE=username:$DRONE_USER,machine:false,admin:true,token:$DRONE_USER_PASSWORD
-      - DRONE_TLS_AUTOCERT=false
-      - VIRTUAL_HOST=drone-harmony.mobilejazz.com
-      - LETSENCRYPT_HOST=drone-harmony.mobilejazz.com
-      - LETSENCRYPT_EMAIL=drone.harmony@mobilejazz.com
-    ports:
-      - '2000:80'
-      - '8443:443'
     restart: unless-stopped
-  drone-runner-docker:
-    image: drone/drone-runner-docker:latest
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on:
-      - drone-server
-    ports:
-      - '3000:3000'
-    environment:
-      - DRONE_RPC_HOST=drone-server
-      - DRONE_RPC_PROTO=http
-      - DRONE_RPC_SECRET=$DRONE_RPC_SECRET
-      - DRONE_RUNNER_CAPACITY=2
+    networks:
+        common_network:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=common_network"
+      # Defines router rules for the entrypoint we've defined as "web" (http)
+      - "traefik.http.routers.harmony-reference.entrypoints=web"
+      - "traefik.http.routers.harmony-reference.rule=Host(`harmony.mobilejazz.com`)"
+      - "traefik.http.middlewares.harmony-reference-https-redirect.redirectscheme.scheme=https"
+      # Defines router rules for the entrypoint we've defined as "websecure" (https)
+      - "traefik.http.routers.harmony-reference-secure.entrypoints=websecure"
+      - "traefik.http.routers.harmony-reference-secure.rule=Host(`harmony.mobilejazz.com`)"
+      - "traefik.http.routers.harmony-reference-secure.tls=true"
+      - "traefik.http.routers.harmony-reference-secure.tls.certresolver=defaultResolver"
+networks:
+    common_network:
+        external: true
+        name: 'common_network'
 
-  node-exporter:
-    container_name: node-exporter
-    image: prom/node-exporter:v1.0.1
-    volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
-    command:
-      - '--path.procfs=/host/proc'
-      - '--path.sysfs=/host/sys'
-      - --collector.filesystem.ignored-mount-points
-      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
-    ports:
-      - 9100:9100
-    restart: unless-stopped

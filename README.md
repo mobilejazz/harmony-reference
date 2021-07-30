@@ -5,9 +5,9 @@
 ## Contributing to the documentation
 
 - The documentation is located the [`docs` folder](docs)
-- New contributions should follow:
-    1. create a `feature/*` branch
-    1. create PR to `master`
+- New contributions should follow the following approach:
+  - Create a `feature/*` branch,
+  - Create a pull request to merge it to `master`
 - You don't need to know anything about [Docusaurus](https://v2.docusaurus.io), and you don't need to run the project locally to update the documentation.
 
 ### Adding a new page
