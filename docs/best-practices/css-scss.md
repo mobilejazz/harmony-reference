@@ -43,7 +43,7 @@ sass/
 ```
 
 * `main.scss` is the entry point, this file should only have `@import`s to other SASS files.
-* `_vars.scss` this holds all our global variables (if a variable is specific to a component it should go in the component file **inside** the top level class `.block {}`). As rule we name our variables from "general to specific", e.g.: preffer `$color-red`, or `$size-body` vs `$red-color` or `$body-size`.
+* `_vars.scss` this holds all our global variables (if a variable is specific to a component it should go in the component file **inside** the top level class `.block {}`). As rule we name our variables from "general to specific", e.g.: preffer `$color-primary`, or `$size-body` vs `$primary-color` or `$body-size`.
 * `components` holds our components which follow BEM convention.
   * Use one file per component
   * The filename should follow the components name: `.my-component {}` => `_my-component.scss`
