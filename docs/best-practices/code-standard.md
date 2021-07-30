@@ -23,7 +23,7 @@ The rest of the implementation will happen in a per language basis and will cons
 
 ## Config files
 
-1. IntelliJ IDEA products [XML config file](/configs/PHPStrom_MJ_CodeStyle.xml). Go to Settings -> Editor -> Code Style
+1. IntelliJ IDEA products [XML config file](/configs/Jetbrains_MJ_CodeStyle.xml). Go to Settings -> Editor -> Code Style
    -> Scheme -> Import Scheme -> Intellij IDEA XML
 1. Visual Studio Code [.editorconfig](/configs/editorconfig)
 1. Tslint [tsling.json](/configs/tslint_json)
@@ -103,7 +103,7 @@ Once the linting plugin is installed the command pallete wil have a `Fix all aut
 
 **JetBrains IDEs**
 
-Once ESLint is enabled you just need to hit `Alt + Enter` on the ESLint warning and select the option **Fix current file with ESLint** from the contextual menu.
+Once ESLint is enabled you just need to hit _Double Shift_ action and search for `Fix current file with ESLint`.
 
 
 ### Pre-commit hook
