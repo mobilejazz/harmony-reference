@@ -1,13 +1,12 @@
 ---
-title: Code Standard
+title: Web Code Standard
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-```
-Note: this document needs a refactor after we arrive to a new agreement
-for the Harmony Code Standard.
-```
+:::danger
+**This document is outdated**, it needs a refactor after we arrive to a new agreement for the Harmony Code Standard.
+:::
 
 This repository is intended to be used as reference to enforce a code standard within MJ's web team.
 

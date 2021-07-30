@@ -2,10 +2,9 @@
 title: CSS/SCSS Guidelines
 ---
 
-```
-Note: this document needs a refactor after we arrive to a new agreement
-for the Harmony Code Standard.
-```
+:::danger
+**This document is outdated**, it needs a refactor after we arrive to a new agreement for the Harmony Code Standard.
+:::
 
 We aim (as far as possible) to…
 
