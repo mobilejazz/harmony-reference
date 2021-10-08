@@ -1,5 +1,5 @@
 # Install the node dependencies for the jekyll website
-FROM node:erbium-alpine AS node-build
+FROM node:16-alpine AS node-build
 
 ENV WORKDIR /usr/src/application/frontend
 
@@ -10,7 +10,7 @@ COPY . .
 RUN apk add --no-cache bash git && npm ci && npm run build
 
 # Final nginx image with the website compiled
-FROM nginx:1.15.8-alpine
+FROM nginx:1.21.3-alpine
 
 WORKDIR /usr/share/nginx/html
 

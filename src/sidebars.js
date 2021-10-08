@@ -121,6 +121,14 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'UI Components',
+      items: [
+        'ui-components/fullscreen-errors/fullscreen-errors',
+        'ui-components/transient-errors/transient-errors'
+      ]
+    },
+    {
+      type: 'category',
       label: 'Other resources',
       items: [
         {

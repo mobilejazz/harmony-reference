@@ -3,7 +3,9 @@
 ## Contributing to the documentation
 
 - The documentation is located the [`docs` folder](docs)
-- New contributions should follow GitFlow: create a `feature/*` branch, merge it to `develop` and finally merge it to `master`
+- New contributions should follow the following approach: 
+  - Create a `feature/*` branch, 
+  - Create a pull request to merge it to `master`
 - You don't need to know anything about [Docusaurus](https://v2.docusaurus.io), and you don't need to run the project locally to update the documentation.
 
 ### Adding a new page
