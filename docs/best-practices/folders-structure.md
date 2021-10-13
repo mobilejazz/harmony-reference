@@ -4,54 +4,78 @@ title: Mobile folders structure
 
 > New projects should follow the following guidelines. Also, feel free to refactor your projects if it's possible and got the time.
 
-## Folders structure
+### Kotlin Multiplatform Project structure
 
-Split in two parts. Presentation layer and domain+data layer.
+#### KMM: Application
 
-#### Presentation layer
-
-In the presentation layer, there are all the parts of the application that are related with the UI or specific for each platform. We can have the activities or fragments, view controllers, custom views, adapters, manager for sensors, etc.
+In the application layer, there are all the platform specific parts. Activities, fragments, view controllers, custom views, adapters but also sensors, platform analytics, third party libraries specific for each platform.
 
 ```txt
 .
 └── project
-    ├── navigation				# navigation logic
-    ├── application 			# platform stuff
-    │   ├── di 					# dependency injection
-    │   └── ui
-    │       ├── topic 			# each feature or topic
-    │       │   ├── presenter 	# if not multiplatform, presenters here
-    │       │   └── adapters	# adapter in Android
-    │       ├── customviews		# shared custom views
-    │       └── base			# shared base classes
-    ├── helper
-    └── analytics
+    ├── ApplicationProvider.kt
+    └── application             # Native stuff
+        ├── navigation          # navigation logic
+        ├── ui                  # Presentation layer but doesn't include the presenters. They are in the KMM project.
+        │   ├── screens         
+        │   │   └── screen-name # Includes Activities/Fragments/VC and DI Provider if needed.
+        │   └── views           # custom views
+        ├── sensor (example)    # Any other native functionality that may be a dataSource (for example, a sensor) will be located inside the application package
+        └── analytics
 ```
 
-#### Domain + Data layer
+#### KMM Core: Presentation + Domain + Data layer
 
-There are all the parts from the presenter (if project is multiplatform, if not then from domain layer with just interactors) to the data sources.
+In this part, there are presenters, interactor, repositories and dataSources. Group by features. A feature is a functionality of the app.
 
 ```txt
 .
-├── topic
-│   ├── data
-│   │   ├── datasource
-│   │   ├── entity
-│   │   ├── mapper
-│   │   └── query
-│   ├── domain
-│   │   ├── exception
-│   │   ├── interactor
-│   │   └── model
-│   └── TopicProvider.kt
-├── application
-│   └── presenter
-└── ApplicationProvider.kt
+└── project
+    └── core
+        ├── features
+        │   └── feature-name          # Includes domain and data layer files
+        │       ├── data
+        │       │   ├── datasource
+        │       │   ├── entity
+        │       │   ├── mapper
+        │       │   └── query
+        │       ├── domain
+        │       │   ├── exception
+        │       │   ├── interactor
+        │       │   └── model
+        │       └── FeatureProvider.kt # Provides Interactors mostly
+        ├── screens
+        │   └── screen-name            # Contains the presenter class only
+        ├── common                   
+        └── ApplicationProvider.kt
 ```
 
-##### Example
+### Native projects
 
-![Domain + Data layer](https://pasteboard.co/JEVnf57.png "")
+The main difference between a KMM and a native project is that the presentation layer also contains the presenters.
 
-
+```txt
+.
+└── project
+    ├── ApplicationProvider.kt
+    ├── application              # Platform stuff
+    │   ├── navigation
+    │   └── ui
+    │       ├── screens
+    │       │   └── screen-name  # Includes Activity/Fragment/VC, presenter and a DI Provider (This provider provides mostly presenters)
+    │       ├── common           # Includes extensions, base clases, helpers
+    │       └── views            # Custom Views
+    ├── features                 # A feature is a functionality of the app. Contains Domain + Data layer.
+    │   └── feature-name         # Each feature contains his own domain and data logic
+    │       ├── data
+    │       │   ├── dataSource
+    │       │   ├── entity
+    │       │   ├── mapper
+    │       │   └── query
+    │       ├── domain
+    │       │   ├── exception
+    │       │   ├── interactor
+    │       │   └── model
+    │       └── FeatureProvider.kt # DI Component. Provides interactor mostly
+    └── analytics
+```
