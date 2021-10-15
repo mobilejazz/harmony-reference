@@ -60,22 +60,23 @@ The main difference between a KMM and a native project is that the presentation 
     ├── ApplicationProvider.kt
     ├── application              # Platform stuff
     │   ├── navigation
-    │   └── ui
-    │       ├── screens
-    │       │   └── screen-name  # Includes Activity/Fragment/VC, presenter and a DI Provider (This provider provides mostly presenters)
-    │       ├── common           # Includes extensions, base clases, helpers
-    │       └── views            # Custom Views
-    ├── features                 # A feature is a functionality of the app. Contains Domain + Data layer.
-    │   └── feature-name         # Each feature contains his own domain and data logic
-    │       ├── data
-    │       │   ├── dataSource
-    │       │   ├── entity
-    │       │   ├── mapper
-    │       │   └── query
-    │       ├── domain
-    │       │   ├── exception
-    │       │   ├── interactor
-    │       │   └── model
-    │       └── FeatureProvider.kt # DI Component. Provides interactor mostly
-    └── analytics
+    │   ├── ui
+    │   │   ├── screens
+    │   │   │   └── screen-name  # Includes Activity/Fragment/VC, presenter and a DI Provider (This provider provides mostly presenters)
+    │   │   ├── common           # Includes extensions, base clases, helpers
+    │   │   └── views            # Custom Views
+    │   └── analytics
+    │
+    └── features                 # A feature is a functionality of the app. Contains Domain + Data layer.
+       └── feature-name         # Each feature contains his own domain and data logic
+            ├── data
+            │   ├── dataSource
+            │   ├── entity
+            │   ├── mapper
+            │   └── query
+            ├── domain
+            │   ├── exception
+            │   ├── interactor
+            │   └── model
+            └── FeatureProvider.kt # DI Component. Provides interactor mostly
 ```
