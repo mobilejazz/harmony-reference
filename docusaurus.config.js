@@ -17,6 +17,7 @@ module.exports = {
       },
       items: [
         {to: 'docs/introduction', label: 'Reference', position: 'left'},
+        {to: 'standards/001-standards', label: 'Standards', position: 'left'},
         {
           href: 'https://github.com/mobilejazz/harmony-reference',
           label: 'GitHub',
@@ -87,6 +88,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
+          id: 'docs',
           path: 'docs',
           sidebarPath: require.resolve('./src/sidebars.js'),
           editUrl: 'https://github.com/mobilejazz/harmony-reference/edit/master/',
@@ -94,6 +96,17 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+      },
+    ],
+  ],
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'standards',
+        path: 'standards',
+        routeBasePath: 'standards',
+        sidebarPath: require.resolve('./src/sidebars-standards.js'),
       },
     ],
   ],
