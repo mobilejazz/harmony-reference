@@ -1,5 +1,5 @@
 ---
-id: 001-standards
+id: 001-meta-standard
 ---
 
 These standards document the workflows and best-practices of [Mobile Jazz](https://mobilejazz.com). We SHOULD (aka RECOMMENDED) use the [IETF RFC 2119](https://www.ietf.org/rfc/rfc2119.txt) keywords for clarity. Not all the projects MUST (aka REQUIRED) follow these standards, the exact sub-set of standards to follow will depend on the type of project (mobile, frontend, backend, design…). And even if a project MUST follow a standard, the enforcement SHOULD be gradual to **avoid extra bureaucracy**.
@@ -12,6 +12,7 @@ These are the guidelines to propose new standards:
   - Correct: `001-standards`, `002-bem`
   - Wrong: `1-standards`, `2-BEM`
 - The standard number MUST autoincrement based on the last accepted standard.
-- The standard MUST be placed in the `/standards` folder.
+- The standard MUST be placed in the `/standards` folder. The filename without extension MUST be the same as the `id` defined on the markdown front-matter.
+  - For the file `/standards/001-meta-standard.md` the front-matter `id` will be `001-meta-standard`.
 - The `/src/sidebars-standards.js` MUST be updated with the ID of the new standard.
 - The standard MUST be presented to the team via a PR in the [Harmony Reference repository](https://github.com/mobilejazz/harmony-reference).

@@ -6,6 +6,6 @@
  */
 module.exports = {
   standards: [
-    '001-standards'
+    '001-meta-standard'
   ]
 };

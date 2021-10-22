@@ -17,7 +17,7 @@ module.exports = {
       },
       items: [
         {to: 'docs/introduction', label: 'Reference', position: 'left'},
-        {to: 'standards/001-standards', label: 'Standards', position: 'left'},
+        {to: 'standards/001-meta-standard', label: 'Standards', position: 'left'},
         {
           href: 'https://github.com/mobilejazz/harmony-reference',
           label: 'GitHub',
