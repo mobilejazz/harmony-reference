@@ -122,8 +122,20 @@ module.exports = {
       type: 'category',
       label: 'UI Components',
       items: [
-        'ui-components/fullscreen-errors/fullscreen-errors',
-        'ui-components/transient-errors/transient-errors'
+        'ui-components/basic-content-loading/basic-content-loading',
+        'ui-components/advanced-content-loading/advanced-content-loading',
+        'ui-components/loading-blocking-ui/loading-blocking-ui',
+        'ui-components/fullscreen-error/fullscreen-error',
+        'ui-components/transient-error/transient-error',
+        'ui-components/lazyloading-error/lazyloading-error',
+        {
+          type: 'category',
+          label: 'Formulary errors',
+          items: [
+            'ui-components/formulary-error/formulary-input-error',
+            'ui-components/formulary-error/formulary-generic-error'
+          ]
+        }
       ]
     },
     {
