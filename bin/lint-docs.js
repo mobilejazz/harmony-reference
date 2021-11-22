@@ -1,8 +1,7 @@
 const { dirname, extname, join } = require('path');
 const { existsSync, readFileSync } = require('fs');
-const globby = require('globby');
 const frontMatter = require('front-matter');
-const colors = require('colors/safe');
+const chalk = require('chalk');
 const markdownLinkExtractor = require('markdown-link-extractor');
 const docsPath = join(__dirname, '../docs');
 
@@ -44,7 +43,7 @@ function validateNoTopLevelTitle(file, content) {
   const matches = [...content.replace(codeFences, '').matchAll(h1Headings)].map(m => m[0]);
 
   return matches.map(m => {
-    return `No top level markdown title allowed: "${colors.red(m)}", use front-matter "title" instead.`;
+    return `No top level markdown title allowed: "${chalk.red(m)}", use front-matter "title" instead.`;
   });
 }
 
@@ -85,15 +84,15 @@ function validateLinks(file, content) {
     }
 
     if (hasExtension) {
-      errors.push(`Remove "${colors.red(link)}" link "${extension}" extension.`);
+      errors.push(`Remove "${chalk.red(link)}" link "${extension}" extension.`);
     }
 
     if (hasPagesPrefix) {
-      errors.push(`Remove "${colors.red(link)}" link "pages/" prefix.`);
+      errors.push(`Remove "${chalk.red(link)}" link "pages/" prefix.`);
     }
 
     if (linkDoesNotExist) {
-      errors.push(`Linked doc ID "${colors.red(link)}" doesn't exist. Fix relative path or alternativelly prepend with ${colors.green('/docs/')} to make the link absolute.`);
+      errors.push(`Linked doc ID "${chalk.red(link)}" doesn't exist. Fix relative path or alternativelly prepend with ${chalk.green('/docs/')} to make the link absolute.`);
     }
   });
 
@@ -130,11 +129,12 @@ function validateFile(file) {
 }
 
 (async () => {
+  const { globby } = await import('globby');
   const files = await globby(`${docsPath}/**/*`);
   const errors = files.map(validateFile).filter(f => f.errors.length > 0);
 
   errors.forEach(entry => {
-    console.log('📄 ' + colors.yellow(entry.file.replace(docsPath, '')));
+    console.log('📄 ' + chalk.yellow(entry.file.replace(docsPath, '')));
 
     entry.errors.forEach(error => {
       console.log(`    💥 ${error}`);
