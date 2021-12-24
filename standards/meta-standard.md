@@ -12,5 +12,6 @@ These are the guidelines to propose new standards:
 - The name of the standard is free-form, use the `title` property on the markdown front-matter.
 - The filename must be the slug of the title. For example, for `Meta-Standard` => `meta-standard.md`.
 - The `/src/sidebars-standards.js` must be updated with the ID of the new standard.
+  - The ID is the filename minus the extension, e.g. `meta-standard.md` => `meta-standard`.
 - The standard must be presented to the team via a PR in the [Harmony Reference repository](https://github.com/mobilejazz/harmony-reference).
 - **The standard is accepted once it's merged**.
