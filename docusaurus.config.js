@@ -52,8 +52,8 @@ module.exports = {
               href: 'https://mobilejazz.com',
             },
             {
-              label: 'Behance',
-              href: 'https://www.behance.net/MobileJazz',
+              label: 'Dribbble',
+              href: 'https://mobilejazz.dribbble.com/',
             },
             {
               label: 'LinkedIn',
@@ -73,8 +73,8 @@ module.exports = {
               href: 'https://twitter.com/mobilejazzcom',
             },
             {
-              label: 'Facebook',
-              href: 'https://www.facebook.com/mobilejazzcom',
+              label: 'Instagram',
+              href: 'https://www.instagram.com/mobilejazz',
             },
           ],
         },
