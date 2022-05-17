@@ -113,6 +113,7 @@ module.exports = {
       label: 'Best Practices',
       items: [
         'best-practices/naming-convention',
+        'best-practices/git-standardization',
         'best-practices/dependency-injection',
         'best-practices/presenter-specs',
         'best-practices/angular',
