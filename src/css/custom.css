@@ -13,7 +13,7 @@
   --ifm-color-primary-light: #3497ed;
   --ifm-color-primary-lighter: #409eee;
   --ifm-color-primary-lightest: #65b0f1;
-  --ifm-code-font-size: 95%;
+  --ifm-code-font-size: 90%;
 }
 
 .footer .footer__col {
@@ -84,4 +84,36 @@
   text-align: right;
   border-top: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 0 0 5px 5px;
+}
+
+.naming-table {
+  width: 100%;
+}
+
+.naming-table thead {
+  background-color: #fafafa;
+}
+
+.naming-table th {
+  width: 20%;
+}
+
+.naming-table tr {
+  background-color: transparent !important;
+}
+
+tr.naming-table__component {
+  background-color: #f0f0f0 !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.naming-table__component small {
+  margin-left: 16px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.naming-table__component small:hover {
+  opacity: 1.0;
 }
