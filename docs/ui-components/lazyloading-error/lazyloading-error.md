@@ -22,12 +22,12 @@ When we can't load partial content (i.e. a infinite scroll pagination)
 * Infinite scrolling pagination (lazy loading).
 
 ## Screenshots/Demo
-###iOS
+### iOS
 ![](lazyloading-error-ios.gif)
 
-###Android
+### Android
 ![](lazyloading-error-android.gif)
 
-###Web
+### Web
 ![](lazyloading-error-web.gif)
 
