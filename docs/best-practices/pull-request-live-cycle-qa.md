@@ -27,7 +27,7 @@ screenshots or video.
 **Frontend**
 1. Compare InVision Design and the Screenshot/Video/Final Result. Play the "7 differences" game. Make sure there 
    aren't major inconsistencies (margins/paddings/colors/font-weight/size…).
-2. Identify "repeating visual patterns" --> Convert to a reusable component. Ex. a <button> that is repeating with different color or sizes. In case of doubt ask the designers.
+2. Identify "repeating visual patterns" --> Convert to a reusable component. Ex. a `<button>` that is repeating with different color or sizes. In case of doubt ask the designers.
 3. Check common BEM code smell --> Refactor. [BEM Presentation](https://docs.google.com/presentation/d/16bNPN7A_JDhKxvLdRf1CKaWB5bYRwys5rmEYRMiLX2A/edit#slide=id.gf260d01fd3_0_67)
 
 **Backend**
