@@ -8,7 +8,7 @@ Find below a quick presentation with the definitions of the QA flow, including P
 [QA Standard Process](https://drive.google.com/file/d/1RHOdxHG547rkpgog2VoAuj0mbCxM4vRp/view)
 
 ### Pull Request Creation
-1. Create the Pull Request following the [Git Standardization Guide](git-standardization.md)
+1. Create the Pull Request following the [Git Standardization Guide](git-standardization)
 
 ### Pull Request is Ready
 1. Upload a **Screenshot or Video** in your Task Manager
