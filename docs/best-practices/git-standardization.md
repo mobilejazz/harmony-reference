@@ -61,6 +61,15 @@ Task_number :: Project :: Story :: Task_type :: Task_name
 * Asana task link: ___
 ```
 
+### Special case: Long-lived branches
+If you have multiple tasks belonging to the same feature you might want to create a long-lived branch to rebase all the changes at once when finished. Here are the steps to follow:
+* Create a draft feature branch (this branch does not have a related task).
+* Use the draft branch as the base for all the sub-features.
+* All the sub-features you must follow the standard rules defined in this document (squash + rebase & naming).
+* When all the tasks are completed the draft branch must be rebased into the target branch 
+  * **IMPORTANT: be sure to don't squash the commits** in this case as you don't want to lose the history.
+
+
 ## Git methodology
 
 We are not going to define a unique git methodology for all the projects because we consider that depending on the nature of the project Git-Flow could be better than Github-Flow and vice-versa. 
