@@ -181,6 +181,7 @@ module.exports = {
       items: [
         'other/tips/node',
         'other/tips/angular',
+        'other/tips/terminal',
         'other/tips/git'
       ]
     },
