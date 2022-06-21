@@ -1,5 +1,5 @@
 ---
-title: QA and Pull Request Live Cycle
+title: QA and Pull Request Life Cycle
 ---
 
 ### QA Presentation
