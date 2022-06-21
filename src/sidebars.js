@@ -114,7 +114,7 @@ module.exports = {
       items: [
         'best-practices/naming-convention',
         'best-practices/git-standardization',
-        'best-practices/pull-request-live-cycle-qa',
+        'best-practices/pull-request-life-cycle-qa',
         'best-practices/dependency-injection',
         'best-practices/presenter-specs',
         'best-practices/angular',
