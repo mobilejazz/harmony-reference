@@ -13,7 +13,7 @@ Everybody is free to use their own system in their git branches for commit messa
 * **Must** be **squashed** using the Merge / Pull request title as the git commit message.
 * **Must** be **rebased** into the target branch.
 * **Must** use the **title format described** below.
-* **Must** enable Delete Branch on Merge (to avoid leave dead branches).
+* **Must** enable Delete Branch on Merge (to avoid dead branches).
 * (optional) Enable WIP: mode. To avoid an accidental merge or Code Review on undone task.
 
 ### Title format
