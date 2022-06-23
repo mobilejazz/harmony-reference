@@ -39,4 +39,4 @@ screenshots or video.
    5. Ask for a Full Security Checklist to DevOps Team
 
 **Mobile**
-ToDo
+1. Compare InVision Design and the Screenshot/Video/Final Result. Play the "7 differences" game. Make sure there aren't major inconsistencies (margins/paddings/colors/font-weight/size…).
