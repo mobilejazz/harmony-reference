@@ -1,8 +1,12 @@
-const { dirname, extname, join } = require('path');
-const { existsSync, readFileSync } = require('fs');
-const frontMatter = require('front-matter');
-const chalk = require('chalk');
-const markdownLinkExtractor = require('markdown-link-extractor');
+import { dirname, extname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { existsSync, readFileSync } from 'fs';
+import frontMatter from 'front-matter';
+import chalk from 'chalk';
+import markdownLinkExtractor from 'markdown-link-extractor';
+import { globby } from 'globby';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const docsPath = join(__dirname, '../docs');
 
 function validateLowerCase(file) {
@@ -51,7 +55,7 @@ function validateNoTopLevelTitle(file, content) {
  * Check if a linked file exists
  *
  * It's either absolute or relative. Absolute links start with `/docs/` which
- * maps to /pages/ folder.
+ * maps to /docs/ folder.
  *
  * @param {string} file Markdown file path
  * @param {string} link Link to check
@@ -129,7 +133,6 @@ function validateFile(file) {
 }
 
 (async () => {
-  const { globby } = await import('globby');
   const files = await globby(`${docsPath}/**/*`);
   const errors = files.map(validateFile).filter(f => f.errors.length > 0);
 
