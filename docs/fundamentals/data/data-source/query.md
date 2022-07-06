@@ -122,7 +122,7 @@ $itemsStorageDataSource->getAll(new SearchQuery("lorem ipsum"));
 :::tip Note
 A query must be **decoupled** from any data source implementation.
 
-Take for example a query called `LastBookReadNerworkQuery`. This is a bad naming as it clearly states a data source implementation. Instead use `LastBookReadQuery` as queries must be abstracted from its source and can potentially be reused in multiple [data sources](/docs/fundamentals/data/data-source/data-source).
+Take for example a query called `LastBookReadNerworkQuery`. This is a bad naming as it clearly states a data source implementation. Instead use `LastBookReadQuery` as queries must be abstracted from its source and can potentially be reused in multiple [data sources](/docs/fundamentals/data/data-source/concepts).
 :::
 
 

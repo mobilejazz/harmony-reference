@@ -5,7 +5,7 @@ title: RepositoryMapper
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`RepositoryMapper<In,Out>` encapuslates a [`Repository`](repository) instance of type `In` and exposes a new interface of [`Repository`](repository) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](/docs/fundamentals/common/mapper) and [`Mapper<Out,In>`](/docs/fundamentals/common/mapper).
+`RepositoryMapper<In,Out>` encapuslates a [`Repository`](concepts) instance of type `In` and exposes a new interface of [`Repository`](concepts) of type `Out`, mapping the objects using a [`Mapper<In,Out>`](/docs/fundamentals/common/mapper) and [`Mapper<Out,In>`](/docs/fundamentals/common/mapper).
 
 ## Usage
 

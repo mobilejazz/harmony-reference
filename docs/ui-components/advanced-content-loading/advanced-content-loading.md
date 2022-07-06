@@ -17,7 +17,7 @@ When navigating to a new screen where content needs to be loaded without blockin
 * Transitioning to a new view and loading new content.
 
 ## Alternative
-* If looking for an easier, faster alternative, check the [Basic Content Loading](../basic-content-loading/basic-content-loading) component.
+* If looking for an easier, faster alternative, check the [Basic Content Loading](../basic-content-loading) component.
 
 ## Screenshots/Demo
 ### iOS

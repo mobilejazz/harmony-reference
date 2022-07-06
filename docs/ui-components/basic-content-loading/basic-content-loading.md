@@ -16,7 +16,7 @@ When navigating to a new screen where content needs to be loaded without blockin
 * Transitioning to a new view and loading new content.
 
 ## Alternative
-* A better alternative for content loading can be found in the [Advanced Content Loading](../advanced-content-loading/advanced-content-loading) component, although requires more time to implement.
+* A better alternative for content loading can be found in the [Advanced Content Loading](../advanced-content-loading) component, although requires more time to implement.
 
 ## Screenshots/Demo
 ### iOS

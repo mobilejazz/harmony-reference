@@ -11,7 +11,7 @@ When transitioning from one screen to another one for which we need to load cont
 
 ## Best Practices
 * When loading, the UI must remain blocked.
-* After a reasonable time, if no content can be loaded we should display then a [Full Screen Error](../fullscreen-error/fullscreen-error).
+* After a reasonable time, if no content can be loaded we should display then a [Full Screen Error](../fullscreen-error).
 
 ## Best used for
 * Transitioning between two screens where loading content is required.
