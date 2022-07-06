@@ -51,25 +51,6 @@ function validateNoTopLevelTitle(file, content) {
   });
 }
 
-/**
- * Check if a linked file exists
- *
- * It's either absolute or relative. Absolute links start with `/docs/` which
- * maps to /docs/ folder.
- *
- * @param {string} file Markdown file path
- * @param {string} link Link to check
- */
-function linkExists(file, link) {
-  const isAbsolute = /^\/docs\//.test(link);
-  const linkFilePath = isAbsolute ?
-    join(docsPath, link.replace('/docs/', '')) :
-    join(dirname(file), link);
-  const fileExists = existsSync(`${linkFilePath}.md`) || existsSync(`${linkFilePath}.mdx`);
-
-  return fileExists;
-}
-
 function validateLinks(file, content) {
   const links = markdownLinkExtractor(content).filter(link => !link.includes('http'));
   const errors = [];
@@ -79,7 +60,6 @@ function validateLinks(file, content) {
     const extension = extname(link);
     const hasExtension = extension !== '';
     const hasPagesPrefix = /^\/?pages\//.test(link);
-    const linkDoesNotExist = !linkExists(file, link);
     const isImage = imageExts.includes(extension);
 
     // Ignore image links
@@ -93,10 +73,6 @@ function validateLinks(file, content) {
 
     if (hasPagesPrefix) {
       errors.push(`Remove "${chalk.red(link)}" link "pages/" prefix.`);
-    }
-
-    if (linkDoesNotExist) {
-      errors.push(`Linked doc ID "${chalk.red(link)}" doesn't exist. Fix relative path or alternativelly prepend with ${chalk.green('/docs/')} to make the link absolute.`);
     }
   });
 
