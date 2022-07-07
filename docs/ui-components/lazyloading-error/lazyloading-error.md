@@ -14,7 +14,7 @@ When we can't load partial content (i.e. a infinite scroll pagination)
 * Display the error message after a reasonable timeout (i.e. five seconds).
 * Hide the loading indicator once the error triggers.
 * Add an actionable to re-try loading the missing content (optional).
-* If no content can be loaded, use [Fullscreen Errors](../fullscreen-error/fullscreen-error) instead.
+* If no content can be loaded, use [Fullscreen Errors](../fullscreen-error) instead.
 * The rest of the UI elements should still be accessible.
 
 ## Best used for

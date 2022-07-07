@@ -2,7 +2,7 @@
 title: DataSourceValidator
 ---
 
-`DataSourceValidator<T>` encapuslates a [`DataSource`](data-source) instance and validates all objects fetched in the `GetDataSource` functions.
+`DataSourceValidator<T>` encapuslates a [`DataSource`](concepts) instance and validates all objects fetched in the `GetDataSource` functions.
 
 Validation happens via the `ObjectValidation` protocol described below.
 

@@ -1,5 +1,5 @@
 ---
-title: Concept
+title: Concepts
 ---
 
 import Tabs from '@theme/Tabs';
@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 Harmony repositories are responsible of managing the **data business logic** of the application data layer, similar to [interactors](../../domain/interactor) being responsible of managing the business logic of the domain layer.
 
-Following the interface definition of [data source](../../data/data-source/data-source), a repository defines a generic interface representing the three main action groups:
+Following the interface definition of [data source](../../data/data-source/concepts), a repository defines a generic interface representing the three main action groups:
 
 - **Get** is the responsible of all actions that fetch data from one or many data sources
 - **Put** is the responsible of all actions that modify and push data to one or many data sources
@@ -82,7 +82,7 @@ Each repository must represent an **atomic behavior** (keeping its testability).
 
 ## Interfaces
 
-The `Repository` functions replicate the [`DataSource`](/docs/fundamentals/data/data-source/data-source) public API, adding an extra parameter of type `Operation` on each function.
+The `Repository` functions replicate the [`DataSource`](/docs/fundamentals/data/data-source/concepts) public API, adding an extra parameter of type `Operation` on each function.
 
 ### Get
 

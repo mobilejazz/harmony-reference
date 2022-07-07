@@ -1,5 +1,5 @@
 ---
-title: Concept
+title: Concepts
 ---
 
 import Tabs from '@theme/Tabs';

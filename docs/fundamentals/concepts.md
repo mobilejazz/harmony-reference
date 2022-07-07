@@ -49,8 +49,8 @@ The data layer is responsible to define and implement all data processing, stora
 
 The data layer is divided in sub-layers:
 
-- [Repository](data/repository/repository)
-- [Data Source](data/data-source/data-source)
+- [Repository](data/repository/concepts)
+- [Data Source](data/data-source/concepts)
 - [Entity](data/entity)
 
 For example, the data layer could implement an HTTP client or a database storage, providing fetch / save / delete capabilities from the different data sources.

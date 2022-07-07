@@ -60,7 +60,7 @@ module.exports = {
               type: "category",
               label: "DataSource",
               items: [
-                "fundamentals/data/data-source/data-source",
+                "fundamentals/data/data-source/concepts",
                 "fundamentals/data/data-source/query",
                 {
                   type: "category",
@@ -83,7 +83,7 @@ module.exports = {
               type: "category",
               label: "Repository",
               items: [
-                "fundamentals/data/repository/repository",
+                "fundamentals/data/repository/concepts",
                 "fundamentals/data/repository/operation",
                 {
                   type: "category",

@@ -1,8 +1,12 @@
-const { dirname, extname, join } = require('path');
-const { existsSync, readFileSync } = require('fs');
-const frontMatter = require('front-matter');
-const chalk = require('chalk');
-const markdownLinkExtractor = require('markdown-link-extractor');
+import { dirname, extname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { existsSync, readFileSync } from 'fs';
+import frontMatter from 'front-matter';
+import chalk from 'chalk';
+import markdownLinkExtractor from 'markdown-link-extractor';
+import { globby } from 'globby';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const docsPath = join(__dirname, '../docs');
 
 function validateLowerCase(file) {
@@ -47,25 +51,6 @@ function validateNoTopLevelTitle(file, content) {
   });
 }
 
-/**
- * Check if a linked file exists
- *
- * It's either absolute or relative. Absolute links start with `/docs/` which
- * maps to /pages/ folder.
- *
- * @param {string} file Markdown file path
- * @param {string} link Link to check
- */
-function linkExists(file, link) {
-  const isAbsolute = /^\/docs\//.test(link);
-  const linkFilePath = isAbsolute ?
-    join(docsPath, link.replace('/docs/', '')) :
-    join(dirname(file), link);
-  const fileExists = existsSync(`${linkFilePath}.md`) || existsSync(`${linkFilePath}.mdx`);
-
-  return fileExists;
-}
-
 function validateLinks(file, content) {
   const links = markdownLinkExtractor(content).filter(link => !link.includes('http'));
   const errors = [];
@@ -75,7 +60,6 @@ function validateLinks(file, content) {
     const extension = extname(link);
     const hasExtension = extension !== '';
     const hasPagesPrefix = /^\/?pages\//.test(link);
-    const linkDoesNotExist = !linkExists(file, link);
     const isImage = imageExts.includes(extension);
 
     // Ignore image links
@@ -89,10 +73,6 @@ function validateLinks(file, content) {
 
     if (hasPagesPrefix) {
       errors.push(`Remove "${chalk.red(link)}" link "pages/" prefix.`);
-    }
-
-    if (linkDoesNotExist) {
-      errors.push(`Linked doc ID "${chalk.red(link)}" doesn't exist. Fix relative path or alternativelly prepend with ${chalk.green('/docs/')} to make the link absolute.`);
     }
   });
 
@@ -129,7 +109,6 @@ function validateFile(file) {
 }
 
 (async () => {
-  const { globby } = await import('globby');
   const files = await globby(`${docsPath}/**/*`);
   const errors = files.map(validateFile).filter(f => f.errors.length > 0);
 
