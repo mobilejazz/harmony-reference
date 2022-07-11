@@ -20,7 +20,7 @@ Everybody is free to use their own system in their git branches for commit messa
 The title format will be composed by different values representing a specific area of the task and the project itself.
 
 **Format**: 
-> {TASK_ID} :: {PROJECT} :: {STORY} :: {TASK_TYPE} :: {TASK_TITLE}
+> **{TASK_ID}** :: {PROJECT} :: {STORY} :: **{TASK_TYPE}** :: {PLATFORM} :: **{TASK_TITLE}**
 
 **Fields**:
 * **Task_ID** **(required)**: Value representing the platform name and the last 4 digits of the asana task. For example, ANDROID-7888
@@ -30,6 +30,7 @@ The title format will be composed by different values representing a specific ar
   * **Feature**: Public new feature visible for clients or users, for example, building a new screen layout, creating a new API endpoint, etc. 
   * **Feature Internal**: Internal new feature which is not visible for users or clients, for example, creating a new internal business logic, adding documentation to a system, etc.  
   * **Bug**: Bug/Issue/Crash reported.
+* **Platform**: Only to be used if the Task_ID doesn't contain the platform information (e.g: a Jira Identifier) 
 * **Task_Title** **(required)**: The asana (or another task management tool) title.
 
 **Examples**:
