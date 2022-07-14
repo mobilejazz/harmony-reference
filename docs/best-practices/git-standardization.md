@@ -80,15 +80,4 @@ If you have multiple tasks belonging to the same feature you might want to creat
 4. Finally `feature/XYZ/main` merges to `master`
 
 ## Git methodology
-We are not going to define a unique git methodology for all the projects because we consider that depending on the nature of the project Git-Flow could be better than Github-Flow and vice-versa. 
-
-So we are going to use one methodology or another depending on the following statements:
-* Projects based on **releases** will use [Git-Flow](https://nvie.com/posts/a-successful-git-branching-model/)
-  * Mobile Applications
-  * Embed software
-  * Libraries
-  * etc.
-* Projects based on **continuous delivery** will use [Github-Flow](https://githubflow.github.io/)
-  * Web frontend applications
-  * Backend applications
-  * etc.
+[Github-Flow](https://githubflow.github.io/) is the methodology that all projects must follow.
