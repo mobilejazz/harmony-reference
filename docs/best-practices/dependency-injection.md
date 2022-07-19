@@ -209,11 +209,11 @@ src
 ```ts
 // src/domain/app.provider.ts
 export abstract class AppProvider {
-  abstract getCountries(): GetCountriesInteractor;
+  abstract getGetCountries(): GetCountriesInteractor;
 }
 
 export class AppDefaultProvider implements AppProvider {
-  public getCountries(): GetCountriesInteractor {
+  public getGetCountries(): GetCountriesInteractor {
     return new GetCountriesInteractor(/* … */);
   }
 }
@@ -232,7 +232,7 @@ export class AppDefaultProvider implements AppProvider {
     {
       provide: GetCountriesInteractor,
       deps: [AppProvider],
-      useFactory: (provider: AppProvider) => provider.getCountries(),
+      useFactory: (provider: AppProvider) => provider.getGetCountries(),
     },
   ]
 })
