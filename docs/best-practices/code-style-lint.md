@@ -37,6 +37,7 @@ All code must be audited by all this tools:
 
 1. [PHP Mess Detector](https://phpmd.org/), currently not compatible with the last version of PHP
 2. [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer), currently have some incompatibilities with Prettier
+3. [Sonarlint](https://www.sonarlint.org/), currently it can be used for free in the IDE but not in the pipeline
 
 
 ## TypeScript
