@@ -113,6 +113,7 @@ module.exports = {
       label: "Best Practices",
       items: [
         "best-practices/naming-convention",
+        "best-practices/documentation",
         "best-practices/git-standardization",
         "best-practices/pull-request-life-cycle-qa",
         "best-practices/code-review",
