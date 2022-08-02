@@ -2,7 +2,7 @@
 title: Documentation
 ---
 
-Each project repository must have a folder `/docs` that will contain all documentation related to the project, business and technical details.
+Each project repository should have a folder `/docs` that will contain all documentation related to the project, business and technical details.
 
 ## What do we need to document?
 
