@@ -149,6 +149,13 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "Agreements",
+          items: [
+            "agreements/rest-api",
+          ]
+        },
+        {
+          type: "category",
           label: "Libraries",
           items: [
             "mj-library/mjlibraries",
