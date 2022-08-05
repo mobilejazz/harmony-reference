@@ -116,6 +116,7 @@ module.exports = {
         "best-practices/git-standardization",
         "best-practices/pull-request-life-cycle-qa",
         "best-practices/code-review",
+        "best-practices/code-style-lint",
         "best-practices/dependency-injection",
         "best-practices/presenter-specs",
         "best-practices/angular",
