@@ -2,25 +2,25 @@
 title: Documentation
 ---
 
-Each project repository should have a folder `/docs` that will contain all documentation related to the project, business and technical details.
+Each project repository should have a folder `/docs` containing all documentation related to the project, business, and technical details.
 
-## What do we need to document?
+## What should we document?
 
-Anything that normally you need to explain to a new team member in the project is a good candidate to document. This 
-way we avoid repeating the same information all the time, and it’s clear for everyone in case of doubt where to go 
-first to find information.
-Example: how to install a localhost to start developing.
-
-Big features require documentation to explain the process followed the first time.
-Example: Create new credentials for external services and how we integrated them with our code.
-
-Also, it can be interesting to document not obvious Business Logic processes, and then link from the code to the 
-documentation.
-Example: new Interactor that will do something very specific for the project Business.
+* **Whatever you need to explain to a new member**, for example:
+  * How to set up the local environment?
+  * Project internal processes
+  * Business and project vocabulary
+* **Complex and simple (but not apparent) features**, or features that may impact the platform/project, for example:
+  * Create and integrate the credentials for external services
+  * Cache policy configured
+  * HTTP or databases timeouts
+  * Single sign-on feature
 
 ## Folder Structure
 
-This is the expected folder structure:
+:::info
+The `/docs/README.md` file acts as the TOC (Table of Contents).
+:::
 
 ```markdown
 docs
@@ -52,47 +52,42 @@ docs
 |   |   ...
 ```
 
-Important: the file `/docs/README.md` is a TOC (Table of Contents), and must contain a link to all other `.md` files.
-
 ## Diagrams
 
-For some features, it can be very useful to first create a Diagram with the expected workflow, and validate it with the
-Product Owner and/or Project Manager, before we write the first line of code.
+Diagrams are an excellent solution to explain/showcase business logic, navigation flows, design patterns, architecture decisions, etc.
 
 ### Draw.io
 
-The recommended tool for creating Diagrams it's [draw.io](https://www.draw.io) because:
+We recommend [draw.io](https://draw.io) to create diagrams:
 
-- Generates a multiplatform SVG file as an output
-- Provides a free Browser tool but also App for Linux, Mac and Windows
-- These tools can be used by Developers, PMs, Clients, etc. So, everyone can open and edit the diagram.
-- SVG files are text files, so, it's ideal for git repository history
+* Support for SVG files, which are excellent for versioning in git
+* Multiplatform
+* User-friendly and intuitive
 
 ### Import/Export Draw.io
 
 To open an existing file:
 
-1. Go to [draw.io](https://www.draw.io)
-2. Click on `File -> Open From -> Device...`
-3. Select the `.svg` file that you want to edit
+* Go to draw.io
+* Click on File -> Open From -> Device...
+* Select the .svg file you want to edit
 
 To export a diagram to save in the project git repository:
 
-1. Click on `File -> Save as...`
-2. Select format `Editable Vector Image` aka `.svg`
+* Click on File -> Save as...
+* Select format Editable Vector Image aka .svg
+
 
 ### Other Tools
 
-To generate Diagrams It can be used any other tool, but with two requirements:
+Other diagram tools are allowed, but they must contain the following features:
 
-1. Easily editable for everyone
-2. Git history compatible
+* User friendly
+* SVG support.
 
-## Documentation for tools and code
+## Code and tools documentation
 
-In some cases, you can have some code or tools where you will want a README.md file explaining how it works.
-Example: A tool to analyze something in the code can be in `/tools/code-analyzer` and 
-`/tools/code-analyzer/README.md`.
+When in need to explain/document a specific tool/application usage, create an independent `README.md` file within a `/docs/tools/{TOOL_NAME}/` folder. For example:
 
-Then, it’s ok to have the specific documentation in a README.md file, but always add a link to the TOC file 
-`/docs/README.md`.
+* Linter configuration
+* Memory analyzer tool (MAT)
