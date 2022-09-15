@@ -82,7 +82,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Mobile Jazz`,
     },
     prism: {
-      additionalLanguages: ['kotlin', 'php', 'swift'],
+      additionalLanguages: ['kotlin', 'php', 'swift', 'groovy'],
     },
   },
   presets: [
