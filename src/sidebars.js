@@ -121,7 +121,8 @@ module.exports = {
         "best-practices/dependency-injection",
         "best-practices/presenter-specs",
         "best-practices/angular",
-        "best-practices/folders-structure"
+        "best-practices/folders-structure",
+        "best-practices/design-guidelines"
       ]
     },
     {
