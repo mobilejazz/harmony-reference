@@ -2,7 +2,7 @@
 title: Design Guidelines
 ---
 
-# Design Standards and Nomenclatures
+Design Standards and Nomenclatures
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
