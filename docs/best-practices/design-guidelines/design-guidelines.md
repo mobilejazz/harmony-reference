@@ -2,21 +2,18 @@
 title: Design Guidelines
 ---
 
-Design Standards and Nomenclatures
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="mobile-jazz" values={[
+<Tabs defaultValue="file-organization" values={[
     { label: 'File Organization', value: 'file-organization', },
     { label: 'Artboards', value: 'artboards', },
     { label: 'Icons', value: 'icons', },
     { label: 'Symbols', value: 'symbols', },
     { label: 'Text Styles', value: 'text-styles', },
-    { label: 'Color Styles', value: 'color-styles', }
+    { label: 'Color Styles', value: 'color-styles', },
 ]}>
 
-<TabItem value="artboards">
 
 <TabItem value="file-organization">
 
@@ -27,7 +24,7 @@ import TabItem from '@theme/TabItem';
 ![](pages.png)
 
 * The first page of a document should always be the latest up-to-date UI, and include the whole design for the entire platform.
-* Use separators to differenciate between page types. Do not place any designs inside a "separator" page. They must always be blank.
+* Use separators to differentiate between page types. Do not place any designs inside a "separator" page. They must always be blank.
 * Separators are made from 30 dashes: `------------------------------`
 
 ```
@@ -41,7 +38,7 @@ Extra Pages
 ```
 
 :::caution Exceptions
-In extremelly large projects with a huge amount of screens, we can use pages to split the design in different areas (i.e. Onboarding, Dashboard, Profile, Settings, etc.) and use one page for each flow.
+In extremely large projects with a huge amount of screens, we can use pages to split the design in different areas (i.e. Onboarding, Dashboard, Profile, Settings, etc.) and use one page for each flow.
 :::
 
 **Components**
@@ -61,6 +58,9 @@ Modal - Update Profile
 Tooltip - Email
 Tooltip - Graph Detailed Info
 ```
+</TabItem>
+
+<TabItem value="artboards">
 
 ## Artboards
 
@@ -83,12 +83,14 @@ Tooltip - Graph Detailed Info
 
 **Parent**
 * Defines the parent view
-`1 - Dashboard`
+  * `1 - Dashboard`
 
 **Child & Child of Child**
 * Variations of a parent or child view
-`1.1 - Dashboard - Empty`
-`1.1.1 - Dashboard - Empty - Validation Error`
+  * `1.1 - Dashboard - Empty`
+  * `1.1.1 - Dashboard - Empty - Validation Error`
+
+</TabItem>
 
 <TabItem value="icons">
 
@@ -108,8 +110,10 @@ Tooltip - Graph Detailed Info
 
 **Name**
 * Use the standard name for the icon, usually found in the icon set.
-`ic_scrible`
-`ic_trash.circle`
+  * `ic_scrible`
+  * `ic_trash.circle`
+
+</TabItem>
 
 <TabItem value="symbols">
 
@@ -128,19 +132,21 @@ Tooltip - Graph Detailed Info
 
 **Symbol**
 * Defines the main symbol name.
-`Route Card`
-`Bike Info`
-`Icons`
+  * `Route Card`
+  * `Bike Info`
+  * `Icons`
 
 **Variation/s**
 * Variations of the same main component.
-`Route Card / Completed`
-`Route Card / Draft`
+  * `Route Card / Completed`
+  * `Route Card / Draft`
 
 **X**
 * Atoms.
-`X / Road Type / Straight`
-`X / Road Type / Curved`
+  * `X / Road Type / Straight`
+  * `X / Road Type / Curved`
+
+</TabItem>
 
 <TabItem value="text-styles">
 
@@ -172,6 +178,8 @@ Tooltip - Graph Detailed Info
 * Regular
 * Light
 
+</TabItem>
+
 <TabItem value="color-styles">
 
 ## Color Styles/Variables
@@ -187,7 +195,7 @@ Tooltip - Graph Detailed Info
 * Secondary
 * Third
 * Accent
-* Netural
+* Neutral
 * Basics
 * Error
 * Warning
@@ -195,3 +203,7 @@ Tooltip - Graph Detailed Info
 
 **Shades**
 * 900, 800, 700, 600, 500, 400, 300, 200, 100, 50
+
+</TabItem>
+
+</Tabs>

@@ -122,7 +122,7 @@ module.exports = {
         "best-practices/presenter-specs",
         "best-practices/angular",
         "best-practices/folders-structure",
-        "best-practices/design-guidelines"
+        "best-practices/design-guidelines/design-guidelines"
       ]
     },
     {
