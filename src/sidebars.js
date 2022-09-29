@@ -112,6 +112,13 @@ module.exports = {
       type: "category",
       label: "Best Practices",
       items: [
+        {
+          type: "category",
+          label: "Agreements",
+          items: [
+            "agreements/rest-api",
+          ]
+        },
         "best-practices/naming-convention",
         "best-practices/documentation",
         "best-practices/git-standardization",
@@ -149,13 +156,6 @@ module.exports = {
       type: "category",
       label: "Other resources",
       items: [
-        {
-          type: "category",
-          label: "Agreements",
-          items: [
-            "agreements/rest-api",
-          ]
-        },
         {
           type: "category",
           label: "Libraries",
