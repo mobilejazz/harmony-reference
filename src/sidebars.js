@@ -25,10 +25,7 @@ module.exports = {
           type: "category",
           label: "Application",
           items: [
-            "fundamentals/application/android",
-            "fundamentals/application/ios",
-            "fundamentals/application/backend",
-            "fundamentals/application/frontend"
+            "fundamentals/application/mvi-specs",
           ]
         },
         {
