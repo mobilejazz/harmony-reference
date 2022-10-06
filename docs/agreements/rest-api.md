@@ -32,7 +32,7 @@ We decided this agreement for these reasons:
 
 We decided this agreement for these reasons:
 
-1. To Avoid errors in server part deducting where is the Request data that needs to be processed.
+1. To avoid errors in server part deducting where the Request data is that needs to be processed.
 2. `JSON` it's more flexible than `<form>` values to send data to the server.
 
 ### Request Params
@@ -42,9 +42,9 @@ We decided this agreement for these reasons:
 
 We decided this agreement for these reasons:
 
-1. To Avoid urls as `/api/v1/brand/1234/campaign/1234/detail/1234/slider/1234`.
+1. To avoid urls as `/api/v1/brand/1234/campaign/1234/detail/1234/slider/1234`.
 2. Instead, we can use a better endpoint as `/api/v1/get-slider` + queryParams `{brandId, campaignId, detailId, sliderId}`.
-3. To Avoid merge GET and POST params at same time.
-4. To Avoid that each Model appear as unique URL in Monitoring System (ex. `/product/1` and `/product/2` are two 
-   transactions on New Relic). Thanks to this we can have easily aggregated stats or errors for each endpoint.
+3. To avoid merging GET and POST params at same time.
+4. To prevent each model from appearing as a unique URL in the Monitoring System (ex. `/product/1` and `/product/2` are two 
+   transactions on New Relic). Thanks to this we can easily have aggregated stats or errors for each endpoint.
 5. We can configure a cache response for each endpoint.
