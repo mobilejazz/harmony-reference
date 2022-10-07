@@ -116,16 +116,17 @@ module.exports = {
             "agreements/rest-api",
           ]
         },
-        "best-practices/naming-convention",
         "best-practices/documentation",
+        "best-practices/naming-convention",
+        "best-practices/folders-structure",
         "best-practices/git-standardization",
         "best-practices/pull-request-life-cycle-qa",
         "best-practices/code-review",
-        "best-practices/code-style-lint",
         "best-practices/dependency-injection",
         "best-practices/presenter-specs",
+        "best-practices/code-style-lint",
         "best-practices/angular",
-        "best-practices/folders-structure",
+        "best-practices/php",
         "best-practices/design-guidelines/design-guidelines"
       ]
     },
