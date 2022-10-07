@@ -25,10 +25,7 @@ module.exports = {
           type: "category",
           label: "Application",
           items: [
-            "fundamentals/application/android",
-            "fundamentals/application/ios",
-            "fundamentals/application/backend",
-            "fundamentals/application/frontend"
+            "fundamentals/application/mvi-specs",
           ]
         },
         {
@@ -112,14 +109,24 @@ module.exports = {
       type: "category",
       label: "Best Practices",
       items: [
+        {
+          type: "category",
+          label: "Agreements",
+          items: [
+            "agreements/rest-api",
+          ]
+        },
         "best-practices/naming-convention",
+        "best-practices/documentation",
         "best-practices/git-standardization",
         "best-practices/pull-request-life-cycle-qa",
         "best-practices/code-review",
+        "best-practices/code-style-lint",
         "best-practices/dependency-injection",
         "best-practices/presenter-specs",
         "best-practices/angular",
-        "best-practices/folders-structure"
+        "best-practices/folders-structure",
+        "best-practices/design-guidelines/design-guidelines"
       ]
     },
     {
