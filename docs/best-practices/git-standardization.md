@@ -106,7 +106,7 @@ Steps to follow to generate a new application release:
 PM and the Engineering Lead must decide if the task is P0 (critical) or not. If it is P0, we must fix it for the current version; otherwise, it can wait until the next release.
 
 If it is P0, we need to follow the following steps:
-1. Checkout to the tag: `git checkout $TAG_NAME`
+1. Checkout to the tag: `git checkout $APP_VERSION`
 2. Create a branch to contain all the changes needed to release the hotfix release: `git checkout -b hotfix/$APP_VERSION_WITH_HOTFIX`
 3. Create one branch for each task needed in the hotfix release 
    1. Follow the same process as a regular MR/MR (squash + rebase) to the hotfix release branch `hotfix/$APP_VERSION_WITH_HOTFIX`
