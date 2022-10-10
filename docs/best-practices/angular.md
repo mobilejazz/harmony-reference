@@ -7,7 +7,7 @@ title: Angular Guidelines
 
 :::tip Note
 
-Double-check the Tips and Tricks for Angular [here](../other/tips/angular.md).
+Double-check the Tips and Tricks for Angular [here](../other/tips/angular).
 
 :::
 
