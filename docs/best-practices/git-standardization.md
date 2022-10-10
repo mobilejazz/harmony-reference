@@ -3,6 +3,9 @@ title: Git Standardization
 ---
 This document contains the different standards related to the use of Git within Mobile Jazz.
 
+## Methodology
+[Github-Flow](https://githubflow.github.io/) is the methodology that all projects must follow.
+
 ## Commit messages
 Everybody is free to use their own system in their git branches for commit messages, but we highly recommend using [semantic commit messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716).
 
@@ -79,5 +82,37 @@ If you have multiple tasks belonging to the same feature you might want to creat
 3. Sub-branches squash and rebase to `feature/XYZ/main`
 4. Finally `feature/XYZ/main` merges to `master`
 
-## Git methodology
-[Github-Flow](https://githubflow.github.io/) is the methodology that all projects must follow.
+## Releases
+
+### Mobile
+Steps to follow to generate a new application release:
+1. Create a new git branch with the following format: `releases/{$APP_VERSION}`
+   1. Checkout to the new release branch
+   2. Release a new version to the Google Play / AppStore
+   3. If the release is successful, we generate the tag: `git tag $APP_VERSION`
+   4. Push the tag to the git remote repository
+   5. Remove remote release branch: `releases/{$APP_VERSION}`
+2. Create a new git branch to generate the bump for the next future release with the format: `feature/bump-$NEXT_APP_VERSION`
+   1. Checkout to the new feature branch
+   2. Bump the application version name and version number
+   3. Generate a PR/MR and assign it to the team to approve
+   4. When approved, squash and merge to master.
+   5. Remove remote feature branch: `feature/bump-$NEXT_APP_VERSION`
+
+#### Questions
+
+* What happens when an existing version requires a hotfix?
+
+PM and the Engineering Lead must decide if the task is P0 (critical) or not. If it is P0, we must fix it for the current version; otherwise, it can wait until the next release.
+
+If it is P0, we need to follow the following steps:
+1. Checkout to the tag: `git checkout $APP_VERSION`
+2. Create a branch to contain all the changes needed to release the hotfix release: `git checkout -b hotfix/$APP_VERSION_WITH_HOTFIX`
+3. Create one branch for each task needed in the hotfix release 
+   1. Follow the same process as a regular MR/MR (squash + rebase) to the hotfix release branch `hotfix/$APP_VERSION_WITH_HOTFIX`
+4. When the application is released with the hotfixes, we need to move those fixes to master. The process to do it is the following:
+   1. Checkout to master/main `git checkout master`
+   2. Create branch `git checkout -b feature/hotfix-$APP_VERSION_WITH_HOTFIX` 
+   3. Cherry-pick the commits from the `hotfix/$APP_VERSION_WITH_HOTFIX` branch into the new branch
+   4. Generate a PR/MR and assign it to the team to be approved
+   5. When approved, **rebase to master** (not squash)
