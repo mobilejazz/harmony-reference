@@ -25,7 +25,7 @@ module.exports = {
           type: "category",
           label: "Application",
           items: [
-            "fundamentals/application/mvi-specs",
+            "fundamentals/application/mvi-specs"
           ]
         },
         {
@@ -113,7 +113,7 @@ module.exports = {
           type: "category",
           label: "Agreements",
           items: [
-            "agreements/rest-api",
+            "agreements/rest-api"
           ]
         },
         "best-practices/naming-convention",
@@ -192,7 +192,8 @@ module.exports = {
         "other/tips/node",
         "other/tips/angular",
         "other/tips/terminal",
-        "other/tips/git"
+        "other/tips/git",
+        "other/tips/mysql"
       ]
     },
     {
