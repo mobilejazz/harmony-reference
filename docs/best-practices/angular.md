@@ -4,6 +4,13 @@ title: Angular Guidelines
 
 > New Angular projects should follow the following guidelines, this also applies to projects that are part of a monorepo (e.g. frontend + Nest.js backend).
 
+
+:::tip Note
+
+Double-check the Tips and Tricks for Angular [here](../other/tips/angular).
+
+:::
+
 ## Folder structure
 
 ```txt
@@ -35,8 +42,3 @@ title: Angular Guidelines
   - e.g.: `app:build:stage`, `admin:build:prod`
 - Each Angular app must build into the `dist` folder inside the project. E.g. `/frontend/app` builds into `/frontend/app/dist`.
 - Environment related config will be managed using Angular `environments.ts`.
-
-## Documentation
-
-- The root `README.md` will contain a TOC.
-- The documentation must go into the `/docs` folder.
