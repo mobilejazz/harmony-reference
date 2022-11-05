@@ -125,6 +125,7 @@ module.exports = {
         "best-practices/dependency-injection",
         "best-practices/presenter-specs",
         "best-practices/code-style-lint",
+        "best-practices/devops",
         "best-practices/angular",
         "best-practices/php",
         "best-practices/design-guidelines/design-guidelines"
