@@ -94,10 +94,10 @@ For example, the start.sh script, it’s basically doing the following command:
 ### Deployment
 
 * `build.sh`
-  * Responsible of:
+  * Responsible for:
     * **Building** the different docker images, for example, build the backend and web-frontend docker image
 * `deploy.sh`
-  * Responsible of:
+  * Responsible for:
     * **Login** to the docker registry
     * **Push** the docker images built to the docker registry
     * Transfer the respective docker-compose file due the environment, stage or production.
