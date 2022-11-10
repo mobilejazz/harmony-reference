@@ -1,8 +1,18 @@
 ---
-title: Mobile folders structure
+title: Folders structure
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 > New projects should follow the following guidelines. Also, feel free to refactor your projects if it's possible and got the time.
+
+<Tabs defaultValue="kmm" values={[
+  { label: 'Kotlin Multiplatform', value: 'kmm', },
+  { label: 'Angular', value: 'angular', },
+]}>
+
+<TabItem value="kmm">
 
 ### Kotlin Multiplatform Project structure
 
@@ -80,3 +90,39 @@ The main difference between a KMM and a native project is that the presentation 
             │   └── model
             └── FeatureProvider.kt # DI Component. Provides interactor mostly
 ```
+</TabItem>
+
+<TabItem value="angular">
+
+### Angular Project structure
+
+```txt
+.
+└── project
+    └── src
+        ├── app                      # Angular stuff
+        │   ├── feature-name         # UI module
+        │   │   ├── component-name   # Includes component + html + css + view-state + test
+        │   │   ├── feature.module.ts
+        │   │   └── feature-routing.module.ts
+        │   ├── shared               # A folder to place services, pipes and every cross-feature class
+        │   ├── app.module.ts
+        │   └── app-routing.module.ts
+        │
+        └── features                 # A feature is a functionality of the app. Contains Domain + Data layer.
+           └── feature-name          # Each feature contains his own domain and data logic
+                ├── data
+                │   ├── data-source
+                │   ├── entity
+                │   ├── mapper
+                │   └── query
+                ├── domain
+                │   ├── interactor
+                │   └── model
+                ├── feature.module.provider.ts # Angular Providers
+                └── feature.provider.ts        # DI Component. Provides interactor mostly
+```
+
+</TabItem>
+
+</Tabs>
