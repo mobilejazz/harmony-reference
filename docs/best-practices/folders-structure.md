@@ -105,7 +105,7 @@ The main difference between a KMM and a native project is that the presentation 
         │   │   ├── component-name   # Includes component + html + css + view-state + test
         │   │   ├── feature.module.ts
         │   │   └── feature-routing.module.ts
-        │   ├── shared               # A folder to place services, pipes and every cross-feature class
+        │   ├── shared               # A folder to place directives, pipes, shared components and every cross-feature class
         │   ├── app.module.ts
         │   └── app-routing.module.ts
         │
@@ -119,7 +119,7 @@ The main difference between a KMM and a native project is that the presentation 
                 ├── domain
                 │   ├── interactor
                 │   └── model
-                ├── feature.module.provider.ts # Angular Providers
+                ├── feature.provider.module.ts # Angular Providers
                 └── feature.provider.ts        # DI Component. Provides interactor mostly
 ```
 
