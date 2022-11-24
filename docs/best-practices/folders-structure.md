@@ -112,13 +112,13 @@ The main difference between a KMM and a native project is that the presentation 
         └── features                 # A feature is a functionality of the app. Contains Domain + Data layer.
            └── feature-name          # Each feature contains his own domain and data logic
                 ├── data
-                │   ├── data-source
-                │   ├── entity
-                │   ├── mapper
-                │   └── query
+                │   ├── data-sources
+                │   ├── entities
+                │   ├── mappers
+                │   └── queries
                 ├── domain
-                │   ├── interactor
-                │   └── model
+                │   ├── interactors
+                │   └── models
                 ├── feature.provider.module.ts # Angular Providers
                 └── feature.provider.ts        # DI Component. Provides interactor mostly
 ```
