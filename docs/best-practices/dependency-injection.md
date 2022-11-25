@@ -183,73 +183,94 @@ class ItemAssembly: Assembly {
 Both Angular and NestJS provide decorators for DI, but **we discourage the usage of these** in the domain or data layers. We promote this so that our code is decoupled from the framework. The data layer shouldn't know anything about the domain layer, and at the same time, the domain layer shouldn't know anything about the app layer.
 :::
 
-We don't have any custom solution for DI on TypeScript projects. Instead use the framework provided solution for the app layer, while we adapt the Harmony DI nomenclature for the domain & data layers.
+We use pure TypeScript DI solution with some glue Angular/Nest code to expose our providers to our frameworks of choice.
 
-More info on Angular & NestJS DI:
+### General
 
-- [Angular Dependency Injection](https://angular.io/guide/dependency-injection)
-- [NestJS Custom Providers](https://docs.nestjs.com/fundamentals/custom-providers)
-
-#### Angular
-
-The problem with Angular is that the suggested `AppComponent`/`AppModule` names for Harmony DI clash with Angular default entry module/component. To overcome this we recommended to settle on `AppProvider` name when defining the Harmony DI. For example we could have the following file tree:
+Since the default Harmony naming for DI collides with Angular/Nest default app names (e.g. `AppComponent`/`AppModule`) we use `*Provider` naming when defining TypeScript Harmony DI. This is how our setup looks like:
 
 ```txt
 src
-├── app
-│   └── app.module.ts            # Angular entry point module
+├─ app                                    # APP layer
+│   └─ app.module.ts                      # Angular/Nest entry point module
 │
-└── domain
-    ├── app.provider.module.ts   # Angular module registering domain instances in Angular DI
-    └── app.provider.ts          # Harmony DI, pure TypeScript
+└─ features                               # DOMAIN/DATA layers
+    └─ my-feature
+        ├─ data
+        ├─ domain
+        ├─ my-feature.provider.module.ts  # Angular module that exposes `my-feature` providers
+        └─ my-feature.provider.ts         # `my-feature` pure TS provider
 ```
 
-`app.provider.ts` defines our project DI tree in pure TypeScript. Here is where the nomenclature departs from the Harmony DI standard, instead of using `AppComponent`/`AppModule`; we just use `AppProvider` to define the interface and then we implement the concrete types, e.g. `AppDefaultProvider`. Note that because of Angular DI limitations we need to use an **abstract class** to define our `AppProvider` interface. This will allow us to ask the Angular DI for `AppProvider` without using custom injection tokens and just get an instance of `AppDefaultProvider`:
+`*.provider.ts` defines the DI tree in pure TypeScript. Here is where the nomenclature departs from the Harmony DI standard, instead of using `*Component`/`*Module`; we just use `*Provider` to define the interface and then we implement the concrete types, e.g. `MyFeatureDefaultProvider`:
 
 ```ts
-// src/domain/app.provider.ts
-export abstract class AppProvider {
-  abstract getGetCountries(): GetCountriesInteractor;
+// src/features/my-feature/my-feature.provider.ts
+export abstract class MyFeatureProvider {
+  abstract provideGetCountries(): GetCountriesInteractor;
 }
 
-export class AppDefaultProvider implements AppProvider {
-  public getGetCountries(): GetCountriesInteractor {
+export class MyFeatureDefaultProvider implements MyFeatureProvider {
+  public provideGetCountries(): GetCountriesInteractor {
     return new GetCountriesInteractor(/* … */);
   }
 }
 ```
 
-`app.provider.module.ts` is the Angular module bridging Harmony DI and Angular. We register our interactors in Angular but we use our `AppProvider` to create the instances and manage the DI tree. While not strictly part of the domain layer the `*.provider.module.ts` files resides next to `*.provider.ts` files for convenience.
+:::important Abstract classes
+Note that because of Angular/Nest DI limitations we need to use an **abstract class** to define our `*Provider` interface. This will allow us to ask the Angular/Nest DI for a provider without using custom injection tokens by just using the abstract class.
+:::
+
+The naming convention for the provider methods is as follows:
+
+- Methods are prefixed with `provide*`.
+- `*Interactor` suffix is ommited.
+
+So, for example, `GetCountriesInteractor` provider method will be `provideGetCountries()`.
+
+### Angular/Nest `*ProviderModule`
+
+Next to the pure TypeScript provider we place an Angular/Nest provider module: `*.provider.module.ts`. This is not strictly correct (as this is app layer code) but we do it for convenience.
+
+#### Angular
 
 ```ts
-// src/domain/app.provider.module.ts
+// src/features/my-feature/my-feature.provider.module.ts
+import { createAngularProviders } from '@mobilejazz/harmony-angular';
+
 @NgModule({
-  providers: [
+  providers: createAngularProviders(
     {
-      provide: AppProvider,
-      useFactory: () => new AppDefaultProvider(),
+      provide: MyFeatureProvider,
+      useFactory: () => new MyFeatureDefaultProvider(),
     },
-    {
-      provide: GetCountriesInteractor,
-      deps: [AppProvider],
-      useFactory: (provider: AppProvider) => provider.getGetCountries(),
-    },
-  ]
+    [
+      GetCountriesInteractor,
+    ],
+  ),
 })
-export class AppProviderModule {}
+export class MyFeatureProviderModule {}
 ```
 
-Finally `app.module.ts` would just register `AppProviderModule`:
+#### Nest
 
 ```ts
-// src/app/app.module.ts
-@NgModule({
-  imports: [
-    AppProviderModule, // <-- Add the bridge module
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule {}
+// src/features/my-feature/my-feature.provider.module.ts
+import { createNestProviderModuleMetadata } from '@mobilejazz/harmony-nest';
+
+@Global()
+@Module(
+  createNestProviderModuleMetadata(
+    {
+      provide: MyFeatureProvider,
+      useFactory: () => new MyFeatureDefaultProvider(),
+    },
+    [
+      GetCountriesInteractor
+    ],
+  ),
+)
+export class MyFeatureProviderModule {}
 ```
 
 </TabItem>
