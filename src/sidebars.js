@@ -113,7 +113,8 @@ module.exports = {
           type: "category",
           label: "Agreements",
           items: [
-            "agreements/rest-api"
+            "agreements/rest-api",
+            "agreements/scss"
           ]
         },
         "best-practices/documentation",
