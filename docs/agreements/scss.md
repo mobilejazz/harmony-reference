@@ -17,7 +17,7 @@ The breakpoints created here are just an arbitrary set to illustrate the usage o
 
 :::
 
-We can define a methods to apply rules with media queries to specific screen sizes.
+We can define methods to apply rules with media queries to specific screen sizes.
 Following the Mobile First approach, we'll be using just "up" rules, leaving mobile rules as the general ones and overriding these for wider screens.
 
 ```scss
