@@ -31,19 +31,19 @@ Following the Mobile First approach, we'll be using just "up" rules, leaving mob
 Having that, the definition of our media queries would be like this:
 ```scss
 @mixin tablet-up {
-  @include bp-up(phone-landscape) {
+  @include bp-up(tablet) {
     @content;
   }
 }
 
 @mixin desktop-up {
-  @include bp-up(phone-landscape) {
+  @include bp-up(desktop) {
     @content;
   }
 }
 ```
 
-Now we can set the styles in this standard way: 
+Now we can set the styles in this standard way:
 ```scss
 .someClass {
   // rules for all breakpoints
