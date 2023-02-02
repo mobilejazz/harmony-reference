@@ -5,6 +5,14 @@ sidebar_label: MySQL and MariaDB
 
 ## MySQL
 
+### Offset Limit Pagination
+
+Using Offset and **Limit** in **MySQL** can sometimes return unexpected results. For example, the pagination can return **not
+consecutive** results if in the middle of the previous query and the current one some update or insertion was done.
+
+To **avoid this problem** it is recommended to **always** use an **Order By** clause.
+Harmony PHP already has this condition for Paginated Queries.
+
 ### Float precision
 
 When using SUM() function in SQL, the result “sometimes” is not as expected. There is a minor precision error.
